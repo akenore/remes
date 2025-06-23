@@ -53,45 +53,50 @@ export default function AdminLayout({
     <AdminGuard>
       <div className="min-h-screen bg-gray-50">
         {/* Mobile sidebar overlay */}
-        {sidebarOpen && (
-          <div className="fixed inset-0 z-40 lg:hidden">
-            <div
-              className="fixed inset-0 bg-gray-600 bg-opacity-75"
-              onClick={() => setSidebarOpen(false)}
-            />
-            <div className="fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl">
-              <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-gray-200">
-                <h1 className="text-lg font-semibold text-gray-900">Remes Admin</h1>
-                <button
-                  type="button"
-                  className="text-gray-400 hover:text-gray-600"
-                  onClick={() => setSidebarOpen(false)}
-                >
-                  <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                  </svg>
-                </button>
-              </div>
-              <nav className="flex-1 px-4 py-4">
-                <div className="space-y-2">
-                  {navigation.map((item) => (
-                    <a
-                      key={item.name}
-                      href={item.href}
-                      className="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                      onClick={() => setSidebarOpen(false)}
-                    >
-                      <div className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
-                        {item.icon}
-                      </div>
-                      {item.name}
-                    </a>
-                  ))}
-                </div>
-              </nav>
+        <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ease-in-out ${
+          sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+        }`}>
+          {/* Backdrop with reduced opacity */}
+          <div
+            className="fixed inset-0 bg-gray-600 bg-opacity-40 transition-opacity duration-300 ease-in-out"
+            onClick={() => setSidebarOpen(false)}
+          />
+          
+          {/* Sidebar panel */}
+          <div className={`fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
+            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+          }`}>
+            <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-gray-200">
+              <h1 className="text-lg font-semibold text-gray-900">Remes Admin</h1>
+              <button
+                type="button"
+                className="text-gray-400 hover:text-gray-600"
+                onClick={() => setSidebarOpen(false)}
+              >
+                <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
             </div>
+            <nav className="flex-1 px-4 py-4">
+              <div className="space-y-2">
+                {navigation.map((item) => (
+                  <a
+                    key={item.name}
+                    href={item.href}
+                    className="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
+                    onClick={() => setSidebarOpen(false)}
+                  >
+                    <div className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
+                      {item.icon}
+                    </div>
+                    {item.name}
+                  </a>
+                ))}
+              </div>
+            </nav>
           </div>
-        )}
+        </div>
 
         {/* Desktop sidebar */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
@@ -127,7 +132,7 @@ export default function AdminLayout({
                 <div className="flex items-center lg:hidden">
                   <button
                     type="button"
-                    className="text-gray-500 hover:text-gray-900"
+                    className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-md transition-all duration-200 ease-in-out"
                     onClick={() => setSidebarOpen(true)}
                   >
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
