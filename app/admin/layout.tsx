@@ -3,7 +3,8 @@
 import { useState } from 'react';
 import AdminGuard from '@/components/ui/admin/AdminGuard';
 import { useAuth } from '@/lib/auth-context';
-import { useRouter } from 'next/navigation';
+import { useRouter, usePathname } from 'next/navigation';
+import Link from 'next/link';
 
 export default function AdminLayout({
   children,
@@ -13,6 +14,7 @@ export default function AdminLayout({
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const router = useRouter();
+  const pathname = usePathname();
 
   const handleLogout = () => {
     logout();
@@ -66,33 +68,48 @@ export default function AdminLayout({
           <div className={`fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
             sidebarOpen ? 'translate-x-0' : '-translate-x-full'
           }`}>
-            <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-gray-200">
-              <h1 className="text-lg font-semibold text-gray-900">Remes Admin</h1>
+            <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center space-x-3">
+                <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">R</span>
+                </div>
+                <h1 className="text-lg font-bold text-gray-900">Remes Admin</h1>
+              </div>
               <button
                 type="button"
-                className="text-gray-400 hover:text-gray-600"
+                className="text-gray-400 hover:text-gray-600 p-1 rounded-md hover:bg-gray-100 transition-colors"
                 onClick={() => setSidebarOpen(false)}
               >
+                <span className="sr-only">Close sidebar</span>
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
               </button>
             </div>
             <nav className="flex-1 px-4 py-4">
-              <div className="space-y-2">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                    onClick={() => setSidebarOpen(false)}
-                  >
-                    <div className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
-                      {item.icon}
-                    </div>
-                    {item.name}
-                  </a>
-                ))}
+              <div className="space-y-1">
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                      onClick={() => setSidebarOpen(false)}
+                    >
+                      <div className={`mr-3 h-5 w-5 transition-colors ${
+                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
+                      }`}>
+                        {item.icon}
+                      </div>
+                      {item.name}
+                    </Link>
+                  );
+                })}
               </div>
             </nav>
           </div>
@@ -100,24 +117,38 @@ export default function AdminLayout({
 
         {/* Desktop sidebar */}
         <div className="hidden lg:fixed lg:inset-y-0 lg:flex lg:w-64 lg:flex-col">
-          <div className="flex flex-col bg-white border-r border-gray-200">
-            <div className="flex h-16 shrink-0 items-center px-4 border-b border-gray-200">
-              <h1 className="text-lg font-semibold text-gray-900">Remes Admin</h1>
+          <div className="flex flex-col bg-white border-r border-gray-200 shadow-sm">
+            <div className="flex h-16 shrink-0 items-center px-6 border-b border-gray-200 bg-gray-50">
+              <div className="flex items-center space-x-3">
+                <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
+                  <span className="text-white font-bold text-sm">R</span>
+                </div>
+                <h1 className="text-lg font-bold text-gray-900">Remes Admin</h1>
+              </div>
             </div>
             <nav className="flex-1 px-4 py-4">
-              <div className="space-y-2">
-                {navigation.map((item) => (
-                  <a
-                    key={item.name}
-                    href={item.href}
-                    className="group flex items-center rounded-md px-2 py-2 text-sm font-medium text-gray-600 hover:bg-gray-50 hover:text-gray-900"
-                  >
-                    <div className="mr-3 h-6 w-6 text-gray-400 group-hover:text-gray-500">
-                      {item.icon}
-                    </div>
-                    {item.name}
-                  </a>
-                ))}
+              <div className="space-y-1">
+                {navigation.map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.name}
+                      href={item.href}
+                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
+                        isActive
+                          ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
+                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                      }`}
+                    >
+                      <div className={`mr-3 h-5 w-5 transition-colors ${
+                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
+                      }`}>
+                        {item.icon}
+                      </div>
+                      {item.name}
+                    </Link>
+                  );
+                })}
               </div>
             </nav>
           </div>
@@ -129,28 +160,52 @@ export default function AdminLayout({
           <div className="sticky top-0 z-10 bg-white shadow-sm border-b border-gray-200">
             <div className="px-4 sm:px-6 lg:px-8">
               <div className="flex h-16 justify-between items-center">
+                {/* Mobile menu button and title */}
                 <div className="flex items-center lg:hidden">
                   <button
                     type="button"
-                    className="text-gray-500 hover:text-gray-900 hover:bg-gray-100 p-2 rounded-md transition-all duration-200 ease-in-out"
+                    className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
                     onClick={() => setSidebarOpen(true)}
                   >
+                    <span className="sr-only">Open main menu</span>
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                   </button>
                   <h1 className="ml-3 text-lg font-semibold text-gray-900">Remes Admin</h1>
                 </div>
+
+                {/* Desktop page title - show current page */}
+                <div className="hidden lg:block">
+                  <h2 className="text-lg font-medium text-gray-900">
+                    {pathname === '/admin' && 'Dashboard'}
+                    {pathname === '/admin/posts' && 'Posts'}
+                    {pathname === '/admin/posts/add' && 'Add New Post'}
+                    {pathname.startsWith('/admin/posts/edit') && 'Edit Post'}
+                    {pathname === '/admin/categories' && 'Categories'}
+                  </h2>
+                </div>
                 
+                {/* User info and actions */}
                 <div className="flex items-center space-x-4">
-                  <div className="hidden sm:block">
-                    <span className="text-sm text-gray-700">
-                      Welcome, <span className="font-medium">{user?.name || user?.email}</span>
-                    </span>
+                  {/* User welcome message */}
+                  <div className="hidden sm:flex items-center space-x-3">
+                    <div className="flex items-center space-x-2">
+                      <div className="h-8 w-8 rounded-full bg-indigo-100 flex items-center justify-center">
+                        <span className="text-sm font-medium text-indigo-700">
+                          {(user?.name || user?.email)?.charAt(0)?.toUpperCase() || 'U'}
+                        </span>
+                      </div>
+                      <span className="text-sm text-gray-700">
+                        <span className="font-medium">{user?.name || user?.email?.split('@')[0]}</span>
+                      </span>
+                    </div>
                   </div>
+
+                  {/* Logout button */}
                   <button
                     onClick={handleLogout}
-                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm leading-4 font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors"
+                    className="inline-flex items-center px-3 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-red-600 hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-red-500 transition-colors shadow-sm"
                   >
                     <svg className="h-4 w-4 mr-1 sm:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />

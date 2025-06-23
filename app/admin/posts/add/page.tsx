@@ -26,6 +26,7 @@ export default function AddPostPage() {
     categories: [] as string[],
     cover_image: null as File | null,
   });
+  const [isSlugEditable, setIsSlugEditable] = useState(false);
 
   useEffect(() => {
     fetchCategories();
@@ -36,9 +37,9 @@ export default function AddPostPage() {
       const result = await pb.collection('categories').getFullList({
         sort: 'title',
       });
-      setCategories(result.map(item => ({
+      setCategories(result.map((item) => ({
         id: item.id,
-        title: item.title,
+        title: item.title as string,
       })));
     } catch (err) {
       console.error('Failed to fetch categories:', err);
@@ -54,12 +55,40 @@ export default function AddPostPage() {
       .trim();
   };
 
-  const handleTitleChange = (title: string) => {
-    setFormData(prev => ({
-      ...prev,
-      title,
-      slug: generateSlug(title),
-    }));
+  const generateUniqueSlug = async (baseSlug: string) => {
+    let slug = baseSlug;
+    let counter = 1;
+
+    while (true) {
+      try {
+        // Check if slug exists in the database
+        const existingPosts = await pb.collection('posts').getList(1, 1, {
+          filter: `slug = "${slug}"`,
+        });
+
+        if (existingPosts.totalItems === 0) {
+          return slug; // Slug is unique
+        }
+
+        // If slug exists, try with a counter
+        slug = `${baseSlug}-${counter}`;
+        counter++;
+      } catch (err) {
+        console.error('Error checking slug uniqueness:', err);
+        return baseSlug; // Return original if error
+      }
+    }
+  };
+
+  const handleTitleChange = async (title: string) => {
+    setFormData(prev => ({ ...prev, title }));
+    
+    // Only auto-update slug if it's not being manually edited
+    if (!isSlugEditable) {
+      const baseSlug = generateSlug(title);
+      const uniqueSlug = await generateUniqueSlug(baseSlug);
+      setFormData(prev => ({ ...prev, slug: uniqueSlug }));
+    }
   };
 
   const handleCategoryToggle = (categoryId: string) => {
@@ -173,18 +202,65 @@ export default function AddPostPage() {
                 />
               </div>
               <div>
-                <label htmlFor="slug" className="block text-sm font-medium text-gray-700">
-                  Slug *
+                <label className="block text-sm font-medium text-gray-700">
+                  Permalink
                 </label>
-                <input
-                  type="text"
-                  id="slug"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                  value={formData.slug}
-                  onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                  placeholder="post-slug"
-                  required
-                />
+                <div className="mt-1">
+                  {!isSlugEditable ? (
+                    <div className="flex items-center space-x-2">
+                      <div className="flex items-center text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-md border border-gray-300">
+                        <span className="text-gray-500">http://127.0.0.1:3000/posts/</span>
+                        <span className="font-medium text-gray-900">{formData.slug || 'post-slug'}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsSlugEditable(true)}
+                        className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                      >
+                        Edit
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <div className="flex items-center space-x-2">
+                        <div className="flex items-center text-sm text-gray-600">
+                          <span className="text-gray-500">http://127.0.0.1:3000/posts/</span>
+                          <input
+                            type="text"
+                            className="border-0 border-b border-gray-300 focus:border-indigo-500 focus:ring-0 px-1 py-0 text-sm font-medium text-gray-900 bg-transparent"
+                            value={formData.slug}
+                            onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                            placeholder="post-slug"
+                            required
+                          />
+                        </div>
+                        <button
+                          type="button"
+                          onClick={() => setIsSlugEditable(false)}
+                          className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                        >
+                          OK
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const baseSlug = generateSlug(formData.title);
+                            generateUniqueSlug(baseSlug).then(uniqueSlug => {
+                              setFormData(prev => ({ ...prev, slug: uniqueSlug }));
+                            });
+                            setIsSlugEditable(false);
+                          }}
+                          className="text-sm text-gray-500 hover:text-gray-700 font-medium"
+                        >
+                          Cancel
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-1 text-xs text-gray-500">
+                  The permalink is the permanent URL for this post.
+                </p>
               </div>
             </div>
 
