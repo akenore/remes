@@ -1,11 +1,19 @@
 'use client';
 
 import { useAuth } from '@/lib/auth-context';
+import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
 
 export default function AdminPage() {
   const { user } = useAuth();
   const [showWelcome, setShowWelcome] = useState(false);
+  const [stats, setStats] = useState({
+    totalPosts: 0,
+    publishedPosts: 0,
+    draftPosts: 0,
+    totalCategories: 0,
+    loading: true,
+  });
 
   // Check if welcome message should be shown (only once per login session)
   useEffect(() => {
@@ -17,6 +25,33 @@ export default function AdminPage() {
       }
     }
   }, [user]);
+
+  // Fetch dashboard statistics
+  useEffect(() => {
+    fetchStats();
+  }, []);
+
+  const fetchStats = async () => {
+    try {
+      // Fetch posts data
+      const [allPosts, publishedPosts, categories] = await Promise.all([
+        pb.collection('posts').getList(1, 1, { requestKey: null }), // Just for count
+        pb.collection('posts').getList(1, 1, { filter: 'published = true', requestKey: null }),
+        pb.collection('categories').getList(1, 1, { requestKey: null })
+      ]);
+
+      setStats({
+        totalPosts: allPosts.totalItems,
+        publishedPosts: publishedPosts.totalItems,
+        draftPosts: allPosts.totalItems - publishedPosts.totalItems,
+        totalCategories: categories.totalItems,
+        loading: false,
+      });
+    } catch (err) {
+      console.error('Failed to fetch stats:', err);
+      setStats(prev => ({ ...prev, loading: false }));
+    }
+  };
 
   // Auto-hide welcome message after 5 seconds
   useEffect(() => {
@@ -101,7 +136,9 @@ export default function AdminPage() {
                   <dt className="text-sm font-medium text-gray-500 truncate">
                     Total Posts
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">-</dd>
+                  <dd className="text-lg font-medium text-gray-900">
+                    {stats.loading ? '...' : stats.totalPosts}
+                  </dd>
                 </dl>
               </div>
             </div>
@@ -131,7 +168,9 @@ export default function AdminPage() {
                   <dt className="text-sm font-medium text-gray-500 truncate">
                     Categories
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">-</dd>
+                  <dd className="text-lg font-medium text-gray-900">
+                    {stats.loading ? '...' : stats.totalCategories}
+                  </dd>
                 </dl>
               </div>
             </div>
@@ -167,7 +206,9 @@ export default function AdminPage() {
                   <dt className="text-sm font-medium text-gray-500 truncate">
                     Published Posts
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">-</dd>
+                  <dd className="text-lg font-medium text-gray-900">
+                    {stats.loading ? '...' : stats.publishedPosts}
+                  </dd>
                 </dl>
               </div>
             </div>
@@ -197,7 +238,9 @@ export default function AdminPage() {
                   <dt className="text-sm font-medium text-gray-500 truncate">
                     Draft Posts
                   </dt>
-                  <dd className="text-lg font-medium text-gray-900">-</dd>
+                  <dd className="text-lg font-medium text-gray-900">
+                    {stats.loading ? '...' : stats.draftPosts}
+                  </dd>
                 </dl>
               </div>
             </div>
@@ -213,18 +256,24 @@ export default function AdminPage() {
           </h3>
           <div className="mt-5">
             <div className="flex flex-col sm:flex-row gap-3">
-              <button className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+              <a
+                href="/admin/posts/add"
+                className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
                 <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
                 Create New Post
-              </button>
-              <button className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors">
+              </a>
+              <a
+                href="/admin/categories"
+                className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
                 <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
                 </svg>
                 Manage Categories
-              </button>
+              </a>
             </div>
           </div>
         </div>
