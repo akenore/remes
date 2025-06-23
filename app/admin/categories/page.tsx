@@ -20,6 +20,9 @@ export default function CategoriesPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [editingCategory, setEditingCategory] = useState<Category | null>(null);
   const [showAddForm, setShowAddForm] = useState(false);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [totalPages, setTotalPages] = useState(1);
+  const categoriesPerPage = 10;
   
   const [formData, setFormData] = useState({
     title: '',
@@ -29,32 +32,29 @@ export default function CategoriesPage() {
 
   useEffect(() => {
     fetchCategories();
-  }, []);
-
-  useEffect(() => {
-    if (searchTerm) {
-      const filtered = categories.filter(category =>
-        category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        category.slug.toLowerCase().includes(searchTerm.toLowerCase())
-      );
-      // Note: This is client-side filtering for simplicity
-      // In a real app, you'd probably want server-side filtering for better performance
-    }
-  }, [searchTerm, categories]);
+  }, [searchTerm, currentPage]);
 
   const fetchCategories = async () => {
     try {
       setLoading(true);
-      const result = await pb.collection('categories').getFullList({
+      
+      let filter = '';
+      if (searchTerm) {
+        filter = `title ~ "${searchTerm}" || slug ~ "${searchTerm}"`;
+      }
+
+      const result = await pb.collection('categories').getList(currentPage, categoriesPerPage, {
+        filter,
         sort: '-created',
       });
-      setCategories(result.map((item) => ({
+      setCategories(result.items.map((item) => ({
         id: item.id,
         title: item.title as string,
         slug: item.slug as string,
         created: item.created as string,
         updated: item.updated as string,
       })));
+      setTotalPages(result.totalPages);
     } catch (err) {
       setError('Failed to fetch categories');
       console.error(err);
@@ -186,10 +186,7 @@ export default function CategoriesPage() {
     });
   };
 
-  const filteredCategories = categories.filter(category =>
-    category.title.toLowerCase().includes(searchTerm.toLowerCase()) ||
-    category.slug.toLowerCase().includes(searchTerm.toLowerCase())
-  );
+  const filteredCategories = categories;
 
   return (
     <div className="space-y-6">
@@ -214,7 +211,7 @@ export default function CategoriesPage() {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
         {/* Add/Edit Form */}
         <div className="lg:col-span-1">
           <div className="bg-white shadow rounded-lg">
@@ -232,59 +229,59 @@ export default function CategoriesPage() {
               {showAddForm ? (
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
-                    <label htmlFor="category-title" className="block text-sm font-medium text-gray-700">
+                    <label htmlFor="category-title" className="block text-sm font-medium text-gray-700 mb-2">
                       Name *
                     </label>
                     <input
                       type="text"
                       id="category-title"
-                      className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                      className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
                       value={formData.title}
                       onChange={(e) => handleTitleChange(e.target.value)}
-                      placeholder="Category name..."
+                      placeholder="Enter category name..."
                       required
                     />
                   </div>
                   
                   <div>
-                    <label className="block text-sm font-medium text-gray-700">
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
                       Permalink
                     </label>
                     <div className="mt-1">
                       {!isSlugEditable ? (
-                        <div className="flex items-center space-x-2">
-                          <div className="flex items-center text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-md border border-gray-300">
-                            <span className="text-gray-500">http://127.0.0.1:3000/categories/</span>
-                            <span className="font-medium text-gray-900">{formData.slug || 'category-slug'}</span>
+                        <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
+                          <div className="flex items-center text-sm">
+                            <span className="text-gray-500 font-mono">http://127.0.0.1:3000/categories/</span>
+                            <span className="font-semibold text-indigo-600">{formData.slug || 'category-slug'}</span>
                           </div>
                           <button
                             type="button"
                             onClick={() => setIsSlugEditable(true)}
-                            className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                            className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                           >
                             Edit
                           </button>
                         </div>
                       ) : (
-                        <div className="space-y-2">
-                          <div className="flex items-center space-x-2">
-                            <div className="flex items-center text-sm text-gray-600">
-                              <span className="text-gray-500">http://127.0.0.1:3000/categories/</span>
-                              <input
-                                type="text"
-                                className="border-0 border-b border-gray-300 focus:border-indigo-500 focus:ring-0 px-1 py-0 text-sm font-medium text-gray-900 bg-transparent"
-                                value={formData.slug}
-                                onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                                placeholder="category-slug"
-                                required
-                              />
-                            </div>
+                        <div className="space-y-3">
+                          <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                            <span className="text-gray-500 font-mono text-sm">http://127.0.0.1:3000/categories/</span>
+                            <input
+                              type="text"
+                              className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"
+                              value={formData.slug}
+                              onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                              placeholder="category-slug"
+                              required
+                            />
+                          </div>
+                          <div className="flex space-x-2">
                             <button
                               type="button"
                               onClick={() => setIsSlugEditable(false)}
-                              className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                              className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
                             >
-                              OK
+                              Save
                             </button>
                             <button
                               type="button"
@@ -295,7 +292,7 @@ export default function CategoriesPage() {
                                 });
                                 setIsSlugEditable(false);
                               }}
-                              className="text-sm text-gray-500 hover:text-gray-700 font-medium"
+                              className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                             >
                               Cancel
                             </button>
@@ -303,7 +300,7 @@ export default function CategoriesPage() {
                         </div>
                       )}
                     </div>
-                    <p className="mt-1 text-xs text-gray-500">
+                    <p className="mt-2 text-xs text-gray-500">
                       The permalink is the permanent URL for this category.
                     </p>
                   </div>
@@ -339,7 +336,7 @@ export default function CategoriesPage() {
         </div>
 
         {/* Categories List */}
-        <div className="lg:col-span-2">
+        <div className="lg:col-span-1">
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               {/* Search */}
@@ -379,7 +376,7 @@ export default function CategoriesPage() {
                   </p>
                 </div>
               ) : (
-                <div className="overflow-hidden">
+                <>
                   <div className="space-y-3">
                     {filteredCategories.map((category) => (
                       <div
@@ -410,7 +407,74 @@ export default function CategoriesPage() {
                       </div>
                     ))}
                   </div>
-                </div>
+
+                  {/* Pagination */}
+                  {totalPages > 1 && (
+                    <div className="mt-6 flex items-center justify-between border-t border-gray-200 pt-4">
+                      <div className="flex-1 flex justify-between sm:hidden">
+                        <button
+                          onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                          disabled={currentPage === 1}
+                          className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
+                        >
+                          Previous
+                        </button>
+                        <button
+                          onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                          disabled={currentPage === totalPages}
+                          className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
+                        >
+                          Next
+                        </button>
+                      </div>
+                      <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
+                        <div>
+                          <p className="text-sm text-gray-700">
+                            Showing page <span className="font-medium">{currentPage}</span> of{' '}
+                            <span className="font-medium">{totalPages}</span>
+                          </p>
+                        </div>
+                        <div>
+                          <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                            <button
+                              onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                              disabled={currentPage === 1}
+                              className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
+                            >
+                              <span className="sr-only">Previous</span>
+                              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                            {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
+                              <button
+                                key={page}
+                                onClick={() => setCurrentPage(page)}
+                                className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium transition-colors ${
+                                  page === currentPage
+                                    ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
+                                    : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
+                                }`}
+                              >
+                                {page}
+                              </button>
+                            ))}
+                            <button
+                              onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
+                              disabled={currentPage === totalPages}
+                              className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
+                            >
+                              <span className="sr-only">Next</span>
+                              <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
+                                <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                              </svg>
+                            </button>
+                          </nav>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+                </>
               )}
             </div>
           </div>

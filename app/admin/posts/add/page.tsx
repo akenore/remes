@@ -186,15 +186,15 @@ export default function AddPostPage() {
         <div className="bg-white shadow rounded-lg">
           <div className="px-4 py-5 sm:p-6 space-y-6">
             {/* Title & Slug */}
-            <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">
+            <div className="grid grid-cols-1 gap-6">
               <div>
-                <label htmlFor="title" className="block text-sm font-medium text-gray-700">
+                <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-2">
                   Title *
                 </label>
                 <input
                   type="text"
                   id="title"
-                  className="mt-1 block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
+                  className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
                   value={formData.title}
                   onChange={(e) => handleTitleChange(e.target.value)}
                   placeholder="Enter post title..."
@@ -202,44 +202,44 @@ export default function AddPostPage() {
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
                   Permalink
                 </label>
                 <div className="mt-1">
                   {!isSlugEditable ? (
-                    <div className="flex items-center space-x-2">
-                      <div className="flex items-center text-sm text-gray-600 bg-gray-50 px-3 py-2 rounded-md border border-gray-300">
-                        <span className="text-gray-500">http://127.0.0.1:3000/posts/</span>
-                        <span className="font-medium text-gray-900">{formData.slug || 'post-slug'}</span>
+                    <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
+                      <div className="flex items-center text-sm">
+                        <span className="text-gray-500 font-mono">http://127.0.0.1:3000/posts/</span>
+                        <span className="font-semibold text-indigo-600">{formData.slug || 'post-slug'}</span>
                       </div>
                       <button
                         type="button"
                         onClick={() => setIsSlugEditable(true)}
-                        className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                       >
                         Edit
                       </button>
                     </div>
                   ) : (
-                    <div className="space-y-2">
-                      <div className="flex items-center space-x-2">
-                        <div className="flex items-center text-sm text-gray-600">
-                          <span className="text-gray-500">http://127.0.0.1:3000/posts/</span>
-                          <input
-                            type="text"
-                            className="border-0 border-b border-gray-300 focus:border-indigo-500 focus:ring-0 px-1 py-0 text-sm font-medium text-gray-900 bg-transparent"
-                            value={formData.slug}
-                            onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                            placeholder="post-slug"
-                            required
-                          />
-                        </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                        <span className="text-gray-500 font-mono text-sm">http://127.0.0.1:3000/posts/</span>
+                        <input
+                          type="text"
+                          className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"
+                          value={formData.slug}
+                          onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                          placeholder="post-slug"
+                          required
+                        />
+                      </div>
+                      <div className="flex space-x-2">
                         <button
                           type="button"
                           onClick={() => setIsSlugEditable(false)}
-                          className="text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                          className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
                         >
-                          OK
+                          Save
                         </button>
                         <button
                           type="button"
@@ -250,7 +250,7 @@ export default function AddPostPage() {
                             });
                             setIsSlugEditable(false);
                           }}
-                          className="text-sm text-gray-500 hover:text-gray-700 font-medium"
+                          className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                         >
                           Cancel
                         </button>
@@ -258,7 +258,7 @@ export default function AddPostPage() {
                     </div>
                   )}
                 </div>
-                <p className="mt-1 text-xs text-gray-500">
+                <p className="mt-2 text-xs text-gray-500">
                   The permalink is the permanent URL for this post.
                 </p>
               </div>
