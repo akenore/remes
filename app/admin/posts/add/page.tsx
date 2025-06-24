@@ -18,6 +18,8 @@ export default function AddPostPage() {
   const [loading, setLoading] = useState(false);
   const [savingAs, setSavingAs] = useState<'draft' | 'published' | null>(null);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
+  const [savedPostId, setSavedPostId] = useState<string | null>(null);
   const [categories, setCategories] = useState<Category[]>([]);
   
   const [formData, setFormData] = useState({
@@ -83,8 +85,9 @@ export default function AddPostPage() {
   };
 
   const handleTitleChange = async (title: string) => {
-    // Clear error when user starts typing
+    // Clear messages when user starts typing
     if (error) setError('');
+    if (success) setSuccess('');
     
     setFormData(prev => ({ ...prev, title }));
     
@@ -97,8 +100,9 @@ export default function AddPostPage() {
   };
 
   const handleCategoryToggle = (categoryId: string) => {
-    // Clear error when user interacts with categories
+    // Clear messages when user interacts with categories
     if (error) setError('');
+    if (success) setSuccess('');
     
     setFormData(prev => ({
       ...prev,
@@ -109,8 +113,9 @@ export default function AddPostPage() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Clear error when user selects an image
+    // Clear messages when user selects an image
     if (error) setError('');
+    if (success) setSuccess('');
     
     const file = e.target.files?.[0] || null;
     setFormData(prev => ({ ...prev, cover_image: file }));
@@ -124,6 +129,7 @@ export default function AddPostPage() {
     setLoading(true);
     setSavingAs(publishStatus ? 'published' : 'draft');
     setError('');
+    setSuccess('');
 
     try {
       // Client-side validation with specific error messages
@@ -176,15 +182,23 @@ export default function AddPostPage() {
         data.append('categories', categoryId);
       });
 
-      await pb.collection('posts').create(data);
+      const createdPost = await pb.collection('posts').create(data);
       
       // Clear any previous errors on success
       setError('');
       
       // Update the form state to reflect the published status
       setFormData(prev => ({ ...prev, published: publishStatus }));
+      setSavedPostId(createdPost.id);
       
-      router.push('/admin/posts');
+      // Show success message and stay on page (WordPress-style)
+      setSuccess(publishStatus 
+        ? `Post published successfully! ` 
+        : `Post saved as draft! `
+      );
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => setSuccess(''), 5000);
     } catch (err: any) {
       // Only log server errors, not client-side validation errors
       if (err.message && (err.message.includes('required') || err.message.includes(','))) {
@@ -281,6 +295,44 @@ export default function AddPostPage() {
           ← Back to Posts
         </Link>
       </div>
+
+      {/* Success Message */}
+      {success && (
+        <div className="bg-green-50 border border-green-200 rounded-md p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-green-800">
+                Success!
+              </h3>
+              <div className="mt-2 text-sm text-green-700 flex items-center justify-between">
+                <span>{success}</span>
+                {savedPostId && (
+                  <div className="flex space-x-2 ml-4">
+                    <Link
+                      href={`/admin/posts/edit/${savedPostId}`}
+                      className="text-sm font-medium text-green-600 hover:text-green-500 underline"
+                    >
+                      Edit post
+                    </Link>
+                    <span className="text-green-400">|</span>
+                    <Link
+                      href="/admin/posts"
+                      className="text-sm font-medium text-green-600 hover:text-green-500 underline"
+                    >
+                      View all posts
+                    </Link>
+                  </div>
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Error Message */}
       {error && (

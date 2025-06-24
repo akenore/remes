@@ -35,6 +35,7 @@ export default function EditPostPage() {
   const [savingAs, setSavingAs] = useState<'draft' | 'published' | null>(null);
   const [pageLoading, setPageLoading] = useState(true);
   const [error, setError] = useState('');
+  const [success, setSuccess] = useState('');
   const [categories, setCategories] = useState<Category[]>([]);
   const [originalPost, setOriginalPost] = useState<Post | null>(null);
   
@@ -146,8 +147,9 @@ export default function EditPostPage() {
   };
 
   const handleTitleChange = async (title: string) => {
-    // Clear error when user starts typing
+    // Clear messages when user starts typing
     if (error) setError('');
+    if (success) setSuccess('');
     
     setFormData(prev => ({ ...prev, title }));
     
@@ -160,6 +162,10 @@ export default function EditPostPage() {
   };
 
   const handleCategoryToggle = (categoryId: string) => {
+    // Clear messages when user interacts with categories
+    if (error) setError('');
+    if (success) setSuccess('');
+    
     setFormData(prev => ({
       ...prev,
       categories: prev.categories.includes(categoryId)
@@ -169,6 +175,10 @@ export default function EditPostPage() {
   };
 
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    // Clear messages when user selects an image
+    if (error) setError('');
+    if (success) setSuccess('');
+    
     const file = e.target.files?.[0] || null;
     setFormData(prev => ({ ...prev, cover_image: file }));
   };
@@ -181,6 +191,7 @@ export default function EditPostPage() {
     setLoading(true);
     setSavingAs(publishStatus ? 'published' : 'draft');
     setError('');
+    setSuccess('');
 
     try {
       // Client-side validation with specific error messages
@@ -227,7 +238,14 @@ export default function EditPostPage() {
       // Update the form state to reflect the published status
       setFormData(prev => ({ ...prev, published: publishStatus }));
       
-      router.push('/admin/posts');
+      // Show success message and stay on page (WordPress-style)
+      setSuccess(publishStatus 
+        ? `Post updated and published successfully! ` 
+        : `Post updated and saved as draft! `
+      );
+      
+      // Auto-hide success message after 5 seconds
+      setTimeout(() => setSuccess(''), 5000);
     } catch (err: any) {
       // Only log server errors, not client-side validation errors
       if (err.message && (err.message.includes('required') || err.message.includes(','))) {
@@ -353,6 +371,35 @@ export default function EditPostPage() {
           ← Back to Posts
         </Link>
       </div>
+
+      {/* Success Message */}
+      {success && (
+        <div className="bg-green-50 border border-green-200 rounded-md p-4">
+          <div className="flex">
+            <div className="flex-shrink-0">
+              <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+              </svg>
+            </div>
+            <div className="ml-3">
+              <h3 className="text-sm font-medium text-green-800">
+                Success!
+              </h3>
+              <div className="mt-2 text-sm text-green-700 flex items-center justify-between">
+                <span>{success}</span>
+                <div className="flex space-x-2 ml-4">
+                  <Link
+                    href="/admin/posts"
+                    className="text-sm font-medium text-green-600 hover:text-green-500 underline"
+                  >
+                    View all posts
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
 
       {/* Error Message */}
       {error && (
