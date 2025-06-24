@@ -3,9 +3,14 @@
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
+import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
+import { Link } from '@/i18n/routing';
 
 export default function AdminPage() {
   const { user } = useAuth();
+  const t = useTranslations('admin.dashboard');
+  const tCommon = useTranslations('common');
   const [showWelcome, setShowWelcome] = useState(false);
   const [stats, setStats] = useState({
     totalPosts: 0,
@@ -70,6 +75,11 @@ export default function AdminPage() {
 
      return (
     <div className="space-y-6">
+      {/* Language Switcher */}
+      <div className="flex justify-end">
+        <LanguageSwitcher />
+      </div>
+
       {/* Welcome Message */}
       {showWelcome && (
         <div className="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
@@ -83,10 +93,10 @@ export default function AdminPage() {
                 </div>
                 <div className="ml-4">
                   <h2 className="text-xl font-bold text-white">
-                    Welcome back, {user?.name || user?.email?.split('@')[0]}! 🎉
+                    {t('welcome', { name: user?.name || user?.email?.split('@')[0] || 'User' })}
                   </h2>
                   <p className="text-indigo-100 mt-1">
-                    You've successfully logged into your admin dashboard
+                    {t('welcomeDescription')}
                   </p>
                 </div>
               </div>
@@ -105,9 +115,9 @@ export default function AdminPage() {
 
       {/* Page Header */}
       <div>
-        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Dashboard</h1>
+        <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
         <p className="mt-1 text-sm text-gray-500">
-          Overview of your Remes content management system
+          {t('description')}
         </p>
       </div>
 
@@ -134,10 +144,10 @@ export default function AdminPage() {
               <div className="ml-4 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-gray-500 truncate">
-                    Total Posts
+                    {t('stats.totalPosts')}
                   </dt>
                   <dd className="text-lg font-medium text-gray-900">
-                    {stats.loading ? '...' : stats.totalPosts}
+                    {stats.loading ? tCommon('loading') : stats.totalPosts}
                   </dd>
                 </dl>
               </div>
@@ -166,10 +176,10 @@ export default function AdminPage() {
               <div className="ml-4 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-gray-500 truncate">
-                    Categories
+                    {t('stats.categories')}
                   </dt>
                   <dd className="text-lg font-medium text-gray-900">
-                    {stats.loading ? '...' : stats.totalCategories}
+                    {stats.loading ? tCommon('loading') : stats.totalCategories}
                   </dd>
                 </dl>
               </div>
@@ -204,10 +214,10 @@ export default function AdminPage() {
               <div className="ml-4 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-gray-500 truncate">
-                    Published Posts
+                    {t('stats.publishedPosts')}
                   </dt>
                   <dd className="text-lg font-medium text-gray-900">
-                    {stats.loading ? '...' : stats.publishedPosts}
+                    {stats.loading ? tCommon('loading') : stats.publishedPosts}
                   </dd>
                 </dl>
               </div>
@@ -236,10 +246,10 @@ export default function AdminPage() {
               <div className="ml-4 w-0 flex-1">
                 <dl>
                   <dt className="text-sm font-medium text-gray-500 truncate">
-                    Draft Posts
+                    {t('stats.draftPosts')}
                   </dt>
                   <dd className="text-lg font-medium text-gray-900">
-                    {stats.loading ? '...' : stats.draftPosts}
+                    {stats.loading ? tCommon('loading') : stats.draftPosts}
                   </dd>
                 </dl>
               </div>
@@ -252,28 +262,28 @@ export default function AdminPage() {
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Quick Actions
+            {t('quickActions.title')}
           </h3>
           <div className="mt-5">
             <div className="flex flex-col sm:flex-row gap-3">
-              <a
+              <Link
                 href="/admin/posts/add"
                 className="inline-flex items-center justify-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                 </svg>
-                Create New Post
-              </a>
-              <a
+                {t('quickActions.createPost')}
+              </Link>
+              <Link
                 href="/admin/categories"
                 className="inline-flex items-center justify-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
                 </svg>
-                Manage Categories
-              </a>
+                {t('quickActions.manageCategories')}
+              </Link>
             </div>
           </div>
         </div>
@@ -283,29 +293,29 @@ export default function AdminPage() {
       <div className="bg-white shadow rounded-lg">
         <div className="px-4 py-5 sm:p-6">
           <h3 className="text-lg leading-6 font-medium text-gray-900">
-            Account Information
+            {t('accountInfo.title')}
           </h3>
           <div className="mt-5">
             <dl className="grid grid-cols-1 gap-x-4 gap-y-6 sm:grid-cols-2">
               <div>
-                <dt className="text-sm font-medium text-gray-500">Email</dt>
+                <dt className="text-sm font-medium text-gray-500">{t('accountInfo.email')}</dt>
                 <dd className="mt-1 text-sm text-gray-900 break-all">{user?.email}</dd>
               </div>
               <div>
-                <dt className="text-sm font-medium text-gray-500">User ID</dt>
+                <dt className="text-sm font-medium text-gray-500">{t('accountInfo.userId')}</dt>
                 <dd className="mt-1 text-sm text-gray-900 font-mono break-all">{user?.id}</dd>
               </div>
               {user?.name && (
                 <div>
-                  <dt className="text-sm font-medium text-gray-500">Name</dt>
+                  <dt className="text-sm font-medium text-gray-500">{t('accountInfo.name')}</dt>
                   <dd className="mt-1 text-sm text-gray-900">{user.name}</dd>
                 </div>
               )}
           <div>
-                <dt className="text-sm font-medium text-gray-500">Account Type</dt>
+                <dt className="text-sm font-medium text-gray-500">{t('accountInfo.accountType')}</dt>
                 <dd className="mt-1">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-                    Admin
+                    {t('accountInfo.admin')}
                   </span>
                 </dd>
               </div>

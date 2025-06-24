@@ -1,14 +1,20 @@
-import { NextResponse } from 'next/server';
-import type { NextRequest } from 'next/server';
+import createMiddleware from 'next-intl/middleware';
+import { routing } from './i18n/routing';
 
-export function middleware(request: NextRequest) {
-  // Temporarily disabled - PocketBase uses localStorage which isn't accessible in middleware
-  // The AdminGuard component handles client-side protection instead
-  return NextResponse.next();
-}
+export default createMiddleware(routing);
 
 export const config = {
+  // Match only internationalized pathnames
   matcher: [
-    '/admin/:path*',
+    // Enable a redirect to a matching locale at the root
+    '/',
+
+    // Set a cookie to remember the previous locale for
+    // all requests that have a locale prefix
+    '/(fr|en)/:path*',
+
+    // Enable redirects that add missing locales
+    // (e.g. `/pathnames` -> `/en/pathnames`)
+    '/((?!_next|_vercel|.*\\..*).*)'
   ]
 }; 

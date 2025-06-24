@@ -1,0 +1,75 @@
+{
+  "admin": {
+    "dashboard": {
+      "title": "Tableau de bord",
+      "description": "Aperçu de votre système de gestion de contenu Remes",
+      "welcome": "Bon retour, {name} ! 🎉",
+      "welcomeDescription": "Vous vous êtes connecté avec succès à votre tableau de bord administrateur",
+      "stats": {
+        "totalPosts": "Total des Articles",
+        "publishedPosts": "Articles Publiés",
+        "draftPosts": "Brouillons",
+        "categories": "Catégories"
+      },
+      "quickActions": {
+        "title": "Actions Rapides",
+        "createPost": "Créer un Nouvel Article",
+        "manageCategories": "Gérer les Catégories"
+      },
+      "accountInfo": {
+        "title": "Informations du Compte",
+        "email": "Email",
+        "userId": "ID Utilisateur",
+        "name": "Nom",
+        "accountType": "Type de Compte",
+        "admin": "Administrateur"
+      }
+    },
+    "navigation": {
+      "dashboard": "Tableau de bord",
+      "posts": "Articles",
+      "categories": "Catégories",
+      "settings": "Paramètres"
+    }
+  },
+  "common": {
+    "loading": "Chargement...",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "edit": "Modifier",
+    "create": "Créer",
+    "close": "Fermer",
+    "back": "Retour",
+    "next": "Suivant",
+    "previous": "Précédent",
+    "search": "Rechercher",
+    "filter": "Filtrer",
+    "sort": "Trier",
+    "actions": "Actions",
+    "status": "Statut",
+    "date": "Date",
+    "author": "Auteur",
+    "title": "Titre",
+    "description": "Description",
+    "published": "Publié",
+    "draft": "Brouillon",
+    "language": "Langue",
+    "english": "Anglais",
+    "french": "Français"
+  },
+  "navigation": {
+    "home": "Accueil",
+    "about": "À propos",
+    "services": "Services",
+    "contact": "Contact",
+    "login": "Connexion",
+    "logout": "Déconnexion"
+  },
+  "forms": {
+    "required": "Ce champ est requis",
+    "email": "Veuillez saisir une adresse email valide",
+    "password": "Le mot de passe doit contenir au moins 6 caractères",
+    "confirmPassword": "Les mots de passe ne correspondent pas"
+  }
+} 

@@ -1,0 +1,75 @@
+{
+  "admin": {
+    "dashboard": {
+      "title": "Dashboard",
+      "description": "Overview of your Remes content management system",
+      "welcome": "Welcome back, {name}! 🎉",
+      "welcomeDescription": "You've successfully logged into your admin dashboard",
+      "stats": {
+        "totalPosts": "Total Posts",
+        "publishedPosts": "Published Posts",
+        "draftPosts": "Draft Posts",
+        "categories": "Categories"
+      },
+      "quickActions": {
+        "title": "Quick Actions",
+        "createPost": "Create New Post",
+        "manageCategories": "Manage Categories"
+      },
+      "accountInfo": {
+        "title": "Account Information",
+        "email": "Email",
+        "userId": "User ID",
+        "name": "Name",
+        "accountType": "Account Type",
+        "admin": "Admin"
+      }
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "categories": "Categories",
+      "settings": "Settings"
+    }
+  },
+  "common": {
+    "loading": "Loading...",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "edit": "Edit",
+    "create": "Create",
+    "close": "Close",
+    "back": "Back",
+    "next": "Next",
+    "previous": "Previous",
+    "search": "Search",
+    "filter": "Filter",
+    "sort": "Sort",
+    "actions": "Actions",
+    "status": "Status",
+    "date": "Date",
+    "author": "Author",
+    "title": "Title",
+    "description": "Description",
+    "published": "Published",
+    "draft": "Draft",
+    "language": "Language",
+    "english": "English",
+    "french": "French"
+  },
+  "navigation": {
+    "home": "Home",
+    "about": "About",
+    "services": "Services",
+    "contact": "Contact",
+    "login": "Login",
+    "logout": "Logout"
+  },
+  "forms": {
+    "required": "This field is required",
+    "email": "Please enter a valid email address",
+    "password": "Password must be at least 6 characters",
+    "confirmPassword": "Passwords do not match"
+  }
+} 
