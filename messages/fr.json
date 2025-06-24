@@ -149,8 +149,7 @@
           "savedAsDraft": "Article enregistré comme brouillon !",
           "published": "Article publié avec succès !",
           "links": {
-            "editPost": "Modifier l'article",
-            "viewAllPosts": "Voir tous les articles"
+            "editPost": "Modifier l'article"
           }
         },
         "validation": {
@@ -171,6 +170,8 @@
           "titlePlaceholder": "Ajouter un titre",
           "slug": "Permalien",
           "slugPlaceholder": "slug-de-larticle",
+          "content": "Contenu",
+          "contentPlaceholder": "Commencez à écrire le contenu de votre article...",
           "categories": "Catégories",
           "coverImage": "Image mise en avant",
           "clickToUpload": "Cliquer pour télécharger",
@@ -194,15 +195,18 @@
         "success": {
           "updated": "Article mis à jour avec succès !",
           "links": {
-            "editPost": "Continuer à modifier",
-            "viewAllPosts": "Voir tous les articles"
+            "editPost": "Continuer à modifier"
           }
         },
         "validation": {
           "titleRequired": "Le titre est obligatoire",
           "slugRequired": "Le slug est obligatoire",
           "contentRequired": "Le contenu est obligatoire",
-          "loginRequired": "Vous devez être connecté pour mettre à jour un article"
+          "categoriesRequired": "Au moins une catégorie est requise",
+          "coverImageRequired": "L'image de couverture est obligatoire",
+          "loginRequired": "Vous devez être connecté pour mettre à jour un article",
+          "publishFailed": "Échec de la publication de l'article",
+          "saveFailed": "Échec de l'enregistrement de l'article"
         }
       },
       "errors": {
@@ -218,16 +222,6 @@
       "title": "Catégories",
       "description": "Organisez votre contenu avec des catégories",
       "addNew": "Ajouter une nouvelle catégorie",
-      "searchPlaceholder": "Rechercher des catégories...",
-      "table": {
-        "title": "Titre",
-        "slug": "Slug",
-        "created": "Créé",
-        "actions": "Actions",
-        "noResults": "Aucune catégorie trouvée",
-        "loadingCategories": "Chargement des catégories..."
-      },
-      "addNew": "Ajouter une nouvelle catégorie",
       "editCategory": "Modifier la catégorie",
       "searchPlaceholder": "Rechercher des catégories...",
       "noCategoriesFound": "Aucune catégorie trouvée",
@@ -236,6 +230,14 @@
       "getStarted": "Commencez par créer une nouvelle catégorie.",
       "clickToStart": "Cliquez sur \"Ajouter une nouvelle catégorie\" pour commencer",
       "created": "Créé",
+      "table": {
+        "title": "Titre",
+        "slug": "Slug",
+        "created": "Créé",
+        "actions": "Actions",
+        "noResults": "Aucune catégorie trouvée",
+        "loadingCategories": "Chargement des catégories..."
+      },
       "form": {
         "title": "Titre",
         "titlePlaceholder": "Saisissez le titre de la catégorie...",

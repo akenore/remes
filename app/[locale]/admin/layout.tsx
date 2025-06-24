@@ -6,6 +6,7 @@ import { useAuth } from '@/lib/auth-context';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations } from 'next-intl';
+import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
    
    export default function AdminLayout({
      children,
@@ -198,6 +199,9 @@ import { useTranslations } from 'next-intl';
                 
                 {/* User info and actions */}
                 <div className="flex items-center space-x-4">
+                  {/* Language Switcher */}
+                  <LanguageSwitcher />
+                  
                   {/* User welcome message */}
                   <div className="hidden sm:flex items-center space-x-3">
                     <div className="flex items-center space-x-2">

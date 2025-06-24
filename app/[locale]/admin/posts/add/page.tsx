@@ -255,13 +255,6 @@ export default function AddPostPage() {
                     >
                       {t('success.links.editPost')}
                     </Link>
-                    {' | '}
-                    <Link
-                      href="/admin/posts"
-                      className="font-medium underline hover:text-green-600"
-                    >
-                      {t('success.links.viewAllPosts')}
-                    </Link>
                   </span>
                 )}
               </p>

@@ -212,8 +212,22 @@ export default function EditPostPage() {
         errors.push(t('validation.contentRequired'));
       }
       
+      if (!user?.id) {
+        errors.push(t('validation.loginRequired'));
+      }
+      
+      // Check if categories are required (at least one)
+      if (formData.categories.length === 0) {
+        errors.push(t('validation.categoriesRequired'));
+      }
+      
+      // Check if cover image is required (either existing or new)
+      if (!formData.cover_image && !formData.current_cover_image) {
+        errors.push(t('validation.coverImageRequired'));
+      }
+      
       if (errors.length > 0) {
-        throw new Error(errors.join(', '));
+        throw new Error(errors.join('\n'));
       }
 
       const data = new FormData();
@@ -392,12 +406,7 @@ export default function EditPostPage() {
               <div className="mt-2 text-sm text-green-700 flex items-center justify-between">
                 <span>{success}</span>
                 <div className="flex space-x-2 ml-4">
-                  <Link
-                    href="/admin/posts"
-                    className="text-sm font-medium text-green-600 hover:text-green-500 underline"
-                  >
-                    View all posts
-                  </Link>
+
                 </div>
               </div>
             </div>
@@ -419,9 +428,9 @@ export default function EditPostPage() {
                 {tCommon('error')}
               </h3>
               <div className="mt-2 text-sm text-red-700">
-                {error.includes(',') ? (
+                {error.includes('\n') ? (
                   <ul className="list-disc list-inside space-y-1">
-                    {error.split(',').map((err, index) => (
+                    {error.split('\n').map((err, index) => (
                       <li key={index}>{err.trim()}</li>
                     ))}
                   </ul>
@@ -520,6 +529,7 @@ export default function EditPostPage() {
               <RichTextEditor
                 value={formData.content}
                 onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
+                placeholder={t('form.contentPlaceholder')}
                 postId={postId}
               />
             </div>

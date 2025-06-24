@@ -4,7 +4,6 @@ import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
 import { Link } from '@/i18n/routing';
 
 export default function AdminPage() {
@@ -79,11 +78,6 @@ export default function AdminPage() {
 
      return (
     <div className="space-y-6">
-      {/* Language Switcher */}
-      <div className="flex justify-end">
-        <LanguageSwitcher />
-      </div>
-
       {/* Welcome Message */}
       {showWelcome && (
         <div className="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">

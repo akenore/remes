@@ -149,8 +149,7 @@
           "savedAsDraft": "Post saved as draft!",
           "published": "Post published successfully!",
           "links": {
-            "editPost": "Edit post",
-            "viewAllPosts": "View all posts"
+            "editPost": "Edit post"
           }
         },
         "validation": {
@@ -171,6 +170,8 @@
           "titlePlaceholder": "Add title",
           "slug": "Permalink",
           "slugPlaceholder": "post-slug",
+          "content": "Content",
+          "contentPlaceholder": "Start writing your post content...",
           "categories": "Categories",
           "coverImage": "Featured Image",
           "clickToUpload": "Click to upload",
@@ -194,15 +195,18 @@
         "success": {
           "updated": "Post updated successfully!",
           "links": {
-            "editPost": "Continue editing",
-            "viewAllPosts": "View all posts"
+            "editPost": "Continue editing"
           }
         },
         "validation": {
           "titleRequired": "Title is required",
           "slugRequired": "Slug is required",
           "contentRequired": "Content is required",
-          "loginRequired": "You must be logged in to update a post"
+          "categoriesRequired": "At least one category is required",
+          "coverImageRequired": "Cover image is required",
+          "loginRequired": "You must be logged in to update a post",
+          "publishFailed": "Failed to publish post",
+          "saveFailed": "Failed to save post"
         }
       },
       "errors": {
