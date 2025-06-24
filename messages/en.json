@@ -1,5 +1,55 @@
 {
   "admin": {
+    "common": {
+      "loading": "Loading...",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "create": "Create",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "search": "Search",
+      "filter": "Filter",
+      "sort": "Sort",
+      "actions": "Actions",
+      "status": "Status",
+      "date": "Date",
+      "author": "Author",
+      "title": "Title",
+      "description": "Description",
+      "published": "Published",
+      "draft": "Draft",
+      "confirm": "Confirm",
+      "yes": "Yes",
+      "no": "No",
+      "error": "Error",
+      "success": "Success",
+      "warning": "Warning",
+      "info": "Information"
+    },
+    "layout": {
+      "brand": "Remes Admin",
+      "closeSidebar": "Close sidebar",
+      "openMainMenu": "Open main menu",
+      "logout": "Logout",
+      "userWelcome": "Welcome, {name}!"
+    },
+    "navigation": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "categories": "Categories",
+      "settings": "Settings"
+    },
+    "pageHeaders": {
+      "dashboard": "Dashboard",
+      "posts": "Posts",
+      "addNewPost": "Add New Post",
+      "editPost": "Edit Post",
+      "categories": "Categories"
+    },
     "dashboard": {
       "title": "Dashboard",
       "description": "Overview of your Remes content management system",
@@ -25,11 +75,211 @@
         "admin": "Admin"
       }
     },
-    "navigation": {
-      "dashboard": "Dashboard",
-      "posts": "Posts",
-      "categories": "Categories",
-      "settings": "Settings"
+    "posts": {
+      "title": "Posts",
+      "description": "Manage your blog posts and articles",
+      "addNew": "Add New Post",
+      "searchPlaceholder": "Search posts...",
+      "searchLabel": "Search posts",
+      "filters": {
+        "all": "All Posts",
+        "published": "Published",
+        "drafts": "Drafts"
+      },
+      "table": {
+        "title": "Title",
+        "author": "Author",
+        "categories": "Categories",
+        "status": "Status",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "No posts found",
+        "loadingPosts": "Loading posts..."
+      },
+      "status": {
+        "published": "Published",
+        "draft": "Draft",
+        "togglePublish": "Toggle publish status"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete",
+        "view": "View"
+      },
+      "deleteConfirm": "Are you sure you want to delete this post?",
+      "pagination": {
+        "page": "Page {current} of {total}",
+        "next": "Next",
+        "previous": "Previous"
+      },
+      "add": {
+        "title": "Add New Post",
+        "backToPosts": "Back to Posts",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Enter post title...",
+          "slug": "URL Slug",
+          "slugPlaceholder": "post-url-slug",
+          "slugHelp": "This will be the URL for your post. Leave blank to auto-generate from title.",
+          "content": "Content",
+          "contentPlaceholder": "Start writing your post content...",
+          "coverImage": "Cover Image",
+          "coverImageRequired": "Cover image is required",
+          "categories": "Categories",
+          "categoriesRequired": "Select at least one category",
+          "removeImage": "Remove image",
+          "imagePreview": "Image preview"
+        },
+        "actions": {
+          "saveDraft": "Save as Draft",
+          "publish": "Publish",
+          "savingDraft": "Saving as draft...",
+          "publishing": "Publishing..."
+        },
+        "success": {
+          "savedAsDraft": "Post saved as draft!",
+          "published": "Post published successfully!",
+          "links": {
+            "editPost": "Edit post",
+            "viewAllPosts": "View all posts"
+          }
+        },
+        "validation": {
+          "titleRequired": "Title is required",
+          "slugRequired": "Slug is required",
+          "contentRequired": "Content is required",
+          "categoriesRequired": "At least one category is required",
+          "coverImageRequired": "Cover image is required",
+          "loginRequired": "You must be logged in to create a post"
+        }
+      },
+      "edit": {
+        "title": "Edit Post",
+        "backToPosts": "Back to Posts",
+        "loading": "Loading post...",
+        "notFound": "Post not found",
+        "success": {
+          "updated": "Post updated successfully!",
+          "links": {
+            "editPost": "Continue editing",
+            "viewAllPosts": "View all posts"
+          }
+        },
+        "validation": {
+          "titleRequired": "Title is required",
+          "slugRequired": "Slug is required",
+          "contentRequired": "Content is required",
+          "loginRequired": "You must be logged in to update a post"
+        }
+      },
+      "errors": {
+        "fetchFailed": "Failed to fetch posts",
+        "deleteFailed": "Failed to delete post",
+        "updateStatusFailed": "Failed to update post status",
+        "createFailed": "Failed to create post",
+        "updateFailed": "Failed to update post",
+        "loadFailed": "Failed to load post"
+      }
+    },
+    "categories": {
+      "title": "Categories",
+      "description": "Organize your content with categories",
+      "addNew": "Add New Category",
+      "searchPlaceholder": "Search categories...",
+      "table": {
+        "title": "Title",
+        "slug": "Slug",
+        "created": "Created",
+        "actions": "Actions",
+        "noResults": "No categories found",
+        "loadingCategories": "Loading categories..."
+      },
+      "form": {
+        "title": "Title",
+        "titlePlaceholder": "Enter category title...",
+        "slug": "URL Slug",
+        "slugPlaceholder": "category-slug",
+        "slugHelp": "This will be used in URLs. Leave blank to auto-generate from title.",
+        "addCategory": "Add Category",
+        "updateCategory": "Update Category",
+        "cancel": "Cancel"
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirm": "Are you sure you want to delete \"{title}\"? This action cannot be undone.",
+      "validation": {
+        "titleRequired": "Title is required",
+        "slugRequired": "Slug is required"
+      },
+      "errors": {
+        "fetchFailed": "Failed to fetch categories",
+        "createFailed": "Failed to create category",
+        "updateFailed": "Failed to update category",
+        "deleteFailed": "Failed to delete category"
+      },
+      "success": {
+        "created": "Category created successfully",
+        "updated": "Category updated successfully",
+        "deleted": "Category deleted successfully"
+      }
+    },
+    "richTextEditor": {
+      "placeholder": "Start writing...",
+      "imageModal": {
+        "title": "Insert Image",
+        "tabs": {
+          "upload": "Upload",
+          "collection": "Collection"
+        },
+        "upload": {
+          "dropzone": "Drag and drop an image here, or click to browse",
+          "browse": "Browse Files",
+          "uploading": "Uploading...",
+          "maxSize": "Maximum file size: 10MB",
+          "supportedFormats": "Supported formats: JPEG, PNG, GIF, WebP"
+        },
+        "collection": {
+          "loading": "Loading images...",
+          "noImages": "No images found in collection",
+          "selectImage": "Click to select this image"
+        },
+        "settings": {
+          "title": "Image Settings",
+          "preview": "Preview",
+          "altText": "Alt Text",
+          "altTextPlaceholder": "Describe this image for accessibility",
+          "altTextHelp": "This text will be read by screen readers and shown if the image fails to load.",
+          "size": "Size",
+          "sizes": {
+            "thumbnail": "Thumbnail (150px)",
+            "medium": "Medium (300px)",
+            "large": "Large (600px)",
+            "full": "Full Size",
+            "custom": "Custom"
+          },
+          "dimensions": "Dimensions",
+          "width": "Width",
+          "height": "Height",
+          "keepAspectRatio": "Keep aspect ratio",
+          "alignment": "Alignment",
+          "alignments": {
+            "none": "None",
+            "left": "Left",
+            "center": "Center",
+            "right": "Right"
+          },
+          "insert": "Insert Image",
+          "cancel": "Cancel"
+        },
+        "errors": {
+          "invalidFile": "Please select an image file",
+          "fileTooLarge": "Image size must be less than 10MB",
+          "uploadFailed": "Failed to upload image",
+          "noCategories": "No categories available. Please create a category first."
+        }
+      }
     }
   },
   "common": {

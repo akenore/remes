@@ -1,35 +1,285 @@
 {
   "admin": {
-    "dashboard": {
-      "title": "Tableau de bord",
-      "description": "Aperçu de votre système de gestion de contenu Remes",
-      "welcome": "Bon retour, {name} ! 🎉",
-      "welcomeDescription": "Vous vous êtes connecté avec succès à votre tableau de bord administrateur",
-      "stats": {
-        "totalPosts": "Total des Articles",
-        "publishedPosts": "Articles Publiés",
-        "draftPosts": "Brouillons",
-        "categories": "Catégories"
-      },
-      "quickActions": {
-        "title": "Actions Rapides",
-        "createPost": "Créer un Nouvel Article",
-        "manageCategories": "Gérer les Catégories"
-      },
-      "accountInfo": {
-        "title": "Informations du Compte",
-        "email": "Email",
-        "userId": "ID Utilisateur",
-        "name": "Nom",
-        "accountType": "Type de Compte",
-        "admin": "Administrateur"
-      }
+    "common": {
+      "loading": "Chargement...",
+      "save": "Enregistrer",
+      "cancel": "Annuler",
+      "delete": "Supprimer",
+      "edit": "Modifier",
+      "create": "Créer",
+      "close": "Fermer",
+      "back": "Retour",
+      "next": "Suivant",
+      "previous": "Précédent",
+      "search": "Rechercher",
+      "filter": "Filtrer",
+      "sort": "Trier",
+      "actions": "Actions",
+      "status": "Statut",
+      "date": "Date",
+      "author": "Auteur",
+      "title": "Titre",
+      "description": "Description",
+      "published": "Publié",
+      "draft": "Brouillon",
+      "confirm": "Confirmer",
+      "yes": "Oui",
+      "no": "Non",
+      "error": "Erreur",
+      "success": "Succès",
+      "warning": "Avertissement",
+      "info": "Information"
+    },
+    "layout": {
+      "brand": "Remes Admin",
+      "closeSidebar": "Fermer la barre latérale",
+      "openMainMenu": "Ouvrir le menu principal",
+      "logout": "Déconnexion",
+      "userWelcome": "Bienvenue, {name} !"
     },
     "navigation": {
       "dashboard": "Tableau de bord",
       "posts": "Articles",
       "categories": "Catégories",
       "settings": "Paramètres"
+    },
+    "pageHeaders": {
+      "dashboard": "Tableau de bord",
+      "posts": "Articles",
+      "addNewPost": "Ajouter un nouvel article",
+      "editPost": "Modifier l'article",
+      "categories": "Catégories"
+    },
+    "dashboard": {
+      "title": "Tableau de bord",
+      "description": "Aperçu de votre système de gestion de contenu Remes",
+      "welcome": "Bon retour, {name} ! 🎉",
+      "welcomeDescription": "Vous vous êtes connecté avec succès à votre tableau de bord administrateur",
+      "stats": {
+        "totalPosts": "Total des articles",
+        "publishedPosts": "Articles publiés",
+        "draftPosts": "Articles brouillons",
+        "categories": "Catégories"
+      },
+      "quickActions": {
+        "title": "Actions rapides",
+        "createPost": "Créer un nouvel article",
+        "manageCategories": "Gérer les catégories"
+      },
+      "accountInfo": {
+        "title": "Informations du compte",
+        "email": "Email",
+        "userId": "ID utilisateur",
+        "name": "Nom",
+        "accountType": "Type de compte",
+        "admin": "Administrateur"
+      }
+    },
+    "posts": {
+      "title": "Articles",
+      "description": "Gérez vos articles de blog et vos contenus",
+      "addNew": "Ajouter un nouvel article",
+      "searchPlaceholder": "Rechercher des articles...",
+      "searchLabel": "Rechercher des articles",
+      "filters": {
+        "all": "Tous les articles",
+        "published": "Publiés",
+        "drafts": "Brouillons"
+      },
+      "table": {
+        "title": "Titre",
+        "author": "Auteur",
+        "categories": "Catégories",
+        "status": "Statut",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "Aucun article trouvé",
+        "loadingPosts": "Chargement des articles..."
+      },
+      "status": {
+        "published": "Publié",
+        "draft": "Brouillon",
+        "togglePublish": "Basculer le statut de publication"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer",
+        "view": "Voir"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet article ?",
+      "pagination": {
+        "page": "Page {current} sur {total}",
+        "next": "Suivant",
+        "previous": "Précédent"
+      },
+      "add": {
+        "title": "Ajouter un nouvel article",
+        "backToPosts": "Retour aux articles",
+        "form": {
+          "title": "Titre",
+          "titlePlaceholder": "Saisissez le titre de l'article...",
+          "slug": "Slug d'URL",
+          "slugPlaceholder": "slug-de-larticle",
+          "slugHelp": "Ceci sera l'URL de votre article. Laissez vide pour générer automatiquement à partir du titre.",
+          "content": "Contenu",
+          "contentPlaceholder": "Commencez à écrire le contenu de votre article...",
+          "coverImage": "Image de couverture",
+          "coverImageRequired": "L'image de couverture est obligatoire",
+          "categories": "Catégories",
+          "categoriesRequired": "Sélectionnez au moins une catégorie",
+          "removeImage": "Supprimer l'image",
+          "imagePreview": "Aperçu de l'image"
+        },
+        "actions": {
+          "saveDraft": "Enregistrer comme brouillon",
+          "publish": "Publier",
+          "savingDraft": "Enregistrement en tant que brouillon...",
+          "publishing": "Publication en cours..."
+        },
+        "success": {
+          "savedAsDraft": "Article enregistré comme brouillon !",
+          "published": "Article publié avec succès !",
+          "links": {
+            "editPost": "Modifier l'article",
+            "viewAllPosts": "Voir tous les articles"
+          }
+        },
+        "validation": {
+          "titleRequired": "Le titre est obligatoire",
+          "slugRequired": "Le slug est obligatoire",
+          "contentRequired": "Le contenu est obligatoire",
+          "categoriesRequired": "Au moins une catégorie est requise",
+          "coverImageRequired": "L'image de couverture est obligatoire",
+          "loginRequired": "Vous devez être connecté pour créer un article"
+        }
+      },
+      "edit": {
+        "title": "Modifier l'article",
+        "backToPosts": "Retour aux articles",
+        "loading": "Chargement de l'article...",
+        "notFound": "Article non trouvé",
+        "success": {
+          "updated": "Article mis à jour avec succès !",
+          "links": {
+            "editPost": "Continuer à modifier",
+            "viewAllPosts": "Voir tous les articles"
+          }
+        },
+        "validation": {
+          "titleRequired": "Le titre est obligatoire",
+          "slugRequired": "Le slug est obligatoire",
+          "contentRequired": "Le contenu est obligatoire",
+          "loginRequired": "Vous devez être connecté pour mettre à jour un article"
+        }
+      },
+      "errors": {
+        "fetchFailed": "Échec du chargement des articles",
+        "deleteFailed": "Échec de la suppression de l'article",
+        "updateStatusFailed": "Échec de la mise à jour du statut de l'article",
+        "createFailed": "Échec de la création de l'article",
+        "updateFailed": "Échec de la mise à jour de l'article",
+        "loadFailed": "Échec du chargement de l'article"
+      }
+    },
+    "categories": {
+      "title": "Catégories",
+      "description": "Organisez votre contenu avec des catégories",
+      "addNew": "Ajouter une nouvelle catégorie",
+      "searchPlaceholder": "Rechercher des catégories...",
+      "table": {
+        "title": "Titre",
+        "slug": "Slug",
+        "created": "Créé",
+        "actions": "Actions",
+        "noResults": "Aucune catégorie trouvée",
+        "loadingCategories": "Chargement des catégories..."
+      },
+      "form": {
+        "title": "Titre",
+        "titlePlaceholder": "Saisissez le titre de la catégorie...",
+        "slug": "Slug d'URL",
+        "slugPlaceholder": "slug-de-categorie",
+        "slugHelp": "Ceci sera utilisé dans les URLs. Laissez vide pour générer automatiquement à partir du titre.",
+        "addCategory": "Ajouter une catégorie",
+        "updateCategory": "Mettre à jour la catégorie",
+        "cancel": "Annuler"
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer \"{title}\" ? Cette action ne peut pas être annulée.",
+      "validation": {
+        "titleRequired": "Le titre est obligatoire",
+        "slugRequired": "Le slug est obligatoire"
+      },
+      "errors": {
+        "fetchFailed": "Échec du chargement des catégories",
+        "createFailed": "Échec de la création de la catégorie",
+        "updateFailed": "Échec de la mise à jour de la catégorie",
+        "deleteFailed": "Échec de la suppression de la catégorie"
+      },
+      "success": {
+        "created": "Catégorie créée avec succès",
+        "updated": "Catégorie mise à jour avec succès",
+        "deleted": "Catégorie supprimée avec succès"
+      }
+    },
+    "richTextEditor": {
+      "placeholder": "Commencez à écrire...",
+      "imageModal": {
+        "title": "Insérer une image",
+        "tabs": {
+          "upload": "Télécharger",
+          "collection": "Collection"
+        },
+        "upload": {
+          "dropzone": "Glissez-déposez une image ici, ou cliquez pour parcourir",
+          "browse": "Parcourir les fichiers",
+          "uploading": "Téléchargement...",
+          "maxSize": "Taille maximale du fichier : 10 Mo",
+          "supportedFormats": "Formats pris en charge : JPEG, PNG, GIF, WebP"
+        },
+        "collection": {
+          "loading": "Chargement des images...",
+          "noImages": "Aucune image trouvée dans la collection",
+          "selectImage": "Cliquez pour sélectionner cette image"
+        },
+        "settings": {
+          "title": "Paramètres de l'image",
+          "preview": "Aperçu",
+          "altText": "Texte alternatif",
+          "altTextPlaceholder": "Décrivez cette image pour l'accessibilité",
+          "altTextHelp": "Ce texte sera lu par les lecteurs d'écran et affiché si l'image ne se charge pas.",
+          "size": "Taille",
+          "sizes": {
+            "thumbnail": "Vignette (150px)",
+            "medium": "Moyen (300px)",
+            "large": "Grand (600px)",
+            "full": "Taille réelle",
+            "custom": "Personnalisé"
+          },
+          "dimensions": "Dimensions",
+          "width": "Largeur",
+          "height": "Hauteur",
+          "keepAspectRatio": "Conserver les proportions",
+          "alignment": "Alignement",
+          "alignments": {
+            "none": "Aucun",
+            "left": "Gauche",
+            "center": "Centre",
+            "right": "Droite"
+          },
+          "insert": "Insérer l'image",
+          "cancel": "Annuler"
+        },
+        "errors": {
+          "invalidFile": "Veuillez sélectionner un fichier image",
+          "fileTooLarge": "La taille de l'image doit être inférieure à 10 Mo",
+          "uploadFailed": "Échec du téléchargement de l'image",
+          "noCategories": "Aucune catégorie disponible. Veuillez d'abord créer une catégorie."
+        }
+      }
     }
   },
   "common": {
@@ -67,7 +317,7 @@
     "logout": "Déconnexion"
   },
   "forms": {
-    "required": "Ce champ est requis",
+    "required": "Ce champ est obligatoire",
     "email": "Veuillez saisir une adresse email valide",
     "password": "Le mot de passe doit contenir au moins 6 caractères",
     "confirmPassword": "Les mots de passe ne correspondent pas"

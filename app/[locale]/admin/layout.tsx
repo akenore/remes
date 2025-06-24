@@ -5,6 +5,7 @@ import AdminGuard from '@/components/ui/admin/AdminGuard';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
    
    export default function AdminLayout({
      children,
@@ -15,6 +16,10 @@ import Link from 'next/link';
   const { user, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const t = useTranslations('admin');
+  const tLayout = useTranslations('admin.layout');
+  const tNav = useTranslations('admin.navigation');
+  const tPageHeaders = useTranslations('admin.pageHeaders');
 
   const handleLogout = () => {
     logout();
@@ -23,7 +28,7 @@ import Link from 'next/link';
 
   const navigation = [
     {
-      name: 'Dashboard',
+      name: tNav('dashboard'),
       href: '/admin',
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -32,7 +37,7 @@ import Link from 'next/link';
       ),
     },
     {
-      name: 'Posts',
+      name: tNav('posts'),
       href: '/admin/posts',
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -41,7 +46,7 @@ import Link from 'next/link';
       ),
     },
     {
-      name: 'Categories',
+      name: tNav('categories'),
       href: '/admin/categories',
       icon: (
         <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -50,6 +55,15 @@ import Link from 'next/link';
       ),
     },
   ];
+
+  const getCurrentPageTitle = () => {
+    if (pathname === '/admin') return tPageHeaders('dashboard');
+    if (pathname === '/admin/posts') return tPageHeaders('posts');
+    if (pathname === '/admin/posts/add') return tPageHeaders('addNewPost');
+    if (pathname.startsWith('/admin/posts/edit')) return tPageHeaders('editPost');
+    if (pathname === '/admin/categories') return tPageHeaders('categories');
+    return tPageHeaders('dashboard');
+  };
 
   return (
     <AdminGuard>
@@ -73,14 +87,14 @@ import Link from 'next/link';
                 <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
                   <span className="text-white font-bold text-sm">R</span>
                 </div>
-                <h1 className="text-lg font-bold text-gray-900">Remes Admin</h1>
+                <h1 className="text-lg font-bold text-gray-900">{tLayout('brand')}</h1>
               </div>
               <button
                 type="button"
                 className="text-gray-400 hover:text-gray-600 p-1 rounded-md hover:bg-gray-100 transition-colors"
                 onClick={() => setSidebarOpen(false)}
               >
-                <span className="sr-only">Close sidebar</span>
+                <span className="sr-only">{tLayout('closeSidebar')}</span>
                 <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
                 </svg>
@@ -123,7 +137,7 @@ import Link from 'next/link';
                 <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
                   <span className="text-white font-bold text-sm">R</span>
                 </div>
-                <h1 className="text-lg font-bold text-gray-900">Remes Admin</h1>
+                <h1 className="text-lg font-bold text-gray-900">{tLayout('brand')}</h1>
               </div>
             </div>
             <nav className="flex-1 px-4 py-4">
@@ -167,22 +181,18 @@ import Link from 'next/link';
                     className="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-gray-500 hover:bg-gray-100 focus:outline-none focus:ring-2 focus:ring-inset focus:ring-indigo-500 transition-colors"
                     onClick={() => setSidebarOpen(true)}
                   >
-                    <span className="sr-only">Open main menu</span>
+                    <span className="sr-only">{tLayout('openMainMenu')}</span>
                     <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
                     </svg>
                   </button>
-                  <h1 className="ml-3 text-lg font-semibold text-gray-900">Remes Admin</h1>
+                  <h1 className="ml-3 text-lg font-semibold text-gray-900">{tLayout('brand')}</h1>
                 </div>
 
                 {/* Desktop page title - show current page */}
                 <div className="hidden lg:block">
                   <h2 className="text-lg font-medium text-gray-900">
-                    {pathname === '/admin' && 'Dashboard'}
-                    {pathname === '/admin/posts' && 'Posts'}
-                    {pathname === '/admin/posts/add' && 'Add New Post'}
-                    {pathname.startsWith('/admin/posts/edit') && 'Edit Post'}
-                    {pathname === '/admin/categories' && 'Categories'}
+                    {getCurrentPageTitle()}
                   </h2>
                 </div>
                 
@@ -210,7 +220,7 @@ import Link from 'next/link';
                     <svg className="h-4 w-4 mr-1 sm:mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1" />
                     </svg>
-                    <span className="hidden sm:inline">Logout</span>
+                    <span className="hidden sm:inline">{tLayout('logout')}</span>
                   </button>
                 </div>
               </div>

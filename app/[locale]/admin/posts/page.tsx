@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
+import { useTranslations } from 'next-intl';
 
 interface Post {
   id: string;
@@ -30,6 +31,8 @@ interface Post {
 
 export default function PostsPage() {
   const { user } = useAuth();
+  const t = useTranslations('admin.posts');
+  const tCommon = useTranslations('admin.common');
   const [posts, setPosts] = useState<Post[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -71,10 +74,10 @@ export default function PostsPage() {
         expand: 'author,categories',
       });
 
-      setPosts(result.items as Post[]);
+      setPosts(result.items as unknown as Post[]);
       setTotalPages(result.totalPages);
     } catch (err) {
-      setError('Failed to fetch posts');
+      setError(t('errors.fetchFailed'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -82,7 +85,7 @@ export default function PostsPage() {
   };
 
   const handleDeletePost = async (postId: string) => {
-    if (!window.confirm('Are you sure you want to delete this post?')) {
+    if (!window.confirm(t('deleteConfirm'))) {
       return;
     }
 
@@ -90,7 +93,7 @@ export default function PostsPage() {
       await pb.collection('posts').delete(postId);
       fetchPosts(); // Refresh the list
     } catch (err) {
-      setError('Failed to delete post');
+      setError(t('errors.deleteFailed'));
       console.error(err);
     }
   };
@@ -102,7 +105,7 @@ export default function PostsPage() {
       });
       fetchPosts(); // Refresh the list
     } catch (err) {
-      setError('Failed to update post status');
+      setError(t('errors.updateStatusFailed'));
       console.error(err);
     }
   };
@@ -120,9 +123,9 @@ export default function PostsPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Posts</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Manage your blog posts and articles
+            {t('description')}
           </p>
         </div>
         <div className="mt-4 sm:mt-0">
@@ -133,7 +136,7 @@ export default function PostsPage() {
             <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Add New Post
+            {t('addNew')}
           </Link>
         </div>
       </div>
@@ -143,7 +146,7 @@ export default function PostsPage() {
         <div className="flex flex-col sm:flex-row gap-4">
           <div className="flex-1">
             <label htmlFor="search" className="sr-only">
-              Search posts
+              {t('searchLabel')}
             </label>
             <div className="relative">
               <div className="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
@@ -155,7 +158,7 @@ export default function PostsPage() {
                 id="search"
                 type="text"
                 className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                placeholder="Search posts..."
+                placeholder={t('searchPlaceholder')}
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
               />
@@ -167,9 +170,9 @@ export default function PostsPage() {
               value={statusFilter}
               onChange={(e) => setStatusFilter(e.target.value)}
             >
-              <option value="all">All Posts</option>
-              <option value="published">Published</option>
-              <option value="draft">Drafts</option>
+              <option value="all">{t('filters.all')}</option>
+              <option value="published">{t('filters.published')}</option>
+              <option value="draft">{t('filters.drafts')}</option>
             </select>
           </div>
         </div>
@@ -196,26 +199,14 @@ export default function PostsPage() {
         {loading ? (
           <div className="p-6 text-center">
             <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-            <p className="mt-2 text-gray-500">Loading posts...</p>
+            <p className="mt-2 text-gray-500">{t('table.loadingPosts')}</p>
           </div>
         ) : posts.length === 0 ? (
-          <div className="p-6 text-center">
+          <div className="p-6 text-center text-gray-500">
             <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
             </svg>
-            <h3 className="mt-2 text-sm font-medium text-gray-900">No posts</h3>
-            <p className="mt-1 text-sm text-gray-500">Get started by creating a new post.</p>
-            <div className="mt-6">
-              <Link
-                href="/admin/posts/add"
-                className="inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
-              >
-                <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-                </svg>
-                Add New Post
-              </Link>
-            </div>
+            <p className="mt-2">{t('table.noResults')}</p>
           </div>
         ) : (
           <>
@@ -223,23 +214,23 @@ export default function PostsPage() {
               <table className="min-w-full divide-y divide-gray-200">
                 <thead className="bg-gray-50">
                   <tr>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Post
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.title')}
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Author
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.author')}
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Categories
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.categories')}
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Status
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.status')}
                     </th>
-                    <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Date
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.date')}
                     </th>
-                    <th className="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Actions
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      {t('table.actions')}
                     </th>
                   </tr>
                 </thead>
@@ -249,16 +240,16 @@ export default function PostsPage() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           {post.cover_image && (
-                            <div className="flex-shrink-0 h-10 w-10 mr-3">
+                            <div className="flex-shrink-0 h-10 w-10">
                               <img
-                                className="h-10 w-10 rounded object-cover"
-                                src={`${process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090'}/api/files/posts/${post.id}/${post.cover_image}`}
+                                className="h-10 w-10 rounded-lg object-cover"
+                                src={pb.files.getURL(post, post.cover_image, { thumb: '40x40' })}
                                 alt=""
                               />
                             </div>
                           )}
-                          <div>
-                            <div className="text-sm font-medium text-gray-900 line-clamp-2">
+                          <div className={post.cover_image ? 'ml-4' : ''}>
+                            <div className="text-sm font-medium text-gray-900">
                               {post.title}
                             </div>
                             <div className="text-sm text-gray-500">
@@ -275,13 +266,11 @@ export default function PostsPage() {
                           {post.expand?.categories?.map((category) => (
                             <span
                               key={category.id}
-                              className="inline-flex items-center px-2 py-0.5 rounded text-xs font-medium bg-blue-100 text-blue-800"
+                              className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
                             >
                               {category.title}
                             </span>
-                          )) || (
-                            <span className="text-xs text-gray-500">No categories</span>
-                          )}
+                          ))}
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
@@ -292,26 +281,27 @@ export default function PostsPage() {
                               ? 'bg-green-100 text-green-800 hover:bg-green-200'
                               : 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200'
                           }`}
+                          title={t('status.togglePublish')}
                         >
-                          {post.published ? 'Published' : 'Draft'}
+                          {post.published ? t('status.published') : t('status.draft')}
                         </button>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {formatDate(post.created)}
                       </td>
-                      <td className="px-6 py-4 whitespace-nowrap text-right text-sm font-medium">
-                        <div className="flex justify-end space-x-2">
+                      <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                        <div className="flex space-x-2">
                           <Link
                             href={`/admin/posts/edit/${post.id}`}
                             className="text-indigo-600 hover:text-indigo-900 transition-colors"
                           >
-                            Edit
+                            {t('actions.edit')}
                           </Link>
                           <button
                             onClick={() => handleDeletePost(post.id)}
                             className="text-red-600 hover:text-red-900 transition-colors"
                           >
-                            Delete
+                            {t('actions.delete')}
                           </button>
                         </div>
                       </td>
@@ -330,56 +320,42 @@ export default function PostsPage() {
                     disabled={currentPage === 1}
                     className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
                   >
-                    Previous
+                    {t('pagination.previous')}
                   </button>
                   <button
                     onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                     disabled={currentPage === totalPages}
                     className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
                   >
-                    Next
+                    {t('pagination.next')}
                   </button>
                 </div>
                 <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                   <div>
                     <p className="text-sm text-gray-700">
-                      Showing page <span className="font-medium">{currentPage}</span> of{' '}
-                      <span className="font-medium">{totalPages}</span>
+                      {t('pagination.page', { current: currentPage, total: totalPages })}
                     </p>
                   </div>
                   <div>
-                    <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px">
+                    <nav className="relative z-0 inline-flex rounded-md shadow-sm -space-x-px" aria-label="Pagination">
                       <button
                         onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
                         disabled={currentPage === 1}
                         className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
                       >
-                        <span className="sr-only">Previous</span>
-                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
+                        <span className="sr-only">{t('pagination.previous')}</span>
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
                         </svg>
                       </button>
-                      {Array.from({ length: totalPages }, (_, i) => i + 1).map((page) => (
-                        <button
-                          key={page}
-                          onClick={() => setCurrentPage(page)}
-                          className={`relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
-                            page === currentPage
-                              ? 'z-10 bg-indigo-50 border-indigo-500 text-indigo-600'
-                              : 'bg-white border-gray-300 text-gray-500 hover:bg-gray-50'
-                          }`}
-                        >
-                          {page}
-                        </button>
-                      ))}
                       <button
                         onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                         disabled={currentPage === totalPages}
                         className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400"
                       >
-                        <span className="sr-only">Next</span>
-                        <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
-                          <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
+                        <span className="sr-only">{t('pagination.next')}</span>
+                        <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                         </svg>
                       </button>
                     </nav>
