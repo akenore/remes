@@ -327,6 +327,45 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "title": "Se connecter au portail d'administration",
+      "subtitle": "Accédez à votre tableau de bord d'administration Remes",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "Adresse e-mail",
+      "passwordLabel": "Mot de passe",
+      "passwordPlaceholder": "Mot de passe",
+      "signInButton": "Se connecter",
+      "signingInButton": "Connexion en cours...",
+      "forgotPassword": "Mot de passe oublié ?",
+      "checkingAuth": "Vérification de l'authentification...",
+      "redirecting": "Redirection vers le tableau de bord d'administration...",
+      "errors": {
+        "fillAllFields": "Veuillez remplir tous les champs",
+        "loginFailed": "Échec de la connexion",
+        "unexpectedError": "Une erreur inattendue s'est produite"
+      }
+    },
+    "forgotPassword": {
+      "title": "Réinitialiser votre mot de passe",
+      "subtitle": "Saisissez votre adresse e-mail et nous vous enverrons les instructions pour réinitialiser votre mot de passe.",
+      "emailLabel": "Adresse e-mail",
+      "emailPlaceholder": "Saisissez votre adresse e-mail",
+      "sendButton": "Envoyer les instructions de réinitialisation",
+      "sendingButton": "Envoi en cours...",
+      "backToLogin": "Retour à la connexion",
+      "success": {
+        "title": "Vérifiez votre e-mail",
+        "message": "Les instructions de réinitialisation du mot de passe ont été envoyées à votre adresse e-mail."
+      },
+      "errors": {
+        "emailRequired": "Veuillez saisir votre adresse e-mail",
+        "invalidEmail": "Veuillez saisir une adresse e-mail valide",
+        "sendFailed": "Échec de l'envoi de l'e-mail de réinitialisation",
+        "unexpectedError": "Une erreur inattendue s'est produite"
+      }
+    }
+  },
   "common": {
     "loading": "Chargement...",
     "save": "Enregistrer",

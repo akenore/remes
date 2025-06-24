@@ -325,6 +325,45 @@
       }
     }
   },
+  "auth": {
+    "login": {
+      "title": "Sign in to Admin Portal",
+      "subtitle": "Access your Remes admin dashboard",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "Email address",
+      "passwordLabel": "Password",
+      "passwordPlaceholder": "Password",
+      "signInButton": "Sign in",
+      "signingInButton": "Signing in...",
+      "forgotPassword": "Forgot your password?",
+      "checkingAuth": "Checking authentication...",
+      "redirecting": "Redirecting to admin dashboard...",
+      "errors": {
+        "fillAllFields": "Please fill in all fields",
+        "loginFailed": "Login failed",
+        "unexpectedError": "An unexpected error occurred"
+      }
+    },
+    "forgotPassword": {
+      "title": "Reset your password",
+      "subtitle": "Enter your email address and we'll send you instructions to reset your password.",
+      "emailLabel": "Email address",
+      "emailPlaceholder": "Enter your email address",
+      "sendButton": "Send reset instructions",
+      "sendingButton": "Sending...",
+      "backToLogin": "Back to sign in",
+      "success": {
+        "title": "Check your email",
+        "message": "Password reset instructions have been sent to your email address."
+      },
+      "errors": {
+        "emailRequired": "Please enter your email address",
+        "invalidEmail": "Please enter a valid email address",
+        "sendFailed": "Failed to send reset email",
+        "unexpectedError": "An unexpected error occurred"
+      }
+    }
+  },
   "common": {
     "loading": "Loading...",
     "save": "Save",

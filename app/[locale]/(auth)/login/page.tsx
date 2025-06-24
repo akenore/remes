@@ -3,7 +3,8 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
-import Link from 'next/link';
+import { useTranslations } from 'next-intl';
+import { Link } from '@/i18n/routing';
 
 export default function LoginPage() {
   const [email, setEmail] = useState('');
@@ -14,6 +15,7 @@ export default function LoginPage() {
   
   const { login, user, isLoading: authLoading } = useAuth();
   const router = useRouter();
+  const t = useTranslations('auth.login');
 
   // Redirect if already authenticated - but only once to prevent loops
   useEffect(() => {
@@ -29,7 +31,7 @@ export default function LoginPage() {
     setIsLoading(true);
 
     if (!email || !password) {
-      setError('Please fill in all fields');
+      setError(t('errors.fillAllFields'));
       setIsLoading(false);
       return;
     }
@@ -42,10 +44,10 @@ export default function LoginPage() {
         // Use replace instead of push to avoid back button issues
         router.replace('/admin');
       } else {
-        setError(result.error || 'Login failed');
+        setError(result.error || t('errors.loginFailed'));
       }
     } catch (err) {
-      setError('An unexpected error occurred');
+      setError(t('errors.unexpectedError'));
     } finally {
       setIsLoading(false);
     }
@@ -57,7 +59,7 @@ export default function LoginPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex items-center space-x-2">
           <div className="w-6 h-6 border-2 border-indigo-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-gray-700">Checking authentication...</span>
+          <span className="text-gray-700">{t('checkingAuth')}</span>
         </div>
       </div>
     );
@@ -69,7 +71,7 @@ export default function LoginPage() {
       <div className="min-h-screen flex items-center justify-center bg-gray-50">
         <div className="flex items-center space-x-2">
           <div className="w-6 h-6 border-2 border-green-600 border-t-transparent rounded-full animate-spin"></div>
-          <span className="text-gray-700">Redirecting to admin dashboard...</span>
+          <span className="text-gray-700">{t('redirecting')}</span>
         </div>
       </div>
     );
@@ -85,10 +87,10 @@ export default function LoginPage() {
       <div className="max-w-md w-full space-y-8">
         <div>
           <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
-            Sign in to Admin Portal
+            {t('title')}
           </h2>
           <p className="mt-2 text-center text-sm text-gray-600">
-            Access your Remes admin dashboard
+            {t('subtitle')}
           </p>
         </div>
         
@@ -96,7 +98,7 @@ export default function LoginPage() {
           <div className="rounded-md shadow-sm -space-y-px">
             <div>
               <label htmlFor="email" className="sr-only">
-                Email address
+                {t('emailLabel')}
               </label>
               <input
                 id="email"
@@ -105,7 +107,7 @@ export default function LoginPage() {
                 autoComplete="email"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-t-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Email address"
+                placeholder={t('emailPlaceholder')}
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 disabled={isLoading}
@@ -113,7 +115,7 @@ export default function LoginPage() {
             </div>
             <div>
               <label htmlFor="password" className="sr-only">
-                Password
+                {t('passwordLabel')}
               </label>
               <input
                 id="password"
@@ -122,7 +124,7 @@ export default function LoginPage() {
                 autoComplete="current-password"
                 required
                 className="appearance-none rounded-none relative block w-full px-3 py-2 border border-gray-300 placeholder-gray-500 text-gray-900 rounded-b-md focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 focus:z-10 sm:text-sm"
-                placeholder="Password"
+                placeholder={t('passwordPlaceholder')}
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 disabled={isLoading}
@@ -141,7 +143,7 @@ export default function LoginPage() {
               href="/forget-password"
               className="text-sm text-indigo-600 hover:text-indigo-500"
             >
-              Forgot your password?
+              {t('forgotPassword')}
             </Link>
           </div>
 
@@ -154,10 +156,10 @@ export default function LoginPage() {
               {isLoading ? (
                 <div className="flex items-center">
                   <div className="w-4 h-4 border-2 border-white border-t-transparent rounded-full animate-spin mr-2"></div>
-                  Signing in...
+                  {t('signingInButton')}
                 </div>
               ) : (
-                'Sign in'
+                t('signInButton')
               )}
             </button>
           </div>
