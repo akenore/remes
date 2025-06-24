@@ -113,12 +113,25 @@ export const authHelpers = {
   async refresh() {
     try {
       if (pb.authStore.isValid) {
-        // Try to refresh - PocketBase will handle whether it's admin or user
-        await pb.collection('users').authRefresh();
-        return true;
+        // Try both admin and user refresh methods
+        try {
+          // First try admin refresh
+          await pb.admins.authRefresh();
+          return true;
+        } catch (adminError) {
+          // If admin refresh fails, try user refresh
+          try {
+            await pb.collection('users').authRefresh();
+            return true;
+          } catch (userError) {
+            console.error('Both admin and user refresh failed:', { adminError, userError });
+            throw userError;
+          }
+        }
       }
       return false;
     } catch (error) {
+      console.error('Auth refresh failed:', error);
       pb.authStore.clear();
       return false;
     }
@@ -127,8 +140,6 @@ export const authHelpers = {
 
 // Initialize auth state on client
 if (typeof window !== 'undefined') {
-  // Try to refresh auth token on initialization
-  if (pb.authStore.isValid) {
-    authHelpers.refresh();
-  }
+  // Skip automatic refresh on initialization to avoid 403 errors
+  // The refresh will be handled manually when needed
 } 

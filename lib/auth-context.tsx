@@ -16,6 +16,7 @@ interface AuthContextType {
   login: (email: string, password: string) => Promise<{ success: boolean; error?: string }>;
   logout: () => void;
   requestPasswordReset: (email: string) => Promise<{ success: boolean; error?: string }>;
+  refreshUser: () => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -91,6 +92,24 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
     return await authHelpers.requestPasswordReset(email);
   };
 
+  const refreshUser = async () => {
+    try {
+      if (pb.authStore.model?.id) {
+        // Refresh user data from PocketBase
+        const updatedUser = await pb.collection('users').getOne(pb.authStore.model.id);
+        const userObj = {
+          id: updatedUser.id,
+          email: updatedUser.email,
+          name: updatedUser.name,
+          avatar: updatedUser.avatar,
+        };
+        setUser(userObj);
+      }
+    } catch (error) {
+      console.error('Failed to refresh user:', error);
+    }
+  };
+
   return (
     <AuthContext.Provider
       value={{
@@ -99,6 +118,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         login,
         logout,
         requestPasswordReset,
+        refreshUser,
       }}
     >
       {children}

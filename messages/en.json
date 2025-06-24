@@ -48,7 +48,8 @@
       "posts": "Posts",
       "addNewPost": "Add New Post",
       "editPost": "Edit Post",
-      "categories": "Categories"
+      "categories": "Categories",
+      "settings": "Settings"
     },
     "dashboard": {
       "title": "Dashboard",
@@ -326,6 +327,49 @@
           "uploadFailed": "Failed to upload image",
           "noCategories": "No categories available. Please create a category first."
         }
+      }
+    },
+    "settings": {
+      "title": "Account Settings",
+      "description": "Manage your account information and security settings",
+      "tabs": {
+        "profile": "Profile",
+        "password": "Password"
+      },
+      "form": {
+        "name": "Name",
+        "namePlaceholder": "Enter your full name",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email address",
+        "oldPassword": "Current Password",
+        "oldPasswordPlaceholder": "Enter your current password",
+        "newPassword": "New Password",
+        "newPasswordPlaceholder": "Enter a new password",
+        "confirmPassword": "Confirm Password",
+        "confirmPasswordPlaceholder": "Confirm your new password",
+        "passwordHelp": "Password must be at least 8 characters long"
+      },
+      "actions": {
+        "saveProfile": "Save Profile",
+        "updatePassword": "Update Password",
+        "saving": "Saving..."
+      },
+      "validation": {
+        "nameRequired": "Name is required",
+        "emailRequired": "Email is required",
+        "emailInvalid": "Please enter a valid email address",
+        "oldPasswordRequired": "Current password is required",
+        "passwordRequired": "New password is required",
+        "passwordMinLength": "Password must be at least 8 characters long",
+        "passwordMismatch": "Passwords do not match"
+      },
+      "success": {
+        "profileUpdated": "Profile updated successfully!",
+        "passwordUpdated": "Password updated successfully!"
+      },
+      "errors": {
+        "updateFailed": "Failed to update profile. Please try again.",
+        "passwordUpdateFailed": "Failed to update password. Please try again."
       }
     }
   },

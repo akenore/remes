@@ -48,7 +48,8 @@
       "posts": "Articles",
       "addNewPost": "Ajouter un nouvel article",
       "editPost": "Modifier l'article",
-      "categories": "Catégories"
+      "categories": "Catégories",
+      "settings": "Paramètres"
     },
     "dashboard": {
       "title": "Tableau de bord",
@@ -326,6 +327,49 @@
           "uploadFailed": "Échec du téléchargement de l'image",
           "noCategories": "Aucune catégorie disponible. Veuillez d'abord créer une catégorie."
         }
+      }
+    },
+    "settings": {
+      "title": "Paramètres du compte",
+      "description": "Gérez vos informations de compte et paramètres de sécurité",
+      "tabs": {
+        "profile": "Profil",
+        "password": "Mot de passe"
+      },
+      "form": {
+        "name": "Nom",
+        "namePlaceholder": "Entrez votre nom complet",
+        "email": "Email",
+        "emailPlaceholder": "Entrez votre adresse email",
+        "oldPassword": "Mot de passe actuel",
+        "oldPasswordPlaceholder": "Entrez votre mot de passe actuel",
+        "newPassword": "Nouveau mot de passe",
+        "newPasswordPlaceholder": "Entrez un nouveau mot de passe",
+        "confirmPassword": "Confirmer le mot de passe",
+        "confirmPasswordPlaceholder": "Confirmez votre nouveau mot de passe",
+        "passwordHelp": "Le mot de passe doit contenir au moins 8 caractères"
+      },
+      "actions": {
+        "saveProfile": "Enregistrer le profil",
+        "updatePassword": "Mettre à jour le mot de passe",
+        "saving": "Enregistrement..."
+      },
+      "validation": {
+        "nameRequired": "Le nom est requis",
+        "emailRequired": "L'email est requis",
+        "emailInvalid": "Veuillez entrer une adresse email valide",
+        "oldPasswordRequired": "Le mot de passe actuel est requis",
+        "passwordRequired": "Le nouveau mot de passe est requis",
+        "passwordMinLength": "Le mot de passe doit contenir au moins 8 caractères",
+        "passwordMismatch": "Les mots de passe ne correspondent pas"
+      },
+      "success": {
+        "profileUpdated": "Profil mis à jour avec succès !",
+        "passwordUpdated": "Mot de passe mis à jour avec succès !"
+      },
+      "errors": {
+        "updateFailed": "Échec de la mise à jour du profil. Veuillez réessayer.",
+        "passwordUpdateFailed": "Échec de la mise à jour du mot de passe. Veuillez réessayer."
       }
     }
   },
