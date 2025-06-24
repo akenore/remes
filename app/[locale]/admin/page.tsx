@@ -38,17 +38,19 @@ export default function AdminPage() {
 
   const fetchStats = async () => {
     try {
-      // Fetch posts data
-      const [allPosts, publishedPosts, categories] = await Promise.all([
-        pb.collection('posts').getList(1, 1, { requestKey: null }), // Just for count
-        pb.collection('posts').getList(1, 1, { filter: 'published = true', requestKey: null }),
+      // Fetch posts data, excluding rich text image posts
+      const realPostsFilter = 'title !~ "[RICH_TEXT_IMG]"';
+      const [allPosts, publishedPosts, draftPosts, categories] = await Promise.all([
+        pb.collection('posts').getList(1, 1, { filter: realPostsFilter, requestKey: null }),
+        pb.collection('posts').getList(1, 1, { filter: `published = true && ${realPostsFilter}`, requestKey: null }),
+        pb.collection('posts').getList(1, 1, { filter: `published = false && ${realPostsFilter}`, requestKey: null }),
         pb.collection('categories').getList(1, 1, { requestKey: null })
       ]);
 
       setStats({
         totalPosts: allPosts.totalItems,
         publishedPosts: publishedPosts.totalItems,
-        draftPosts: allPosts.totalItems - publishedPosts.totalItems,
+        draftPosts: draftPosts.totalItems,
         totalCategories: categories.totalItems,
         loading: false,
       });
