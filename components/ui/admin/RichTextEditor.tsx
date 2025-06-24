@@ -28,6 +28,15 @@ interface CollectionImage {
   created: string;
 }
 
+interface ImageSettings {
+  url: string;
+  alt: string;
+  width: number;
+  height: number;
+  alignment: 'left' | 'center' | 'right' | 'none';
+  size: 'thumbnail' | 'medium' | 'large' | 'full' | 'custom';
+}
+
 export default function RichTextEditor({
   value,
   onChange,
@@ -42,6 +51,19 @@ export default function RichTextEditor({
   const [loadingImages, setLoadingImages] = useState(false);
   const [uploading, setUploading] = useState(false);
   
+  // Image configuration state
+  const [selectedImageUrl, setSelectedImageUrl] = useState<string>('');
+  const [showImageSettings, setShowImageSettings] = useState(false);
+  const [imageSettings, setImageSettings] = useState<ImageSettings>({
+    url: '',
+    alt: '',
+    width: 0,
+    height: 0,
+    alignment: 'none',
+    size: 'medium'
+  });
+  const [originalImageDimensions, setOriginalImageDimensions] = useState({ width: 0, height: 0 });
+  
   // Use refs to store Quill instance and ReactQuill component
   const quillRef = useRef<any>(null);
   const reactQuillRef = useRef<any>(null);
@@ -49,6 +71,49 @@ export default function RichTextEditor({
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Get image dimensions
+  const getImageDimensions = (imageUrl: string): Promise<{width: number, height: number}> => {
+    return new Promise((resolve) => {
+      const img = new Image();
+      img.onload = () => {
+        resolve({ width: img.naturalWidth, height: img.naturalHeight });
+      };
+      img.onerror = () => {
+        resolve({ width: 800, height: 600 }); // Default fallback
+      };
+      img.src = imageUrl;
+    });
+  };
+
+  // Calculate size dimensions based on preset
+  const calculateDimensions = (originalWidth: number, originalHeight: number, size: string) => {
+    const maxSizes = {
+      thumbnail: 150,
+      medium: 300,
+      large: 600,
+      full: Math.max(originalWidth, originalHeight)
+    };
+
+    if (size === 'custom') {
+      return { width: originalWidth, height: originalHeight };
+    }
+
+    const maxSize = maxSizes[size as keyof typeof maxSizes] || 300;
+    const aspectRatio = originalWidth / originalHeight;
+
+    if (originalWidth > originalHeight) {
+      return {
+        width: Math.min(maxSize, originalWidth),
+        height: Math.min(maxSize, originalWidth) / aspectRatio
+      };
+    } else {
+      return {
+        width: Math.min(maxSize, originalHeight) * aspectRatio,
+        height: Math.min(maxSize, originalHeight)
+      };
+    }
+  };
 
   // Fetch images from posts collection (both rich text images and regular posts)
   const fetchCollectionImages = async () => {
@@ -113,9 +178,8 @@ export default function RichTextEditor({
       
       console.log('Image uploaded successfully:', imageUrl);
       
-      // Insert image into editor
-      insertImageIntoEditor(imageUrl);
-      setShowImageModal(false);
+      // Show image settings modal
+      await showImageSettingsModal(imageUrl);
       
       // Refresh collection images
       fetchCollectionImages();
@@ -128,13 +192,38 @@ export default function RichTextEditor({
     }
   };
 
-  // Insert image into Quill editor - completely rewritten approach
-  const insertImageIntoEditor = useCallback((imageUrl: string) => {
+  // Insert image into Quill editor with settings
+  const insertImageIntoEditor = useCallback((settings: ImageSettings) => {
     console.log('=== Starting image insertion ===');
-    console.log('Image URL:', imageUrl);
+    console.log('Image settings:', settings);
     console.log('ReactQuill ref:', !!reactQuillRef.current);
     console.log('Quill ref:', !!quillRef.current);
     
+    // Create image HTML with all settings
+    const createImageHtml = (settings: ImageSettings) => {
+      const { url, alt, width, height, alignment } = settings;
+      
+      let style = `max-width: none;`; // Don't constrain by default
+      if (width && height) {
+        style = `width: ${Math.round(width)}px; height: ${Math.round(height)}px; max-width: none;`;
+      }
+      
+      let alignmentStyle = '';
+      if (alignment === 'center') {
+        alignmentStyle = ' display: block; margin-left: auto; margin-right: auto;';
+      } else if (alignment === 'left') {
+        alignmentStyle = ' float: left; margin-right: 15px; margin-bottom: 10px;';
+      } else if (alignment === 'right') {
+        alignmentStyle = ' float: right; margin-left: 15px; margin-bottom: 10px;';
+      }
+      
+      const finalStyle = style + alignmentStyle;
+      const widthAttr = width ? ` width="${Math.round(width)}"` : '';
+      const heightAttr = height ? ` height="${Math.round(height)}"` : '';
+      
+      return `<img src="${url}" alt="${alt || 'Image'}" style="${finalStyle}"${widthAttr}${heightAttr} />`;
+    };
+
     // Method 1: Try using the stored quill reference
     if (quillRef.current) {
       try {
@@ -143,7 +232,60 @@ export default function RichTextEditor({
         const insertIndex = Math.max(0, length - 1);
         console.log('Inserting at index:', insertIndex, 'of', length);
         
-        quillRef.current.insertEmbed(insertIndex, 'image', imageUrl);
+        quillRef.current.insertEmbed(insertIndex, 'image', settings.url);
+        
+        // Add custom attributes to the inserted image with multiple attempts
+        const applyImageAttributes = (attempt = 0) => {
+          const images = document.querySelectorAll('.ql-editor img[src="' + settings.url + '"]');
+          const lastImage = images[images.length - 1] as HTMLImageElement;
+          
+          if (lastImage) {
+            console.log('Applying image attributes, attempt:', attempt + 1);
+            lastImage.alt = settings.alt || 'Image';
+            
+            // Apply size settings with !important styles
+            if (settings.width && settings.height) {
+              const width = Math.round(settings.width);
+              const height = Math.round(settings.height);
+              
+              lastImage.style.setProperty('width', width + 'px', 'important');
+              lastImage.style.setProperty('height', height + 'px', 'important');
+              lastImage.style.setProperty('max-width', 'none', 'important');
+              
+              // Also set as attributes for persistence
+              lastImage.setAttribute('width', width.toString());
+              lastImage.setAttribute('height', height.toString());
+            }
+            
+            // Apply alignment settings
+            if (settings.alignment && settings.alignment !== 'none') {
+              if (settings.alignment === 'center') {
+                lastImage.style.setProperty('display', 'block', 'important');
+                lastImage.style.setProperty('margin-left', 'auto', 'important');
+                lastImage.style.setProperty('margin-right', 'auto', 'important');
+              } else if (settings.alignment === 'left') {
+                lastImage.style.setProperty('float', 'left', 'important');
+                lastImage.style.setProperty('margin-right', '15px', 'important');
+                lastImage.style.setProperty('margin-bottom', '10px', 'important');
+              } else if (settings.alignment === 'right') {
+                lastImage.style.setProperty('float', 'right', 'important');
+                lastImage.style.setProperty('margin-left', '15px', 'important');
+                lastImage.style.setProperty('margin-bottom', '10px', 'important');
+              }
+            }
+            
+            console.log('Image attributes applied successfully');
+          } else if (attempt < 5) {
+            // Retry up to 5 times with increasing delays
+            setTimeout(() => applyImageAttributes(attempt + 1), 50 * (attempt + 1));
+          } else {
+            console.warn('Failed to apply image attributes after 5 attempts');
+          }
+        };
+        
+        // Start applying attributes immediately and then retry
+        applyImageAttributes();
+        
         quillRef.current.insertText(insertIndex + 1, '\n');
         console.log('✓ Image inserted successfully via stored reference');
         return;
@@ -166,7 +308,60 @@ export default function RichTextEditor({
             const insertIndex = Math.max(0, length - 1);
             console.log('Inserting at index:', insertIndex, 'of', length);
             
-            quillInstance.insertEmbed(insertIndex, 'image', imageUrl);
+            quillInstance.insertEmbed(insertIndex, 'image', settings.url);
+            
+            // Add custom attributes similar to method 1
+            const applyImageAttributes2 = (attempt = 0) => {
+              const images = document.querySelectorAll('.ql-editor img[src="' + settings.url + '"]');
+              const lastImage = images[images.length - 1] as HTMLImageElement;
+              
+              if (lastImage) {
+                console.log('Method 2: Applying image attributes, attempt:', attempt + 1);
+                lastImage.alt = settings.alt || 'Image';
+                
+                // Apply size settings with !important styles
+                if (settings.width && settings.height) {
+                  const width = Math.round(settings.width);
+                  const height = Math.round(settings.height);
+                  
+                  lastImage.style.setProperty('width', width + 'px', 'important');
+                  lastImage.style.setProperty('height', height + 'px', 'important');
+                  lastImage.style.setProperty('max-width', 'none', 'important');
+                  
+                  // Also set as attributes for persistence
+                  lastImage.setAttribute('width', width.toString());
+                  lastImage.setAttribute('height', height.toString());
+                }
+                
+                // Apply alignment settings
+                if (settings.alignment && settings.alignment !== 'none') {
+                  if (settings.alignment === 'center') {
+                    lastImage.style.setProperty('display', 'block', 'important');
+                    lastImage.style.setProperty('margin-left', 'auto', 'important');
+                    lastImage.style.setProperty('margin-right', 'auto', 'important');
+                  } else if (settings.alignment === 'left') {
+                    lastImage.style.setProperty('float', 'left', 'important');
+                    lastImage.style.setProperty('margin-right', '15px', 'important');
+                    lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                  } else if (settings.alignment === 'right') {
+                    lastImage.style.setProperty('float', 'right', 'important');
+                    lastImage.style.setProperty('margin-left', '15px', 'important');
+                    lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                  }
+                }
+                
+                console.log('Method 2: Image attributes applied successfully');
+              } else if (attempt < 5) {
+                // Retry up to 5 times with increasing delays
+                setTimeout(() => applyImageAttributes2(attempt + 1), 50 * (attempt + 1));
+              } else {
+                console.warn('Method 2: Failed to apply image attributes after 5 attempts');
+              }
+            };
+            
+            // Start applying attributes immediately and then retry
+            applyImageAttributes2();
+            
             quillInstance.insertText(insertIndex + 1, '\n');
             console.log('✓ Image inserted successfully via container search');
             return;
@@ -192,7 +387,7 @@ export default function RichTextEditor({
           const insertIndex = Math.max(0, length - 1);
           console.log('Inserting at index:', insertIndex, 'of', length);
           
-          quillInstance.insertEmbed(insertIndex, 'image', imageUrl);
+          quillInstance.insertEmbed(insertIndex, 'image', settings.url);
           quillInstance.insertText(insertIndex + 1, '\n');
           console.log('✓ Image inserted successfully via DOM search');
           return;
@@ -205,7 +400,7 @@ export default function RichTextEditor({
     // Method 4: Fallback to direct HTML manipulation
     console.log('Method 4: Using HTML fallback');
     try {
-      const imageHtml = `<p><img src="${imageUrl}" alt="Rich text image" style="max-width: 100%; height: auto;" /></p>`;
+      const imageHtml = `<p>${createImageHtml(settings)}</p>`;
       const newValue = value ? value + imageHtml : imageHtml;
       onChange(newValue);
       console.log('✓ Image inserted successfully via HTML fallback');
@@ -214,13 +409,37 @@ export default function RichTextEditor({
     }
   }, [value, onChange]);
 
+  // Show image settings modal
+  const showImageSettingsModal = async (imageUrl: string) => {
+    try {
+      const dimensions = await getImageDimensions(imageUrl);
+      setOriginalImageDimensions(dimensions);
+      
+      const mediumSize = calculateDimensions(dimensions.width, dimensions.height, 'medium');
+      
+      setImageSettings({
+        url: imageUrl,
+        alt: '',
+        width: mediumSize.width,
+        height: mediumSize.height,
+        alignment: 'none',
+        size: 'medium'
+      });
+      
+      setSelectedImageUrl(imageUrl);
+      setShowImageModal(false);
+      setShowImageSettings(true);
+    } catch (error) {
+      console.error('Error setting up image:', error);
+    }
+  };
+
   // Handle image selection from collection
-  const handleImageSelect = (image: CollectionImage) => {
+  const handleImageSelect = async (image: CollectionImage) => {
     console.log('Selecting image from collection:', image);
     const imageUrl = pb.files.getURL({ id: image.id, collectionName: 'posts' }, image.cover_image);
     console.log('Generated image URL:', imageUrl);
-    insertImageIntoEditor(imageUrl);
-    setShowImageModal(false);
+    await showImageSettingsModal(imageUrl);
   };
 
   // Custom image handler for Quill toolbar - completely rewritten
@@ -265,6 +484,59 @@ export default function RichTextEditor({
     setShowImageModal(true);
     fetchCollectionImages();
   }, []);
+
+  // Handle image settings changes
+  const handleSizeChange = (size: string) => {
+    const newDimensions = calculateDimensions(originalImageDimensions.width, originalImageDimensions.height, size);
+    setImageSettings(prev => ({
+      ...prev,
+      size: size as ImageSettings['size'],
+      width: newDimensions.width,
+      height: newDimensions.height
+    }));
+  };
+
+  const handleDimensionChange = (dimension: 'width' | 'height', value: number) => {
+    const aspectRatio = originalImageDimensions.width / originalImageDimensions.height;
+    
+    setImageSettings(prev => {
+      if (dimension === 'width') {
+        return {
+          ...prev,
+          width: value,
+          height: value / aspectRatio,
+          size: 'custom'
+        };
+      } else {
+        return {
+          ...prev,
+          width: value * aspectRatio,
+          height: value,
+          size: 'custom'
+        };
+      }
+    });
+  };
+
+  const handleInsertImage = () => {
+    insertImageIntoEditor(imageSettings);
+    setShowImageSettings(false);
+    
+    // Refresh collection images if it was an upload
+    fetchCollectionImages();
+  };
+
+  const handleCancelImageSettings = () => {
+    setShowImageSettings(false);
+    setImageSettings({
+      url: '',
+      alt: '',
+      width: 0,
+      height: 0,
+      alignment: 'none',
+      size: 'medium'
+    });
+  };
 
   // Quill modules configuration
   const modules = {
@@ -330,6 +602,18 @@ export default function RichTextEditor({
 
   return (
     <div className={`relative ${className}`}>
+      {/* Add custom CSS to override Quill's default image styles */}
+      <style dangerouslySetInnerHTML={{
+        __html: `
+          .ql-editor img {
+            max-width: none !important;
+          }
+          .ql-editor img[style*="width"] {
+            max-width: none !important;
+          }
+        `
+      }} />
+      
       <div 
         ref={reactQuillRef}
         className="react-quill-container"
@@ -473,6 +757,170 @@ export default function RichTextEditor({
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Cancel
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Image Settings Modal */}
+      {showImageSettings && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+            {/* Modal Header */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <h3 className="text-lg font-semibold text-gray-900">Image Settings</h3>
+              <button
+                onClick={handleCancelImageSettings}
+                className="text-gray-400 hover:text-gray-600 transition-colors"
+              >
+                <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+
+            {/* Modal Content */}
+            <div className="p-6 max-h-96 overflow-y-auto">
+              <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                {/* Image Preview */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Preview</h4>
+                  <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <div className="flex justify-center">
+                      <img
+                        src={selectedImageUrl}
+                        alt={imageSettings.alt || 'Preview'}
+                                               style={{
+                           width: `${Math.min(Math.round(imageSettings.width), 400)}px`,
+                           height: `${Math.min(Math.round(imageSettings.height), 300)}px`,
+                           maxWidth: '100%'
+                         }}
+                        className="border border-gray-300 rounded"
+                      />
+                    </div>
+                    <div className="text-center mt-2 text-sm text-gray-600">
+                      {Math.round(imageSettings.width)} × {Math.round(imageSettings.height)} pixels
+                    </div>
+                  </div>
+                </div>
+
+                {/* Settings Panel */}
+                <div className="space-y-4">
+                  <h4 className="font-medium text-gray-900">Settings</h4>
+                  
+                  {/* Alt Text */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-1">
+                      Alt Text
+                    </label>
+                    <input
+                      type="text"
+                      value={imageSettings.alt}
+                      onChange={(e) => setImageSettings(prev => ({ ...prev, alt: e.target.value }))}
+                      placeholder="Describe this image..."
+                      className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                    />
+                    <p className="mt-1 text-xs text-gray-500">
+                      Helps screen readers understand the image content
+                    </p>
+                  </div>
+
+                  {/* Size Presets */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Size
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {['thumbnail', 'medium', 'large', 'full'].map((size) => (
+                        <button
+                          key={size}
+                          onClick={() => handleSizeChange(size)}
+                          className={`px-3 py-2 text-sm rounded-md transition-colors ${
+                            imageSettings.size === size
+                              ? 'bg-indigo-600 text-white'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {size.charAt(0).toUpperCase() + size.slice(1)}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Custom Dimensions */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Custom Dimensions
+                    </label>
+                    <div className="grid grid-cols-2 gap-3">
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Width</label>
+                        <input
+                          type="number"
+                          value={Math.round(imageSettings.width)}
+                          onChange={(e) => handleDimensionChange('width', parseInt(e.target.value) || 0)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                      </div>
+                      <div>
+                        <label className="block text-xs text-gray-500 mb-1">Height</label>
+                        <input
+                          type="number"
+                          value={Math.round(imageSettings.height)}
+                          onChange={(e) => handleDimensionChange('height', parseInt(e.target.value) || 0)}
+                          className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
+                        />
+                      </div>
+                    </div>
+                    <p className="mt-1 text-xs text-gray-500">
+                      Original: {originalImageDimensions.width} × {originalImageDimensions.height}
+                    </p>
+                  </div>
+
+                  {/* Alignment */}
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      Alignment
+                    </label>
+                    <div className="grid grid-cols-2 gap-2">
+                      {[
+                        { value: 'none', label: 'None' },
+                        { value: 'left', label: 'Left' },
+                        { value: 'center', label: 'Center' },
+                        { value: 'right', label: 'Right' }
+                      ].map((align) => (
+                        <button
+                          key={align.value}
+                          onClick={() => setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))}
+                          className={`px-3 py-2 text-sm rounded-md transition-colors ${
+                            imageSettings.alignment === align.value
+                              ? 'bg-indigo-600 text-white'
+                              : 'bg-gray-100 text-gray-700 hover:bg-gray-200'
+                          }`}
+                        >
+                          {align.label}
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Modal Footer */}
+            <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
+              <button
+                onClick={handleCancelImageSettings}
+                className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
+                Cancel
+              </button>
+              <button
+                onClick={handleInsertImage}
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
+                Insert Image
               </button>
             </div>
           </div>
