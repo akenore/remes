@@ -50,6 +50,9 @@ export default function PostsPage() {
       let filter = '';
       const filters = [];
       
+      // Always exclude rich text images from the main posts list
+      filters.push('title !~ "[RICH_TEXT_IMG]"');
+      
       if (searchTerm) {
         filters.push(`title ~ "${searchTerm}" || content ~ "${searchTerm}"`);
       }
@@ -60,9 +63,7 @@ export default function PostsPage() {
         filters.push('published = false');
       }
       
-      if (filters.length > 0) {
-        filter = filters.join(' && ');
-      }
+      filter = filters.join(' && ');
 
       const result = await pb.collection('posts').getList(currentPage, postsPerPage, {
         filter,

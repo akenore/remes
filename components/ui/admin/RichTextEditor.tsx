@@ -72,6 +72,25 @@ export default function RichTextEditor({
     setIsMounted(true);
   }, []);
 
+  // Optional: Cleanup old rich text images (can be called manually if needed)
+  const cleanupOldRichTextImages = async () => {
+    try {
+      // Find rich text images older than 7 days that might be orphaned
+      const weekAgo = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+      const oldImages = await pb.collection('posts').getList(1, 100, {
+        filter: `title ~ "[RICH_TEXT_IMG]" && created < "${weekAgo}"`,
+        fields: 'id,title,created'
+      });
+
+      console.log(`Found ${oldImages.items.length} old rich text images that could be cleaned up`);
+      
+      // Note: We don't auto-delete them as they might still be referenced in content
+      // This is just for monitoring - manual cleanup can be done through admin if needed
+    } catch (error) {
+      console.error('Error checking for old rich text images:', error);
+    }
+  };
+
   // Get image dimensions
   const getImageDimensions = (imageUrl: string): Promise<{width: number, height: number}> => {
     return new Promise((resolve) => {
@@ -130,7 +149,10 @@ export default function RichTextEditor({
       setCollectionImages(result.items.map(item => ({
         id: item.id,
         cover_image: item.cover_image,
-        title: item.title || 'Untitled',
+        // Clean up rich text image titles for better display
+        title: item.title?.startsWith('[RICH_TEXT_IMG]') 
+          ? item.title.replace('[RICH_TEXT_IMG]', '🖼️').replace(/- \d+$/, '').trim()
+          : (item.title || 'Untitled'),
         created: item.created
       })));
     } catch (error) {
@@ -155,7 +177,7 @@ export default function RichTextEditor({
         return;
       }
 
-      // Create temporary post for image storage - use a unique approach to avoid conflicts
+      // Create temporary post for image storage - mark as system/hidden
       const categories = await pb.collection('categories').getList(1, 1);
       if (categories.items.length === 0) {
         throw new Error('No categories available. Please create a category first.');
@@ -163,10 +185,11 @@ export default function RichTextEditor({
       
       const timestamp = Date.now();
       const tempFormData = new FormData();
-      tempFormData.append('title', `[Rich Text Image] ${timestamp}`);
+      // Use a special prefix to identify rich text images and hide them from normal post lists
+      tempFormData.append('title', `[RICH_TEXT_IMG] ${file.name.replace(/\.[^/.]+$/, "")} - ${timestamp}`);
       tempFormData.append('slug', `rich-text-img-${timestamp}-${Math.random().toString(36).substr(2, 9)}`);
-      tempFormData.append('content', `Rich text editor image uploaded at ${new Date().toISOString()}`);
-      tempFormData.append('published', 'false');
+      tempFormData.append('content', `<!-- Rich text editor image: ${file.name} -->`);
+      tempFormData.append('published', 'false'); // Always keep unpublished
       tempFormData.append('author', pb.authStore.model?.id || '');
       tempFormData.append('categories', categories.items[0].id);
       
