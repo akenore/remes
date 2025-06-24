@@ -82,34 +82,31 @@ export default function SettingsPage() {
         // This is a regular user from users collection (even if they have admin permissions)
         console.log('Updating as REGULAR USER via pb.collection(users).update');
         
-        // Update name first
+        // Update name first (always safe)
         await pb.collection('users').update(user?.id || '', {
           name: profileData.name,
         });
         
-        // Handle email change separately if it's changed
+        // Only update email if it has actually changed
         if (profileData.email !== user?.email) {
-          console.log('Email is being changed from', user?.email, 'to', profileData.email);
-          // Request email change instead of direct update
+          console.log('Email is changing from', user?.email, 'to', profileData.email);
+          // Use the proper PocketBase email change request method
           await pb.collection('users').requestEmailChange(profileData.email);
-          console.log('Email change request sent. User will need to check their email to confirm.');
+          console.log('Email change request sent successfully');
+          // Update success message for email verification case
+          setSuccess(t('success.profileUpdatedEmailChange'));
+          setTimeout(() => setSuccess(''), 10000);
+          return; // Exit early to avoid the normal success message
         } else {
-          console.log('Email unchanged, not requesting change');
+          console.log('Email unchanged, not updating');
         }
       }
       
       await refreshUser();
       
-      // Set appropriate success message based on whether email change was requested
-      if (profileData.email !== user?.email && currentUser?.collectionName !== '_superusers') {
-        // Email change was requested for regular user - they need to check email
-        setSuccess(t('success.profileUpdatedEmailChange'));
-        setTimeout(() => setSuccess(''), 10000); // Longer timeout for email change message
-      } else {
-        // Normal profile update or admin user (direct update)
-        setSuccess(t('success.profileUpdated'));
-        setTimeout(() => setSuccess(''), 5000);
-      }
+      // Show normal success message for all updates
+      setSuccess(t('success.profileUpdated'));
+      setTimeout(() => setSuccess(''), 5000);
 
     } catch (err: any) {
       if (err.message && (err.message.includes('required') || err.message.includes('\n'))) {
