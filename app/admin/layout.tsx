@@ -5,12 +5,12 @@ import AdminGuard from '@/components/ui/admin/AdminGuard';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-
-export default function AdminLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+   
+   export default function AdminLayout({
+     children,
+   }: {
+     children: React.ReactNode;
+   }) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const router = useRouter();
@@ -130,7 +130,7 @@ export default function AdminLayout({
               <div className="space-y-1">
                 {navigation.map((item) => {
                   const isActive = pathname === item.href;
-                  return (
+     return (
                     <Link
                       key={item.name}
                       href={item.href}
@@ -222,7 +222,7 @@ export default function AdminLayout({
             {children}
           </main>
         </div>
-      </div>
+       </div>
     </AdminGuard>
-  );
-}
+     );
+   }

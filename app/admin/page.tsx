@@ -68,7 +68,7 @@ export default function AdminPage() {
     setShowWelcome(false);
   };
 
-  return (
+     return (
     <div className="space-y-6">
       {/* Welcome Message */}
       {showWelcome && (
@@ -301,7 +301,7 @@ export default function AdminPage() {
                   <dd className="mt-1 text-sm text-gray-900">{user.name}</dd>
                 </div>
               )}
-              <div>
+          <div>
                 <dt className="text-sm font-medium text-gray-500">Account Type</dt>
                 <dd className="mt-1">
                   <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
@@ -313,6 +313,6 @@ export default function AdminPage() {
           </div>
         </div>
       </div>
-    </div>
-  );
+          </div>
+     );
 }

@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
+import RichTextEditor from '@/components/ui/admin/RichTextEditor';
 
 interface Category {
   id: string;
@@ -205,6 +206,7 @@ export default function EditPostPage() {
       data.append('title', formData.title);
       data.append('slug', formData.slug);
       data.append('content', formData.content);
+      data.append('author', user?.id || ''); // Required field - keep original author
       data.append('published', publishStatus.toString());
       
       // Add categories as separate form fields
@@ -464,13 +466,10 @@ export default function EditPostPage() {
           {/* Content Editor */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <textarea
-                placeholder="Tell your story..."
-                rows={20}
-                className="block w-full border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none text-lg leading-relaxed"
+              <RichTextEditor
                 value={formData.content}
-                onChange={(e) => setFormData(prev => ({ ...prev, content: e.target.value }))}
-                required
+                onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
+                postId={postId}
               />
             </div>
           </div>

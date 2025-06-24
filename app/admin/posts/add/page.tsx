@@ -5,6 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import RichTextEditor from '@/components/ui/admin/RichTextEditor';
 
 interface Category {
   id: string;
@@ -393,17 +394,13 @@ export default function AddPostPage() {
           {/* Content Editor */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <textarea
-                placeholder="Tell your story..."
-                rows={20}
-                className="block w-full border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none text-lg leading-relaxed"
+              <RichTextEditor
                 value={formData.content}
-                onChange={(e) => {
+                onChange={(value) => {
                   // Clear error when user starts typing
                   if (error) setError('');
-                  setFormData(prev => ({ ...prev, content: e.target.value }));
+                  setFormData(prev => ({ ...prev, content: value }));
                 }}
-                required
               />
             </div>
           </div>
