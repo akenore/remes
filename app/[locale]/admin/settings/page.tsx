@@ -93,9 +93,10 @@ export default function SettingsPage() {
           // Use the proper PocketBase email change request method
           await pb.collection('users').requestEmailChange(profileData.email);
           console.log('Email change request sent successfully');
-          // Update success message for email verification case
-          setSuccess(t('success.profileUpdatedEmailChange'));
-          setTimeout(() => setSuccess(''), 10000);
+          
+          // Important security notice: When email is confirmed, all auth tokens will be invalidated
+          setSuccess(t('success.profileUpdatedEmailChangeSecure'));
+          setTimeout(() => setSuccess(''), 15000); // Longer timeout for security message
           return; // Exit early to avoid the normal success message
         } else {
           console.log('Email unchanged, not updating');

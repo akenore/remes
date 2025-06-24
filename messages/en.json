@@ -366,6 +366,7 @@
       "success": {
         "profileUpdated": "Profile updated successfully!",
         "profileUpdatedEmailChange": "Profile updated! Please check your email to confirm the new email address.",
+      "profileUpdatedEmailChangeSecure": "Profile updated! Please check your email to confirm the new address. IMPORTANT: After confirming the email change, you will be automatically logged out for security reasons and will need to log in again with your new email.",
         "passwordUpdated": "Password updated successfully!"
       },
       "errors": {

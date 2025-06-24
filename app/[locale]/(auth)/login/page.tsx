@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { useRouter } from 'next/navigation';
+import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
@@ -12,10 +12,22 @@ export default function LoginPage() {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [hasRedirected, setHasRedirected] = useState(false);
+  const [emailChangeMessage, setEmailChangeMessage] = useState('');
   
   const { login, user, isLoading: authLoading } = useAuth();
   const router = useRouter();
+  const searchParams = useSearchParams();
   const t = useTranslations('auth.login');
+
+  // Check for messages from URL parameters
+  useEffect(() => {
+    const message = searchParams.get('message');
+    if (message === 'email-changed') {
+      setEmailChangeMessage('Your email address has been successfully updated! Please log in with your new email address.');
+    } else if (message === 'session-expired') {
+      setEmailChangeMessage('Your session has expired for security reasons. Please log in again.');
+    }
+  }, [searchParams]);
 
   // Redirect if already authenticated - but only once to prevent loops
   useEffect(() => {
@@ -93,6 +105,23 @@ export default function LoginPage() {
             {t('subtitle')}
           </p>
         </div>
+
+        {emailChangeMessage && (
+          <div className="rounded-md bg-green-50 p-4">
+            <div className="flex">
+              <div className="flex-shrink-0">
+                <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+              </div>
+              <div className="ml-3">
+                <p className="text-sm font-medium text-green-800">
+                  {emailChangeMessage}
+                </p>
+              </div>
+            </div>
+          </div>
+        )}
         
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="rounded-md shadow-sm -space-y-px">
