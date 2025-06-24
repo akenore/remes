@@ -365,6 +365,7 @@
       },
       "success": {
         "profileUpdated": "Profile updated successfully!",
+        "profileUpdatedEmailChange": "Profile updated! Please check your email to confirm the new email address.",
         "passwordUpdated": "Password updated successfully!"
       },
       "errors": {

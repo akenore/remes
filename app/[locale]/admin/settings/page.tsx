@@ -47,36 +47,103 @@ export default function SettingsPage() {
         errors.push(t('validation.emailInvalid'));
       }
       
+      // Check if email is actually different from current email
+      if (profileData.email === user?.email) {
+        console.log('Email unchanged, skipping email validation');
+      }
+      
       if (errors.length > 0) {
         throw new Error(errors.join('\n'));
       }
 
       // Check if user is admin or regular user and update accordingly
       const currentUser = pb.authStore.record;
+      console.log('Current user info:', {
+        id: currentUser?.id,
+        email: currentUser?.email,
+        collectionName: currentUser?.collectionName,
+        userIdFromContext: user?.id
+      });
+      
       if (currentUser && (currentUser.collectionName === '_superusers' || !currentUser.collectionName)) {
         // This is likely an admin user
+        console.log('Updating as admin user');
+        
+        // For admin users, we can directly update both name and email
         await pb.admins.update(user?.id || '', {
           name: profileData.name,
           email: profileData.email,
         });
       } else {
         // This is a regular user
+        console.log('Updating as regular user');
+        
+        // Update name first
         await pb.collection('users').update(user?.id || '', {
           name: profileData.name,
-          email: profileData.email,
         });
+        
+        // Handle email change separately if it's changed
+        if (profileData.email !== user?.email) {
+          console.log('Email is being changed from', user?.email, 'to', profileData.email);
+          // Request email change instead of direct update
+          await pb.collection('users').requestEmailChange(profileData.email);
+          console.log('Email change request sent. User will need to check their email to confirm.');
+        } else {
+          console.log('Email unchanged, not requesting change');
+        }
       }
       
       await refreshUser();
-      setSuccess(t('success.profileUpdated'));
-      setTimeout(() => setSuccess(''), 5000);
+      
+      // Set appropriate success message based on whether email change was requested
+      if (profileData.email !== user?.email && currentUser?.collectionName !== '_superusers') {
+        // Email change was requested for regular user - they need to check email
+        setSuccess(t('success.profileUpdatedEmailChange'));
+        setTimeout(() => setSuccess(''), 10000); // Longer timeout for email change message
+      } else {
+        // Normal profile update or admin user (direct update)
+        setSuccess(t('success.profileUpdated'));
+        setTimeout(() => setSuccess(''), 5000);
+      }
 
     } catch (err: any) {
       if (err.message && (err.message.includes('required') || err.message.includes('\n'))) {
         setError(err.message);
       } else {
         console.error('Profile update error:', err);
-        setError(err?.message || t('errors.updateFailed'));
+        console.error('Error details:', {
+          message: err?.message,
+          data: err?.data,
+          response: err?.response,
+          status: err?.status
+        });
+        console.error('Full error data:', JSON.stringify(err?.data, null, 2));
+        
+        // Handle PocketBase validation errors
+        let errorMessage = '';
+        if (err?.data && typeof err.data === 'object') {
+          const fieldErrors: string[] = [];
+          
+          Object.keys(err.data).forEach(field => {
+            const fieldError = err.data[field];
+            if (fieldError && fieldError.message) {
+              fieldErrors.push(`${field}: ${fieldError.message}`);
+            } else if (fieldError && typeof fieldError === 'string') {
+              fieldErrors.push(`${field}: ${fieldError}`);
+            }
+          });
+          
+          if (fieldErrors.length > 0) {
+            errorMessage = fieldErrors.join('. ');
+          }
+        }
+        
+        if (!errorMessage) {
+          errorMessage = err?.message || t('errors.updateFailed');
+        }
+        
+        setError(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -144,7 +211,37 @@ export default function SettingsPage() {
         setError(err.message);
       } else {
         console.error('Password update error:', err);
-        setError(err?.message || t('errors.passwordUpdateFailed'));
+        console.error('Error details:', {
+          message: err?.message,
+          data: err?.data,
+          response: err?.response,
+          status: err?.status
+        });
+        
+        // Handle PocketBase validation errors
+        let errorMessage = '';
+        if (err?.data && typeof err.data === 'object') {
+          const fieldErrors: string[] = [];
+          
+          Object.keys(err.data).forEach(field => {
+            const fieldError = err.data[field];
+            if (fieldError && fieldError.message) {
+              fieldErrors.push(`${field}: ${fieldError.message}`);
+            } else if (fieldError && typeof fieldError === 'string') {
+              fieldErrors.push(`${field}: ${fieldError}`);
+            }
+          });
+          
+          if (fieldErrors.length > 0) {
+            errorMessage = fieldErrors.join('. ');
+          }
+        }
+        
+        if (!errorMessage) {
+          errorMessage = err?.message || t('errors.passwordUpdateFailed');
+        }
+        
+        setError(errorMessage);
       }
     } finally {
       setLoading(false);
@@ -276,7 +373,7 @@ export default function SettingsPage() {
                     <>
                       <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 818-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                       {t('actions.saving')}
                     </>
@@ -360,7 +457,7 @@ export default function SettingsPage() {
                     <>
                       <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                         <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 818-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 0 1 8-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 0 1 4 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                       </svg>
                       {t('actions.saving')}
                     </>

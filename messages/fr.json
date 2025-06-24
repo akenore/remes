@@ -365,6 +365,7 @@
       },
       "success": {
         "profileUpdated": "Profil mis à jour avec succès !",
+        "profileUpdatedEmailChange": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse.",
         "passwordUpdated": "Mot de passe mis à jour avec succès !"
       },
       "errors": {
