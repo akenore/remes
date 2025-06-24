@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
+import { useTranslations } from 'next-intl';
 
 interface Category {
   id: string;
@@ -14,6 +15,8 @@ interface Category {
 
 export default function CategoriesPage() {
   const { user } = useAuth();
+  const t = useTranslations('admin.categories');
+  const tCommon = useTranslations('admin.common');
   const [categories, setCategories] = useState<Category[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState('');
@@ -56,7 +59,7 @@ export default function CategoriesPage() {
       })));
       setTotalPages(result.totalPages);
     } catch (err) {
-      setError('Failed to fetch categories');
+      setError(t('errors.fetchFailed'));
       console.error(err);
     } finally {
       setLoading(false);
@@ -140,10 +143,10 @@ export default function CategoriesPage() {
 
     try {
       if (!formData.title.trim()) {
-        throw new Error('Title is required');
+        throw new Error(t('validation.titleRequired'));
       }
       if (!formData.slug.trim()) {
-        throw new Error('Slug is required');
+        throw new Error(t('validation.slugRequired'));
       }
 
       const data = {
@@ -160,12 +163,12 @@ export default function CategoriesPage() {
       await fetchCategories();
       resetForm();
     } catch (err: any) {
-      setError(err.message || `Failed to ${editingCategory ? 'update' : 'create'} category`);
+      setError(err.message || t(`errors.${editingCategory ? 'updateFailed' : 'createFailed'}`));
     }
   };
 
   const handleDeleteCategory = async (categoryId: string, categoryTitle: string) => {
-    if (!window.confirm(`Are you sure you want to delete "${categoryTitle}"? This action cannot be undone.`)) {
+    if (!window.confirm(t('deleteConfirm', { title: categoryTitle }))) {
       return;
     }
 
@@ -173,7 +176,7 @@ export default function CategoriesPage() {
       await pb.collection('categories').delete(categoryId);
       await fetchCategories();
     } catch (err) {
-      setError('Failed to delete category');
+      setError(t('errors.deleteFailed'));
       console.error(err);
     }
   };
@@ -193,9 +196,9 @@ export default function CategoriesPage() {
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Categories</h1>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
           <p className="mt-1 text-sm text-gray-500">
-            Organize your content with categories
+            {t('description')}
           </p>
         </div>
         <div className="mt-4 sm:mt-0">
@@ -206,7 +209,7 @@ export default function CategoriesPage() {
             <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
               <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
             </svg>
-            Add New Category
+{t('addNew')}
           </button>
         </div>
       </div>
@@ -217,7 +220,7 @@ export default function CategoriesPage() {
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <h3 className="text-lg leading-6 font-medium text-gray-900 mb-4">
-                {editingCategory ? 'Edit Category' : 'Add New Category'}
+{editingCategory ? t('editCategory') : t('addNew')}
               </h3>
               
               {error && (
@@ -230,7 +233,7 @@ export default function CategoriesPage() {
                 <form onSubmit={handleSubmit} className="space-y-4">
                   <div>
                     <label htmlFor="category-title" className="block text-sm font-medium text-gray-700 mb-2">
-                      Name *
+{t('form.title')} *
                     </label>
                     <input
                       type="text"
@@ -238,14 +241,14 @@ export default function CategoriesPage() {
                       className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
                       value={formData.title}
                       onChange={(e) => handleTitleChange(e.target.value)}
-                      placeholder="Enter category name..."
+                      placeholder={t('form.titlePlaceholder')}
                       required
                     />
                   </div>
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Permalink
+{t('form.slug')}
                     </label>
                     <div className="mt-1">
                       {!isSlugEditable ? (
@@ -259,7 +262,7 @@ export default function CategoriesPage() {
                             onClick={() => setIsSlugEditable(true)}
                             className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                           >
-                            Edit
+                            {tCommon('edit')}
                           </button>
                         </div>
                       ) : (
@@ -281,7 +284,7 @@ export default function CategoriesPage() {
                               onClick={() => setIsSlugEditable(false)}
                               className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
                             >
-                              Save
+                              {tCommon('save')}
                             </button>
                             <button
                               type="button"
@@ -294,14 +297,14 @@ export default function CategoriesPage() {
                               }}
                               className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                             >
-                              Cancel
+{tCommon('cancel')}
                             </button>
                           </div>
                         </div>
                       )}
                     </div>
                     <p className="mt-2 text-xs text-gray-500">
-                      The permalink is the permanent URL for this category.
+{t('form.slugHelp')}
                     </p>
                   </div>
 
@@ -310,14 +313,14 @@ export default function CategoriesPage() {
                       type="submit"
                       className="flex-1 inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                     >
-                      {editingCategory ? 'Update Category' : 'Add Category'}
+{editingCategory ? t('form.updateCategory') : t('form.addCategory')}
                     </button>
                     <button
                       type="button"
                       onClick={resetForm}
                       className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
                     >
-                      Cancel
+{tCommon('cancel')}
                     </button>
                   </div>
                 </form>
@@ -327,7 +330,7 @@ export default function CategoriesPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
                   </svg>
                   <p className="mt-2 text-sm text-gray-500">
-                    Click "Add New Category" to get started
+{t('clickToStart')}
                   </p>
                 </div>
               )}
@@ -350,7 +353,7 @@ export default function CategoriesPage() {
                   <input
                     type="text"
                     className="block w-full pl-10 pr-3 py-2 border border-gray-300 rounded-md leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-1 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm"
-                    placeholder="Search categories..."
+                    placeholder={t('searchPlaceholder')}
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                   />
@@ -361,7 +364,7 @@ export default function CategoriesPage() {
               {loading ? (
                 <div className="text-center py-6">
                   <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
-                  <p className="mt-2 text-gray-500">Loading categories...</p>
+                  <p className="mt-2 text-gray-500">{tCommon('loading')}</p>
                 </div>
               ) : filteredCategories.length === 0 ? (
                 <div className="text-center py-6">
@@ -369,10 +372,10 @@ export default function CategoriesPage() {
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 7h.01M7 3h5c.512 0 1.024.195 1.414.586l7 7a2 2 0 010 2.828l-7 7a2 2 0 01-2.828 0l-7-7A1.99 1.99 0 013 12V7a4 4 0 014-4z" />
                   </svg>
                   <h3 className="mt-2 text-sm font-medium text-gray-900">
-                    {searchTerm ? 'No categories found' : 'No categories'}
+                    {searchTerm ? t('noCategoriesFound') : t('noCategories')}
                   </h3>
                   <p className="mt-1 text-sm text-gray-500">
-                    {searchTerm ? 'Try adjusting your search terms' : 'Get started by creating a new category.'}
+                    {searchTerm ? t('adjustSearch') : t('getStarted')}
                   </p>
                 </div>
               ) : (
@@ -387,7 +390,7 @@ export default function CategoriesPage() {
                           <h4 className="text-sm font-medium text-gray-900">{category.title}</h4>
                           <p className="text-sm text-gray-500">/{category.slug}</p>
                           <p className="text-xs text-gray-400 mt-1">
-                            Created {formatDate(category.created)}
+                            {t('created')} {formatDate(category.created)}
                           </p>
                         </div>
                         <div className="flex space-x-2">
@@ -395,13 +398,13 @@ export default function CategoriesPage() {
                             onClick={() => handleEditCategory(category)}
                             className="text-indigo-600 hover:text-indigo-900 text-sm font-medium transition-colors"
                           >
-                            Edit
+{tCommon('edit')}
                           </button>
                           <button
                             onClick={() => handleDeleteCategory(category.id, category.title)}
                             className="text-red-600 hover:text-red-900 text-sm font-medium transition-colors"
                           >
-                            Delete
+{tCommon('delete')}
                           </button>
                         </div>
                       </div>
@@ -417,21 +420,20 @@ export default function CategoriesPage() {
                           disabled={currentPage === 1}
                           className="relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
                         >
-                          Previous
+{tCommon('previous')}
                         </button>
                         <button
                           onClick={() => setCurrentPage(Math.min(totalPages, currentPage + 1))}
                           disabled={currentPage === totalPages}
                           className="ml-3 relative inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
                         >
-                          Next
+{tCommon('next')}
                         </button>
                       </div>
                       <div className="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
                         <div>
                           <p className="text-sm text-gray-700">
-                            Showing page <span className="font-medium">{currentPage}</span> of{' '}
-                            <span className="font-medium">{totalPages}</span>
+                            {t('pagination.showing', { current: currentPage, total: totalPages })}
                           </p>
                         </div>
                         <div>
@@ -441,7 +443,7 @@ export default function CategoriesPage() {
                               disabled={currentPage === 1}
                               className="relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
                             >
-                              <span className="sr-only">Previous</span>
+                              <span className="sr-only">{tCommon('previous')}</span>
                               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M12.707 5.293a1 1 0 010 1.414L9.414 10l3.293 3.293a1 1 0 01-1.414 1.414l-4-4a1 1 0 010-1.414l4-4a1 1 0 011.414 0z" clipRule="evenodd" />
                               </svg>
@@ -464,7 +466,7 @@ export default function CategoriesPage() {
                               disabled={currentPage === totalPages}
                               className="relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-sm font-medium text-gray-500 hover:bg-gray-50 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
                             >
-                              <span className="sr-only">Next</span>
+                              <span className="sr-only">{tCommon('next')}</span>
                               <svg className="h-5 w-5" fill="currentColor" viewBox="0 0 20 20">
                                 <path fillRule="evenodd" d="M7.293 14.707a1 1 0 010-1.414L10.586 10 7.293 6.707a1 1 0 011.414-1.414l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414 0z" clipRule="evenodd" />
                               </svg>

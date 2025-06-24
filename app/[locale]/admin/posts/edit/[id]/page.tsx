@@ -6,6 +6,7 @@ import { pb } from '@/lib/pocketbase';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
+import { useTranslations } from 'next-intl';
 
 interface Category {
   id: string;
@@ -30,6 +31,8 @@ export default function EditPostPage() {
   const router = useRouter();
   const params = useParams();
   const postId = params.id as string;
+  const t = useTranslations('admin.posts.edit');
+  const tCommon = useTranslations('admin.common');
   
   const [loading, setLoading] = useState(false);
   const [savingAs, setSavingAs] = useState<'draft' | 'published' | null>(null);
@@ -87,7 +90,7 @@ export default function EditPostPage() {
         current_cover_image: typedPost.cover_image,
       });
     } catch (err) {
-      setError('Failed to load post');
+      setError(t('errors.loadFailed'));
       console.error(err);
     } finally {
       setPageLoading(false);
@@ -198,15 +201,15 @@ export default function EditPostPage() {
       const errors = [];
       
       if (!formData.title.trim()) {
-        errors.push('Title is required');
+        errors.push(t('validation.titleRequired'));
       }
       
       if (!formData.slug.trim()) {
-        errors.push('Slug is required');
+        errors.push(t('validation.slugRequired'));
       }
       
       if (!formData.content.trim()) {
-        errors.push('Content is required');
+        errors.push(t('validation.contentRequired'));
       }
       
       if (errors.length > 0) {
@@ -240,8 +243,8 @@ export default function EditPostPage() {
       
       // Show success message and stay on page (WordPress-style)
       setSuccess(publishStatus 
-        ? `Post updated and published successfully! ` 
-        : `Post updated and saved as draft! `
+        ? t('success.updated')
+        : t('success.updated')
       );
       
       // Auto-hide success message after 5 seconds
@@ -339,6 +342,7 @@ export default function EditPostPage() {
     return (
       <div className="flex items-center justify-center min-h-screen">
         <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-indigo-600"></div>
+        <p className="ml-3 text-gray-600">{t('loading')}</p>
       </div>
     );
   }
@@ -346,9 +350,9 @@ export default function EditPostPage() {
   if (!originalPost) {
     return (
       <div className="text-center py-12">
-        <h1 className="text-2xl font-bold text-gray-900">Post not found</h1>
+        <h1 className="text-2xl font-bold text-gray-900">{t('notFound')}</h1>
         <Link href="/admin/posts" className="text-indigo-600 hover:text-indigo-500 mt-4 inline-block">
-          ← Back to Posts
+          {t('backToPosts')}
         </Link>
       </div>
     );
@@ -359,16 +363,16 @@ export default function EditPostPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Edit Post</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Update your blog post or article
-          </p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
         </div>
         <Link
           href="/admin/posts"
           className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
         >
-          ← Back to Posts
+          <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          {t('backToPosts')}
         </Link>
       </div>
 
@@ -412,7 +416,7 @@ export default function EditPostPage() {
             </div>
             <div className="ml-3">
               <h3 className="text-sm font-medium text-red-800">
-                Please fix the following issues:
+                {tCommon('error')}
               </h3>
               <div className="mt-2 text-sm text-red-700">
                 {error.includes(',') ? (
@@ -439,7 +443,7 @@ export default function EditPostPage() {
             <div className="px-4 py-5 sm:p-6">
               <input
                 type="text"
-                placeholder="Add title"
+                placeholder={t('form.titlePlaceholder')}
                 className="block w-full text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none"
                 value={formData.title}
                 onChange={(e) => handleTitleChange(e.target.value)}
@@ -452,7 +456,7 @@ export default function EditPostPage() {
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
               <label className="block text-sm font-medium text-gray-700 mb-2">
-                Permalink
+                {t('form.slug')}
               </label>
               <div className="mt-1">
                 {!isSlugEditable ? (
@@ -466,7 +470,7 @@ export default function EditPostPage() {
                       onClick={() => setIsSlugEditable(true)}
                       className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
                     >
-                      Edit
+{tCommon('edit')}
                     </button>
                   </div>
                 ) : (
@@ -488,7 +492,7 @@ export default function EditPostPage() {
                         onClick={() => setIsSlugEditable(false)}
                         className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
                       >
-                        Save
+{tCommon('save')}
                       </button>
                       <button
                         type="button"
@@ -501,7 +505,7 @@ export default function EditPostPage() {
                         }}
                         className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
                       >
-                        Cancel
+{tCommon('cancel')}
                       </button>
                     </div>
                   </div>
@@ -527,19 +531,19 @@ export default function EditPostPage() {
           {/* Publish Box */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Publish</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{tCommon('actions')}</h3>
               
               <div className="space-y-4">
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500">Status:</span>
+                  <span className="text-gray-500">{t('form.status')}:</span>
                   <span className="font-medium text-gray-900">
-                    {savingAs === 'published' || (savingAs === null && formData.published) ? 'Published' : 'Draft'}
+                    {savingAs === 'published' || (savingAs === null && formData.published) ? tCommon('published') : tCommon('draft')}
                   </span>
                 </div>
 
                 <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500">Visibility:</span>
-                  <span className="font-medium text-gray-900">Public</span>
+                  <span className="text-gray-500">{t('form.visibility')}:</span>
+                  <span className="font-medium text-gray-900">{t('form.public')}</span>
                 </div>
 
                 <hr className="border-gray-200" />
@@ -557,10 +561,10 @@ export default function EditPostPage() {
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                           <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Saving as Draft...
+                        {t('actions.savingDraft')}
                       </>
                     ) : (
-                      'Save as Draft'
+                      t('actions.saveDraft')
                     )}
                   </button>
                   
@@ -574,12 +578,12 @@ export default function EditPostPage() {
                       <>
                         <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
                           <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 818-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                         </svg>
-                        Publishing...
+                        {t('actions.publishing')}
                       </>
                     ) : (
-                      formData.published ? 'Update' : 'Publish'
+                      formData.published ? t('actions.update') : t('actions.publish')
                     )}
                   </button>
                 </div>
@@ -590,7 +594,7 @@ export default function EditPostPage() {
           {/* Categories */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Categories</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('form.categories')}</h3>
               
               <div className="space-y-3 max-h-48 overflow-y-auto">
                 {categories.length > 0 ? (
@@ -614,9 +618,9 @@ export default function EditPostPage() {
                   ))
                 ) : (
                   <p className="text-sm text-gray-500">
-                    No categories available.{' '}
+                    {t('form.noCategoriesMessage')}{' '}
                     <Link href="/admin/categories" className="text-indigo-600 hover:text-indigo-500">
-                      Create some first
+                      {t('form.createCategoriesFirst')}
                     </Link>
                   </p>
                 )}
@@ -627,7 +631,7 @@ export default function EditPostPage() {
                   href="/admin/categories"
                   className="text-sm text-indigo-600 hover:text-indigo-500"
                 >
-                  + Add New Category
+                  {t('form.addNewCategory')}
                 </Link>
               </div>
             </div>
@@ -636,7 +640,7 @@ export default function EditPostPage() {
           {/* Featured Image */}
           <div className="bg-white shadow rounded-lg">
             <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Featured Image</h3>
+              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('form.coverImage')}</h3>
               
               {!getCurrentImageUrl() ? (
                 <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
@@ -646,10 +650,10 @@ export default function EditPostPage() {
                   <div className="mt-4">
                     <label htmlFor="cover_image" className="cursor-pointer">
                       <span className="block text-sm font-medium text-gray-900">
-                        Click to upload
+                        {t('form.clickToUpload')}
                       </span>
                       <span className="block text-sm text-gray-500">
-                        PNG, JPG, GIF up to 10MB
+                        {t('form.imageFormats')}
                       </span>
                       <input
                         id="cover_image"
@@ -665,7 +669,7 @@ export default function EditPostPage() {
                 <div className="relative">
                   <img
                     src={getCurrentImageUrl()!}
-                    alt="Cover preview"
+                    alt={t('form.imagePreview')}
                     className="w-full h-48 object-cover rounded-lg"
                   />
                   <button
@@ -680,7 +684,7 @@ export default function EditPostPage() {
                   <div className="mt-3">
                     <label htmlFor="cover_image_change" className="cursor-pointer">
                       <span className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Change Image
+                        {t('form.changeImage')}
                       </span>
                       <input
                         id="cover_image_change"

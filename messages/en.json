@@ -118,7 +118,7 @@
         "form": {
           "title": "Title",
           "titlePlaceholder": "Enter post title...",
-          "slug": "URL Slug",
+          "slug": "Permalink",
           "slugPlaceholder": "post-url-slug",
           "slugHelp": "This will be the URL for your post. Leave blank to auto-generate from title.",
           "content": "Content",
@@ -128,7 +128,16 @@
           "categories": "Categories",
           "categoriesRequired": "Select at least one category",
           "removeImage": "Remove image",
-          "imagePreview": "Image preview"
+          "imagePreview": "Image preview",
+          "changeImage": "Change Image",
+          "clickToUpload": "Click to upload",
+          "imageFormats": "PNG, JPG, GIF up to 10MB",
+          "noCategoriesMessage": "No categories available.",
+          "createCategoriesFirst": "Create some first",
+          "addNewCategory": "+ Add New Category",
+          "status": "Status",
+          "visibility": "Visibility",
+          "public": "Public"
         },
         "actions": {
           "saveDraft": "Save as Draft",
@@ -158,6 +167,30 @@
         "backToPosts": "Back to Posts",
         "loading": "Loading post...",
         "notFound": "Post not found",
+        "form": {
+          "titlePlaceholder": "Add title",
+          "slug": "Permalink",
+          "slugPlaceholder": "post-slug",
+          "categories": "Categories",
+          "coverImage": "Featured Image",
+          "clickToUpload": "Click to upload",
+          "imageFormats": "PNG, JPG, GIF up to 10MB",
+          "imagePreview": "Cover preview",
+          "changeImage": "Change Image",
+          "noCategoriesMessage": "No categories available.",
+          "createCategoriesFirst": "Create some first",
+          "addNewCategory": "+ Add New Category",
+          "status": "Status",
+          "visibility": "Visibility",
+          "public": "Public"
+        },
+        "actions": {
+          "saveDraft": "Save as Draft",
+          "publish": "Publish",
+          "update": "Update",
+          "savingDraft": "Saving as Draft...",
+          "publishing": "Publishing..."
+        },
         "success": {
           "updated": "Post updated successfully!",
           "links": {
@@ -185,7 +218,14 @@
       "title": "Categories",
       "description": "Organize your content with categories",
       "addNew": "Add New Category",
+      "editCategory": "Edit Category",
       "searchPlaceholder": "Search categories...",
+      "noCategoriesFound": "No categories found",
+      "noCategories": "No categories",
+      "adjustSearch": "Try adjusting your search terms",
+      "getStarted": "Get started by creating a new category.",
+      "clickToStart": "Click \"Add New Category\" to get started",
+      "created": "Created",
       "table": {
         "title": "Title",
         "slug": "Slug",
@@ -203,6 +243,9 @@
         "addCategory": "Add Category",
         "updateCategory": "Update Category",
         "cancel": "Cancel"
+      },
+      "pagination": {
+        "showing": "Showing page {current} of {total}"
       },
       "actions": {
         "edit": "Edit",

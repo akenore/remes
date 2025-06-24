@@ -65,6 +65,7 @@ export default function AdminPage() {
     if (showWelcome) {
       const timer = setTimeout(() => {
         setShowWelcome(false);
+        sessionStorage.setItem('welcome_shown', 'true');
       }, 5000);
 
       return () => clearTimeout(timer);
@@ -73,6 +74,7 @@ export default function AdminPage() {
 
   const handleCloseWelcome = () => {
     setShowWelcome(false);
+    sessionStorage.setItem('welcome_shown', 'true');
   };
 
      return (

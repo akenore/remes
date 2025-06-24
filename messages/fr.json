@@ -118,7 +118,7 @@
         "form": {
           "title": "Titre",
           "titlePlaceholder": "Saisissez le titre de l'article...",
-          "slug": "Slug d'URL",
+          "slug": "Permalien",
           "slugPlaceholder": "slug-de-larticle",
           "slugHelp": "Ceci sera l'URL de votre article. Laissez vide pour générer automatiquement à partir du titre.",
           "content": "Contenu",
@@ -128,7 +128,16 @@
           "categories": "Catégories",
           "categoriesRequired": "Sélectionnez au moins une catégorie",
           "removeImage": "Supprimer l'image",
-          "imagePreview": "Aperçu de l'image"
+          "imagePreview": "Aperçu de l'image",
+          "changeImage": "Changer l'image",
+          "clickToUpload": "Cliquer pour télécharger",
+          "imageFormats": "PNG, JPG, GIF jusqu'à 10 Mo",
+          "noCategoriesMessage": "Aucune catégorie disponible.",
+          "createCategoriesFirst": "Créez-en d'abord",
+          "addNewCategory": "+ Ajouter une nouvelle catégorie",
+          "status": "Statut",
+          "visibility": "Visibilité",
+          "public": "Public"
         },
         "actions": {
           "saveDraft": "Enregistrer comme brouillon",
@@ -158,6 +167,30 @@
         "backToPosts": "Retour aux articles",
         "loading": "Chargement de l'article...",
         "notFound": "Article non trouvé",
+        "form": {
+          "titlePlaceholder": "Ajouter un titre",
+          "slug": "Permalien",
+          "slugPlaceholder": "slug-de-larticle",
+          "categories": "Catégories",
+          "coverImage": "Image mise en avant",
+          "clickToUpload": "Cliquer pour télécharger",
+          "imageFormats": "PNG, JPG, GIF jusqu'à 10 Mo",
+          "imagePreview": "Aperçu de la couverture",
+          "changeImage": "Changer l'image",
+          "noCategoriesMessage": "Aucune catégorie disponible.",
+          "createCategoriesFirst": "Créez-en d'abord",
+          "addNewCategory": "+ Ajouter une nouvelle catégorie",
+          "status": "Statut",
+          "visibility": "Visibilité",
+          "public": "Public"
+        },
+        "actions": {
+          "saveDraft": "Enregistrer comme brouillon",
+          "publish": "Publier",
+          "update": "Mettre à jour",
+          "savingDraft": "Enregistrement comme brouillon...",
+          "publishing": "Publication en cours..."
+        },
         "success": {
           "updated": "Article mis à jour avec succès !",
           "links": {
@@ -194,6 +227,15 @@
         "noResults": "Aucune catégorie trouvée",
         "loadingCategories": "Chargement des catégories..."
       },
+      "addNew": "Ajouter une nouvelle catégorie",
+      "editCategory": "Modifier la catégorie",
+      "searchPlaceholder": "Rechercher des catégories...",
+      "noCategoriesFound": "Aucune catégorie trouvée",
+      "noCategories": "Aucune catégorie",
+      "adjustSearch": "Essayez d'ajuster vos termes de recherche",
+      "getStarted": "Commencez par créer une nouvelle catégorie.",
+      "clickToStart": "Cliquez sur \"Ajouter une nouvelle catégorie\" pour commencer",
+      "created": "Créé",
       "form": {
         "title": "Titre",
         "titlePlaceholder": "Saisissez le titre de la catégorie...",
@@ -203,6 +245,9 @@
         "addCategory": "Ajouter une catégorie",
         "updateCategory": "Mettre à jour la catégorie",
         "cancel": "Annuler"
+      },
+      "pagination": {
+        "showing": "Page {current} sur {total}"
       },
       "actions": {
         "edit": "Modifier",

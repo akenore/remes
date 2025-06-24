@@ -6,6 +6,7 @@ import { pb } from '@/lib/pocketbase';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
+import { useTranslations } from 'next-intl';
 
 interface Category {
   id: string;
@@ -15,6 +16,8 @@ interface Category {
 export default function AddPostPage() {
   const { user } = useAuth();
   const router = useRouter();
+  const t = useTranslations('admin.posts.add');
+  const tCommon = useTranslations('admin.common');
   const [loading, setLoading] = useState(false);
   const [savingAs, setSavingAs] = useState<'draft' | 'published' | null>(null);
   const [error, setError] = useState('');
@@ -136,33 +139,33 @@ export default function AddPostPage() {
       const errors = [];
       
       if (!formData.title.trim()) {
-        errors.push('Title is required');
+        errors.push(t('validation.titleRequired'));
       }
       
       if (!formData.slug.trim()) {
-        errors.push('Slug is required');
+        errors.push(t('validation.slugRequired'));
       }
       
       if (!formData.content.trim()) {
-        errors.push('Content is required');
+        errors.push(t('validation.contentRequired'));
       }
       
       if (!user?.id) {
-        errors.push('You must be logged in to create a post');
+        errors.push(t('validation.loginRequired'));
       }
       
       // Check if categories are required (based on PocketBase schema)
       if (formData.categories.length === 0) {
-        errors.push('At least one category is required');
+        errors.push(t('validation.categoriesRequired'));
       }
       
       // Check if cover image is required (based on PocketBase schema)
       if (!formData.cover_image) {
-        errors.push('Cover image is required');
+        errors.push(t('validation.coverImageRequired'));
       }
       
       if (errors.length > 0) {
-        throw new Error(errors.join(', '));
+        throw new Error(errors.join('\n'));
       }
 
       const data = new FormData();
@@ -193,85 +196,21 @@ export default function AddPostPage() {
       
       // Show success message and stay on page (WordPress-style)
       setSuccess(publishStatus 
-        ? `Post published successfully! ` 
-        : `Post saved as draft! `
+        ? t('success.published')
+        : t('success.savedAsDraft')
       );
       
       // Auto-hide success message after 5 seconds
-      setTimeout(() => setSuccess(''), 5000);
+      setTimeout(() => {
+        setSuccess('');
+      }, 5000);
+
     } catch (err: any) {
-      // Only log server errors, not client-side validation errors
-      if (err.message && (err.message.includes('required') || err.message.includes(','))) {
-        // This is our client-side validation error - no need to log extensively
-        console.log('Validation error:', err.message);
-      } else {
-        // This is likely a server/network error - log details for debugging
-        console.error('Server error:', err);
-        console.error('Error data:', err?.data);
-        console.error('Error response:', err?.response);
+      // Only log actual server/network errors, not our validation errors
+      if (err.response || err.status) {
+        console.error('Server error creating post:', err);
       }
-      
-      let errorMessage = '';
-      
-      // Handle PocketBase validation errors
-      if (err?.data && typeof err.data === 'object') {
-        const fieldErrors: string[] = [];
-        
-        // Check for field-specific validation errors
-        Object.keys(err.data).forEach(field => {
-          const fieldError = err.data[field];
-          if (fieldError && fieldError.message) {
-            fieldErrors.push(`${field}: ${fieldError.message}`);
-          } else if (fieldError && typeof fieldError === 'string') {
-            fieldErrors.push(`${field}: ${fieldError}`);
-          } else if (fieldError && Array.isArray(fieldError)) {
-            fieldErrors.push(`${field}: ${fieldError.join(', ')}`);
-          }
-        });
-        
-        if (fieldErrors.length > 0) {
-          errorMessage = fieldErrors.join('. ');
-        }
-      }
-      
-      // Check for nested error structure (err.response.data.data)
-      if (!errorMessage && err?.response?.data?.data && typeof err.response.data.data === 'object') {
-        const fieldErrors: string[] = [];
-        
-        Object.keys(err.response.data.data).forEach(field => {
-          const fieldError = err.response.data.data[field];
-          if (fieldError && fieldError.message) {
-            fieldErrors.push(`${field}: ${fieldError.message}`);
-          } else if (fieldError && typeof fieldError === 'string') {
-            fieldErrors.push(`${field}: ${fieldError}`);
-          }
-        });
-        
-        if (fieldErrors.length > 0) {
-          errorMessage = fieldErrors.join('. ');
-        }
-      }
-      
-      // If no field errors found, use the main error message
-      if (!errorMessage) {
-        if (err?.message) {
-          errorMessage = err.message;
-        } else if (err?.response?.data?.message) {
-          errorMessage = err.response.data.message;
-        } else {
-          errorMessage = 'Failed to create post. Please check your data and try again.';
-        }
-      }
-      
-      // Add common error explanations
-      if (errorMessage.includes('slug')) {
-        errorMessage += ' (Slug must be unique and contain only letters, numbers, and hyphens)';
-      }
-      if (errorMessage.includes('author')) {
-        errorMessage += ' (Please make sure you are logged in)';
-      }
-      
-      setError(errorMessage);
+      setError(err.message || (publishStatus ? t('validation.publishFailed') : t('validation.saveFailed')));
     } finally {
       setLoading(false);
       setSavingAs(null);
@@ -283,16 +222,16 @@ export default function AddPostPage() {
       {/* Header */}
       <div className="flex items-center justify-between">
         <div>
-          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">Add New Post</h1>
-          <p className="mt-1 text-sm text-gray-500">
-            Create a new blog post or article
-          </p>
+          <h1 className="text-2xl sm:text-3xl font-bold text-gray-900">{t('title')}</h1>
         </div>
         <Link
           href="/admin/posts"
-          className="inline-flex items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+          className="inline-flex items-center px-4 py-2 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
         >
-          ← Back to Posts
+          <svg className="h-4 w-4 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+          </svg>
+          {t('backToPosts')}
         </Link>
       </div>
 
@@ -306,29 +245,26 @@ export default function AddPostPage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-green-800">
-                Success!
-              </h3>
-              <div className="mt-2 text-sm text-green-700 flex items-center justify-between">
-                <span>{success}</span>
+              <p className="text-sm text-green-800">
+                {success}
                 {savedPostId && (
-                  <div className="flex space-x-2 ml-4">
+                  <span className="ml-2">
                     <Link
                       href={`/admin/posts/edit/${savedPostId}`}
-                      className="text-sm font-medium text-green-600 hover:text-green-500 underline"
+                      className="font-medium underline hover:text-green-600"
                     >
-                      Edit post
+                      {t('success.links.editPost')}
                     </Link>
-                    <span className="text-green-400">|</span>
+                    {' | '}
                     <Link
                       href="/admin/posts"
-                      className="text-sm font-medium text-green-600 hover:text-green-500 underline"
+                      className="font-medium underline hover:text-green-600"
                     >
-                      View all posts
+                      {t('success.links.viewAllPosts')}
                     </Link>
-                  </div>
+                  </span>
                 )}
-              </div>
+              </p>
             </div>
           </div>
         </div>
@@ -344,13 +280,10 @@ export default function AddPostPage() {
               </svg>
             </div>
             <div className="ml-3">
-              <h3 className="text-sm font-medium text-red-800">
-                Please fix the following issues:
-              </h3>
-              <div className="mt-2 text-sm text-red-700">
-                {error.includes(',') ? (
+              <div className="text-sm text-red-800">
+                {error.includes('\n') ? (
                   <ul className="list-disc list-inside space-y-1">
-                    {error.split(',').map((err, index) => (
+                    {error.split('\n').map((err, index) => (
                       <li key={index}>{err.trim()}</li>
                     ))}
                   </ul>
@@ -363,280 +296,280 @@ export default function AddPostPage() {
         </div>
       )}
 
-      {/* WordPress-style Layout */}
-      <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
-        {/* Main Content Area (Left) */}
-        <div className="lg:col-span-3 space-y-6">
-          {/* Title */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <input
-                type="text"
-                placeholder="Add title"
-                className="block w-full text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none"
-                value={formData.title}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                required
-              />
-            </div>
-          </div>
-
-          {/* Permalink */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <label className="block text-sm font-medium text-gray-700 mb-2">
-                Permalink
-              </label>
-              <div className="mt-1">
-                {!isSlugEditable ? (
-                  <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
-                    <div className="flex items-center text-sm">
-                      <span className="text-gray-500 font-mono">http://127.0.0.1:3000/posts/</span>
-                      <span className="font-semibold text-indigo-600">{formData.slug || 'post-slug'}</span>
-                    </div>
-                    <button
-                      type="button"
-                      onClick={() => setIsSlugEditable(true)}
-                      className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
-                    >
-                      Edit
-                    </button>
-                  </div>
-                ) : (
-                  <div className="space-y-3">
-                    <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-                      <span className="text-gray-500 font-mono text-sm">http://127.0.0.1:3000/posts/</span>
-                      <input
-                        type="text"
-                        className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"
-                        value={formData.slug}
-                        onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
-                        placeholder="post-slug"
-                        required
-                      />
-                    </div>
-                    <div className="flex space-x-2">
-                      <button
-                        type="button"
-                        onClick={() => setIsSlugEditable(false)}
-                        className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
-                      >
-                        Save
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const baseSlug = generateSlug(formData.title);
-                          generateUniqueSlug(baseSlug).then(uniqueSlug => {
-                            setFormData(prev => ({ ...prev, slug: uniqueSlug }));
-                          });
-                          setIsSlugEditable(false);
-                        }}
-                        className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
-                      >
-                        Cancel
-                      </button>
-                    </div>
-                  </div>
-                )}
+      <form className="space-y-6">
+        {/* WordPress-style Layout */}
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
+          {/* Main Content Area (Left) */}
+          <div className="lg:col-span-3 space-y-6">
+            {/* Title */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <input
+                  type="text"
+                  placeholder={t('form.titlePlaceholder')}
+                  className="block w-full text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none"
+                  value={formData.title}
+                  onChange={(e) => handleTitleChange(e.target.value)}
+                  required
+                />
               </div>
             </div>
-          </div>
 
-          {/* Content Editor */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <RichTextEditor
-                value={formData.content}
-                onChange={(value) => {
-                  // Clear error when user starts typing
-                  if (error) setError('');
-                  setFormData(prev => ({ ...prev, content: value }));
-                }}
-              />
-            </div>
-          </div>
-        </div>
-
-        {/* Sidebar (Right) */}
-        <div className="lg:col-span-1 space-y-6">
-          {/* Publish Box */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">Publish</h3>
-              
-              <div className="space-y-4">
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500">Status:</span>
-                  <span className="font-medium text-gray-900">
-                    {savingAs === 'published' || (savingAs === null && formData.published) ? 'Published' : 'Draft'}
-                  </span>
-                </div>
-
-                <div className="flex items-center justify-between text-sm">
-                  <span className="text-gray-500">Visibility:</span>
-                  <span className="font-medium text-gray-900">Public</span>
-                </div>
-
-                <hr className="border-gray-200" />
-
-                <div className="flex flex-col space-y-3">
-                  <button
-                    type="button"
-                    onClick={() => handleSave(false)}
-                    disabled={loading}
-                    className="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
-                  >
-                    {loading && savingAs === 'draft' ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Saving as Draft...
-                      </>
-                    ) : (
-                      'Save as Draft'
-                    )}
-                  </button>
-                  
-                  <button
-                    type="button"
-                    onClick={() => handleSave(true)}
-                    disabled={loading}
-                    className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400 transition-colors"
-                  >
-                    {loading && savingAs === 'published' ? (
-                      <>
-                        <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
-                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                        </svg>
-                        Publishing...
-                      </>
-                    ) : (
-                      'Publish'
-                    )}
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          {/* Categories */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
-                Categories <span className="text-red-500">*</span>
-              </h3>
-              
-              <div className="space-y-3 max-h-48 overflow-y-auto">
-                {categories.length > 0 ? (
-                  categories.map((category) => (
-                    <label
-                      key={category.id}
-                      className="relative flex items-start cursor-pointer"
-                    >
-                      <div className="flex items-center h-5">
+            {/* Permalink */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('form.slug')}
+                </label>
+                <div className="mt-1">
+                  {!isSlugEditable ? (
+                    <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
+                      <div className="flex items-center text-sm">
+                        <span className="text-gray-500 font-mono">http://127.0.0.1:3000/posts/</span>
+                        <span className="font-semibold text-indigo-600">{formData.slug || 'post-slug'}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsSlugEditable(true)}
+                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                      >
+                        {tCommon('edit')}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                        <span className="text-gray-500 font-mono text-sm">http://127.0.0.1:3000/posts/</span>
                         <input
-                          type="checkbox"
-                          className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
-                          checked={formData.categories.includes(category.id)}
-                          onChange={() => handleCategoryToggle(category.id)}
+                          type="text"
+                          className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"
+                          value={formData.slug}
+                          onChange={(e) => setFormData(prev => ({ ...prev, slug: e.target.value }))}
+                          placeholder={t('form.slugPlaceholder')}
+                          required
                         />
                       </div>
-                      <div className="ml-3 text-sm">
-                        <span className="font-medium text-gray-700">{category.title}</span>
+                      <div className="flex space-x-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsSlugEditable(false)}
+                          className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
+                        >
+                          {tCommon('save')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const baseSlug = generateSlug(formData.title);
+                            generateUniqueSlug(baseSlug).then(uniqueSlug => {
+                              setFormData(prev => ({ ...prev, slug: uniqueSlug }));
+                            });
+                            setIsSlugEditable(false);
+                          }}
+                          className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                        >
+                          {tCommon('cancel')}
+                        </button>
                       </div>
-                    </label>
-                  ))
-                ) : (
-                  <p className="text-sm text-red-600">
-                    No categories available. At least one category is required.{' '}
-                    <Link href="/admin/categories" className="text-indigo-600 hover:text-indigo-500 underline">
-                      Create categories first
-                    </Link>
-                  </p>
-                )}
+                    </div>
+                  )}
+                </div>
               </div>
+            </div>
 
-              <div className="mt-4 pt-4 border-t border-gray-200">
-                <Link
-                  href="/admin/categories"
-                  className="text-sm text-indigo-600 hover:text-indigo-500"
-                >
-                  + Add New Category
-                </Link>
+            {/* Content Editor */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <RichTextEditor
+                  value={formData.content}
+                  onChange={(content) => {
+                    // Clear messages when user starts typing content
+                    if (error) setError('');
+                    if (success) setSuccess('');
+                    setFormData(prev => ({ ...prev, content }));
+                  }}
+                  placeholder={t('form.contentPlaceholder')}
+                />
               </div>
             </div>
           </div>
 
-          {/* Featured Image */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">
-                Featured Image <span className="text-red-500">*</span>
-              </h3>
-              
-              {!formData.cover_image ? (
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="mt-4">
-                    <label htmlFor="cover_image" className="cursor-pointer">
-                      <span className="block text-sm font-medium text-gray-900">
-                        Click to upload
-                      </span>
-                      <span className="block text-sm text-gray-500">
-                        PNG, JPG, GIF up to 10MB
-                      </span>
-                      <input
-                        id="cover_image"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="sr-only"
-                      />
-                    </label>
+          {/* Sidebar (Right) */}
+          <div className="lg:col-span-1 space-y-6">
+            {/* Publish Box */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">{tCommon('actions')}</h3>
+                
+                <div className="space-y-4">
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-500">{t('form.status')}:</span>
+                    <span className="font-medium text-gray-900">
+                      {savingAs === 'published' || (savingAs === null && formData.published) ? tCommon('published') : tCommon('draft')}
+                    </span>
+                  </div>
+
+                  <div className="flex items-center justify-between text-sm">
+                    <span className="text-gray-500">{t('form.visibility')}:</span>
+                    <span className="font-medium text-gray-900">{t('form.public')}</span>
+                  </div>
+
+                  <hr className="border-gray-200" />
+
+                  <div className="flex flex-col space-y-3">
+                    <button
+                      type="button"
+                      onClick={() => handleSave(false)}
+                      disabled={loading}
+                      className="w-full inline-flex justify-center items-center px-4 py-2 border border-gray-300 text-sm font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-100 disabled:text-gray-400 transition-colors"
+                    >
+                      {loading && savingAs === 'draft' ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-gray-600" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 818-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {t('actions.savingDraft')}
+                        </>
+                      ) : (
+                        t('actions.saveDraft')
+                      )}
+                    </button>
+                    
+                    <button
+                      type="button"
+                      onClick={() => handleSave(true)}
+                      disabled={loading}
+                      className="w-full inline-flex justify-center items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md shadow-sm text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 disabled:bg-gray-400 transition-colors"
+                    >
+                      {loading && savingAs === 'published' ? (
+                        <>
+                          <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 818-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 714 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                          </svg>
+                          {t('actions.publishing')}
+                        </>
+                      ) : (
+                        t('actions.publish')
+                      )}
+                    </button>
                   </div>
                 </div>
-              ) : (
-                <div className="relative">
-                  <img
-                    src={URL.createObjectURL(formData.cover_image)}
-                    alt="Cover preview"
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  <button
-                    type="button"
-                    onClick={removeImage}
-                    className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+              </div>
+            </div>
+
+            {/* Categories */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">{t('form.categories')}</h3>
+                
+                <div className="space-y-3 max-h-48 overflow-y-auto">
+                  {categories.length > 0 ? (
+                    categories.map((category) => (
+                      <label
+                        key={category.id}
+                        className="relative flex items-start cursor-pointer"
+                      >
+                        <div className="flex items-center h-5">
+                          <input
+                            type="checkbox"
+                            className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-gray-300 rounded"
+                            checked={formData.categories.includes(category.id)}
+                            onChange={() => handleCategoryToggle(category.id)}
+                          />
+                        </div>
+                        <div className="ml-3 text-sm">
+                          <span className="font-medium text-gray-700">{category.title}</span>
+                        </div>
+                      </label>
+                    ))
+                  ) : (
+                    <p className="text-sm text-gray-500">
+                      {t('form.noCategoriesMessage')}{' '}
+                      <Link href="/admin/categories" className="text-indigo-600 hover:text-indigo-500">
+                        {t('form.createCategoriesFirst')}
+                      </Link>
+                    </p>
+                  )}
+                </div>
+
+                <div className="mt-4 pt-4 border-t border-gray-200">
+                  <Link
+                    href="/admin/categories"
+                    className="text-sm text-indigo-600 hover:text-indigo-500"
                   >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div className="mt-3">
-                    <label htmlFor="cover_image_change" className="cursor-pointer">
-                      <span className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        Change Image
-                      </span>
-                      <input
-                        id="cover_image_change"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="sr-only"
-                      />
-                    </label>
-                  </div>
+                    {t('form.addNewCategory')}
+                  </Link>
                 </div>
-              )}
+              </div>
+            </div>
+
+            {/* Featured Image */}
+            <div className="bg-white shadow rounded-lg">
+              <div className="px-4 py-5 sm:p-6">
+                <h3 className="text-lg font-medium text-gray-900 mb-4">{t('form.coverImage')}</h3>
+                
+                {!formData.cover_image ? (
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
+                    <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                      <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                    </svg>
+                    <div className="mt-4">
+                      <label htmlFor="cover_image" className="cursor-pointer">
+                        <span className="block text-sm font-medium text-gray-900">
+                          {t('form.clickToUpload')}
+                        </span>
+                        <span className="block text-sm text-gray-500">
+                          {t('form.imageFormats')}
+                        </span>
+                        <input
+                          id="cover_image"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="sr-only"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="relative">
+                    <img
+                      src={URL.createObjectURL(formData.cover_image)}
+                      alt={t('form.imagePreview')}
+                      className="w-full h-48 object-cover rounded-lg"
+                    />
+                    <button
+                      type="button"
+                      onClick={removeImage}
+                      className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
+                    >
+                      <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                      </svg>
+                    </button>
+                    <div className="mt-3">
+                      <label htmlFor="cover_image_change" className="cursor-pointer">
+                        <span className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                          {t('form.changeImage')}
+                        </span>
+                        <input
+                          id="cover_image_change"
+                          type="file"
+                          accept="image/*"
+                          onChange={handleImageChange}
+                          className="sr-only"
+                        />
+                      </label>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
           </div>
         </div>
-      </div>
+      </form>
     </div>
   );
 } 
