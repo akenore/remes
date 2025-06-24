@@ -37,9 +37,9 @@ interface ImageSettings {
   size: 'thumbnail' | 'medium' | 'large' | 'full' | 'custom';
 }
 
-export default function RichTextEditor({
-  value,
-  onChange,
+export default function RichTextEditor({ 
+  value, 
+  onChange, 
   placeholder = 'Start writing...',
   className = '',
   postId
@@ -377,7 +377,7 @@ export default function RichTextEditor({
               } else if (attempt < 5) {
                 // Retry up to 5 times with increasing delays
                 setTimeout(() => applyImageAttributes2(attempt + 1), 50 * (attempt + 1));
-              } else {
+        } else {
                 console.warn('Method 2: Failed to apply image attributes after 5 attempts');
               }
             };
@@ -641,14 +641,14 @@ export default function RichTextEditor({
         ref={reactQuillRef}
         className="react-quill-container"
       >
-        <ReactQuill
-          theme="snow"
-          value={value}
-          onChange={onChange}
+      <ReactQuill
+        theme="snow"
+        value={value}
+        onChange={onChange}
           onFocus={handleReady}
-          placeholder={placeholder}
-          modules={modules}
-          formats={formats}
+        placeholder={placeholder}
+        modules={modules}
+        formats={formats}
           className="bg-white"
         />
       </div>
@@ -814,7 +814,7 @@ export default function RichTextEditor({
                       <img
                         src={selectedImageUrl}
                         alt={imageSettings.alt || 'Preview'}
-                                               style={{
+        style={{
                            width: `${Math.min(Math.round(imageSettings.width), 400)}px`,
                            height: `${Math.min(Math.round(imageSettings.height), 300)}px`,
                            maxWidth: '100%'

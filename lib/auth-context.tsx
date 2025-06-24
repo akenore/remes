@@ -95,8 +95,18 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const refreshUser = async () => {
     try {
       if (pb.authStore.model?.id) {
-        // Refresh user data from PocketBase
-        const updatedUser = await pb.collection('users').getOne(pb.authStore.model.id);
+        // Check if this is an admin or regular user
+        const currentUser = pb.authStore.record;
+        let updatedUser;
+        
+        if (currentUser && currentUser.collectionName === '_superusers') {
+          // This is an admin user - refresh from admins
+          updatedUser = await pb.admins.getOne(pb.authStore.model.id);
+        } else {
+          // This is a regular user - refresh from users collection
+          updatedUser = await pb.collection('users').getOne(pb.authStore.model.id);
+        }
+        
         const userObj = {
           id: updatedUser.id,
           email: updatedUser.email,

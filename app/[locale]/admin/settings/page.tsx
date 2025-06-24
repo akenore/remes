@@ -62,21 +62,25 @@ export default function SettingsPage() {
         id: currentUser?.id,
         email: currentUser?.email,
         collectionName: currentUser?.collectionName,
-        userIdFromContext: user?.id
+        userIdFromContext: user?.id,
+        profileDataEmail: profileData.email,
+        profileDataName: profileData.name
       });
       
-      if (currentUser && (currentUser.collectionName === '_superusers' || !currentUser.collectionName)) {
-        // This is likely an admin user
-        console.log('Updating as admin user');
+      if (currentUser && currentUser.collectionName === '_superusers') {
+        // This is a real superuser from _superusers collection
+        console.log('Updating as REAL superuser via pb.admins.update');
         
         // For admin users, we can directly update both name and email
-        await pb.admins.update(user?.id || '', {
+        console.log('Updating admin with ID:', currentUser?.id);
+        const updateResult = await pb.admins.update(currentUser?.id || '', {
           name: profileData.name,
           email: profileData.email,
         });
+        console.log('Admin update result:', updateResult);
       } else {
-        // This is a regular user
-        console.log('Updating as regular user');
+        // This is a regular user from users collection (even if they have admin permissions)
+        console.log('Updating as REGULAR USER via pb.collection(users).update');
         
         // Update name first
         await pb.collection('users').update(user?.id || '', {
@@ -181,9 +185,9 @@ export default function SettingsPage() {
 
       // Check if user is admin or regular user and update accordingly
       const currentUser = pb.authStore.record;
-      if (currentUser && (currentUser.collectionName === '_superusers' || !currentUser.collectionName)) {
+      if (currentUser && currentUser.collectionName === '_superusers') {
         // This is likely an admin user
-        await pb.admins.update(user?.id || '', {
+        await pb.admins.update(currentUser?.id || '', {
           oldPassword: passwordData.oldPassword,
           password: passwordData.password,
           passwordConfirm: passwordData.passwordConfirm,

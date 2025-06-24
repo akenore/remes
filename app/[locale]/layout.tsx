@@ -50,9 +50,9 @@ export default async function LocaleLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
-          <AuthProvider>
-            {children}
-          </AuthProvider>
+        <AuthProvider>
+        {children}
+        </AuthProvider>
         </NextIntlClientProvider>
       </body>
     </html>
