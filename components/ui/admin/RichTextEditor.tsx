@@ -3,6 +3,7 @@
 import { useEffect, useState, useRef, useCallback } from 'react';
 import dynamic from 'next/dynamic';
 import { pb } from '@/lib/pocketbase';
+import { useTranslations } from 'next-intl';
 
 // Dynamically import ReactQuill to avoid SSR issues
 const ReactQuill = dynamic(() => import('react-quill-new'), { 
@@ -41,10 +42,12 @@ interface ImageSettings {
 export default function RichTextEditor({ 
   value, 
   onChange, 
-  placeholder = 'Start writing...',
+  placeholder,
   className = '',
   postId
 }: RichTextEditorProps) {
+  const t = useTranslations('admin.richTextEditor');
+  const defaultPlaceholder = placeholder || t('placeholder');
   const [isMounted, setIsMounted] = useState(false);
   const [showImageModal, setShowImageModal] = useState(false);
   const [activeTab, setActiveTab] = useState<'upload' | 'collection'>('upload');
@@ -72,13 +75,6 @@ export default function RichTextEditor({
   useEffect(() => {
     setIsMounted(true);
   }, []);
-
-  // Fetch collection images when switching to collection tab
-  useEffect(() => {
-    if (activeTab === 'collection' && showImageModal) {
-      fetchCollectionImages();
-    }
-  }, [activeTab, showImageModal]);
 
   // Optional: Cleanup old rich text images (can be called manually if needed)
   const cleanupOldRichTextImages = async () => {
@@ -142,60 +138,28 @@ export default function RichTextEditor({
     }
   };
 
-  // Fetch images from both media and posts collections
+  // Fetch images from posts collection only (simpler approach)
   const fetchCollectionImages = async () => {
     setLoadingImages(true);
     try {
-      let allImages: CollectionImage[] = [];
+      // Only fetch from posts with cover images (removing media collection fetch to avoid 403)
+      const postsResult = await pb.collection('posts').getList(1, 25, {
+        sort: '-created',
+        filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
+        fields: 'id,cover_image,title,created'
+      });
       
-      // Try to fetch from media collection
-      try {
-        const mediaResult = await pb.collection('media').getList(1, 25, {
-          sort: '-created',
-          fields: 'id,file,title,created'
-        });
-        
-        const mediaImages = mediaResult.items.map(item => ({
-          id: item.id,
-          cover_image: item.file, // Media collection uses "file"
-          title: item.title || 'Media Image',
-          created: item.created,
-          collection: 'media' as const
-        }));
-        
-        allImages.push(...mediaImages);
-        console.log('Fetched images from media collection:', mediaImages.length);
-      } catch (mediaError: any) {
-        console.warn('Could not fetch from media collection:', mediaError.message);
-      }
+      console.log('Fetched images from posts:', postsResult.items.length);
       
-      // Also fetch from posts with cover images (for backward compatibility)
-      try {
-        const postsResult = await pb.collection('posts').getList(1, 25, {
-          sort: '-created',
-          filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
-          fields: 'id,cover_image,title,created'
-        });
-        
-        const postImages = postsResult.items.map(item => ({
-          id: item.id,
-          cover_image: item.cover_image,
-          title: item.title || 'Untitled',
-          created: item.created,
-          collection: 'posts' as const
-        }));
-        
-        allImages.push(...postImages);
-        console.log('Fetched images from posts:', postImages.length);
-      } catch (postsError: any) {
-        console.warn('Could not fetch from posts collection:', postsError.message);
-      }
+      const postImages = postsResult.items.map(item => ({
+        id: item.id,
+        cover_image: item.cover_image,
+        title: item.title || 'Untitled',
+        created: item.created,
+        collection: 'posts' as const
+      }));
       
-      // Sort all images by creation date (newest first)
-      allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-      
-      setCollectionImages(allImages);
-      console.log('Total images loaded:', allImages.length);
+      setCollectionImages(postImages);
     } catch (error) {
       console.error('Failed to fetch collection images:', error);
     } finally {
@@ -207,19 +171,14 @@ export default function RichTextEditor({
   const handleImageUpload = async (file: File) => {
     setUploading(true);
     try {
-      // Validate file parameter first
-      if (!file) {
-        throw new Error('No file provided for upload');
-      }
-      
       // Validate file
       if (!file.type.startsWith('image/')) {
-        alert('Please select an image file');
+        alert(t('imageModal.errors.invalidFile'));
         return;
       }
 
       if (file.size > 10 * 1024 * 1024) {
-        alert('Image size must be less than 10MB');
+        alert(t('imageModal.errors.fileTooLarge'));
         return;
       }
 
@@ -238,32 +197,34 @@ export default function RichTextEditor({
       console.log('Auth token exists:', !!pb.authStore.token);
       console.log('Author ID:', authorId);
       console.log('Uploading file:', file.name, file.type, file.size);
-      console.log('File object:', file);
 
-      // Create media record for the image (proper separation from posts)
+      // Create post record for the image (like it was working before)
       const formData = new FormData();
       
-      // Add the file field - PocketBase expects "file" field name
-      formData.append('file', file, file.name);
+      // Add the cover_image field (this was working before)
+      formData.append('cover_image', file, file.name);
       
-      // Add a clean title for the media
+      // Add a clean title (no more [RICH_TEXT_IMG] prefix)
       const title = file.name.replace(/\.[^/.]+$/, "");
-      formData.append('title', `📷 ${title}`);
+      formData.append('title', `📷 ${title}`); // Just add camera emoji to identify it
       
-      // Add author (for user separation like WordPress)
-      formData.append('author', authorId);
+      // Add other required fields
+      formData.append('content', 'Rich text editor image');
+      formData.append('status', 'published');
+      formData.append('author', authorId); // Use the verified author ID
+      formData.append('slug', `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`); // Add required slug field
 
       console.log('FormData prepared with fields:');
       for (let pair of formData.entries()) {
         console.log(`- ${pair[0]}:`, pair[1] instanceof File ? `File(${pair[1].name}, ${pair[1].size} bytes)` : pair[1]);
       }
       
-      console.log('Attempting upload to media collection...');
+      console.log('Attempting upload to posts collection...');
       
-      const mediaRecord = await pb.collection('media').create(formData);
-      const imageUrl = pb.files.getURL(mediaRecord, mediaRecord.file);
+      const postRecord = await pb.collection('posts').create(formData);
+      const imageUrl = pb.files.getURL(postRecord, postRecord.cover_image);
       
-      console.log('Image uploaded successfully to media collection:', imageUrl);
+      console.log('Image uploaded successfully to posts collection:', imageUrl);
       
       // Show image settings modal
       await showImageSettingsModal(imageUrl);
@@ -288,7 +249,7 @@ export default function RichTextEditor({
         errorMessage = error.message;
       }
       
-      alert(`Failed to upload image: ${errorMessage}`);
+      alert(`${t('imageModal.errors.uploadFailed')}: ${errorMessage}`);
     } finally {
       setUploading(false);
     }
@@ -703,14 +664,7 @@ export default function RichTextEditor({
   }
 
   return (
-    <div 
-      className={`relative ${className}`}
-      onSubmit={(e) => {
-        e.preventDefault();
-        e.stopPropagation();
-        return false;
-      }}
-    >
+    <div className={`relative ${className}`}>
       {/* Add custom CSS to override Quill's default image styles */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -732,37 +686,22 @@ export default function RichTextEditor({
         value={value}
         onChange={onChange}
           onFocus={handleReady}
-        placeholder={placeholder}
+        placeholder={defaultPlaceholder}
         modules={modules}
         formats={formats}
           className="bg-white"
         />
       </div>
 
-      {/* Image Modal */}
+      {/* Image Selection Modal */}
       {showImageModal && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              e.preventDefault();
-              setShowImageModal(false);
-            }
-          }}
-        >
-          <div 
-            className="bg-white rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
-              <h3 className="text-lg font-semibold text-gray-900">Select an image</h3>
+              <h3 className="text-lg font-semibold text-gray-900">{t('selectImage')}</h3>
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setShowImageModal(false);
-                }}
+                onClick={() => setShowImageModal(false)}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -774,32 +713,24 @@ export default function RichTextEditor({
             {/* Tabs */}
             <div className="flex border-b">
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab('upload');
-                }}
+                onClick={() => setActiveTab('upload')}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'upload'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                Upload from PC
+                {t('uploadFromPC')}
               </button>
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  setActiveTab('collection');
-                }}
+                onClick={() => setActiveTab('collection')}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'collection'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
                     : 'text-gray-500 hover:text-gray-700'
                 }`}
               >
-                From collection
+                {t('fromCollection')}
               </button>
             </div>
 
@@ -807,30 +738,7 @@ export default function RichTextEditor({
             <div className="p-6 max-h-96 overflow-y-auto">
               {activeTab === 'upload' ? (
                 <div className="space-y-4">
-                  <div 
-                    className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center"
-                    onDragOver={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onDragEnter={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onDragLeave={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                    }}
-                    onDrop={(e) => {
-                      e.preventDefault();
-                      e.stopPropagation();
-                      const files = Array.from(e.dataTransfer.files);
-                      const imageFile = files.find(file => file.type.startsWith('image/'));
-                      if (imageFile) {
-                        handleImageUpload(imageFile);
-                      }
-                    }}
-                  >
+                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
                     <input
                       type="file"
                       accept="image/*"
@@ -852,15 +760,15 @@ export default function RichTextEditor({
                         </svg>
                         <div className="text-sm text-gray-600">
                           {uploading ? (
-                            <span className="text-indigo-600">Uploading...</span>
+                            <span className="text-indigo-600">{t('uploading')}</span>
                           ) : (
                             <>
-                              <span className="font-medium text-indigo-600 hover:text-indigo-500">Click to upload</span>
-                              <span> or drag and drop</span>
+                              <span className="font-medium text-indigo-600 hover:text-indigo-500">{t('clickToUpload')}</span>
+                              <span>{t('orDragAndDrop')}</span>
                             </>
                           )}
                         </div>
-                        <p className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</p>
+                        <p className="text-xs text-gray-500">{t('imageSize')}</p>
                       </div>
                     </label>
                   </div>
@@ -870,16 +778,14 @@ export default function RichTextEditor({
                   {loadingImages ? (
                     <div className="flex justify-center py-8">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-600"></div>
+                      <p className="ml-3 text-gray-600">{t('loadingImages')}</p>
                     </div>
                   ) : collectionImages.length > 0 ? (
                     <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-4">
                       {collectionImages.map((image) => (
                         <div
                           key={image.id}
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleImageSelect(image);
-                          }}
+                          onClick={() => handleImageSelect(image)}
                           className="group relative cursor-pointer border border-gray-200 rounded-lg p-2 hover:border-indigo-500 hover:shadow-md transition-all"
                         >
                           <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
@@ -900,8 +806,8 @@ export default function RichTextEditor({
                       <svg className="mx-auto h-12 w-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
-                      <p className="mt-2">No images found in collection</p>
-                      <p className="text-sm">Upload some images first to see them here</p>
+                      <p className="mt-2">{t('noImagesFound')}</p>
+                      <p className="text-sm">{t('uploadImagesFirst')}</p>
                     </div>
                   )}
                 </div>
@@ -911,24 +817,10 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCancelImageSettings();
-                }}
+                onClick={() => setShowImageModal(false)}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
-                Cancel
-              </button>
-              <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleInsertImage();
-                }}
-                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
-              >
-                Insert Image
+                {t('cancel')}
               </button>
             </div>
           </div>
@@ -937,28 +829,13 @@ export default function RichTextEditor({
 
       {/* Image Settings Modal */}
       {showImageSettings && (
-        <div 
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
-          onClick={(e) => {
-            if (e.target === e.currentTarget) {
-              e.preventDefault();
-              handleCancelImageSettings();
-            }
-          }}
-        >
-          <div 
-            className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden"
-            onClick={(e) => e.stopPropagation()}
-          >
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
-              <h3 className="text-lg font-semibold text-gray-900">Image Settings</h3>
+              <h3 className="text-lg font-semibold text-gray-900">{t('imageSettings')}</h3>
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCancelImageSettings();
-                }}
+                onClick={handleCancelImageSettings}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -972,7 +849,7 @@ export default function RichTextEditor({
               <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
                 {/* Image Preview */}
                 <div className="space-y-4">
-                  <h4 className="font-medium text-gray-900">Preview</h4>
+                  <h4 className="font-medium text-gray-900">{t('preview')}</h4>
                   <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
                     <div className="flex justify-center">
                       <img
@@ -994,39 +871,35 @@ export default function RichTextEditor({
 
                 {/* Settings Panel */}
                 <div className="space-y-4">
-                  <h4 className="font-medium text-gray-900">Settings</h4>
+                  <h4 className="font-medium text-gray-900">{t('settings')}</h4>
                   
                   {/* Alt Text */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-1">
-                      Alt Text
+                      {t('altText')}
                     </label>
                     <input
                       type="text"
                       value={imageSettings.alt}
                       onChange={(e) => setImageSettings(prev => ({ ...prev, alt: e.target.value }))}
-                      placeholder="Describe this image..."
+                      placeholder={t('describeThisImage')}
                       className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                     />
                     <p className="mt-1 text-xs text-gray-500">
-                      Helps screen readers understand the image content
+                      {t('helpsScreenReaders')}
                     </p>
                   </div>
 
                   {/* Size Presets */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Size
+                      {t('size')}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {['thumbnail', 'medium', 'large', 'full'].map((size) => (
                         <button
                           key={size}
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            handleSizeChange(size);
-                          }}
+                          onClick={() => handleSizeChange(size)}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.size === size
                               ? 'bg-indigo-600 text-white'
@@ -1042,11 +915,11 @@ export default function RichTextEditor({
                   {/* Custom Dimensions */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Custom Dimensions
+                      {t('customDimensions')}
                     </label>
                     <div className="grid grid-cols-2 gap-3">
                       <div>
-                        <label className="block text-xs text-gray-500 mb-1">Width</label>
+                        <label className="block text-xs text-gray-500 mb-1">{t('width')}</label>
                         <input
                           type="number"
                           value={Math.round(imageSettings.width)}
@@ -1055,7 +928,7 @@ export default function RichTextEditor({
                         />
                       </div>
                       <div>
-                        <label className="block text-xs text-gray-500 mb-1">Height</label>
+                        <label className="block text-xs text-gray-500 mb-1">{t('height')}</label>
                         <input
                           type="number"
                           value={Math.round(imageSettings.height)}
@@ -1065,29 +938,25 @@ export default function RichTextEditor({
                       </div>
                     </div>
                     <p className="mt-1 text-xs text-gray-500">
-                      Original: {originalImageDimensions.width} × {originalImageDimensions.height}
+                      {t('original')} {originalImageDimensions.width} × {originalImageDimensions.height}
                     </p>
                   </div>
 
                   {/* Alignment */}
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
-                      Alignment
+                      {t('alignment')}
                     </label>
                     <div className="grid grid-cols-2 gap-2">
                       {[
-                        { value: 'none', label: 'None' },
-                        { value: 'left', label: 'Left' },
-                        { value: 'center', label: 'Center' },
-                        { value: 'right', label: 'Right' }
+                        { value: 'none', label: t('none') },
+                        { value: 'left', label: t('left') },
+                        { value: 'center', label: t('center') },
+                        { value: 'right', label: t('right') }
                       ].map((align) => (
                         <button
                           key={align.value}
-                          type="button"
-                          onClick={(e) => {
-                            e.preventDefault();
-                            setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }));
-                          }}
+                          onClick={() => setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.alignment === align.value
                               ? 'bg-indigo-600 text-white'
@@ -1106,24 +975,16 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleCancelImageSettings();
-                }}
+                onClick={handleCancelImageSettings}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
-                Cancel
+                {t('cancel')}
               </button>
               <button
-                type="button"
-                onClick={(e) => {
-                  e.preventDefault();
-                  handleInsertImage();
-                }}
+                onClick={handleInsertImage}
                 className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
-                Insert Image
+                {t('insertImage')}
               </button>
             </div>
           </div>
