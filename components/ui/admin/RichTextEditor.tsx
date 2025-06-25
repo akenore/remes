@@ -135,28 +135,60 @@ export default function RichTextEditor({
     }
   };
 
-  // Fetch images from posts collection only (simpler approach)
+  // Fetch images from both media and posts collections
   const fetchCollectionImages = async () => {
     setLoadingImages(true);
     try {
-      // Only fetch from posts with cover images (removing media collection fetch to avoid 403)
-      const postsResult = await pb.collection('posts').getList(1, 25, {
-        sort: '-created',
-        filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
-        fields: 'id,cover_image,title,created'
-      });
+      let allImages: CollectionImage[] = [];
       
-      console.log('Fetched images from posts:', postsResult.items.length);
+      // Try to fetch from media collection
+      try {
+        const mediaResult = await pb.collection('media').getList(1, 25, {
+          sort: '-created',
+          fields: 'id,file,title,created'
+        });
+        
+        const mediaImages = mediaResult.items.map(item => ({
+          id: item.id,
+          cover_image: item.file, // Media collection uses "file"
+          title: item.title || 'Media Image',
+          created: item.created,
+          collection: 'media' as const
+        }));
+        
+        allImages.push(...mediaImages);
+        console.log('Fetched images from media collection:', mediaImages.length);
+      } catch (mediaError: any) {
+        console.warn('Could not fetch from media collection:', mediaError.message);
+      }
       
-      const postImages = postsResult.items.map(item => ({
-        id: item.id,
-        cover_image: item.cover_image,
-        title: item.title || 'Untitled',
-        created: item.created,
-        collection: 'posts' as const
-      }));
+      // Also fetch from posts with cover images (for backward compatibility)
+      try {
+        const postsResult = await pb.collection('posts').getList(1, 25, {
+          sort: '-created',
+          filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
+          fields: 'id,cover_image,title,created'
+        });
+        
+        const postImages = postsResult.items.map(item => ({
+          id: item.id,
+          cover_image: item.cover_image,
+          title: item.title || 'Untitled',
+          created: item.created,
+          collection: 'posts' as const
+        }));
+        
+        allImages.push(...postImages);
+        console.log('Fetched images from posts:', postImages.length);
+      } catch (postsError: any) {
+        console.warn('Could not fetch from posts collection:', postsError.message);
+      }
       
-      setCollectionImages(postImages);
+      // Sort all images by creation date (newest first)
+      allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
+      
+      setCollectionImages(allImages);
+      console.log('Total images loaded:', allImages.length);
     } catch (error) {
       console.error('Failed to fetch collection images:', error);
     } finally {
@@ -168,6 +200,11 @@ export default function RichTextEditor({
   const handleImageUpload = async (file: File) => {
     setUploading(true);
     try {
+      // Validate file parameter first
+      if (!file) {
+        throw new Error('No file provided for upload');
+      }
+      
       // Validate file
       if (!file.type.startsWith('image/')) {
         alert('Please select an image file');
@@ -194,34 +231,32 @@ export default function RichTextEditor({
       console.log('Auth token exists:', !!pb.authStore.token);
       console.log('Author ID:', authorId);
       console.log('Uploading file:', file.name, file.type, file.size);
+      console.log('File object:', file);
 
-      // Create post record for the image (like it was working before)
+      // Create media record for the image (proper separation from posts)
       const formData = new FormData();
       
-      // Add the cover_image field (this was working before)
-      formData.append('cover_image', file, file.name);
+      // Add the file field - PocketBase expects "file" field name
+      formData.append('file', file, file.name);
       
-      // Add a clean title (no more [RICH_TEXT_IMG] prefix)
+      // Add a clean title for the media
       const title = file.name.replace(/\.[^/.]+$/, "");
-      formData.append('title', `📷 ${title}`); // Just add camera emoji to identify it
+      formData.append('title', `📷 ${title}`);
       
-      // Add other required fields
-      formData.append('content', 'Rich text editor image');
-      formData.append('status', 'published');
-      formData.append('author', authorId); // Use the verified author ID
-      formData.append('slug', `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`); // Add required slug field
+      // Add author (for user separation like WordPress)
+      formData.append('author', authorId);
 
       console.log('FormData prepared with fields:');
       for (let pair of formData.entries()) {
         console.log(`- ${pair[0]}:`, pair[1] instanceof File ? `File(${pair[1].name}, ${pair[1].size} bytes)` : pair[1]);
       }
       
-      console.log('Attempting upload to posts collection...');
+      console.log('Attempting upload to media collection...');
       
-      const postRecord = await pb.collection('posts').create(formData);
-      const imageUrl = pb.files.getURL(postRecord, postRecord.cover_image);
+      const mediaRecord = await pb.collection('media').create(formData);
+      const imageUrl = pb.files.getURL(mediaRecord, mediaRecord.file);
       
-      console.log('Image uploaded successfully to posts collection:', imageUrl);
+      console.log('Image uploaded successfully to media collection:', imageUrl);
       
       // Show image settings modal
       await showImageSettingsModal(imageUrl);
