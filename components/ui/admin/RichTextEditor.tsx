@@ -73,6 +73,13 @@ export default function RichTextEditor({
     setIsMounted(true);
   }, []);
 
+  // Fetch collection images when switching to collection tab
+  useEffect(() => {
+    if (activeTab === 'collection' && showImageModal) {
+      fetchCollectionImages();
+    }
+  }, [activeTab, showImageModal]);
+
   // Optional: Cleanup old rich text images (can be called manually if needed)
   const cleanupOldRichTextImages = async () => {
     try {
@@ -696,7 +703,14 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className={`relative ${className}`}>
+    <div 
+      className={`relative ${className}`}
+      onSubmit={(e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        return false;
+      }}
+    >
       {/* Add custom CSS to override Quill's default image styles */}
       <style dangerouslySetInnerHTML={{
         __html: `
@@ -725,15 +739,30 @@ export default function RichTextEditor({
         />
       </div>
 
-      {/* Image Selection Modal */}
+      {/* Image Modal */}
       {showImageModal && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+              setShowImageModal(false);
+            }
+          }}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-6xl w-full mx-4 max-h-[90vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">Select an image</h3>
               <button
-                onClick={() => setShowImageModal(false)}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowImageModal(false);
+                }}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -745,7 +774,11 @@ export default function RichTextEditor({
             {/* Tabs */}
             <div className="flex border-b">
               <button
-                onClick={() => setActiveTab('upload')}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab('upload');
+                }}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'upload'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
@@ -755,7 +788,11 @@ export default function RichTextEditor({
                 Upload from PC
               </button>
               <button
-                onClick={() => setActiveTab('collection')}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab('collection');
+                }}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'collection'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
@@ -770,7 +807,30 @@ export default function RichTextEditor({
             <div className="p-6 max-h-96 overflow-y-auto">
               {activeTab === 'upload' ? (
                 <div className="space-y-4">
-                  <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
+                  <div 
+                    className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center"
+                    onDragOver={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onDragEnter={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onDragLeave={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                    }}
+                    onDrop={(e) => {
+                      e.preventDefault();
+                      e.stopPropagation();
+                      const files = Array.from(e.dataTransfer.files);
+                      const imageFile = files.find(file => file.type.startsWith('image/'));
+                      if (imageFile) {
+                        handleImageUpload(imageFile);
+                      }
+                    }}
+                  >
                     <input
                       type="file"
                       accept="image/*"
@@ -816,7 +876,10 @@ export default function RichTextEditor({
                       {collectionImages.map((image) => (
                         <div
                           key={image.id}
-                          onClick={() => handleImageSelect(image)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleImageSelect(image);
+                          }}
                           className="group relative cursor-pointer border border-gray-200 rounded-lg p-2 hover:border-indigo-500 hover:shadow-md transition-all"
                         >
                           <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
@@ -848,10 +911,24 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                onClick={() => setShowImageModal(false)}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCancelImageSettings();
+                }}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Cancel
+              </button>
+              <button
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleInsertImage();
+                }}
+                className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
+              >
+                Insert Image
               </button>
             </div>
           </div>
@@ -860,13 +937,28 @@ export default function RichTextEditor({
 
       {/* Image Settings Modal */}
       {showImageSettings && (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
-          <div className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden">
+        <div 
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50"
+          onClick={(e) => {
+            if (e.target === e.currentTarget) {
+              e.preventDefault();
+              handleCancelImageSettings();
+            }
+          }}
+        >
+          <div 
+            className="bg-white rounded-lg shadow-xl max-w-4xl w-full mx-4 max-h-[90vh] overflow-hidden"
+            onClick={(e) => e.stopPropagation()}
+          >
             {/* Modal Header */}
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">Image Settings</h3>
               <button
-                onClick={handleCancelImageSettings}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCancelImageSettings();
+                }}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -930,7 +1022,11 @@ export default function RichTextEditor({
                       {['thumbnail', 'medium', 'large', 'full'].map((size) => (
                         <button
                           key={size}
-                          onClick={() => handleSizeChange(size)}
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSizeChange(size);
+                          }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.size === size
                               ? 'bg-indigo-600 text-white'
@@ -987,7 +1083,11 @@ export default function RichTextEditor({
                       ].map((align) => (
                         <button
                           key={align.value}
-                          onClick={() => setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))}
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }));
+                          }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.alignment === align.value
                               ? 'bg-indigo-600 text-white'
@@ -1006,13 +1106,21 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                onClick={handleCancelImageSettings}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleCancelImageSettings();
+                }}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Cancel
               </button>
               <button
-                onClick={handleInsertImage}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleInsertImage();
+                }}
                 className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 Insert Image
