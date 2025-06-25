@@ -26,6 +26,7 @@ interface CollectionImage {
   cover_image: string;
   title: string;
   created: string;
+  collection: 'media' | 'posts';
 }
 
 interface ImageSettings {
@@ -134,27 +135,28 @@ export default function RichTextEditor({
     }
   };
 
-  // Fetch images from posts collection (both rich text images and regular posts)
+  // Fetch images from posts collection only (simpler approach)
   const fetchCollectionImages = async () => {
     setLoadingImages(true);
     try {
-      const result = await pb.collection('posts').getList(1, 50, {
+      // Only fetch from posts with cover images (removing media collection fetch to avoid 403)
+      const postsResult = await pb.collection('posts').getList(1, 25, {
         sort: '-created',
-        filter: 'cover_image != ""',
+        filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
         fields: 'id,cover_image,title,created'
       });
       
-      console.log('Fetched images from collection:', result.items.length);
+      console.log('Fetched images from posts:', postsResult.items.length);
       
-      setCollectionImages(result.items.map(item => ({
+      const postImages = postsResult.items.map(item => ({
         id: item.id,
         cover_image: item.cover_image,
-        // Clean up rich text image titles for better display
-        title: item.title?.startsWith('[RICH_TEXT_IMG]') 
-          ? item.title.replace('[RICH_TEXT_IMG]', '🖼️').replace(/- \d+$/, '').trim()
-          : (item.title || 'Untitled'),
-        created: item.created
-      })));
+        title: item.title || 'Untitled',
+        created: item.created,
+        collection: 'posts' as const
+      }));
+      
+      setCollectionImages(postImages);
     } catch (error) {
       console.error('Failed to fetch collection images:', error);
     } finally {
@@ -177,29 +179,49 @@ export default function RichTextEditor({
         return;
       }
 
-      // Create temporary post for image storage - mark as system/hidden
-      const categories = await pb.collection('categories').getList(1, 1);
-      if (categories.items.length === 0) {
-        throw new Error('No categories available. Please create a category first.');
+      // Check authentication
+      if (!pb.authStore.isValid) {
+        throw new Error('User not authenticated. Please log in first.');
+      }
+
+      // Ensure we have author ID
+      const authorId = pb.authStore.model?.id;
+      if (!authorId) {
+        throw new Error('Author ID not found. Please log in again.');
+      }
+
+      console.log('User authenticated:', pb.authStore.model?.email);
+      console.log('Auth token exists:', !!pb.authStore.token);
+      console.log('Author ID:', authorId);
+      console.log('Uploading file:', file.name, file.type, file.size);
+
+      // Create post record for the image (like it was working before)
+      const formData = new FormData();
+      
+      // Add the cover_image field (this was working before)
+      formData.append('cover_image', file, file.name);
+      
+      // Add a clean title (no more [RICH_TEXT_IMG] prefix)
+      const title = file.name.replace(/\.[^/.]+$/, "");
+      formData.append('title', `📷 ${title}`); // Just add camera emoji to identify it
+      
+      // Add other required fields
+      formData.append('content', 'Rich text editor image');
+      formData.append('status', 'published');
+      formData.append('author', authorId); // Use the verified author ID
+      formData.append('slug', `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`); // Add required slug field
+
+      console.log('FormData prepared with fields:');
+      for (let pair of formData.entries()) {
+        console.log(`- ${pair[0]}:`, pair[1] instanceof File ? `File(${pair[1].name}, ${pair[1].size} bytes)` : pair[1]);
       }
       
-      const timestamp = Date.now();
-      const tempFormData = new FormData();
-      // Use a special prefix to identify rich text images and hide them from normal post lists
-      tempFormData.append('title', `[RICH_TEXT_IMG] ${file.name.replace(/\.[^/.]+$/, "")} - ${timestamp}`);
-      tempFormData.append('slug', `rich-text-img-${timestamp}-${Math.random().toString(36).substr(2, 9)}`);
-      tempFormData.append('content', `<!-- Rich text editor image: ${file.name} -->`);
-      tempFormData.append('published', 'false'); // Always keep unpublished
-      tempFormData.append('author', pb.authStore.model?.id || '');
-      tempFormData.append('categories', categories.items[0].id);
+      console.log('Attempting upload to posts collection...');
       
-      // Store the image as cover_image but mark it as a rich text asset
-      tempFormData.append('cover_image', file);
+      const postRecord = await pb.collection('posts').create(formData);
+      const imageUrl = pb.files.getURL(postRecord, postRecord.cover_image);
       
-      const tempPost = await pb.collection('posts').create(tempFormData);
-      const imageUrl = pb.files.getURL(tempPost, tempPost.cover_image);
-      
-      console.log('Image uploaded successfully:', imageUrl);
+      console.log('Image uploaded successfully to posts collection:', imageUrl);
       
       // Show image settings modal
       await showImageSettingsModal(imageUrl);
@@ -207,9 +229,24 @@ export default function RichTextEditor({
       // Refresh collection images
       fetchCollectionImages();
       
-    } catch (error) {
-      console.error('Image upload failed:', error);
-      alert('Failed to upload image. Please try again.');
+    } catch (error: any) {
+      console.error('=== Image upload failed ===');
+      console.error('Full error object:', error);
+      console.error('Error response:', error.response);
+      console.error('Error data:', error.response?.data);
+      console.error('Error message:', error.message);
+      console.error('Error status:', error.status);
+      
+      let errorMessage = 'Unknown error';
+      if (error.response?.data?.message) {
+        errorMessage = error.response.data.message;
+      } else if (error.response?.data) {
+        errorMessage = JSON.stringify(error.response.data);
+      } else if (error.message) {
+        errorMessage = error.message;
+      }
+      
+      alert(`Failed to upload image: ${errorMessage}`);
     } finally {
       setUploading(false);
     }
@@ -377,7 +414,7 @@ export default function RichTextEditor({
               } else if (attempt < 5) {
                 // Retry up to 5 times with increasing delays
                 setTimeout(() => applyImageAttributes2(attempt + 1), 50 * (attempt + 1));
-        } else {
+              } else {
                 console.warn('Method 2: Failed to apply image attributes after 5 attempts');
               }
             };
@@ -460,7 +497,7 @@ export default function RichTextEditor({
   // Handle image selection from collection
   const handleImageSelect = async (image: CollectionImage) => {
     console.log('Selecting image from collection:', image);
-    const imageUrl = pb.files.getURL({ id: image.id, collectionName: 'posts' }, image.cover_image);
+    const imageUrl = pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image);
     console.log('Generated image URL:', imageUrl);
     await showImageSettingsModal(imageUrl);
   };
@@ -749,7 +786,7 @@ export default function RichTextEditor({
                         >
                           <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
                             <img
-                              src={pb.files.getURL({ id: image.id, collectionName: 'posts' }, image.cover_image)}
+                              src={pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image)}
                               alt={image.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                             />
