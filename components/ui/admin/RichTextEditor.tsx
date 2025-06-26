@@ -138,28 +138,62 @@ export default function RichTextEditor({
     }
   };
 
-  // Fetch images from posts collection only (simpler approach)
+  // Fetch images from both media and posts collections
   const fetchCollectionImages = async () => {
     setLoadingImages(true);
     try {
-      // Only fetch from posts with cover images (removing media collection fetch to avoid 403)
-      const postsResult = await pb.collection('posts').getList(1, 25, {
-        sort: '-created',
-        filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]"', // Exclude old rich text images
-        fields: 'id,cover_image,title,created'
-      });
+      const allImages: CollectionImage[] = [];
+
+      // Fetch from media collection
+      try {
+        const mediaResult = await pb.collection('media').getList(1, 50, {
+          sort: '-created',
+          fields: 'id,file,created'
+        });
+        
+        console.log('Fetched images from media collection:', mediaResult.items.length);
+        
+        const mediaImages = mediaResult.items.map(item => ({
+          id: item.id,
+          cover_image: item.file, // media collection uses 'file' for the file
+          title: `Image ${item.id.slice(-6)}`, // Generate a simple title
+          created: item.created,
+          collection: 'media' as const
+        }));
+        
+        allImages.push(...mediaImages);
+      } catch (error) {
+        console.warn('Could not fetch from media collection:', error);
+      }
+
+      // Fetch from posts with cover images (excluding rich text images)
+      try {
+        const postsResult = await pb.collection('posts').getList(1, 25, {
+          sort: '-created',
+          filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]" && title !~ "📷"', // Exclude rich text images
+          fields: 'id,cover_image,title,created'
+        });
+        
+        console.log('Fetched images from posts:', postsResult.items.length);
+        
+        const postImages = postsResult.items.map(item => ({
+          id: item.id,
+          cover_image: item.cover_image,
+          title: item.title || 'Untitled',
+          created: item.created,
+          collection: 'posts' as const
+        }));
+        
+        allImages.push(...postImages);
+      } catch (error) {
+        console.warn('Could not fetch from posts collection:', error);
+      }
+
+      // Sort all images by creation date (newest first)
+      allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
       
-      console.log('Fetched images from posts:', postsResult.items.length);
-      
-      const postImages = postsResult.items.map(item => ({
-        id: item.id,
-        cover_image: item.cover_image,
-        title: item.title || 'Untitled',
-        created: item.created,
-        collection: 'posts' as const
-      }));
-      
-      setCollectionImages(postImages);
+      console.log('Total images fetched:', allImages.length);
+      setCollectionImages(allImages);
     } catch (error) {
       console.error('Failed to fetch collection images:', error);
     } finally {
@@ -198,33 +232,23 @@ export default function RichTextEditor({
       console.log('Author ID:', authorId);
       console.log('Uploading file:', file.name, file.type, file.size);
 
-      // Create post record for the image (like it was working before)
+      // Upload image to media collection instead of posts
       const formData = new FormData();
       
-      // Add the cover_image field (this was working before)
-      formData.append('cover_image', file, file.name);
+      // Add the file to the 'file' field (as per the media collection schema)
+      formData.append('file', file, file.name);
       
-      // Add a clean title (no more [RICH_TEXT_IMG] prefix)
-      const title = file.name.replace(/\.[^/.]+$/, "");
-      formData.append('title', `📷 ${title}`); // Just add camera emoji to identify it
-      
-      // Add other required fields
-      formData.append('content', 'Rich text editor image');
-      formData.append('status', 'published');
-      formData.append('author', authorId); // Use the verified author ID
-      formData.append('slug', `img-${Date.now()}-${Math.random().toString(36).substr(2, 9)}`); // Add required slug field
-
       console.log('FormData prepared with fields:');
       for (let pair of formData.entries()) {
         console.log(`- ${pair[0]}:`, pair[1] instanceof File ? `File(${pair[1].name}, ${pair[1].size} bytes)` : pair[1]);
       }
       
-      console.log('Attempting upload to posts collection...');
+      console.log('Attempting upload to media collection...');
       
-      const postRecord = await pb.collection('posts').create(formData);
-      const imageUrl = pb.files.getURL(postRecord, postRecord.cover_image);
+      const mediaRecord = await pb.collection('media').create(formData);
+      const imageUrl = pb.files.getURL(mediaRecord, mediaRecord.file);
       
-      console.log('Image uploaded successfully to posts collection:', imageUrl);
+      console.log('Image uploaded successfully to media collection:', imageUrl);
       
       // Show image settings modal
       await showImageSettingsModal(imageUrl);
@@ -701,7 +725,11 @@ export default function RichTextEditor({
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">{t('selectImage')}</h3>
               <button
-                onClick={() => setShowImageModal(false)}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowImageModal(false);
+                }}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -713,7 +741,11 @@ export default function RichTextEditor({
             {/* Tabs */}
             <div className="flex border-b">
               <button
-                onClick={() => setActiveTab('upload')}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab('upload');
+                }}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'upload'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
@@ -723,7 +755,15 @@ export default function RichTextEditor({
                 {t('uploadFromPC')}
               </button>
               <button
-                onClick={() => setActiveTab('collection')}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setActiveTab('collection');
+                  // Fetch images when switching to collection tab
+                  if (collectionImages.length === 0) {
+                    fetchCollectionImages();
+                  }
+                }}
                 className={`px-6 py-3 font-medium text-sm transition-colors ${
                   activeTab === 'collection'
                     ? 'text-indigo-600 border-b-2 border-indigo-600 bg-indigo-50'
@@ -785,7 +825,11 @@ export default function RichTextEditor({
                       {collectionImages.map((image) => (
                         <div
                           key={image.id}
-                          onClick={() => handleImageSelect(image)}
+                          onClick={(e) => {
+                            e.preventDefault();
+                            e.stopPropagation();
+                            handleImageSelect(image);
+                          }}
                           className="group relative cursor-pointer border border-gray-200 rounded-lg p-2 hover:border-indigo-500 hover:shadow-md transition-all"
                         >
                           <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
@@ -817,7 +861,11 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                onClick={() => setShowImageModal(false)}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowImageModal(false);
+                }}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 {t('cancel')}
@@ -835,7 +883,11 @@ export default function RichTextEditor({
             <div className="flex items-center justify-between p-4 border-b">
               <h3 className="text-lg font-semibold text-gray-900">{t('imageSettings')}</h3>
               <button
-                onClick={handleCancelImageSettings}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowImageSettings(false);
+                }}
                 className="text-gray-400 hover:text-gray-600 transition-colors"
               >
                 <svg className="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -899,7 +951,11 @@ export default function RichTextEditor({
                       {['thumbnail', 'medium', 'large', 'full'].map((size) => (
                         <button
                           key={size}
-                          onClick={() => handleSizeChange(size)}
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            handleSizeChange(size);
+                          }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.size === size
                               ? 'bg-indigo-600 text-white'
@@ -956,7 +1012,11 @@ export default function RichTextEditor({
                       ].map((align) => (
                         <button
                           key={align.value}
-                          onClick={() => setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))}
+                          type="button"
+                          onClick={(e) => {
+                            e.preventDefault();
+                            setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))
+                          }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.alignment === align.value
                               ? 'bg-indigo-600 text-white'
@@ -975,13 +1035,21 @@ export default function RichTextEditor({
             {/* Modal Footer */}
             <div className="flex justify-end gap-3 p-4 border-t bg-gray-50">
               <button
-                onClick={handleCancelImageSettings}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  setShowImageSettings(false);
+                }}
                 className="px-4 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-md hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 {t('cancel')}
               </button>
               <button
-                onClick={handleInsertImage}
+                type="button"
+                onClick={(e) => {
+                  e.preventDefault();
+                  handleInsertImage();
+                }}
                 className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500 transition-colors"
               >
                 {t('insertImage')}
