@@ -81,18 +81,6 @@ export default function RichTextEditor({
     setIsMounted(true);
   }, []);
 
-  // Effect to track imageSettings changes for debugging
-  useEffect(() => {
-    if (showImageSettings) {
-      console.log('🔍 ImageSettings changed:', {
-        alignment: imageSettings.alignment,
-        size: imageSettings.size,
-        width: Math.round(imageSettings.width),
-        height: Math.round(imageSettings.height)
-      });
-    }
-  }, [imageSettings, showImageSettings]);
-
   // Effect to set up Quill reference after mount
   useEffect(() => {
     if (isMounted && reactQuillRef.current) {
@@ -105,11 +93,10 @@ export default function RichTextEditor({
                                  (quillComponent.closest('.ql-container') as any).__quill;
             if (quillInstance && !quillRef.current) {
               quillRef.current = quillInstance;
-              console.log('✓ Quill editor reference set up on mount');
             }
           }
         } catch (error) {
-          console.warn('Could not get editor reference on mount:', error);
+          // Silent error handling
         }
       };
 
@@ -131,12 +118,10 @@ export default function RichTextEditor({
         fields: 'id,title,created'
       });
 
-      console.log(`Found ${oldImages.items.length} old rich text images that could be cleaned up`);
-      
       // Note: We don't auto-delete them as they might still be referenced in content
       // This is just for monitoring - manual cleanup can be done through admin if needed
     } catch (error) {
-      console.error('Error checking for old rich text images:', error);
+      // Silent error handling
     }
   };
 
@@ -196,8 +181,6 @@ export default function RichTextEditor({
           fields: 'id,file,created'
         });
         
-        console.log('Fetched images from media collection:', mediaResult.items.length);
-        
         const mediaImages = mediaResult.items.map(item => ({
           id: item.id,
           cover_image: item.file, // media collection uses 'file' for the file
@@ -208,7 +191,7 @@ export default function RichTextEditor({
         
         allImages.push(...mediaImages);
       } catch (error) {
-        console.warn('Could not fetch from media collection:', error);
+        // Silent error handling
       }
 
       // Fetch from posts with cover images (excluding rich text images)
@@ -218,8 +201,6 @@ export default function RichTextEditor({
           filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]" && title !~ "📷"', // Exclude rich text images
           fields: 'id,cover_image,title,created'
         });
-        
-        console.log('Fetched images from posts:', postsResult.items.length);
         
         const postImages = postsResult.items.map(item => ({
           id: item.id,
@@ -231,16 +212,15 @@ export default function RichTextEditor({
         
         allImages.push(...postImages);
       } catch (error) {
-        console.warn('Could not fetch from posts collection:', error);
+        // Silent error handling
       }
 
       // Sort all images by creation date (newest first)
       allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
       
-      console.log('Total images fetched:', allImages.length);
       setCollectionImages(allImages);
     } catch (error) {
-      console.error('Failed to fetch collection images:', error);
+      // Silent error handling
     } finally {
       setLoadingImages(false);
     }
@@ -272,48 +252,36 @@ export default function RichTextEditor({
         throw new Error('Author ID not found. Please log in again.');
       }
 
-      console.log('User authenticated:', pb.authStore.model?.email);
-      console.log('Auth token exists:', !!pb.authStore.token);
-      console.log('Author ID:', authorId);
-      console.log('Uploading file:', file.name, file.type, file.size);
-
       // Upload image to media collection instead of posts
         const formData = new FormData();
-      
-      // Add the file to the 'file' field (as per the media collection schema)
       formData.append('file', file, file.name);
+
+      // Create the record in media collection
+      const record = await pb.collection('media').create(formData);
       
-      console.log('FormData prepared with fields:');
-      for (let pair of formData.entries()) {
-        console.log(`- ${pair[0]}:`, pair[1] instanceof File ? `File(${pair[1].name}, ${pair[1].size} bytes)` : pair[1]);
-      }
-      
-      console.log('Attempting upload to media collection...');
-      
-      const mediaRecord = await pb.collection('media').create(formData);
-      const imageUrl = pb.files.getURL(mediaRecord, mediaRecord.file);
-      
-      console.log('Image uploaded successfully to media collection:', imageUrl);
+      // Generate the image URL
+      const imageUrl = pb.files.getURL(record, record.file);
       
       // Show image settings modal
       await showImageSettingsModal(imageUrl);
-      
-      // Refresh collection images
-      fetchCollectionImages();
-      
+
     } catch (error: any) {
-      console.error('=== Image upload failed ===');
-      console.error('Full error object:', error);
-      console.error('Error response:', error.response);
-      console.error('Error data:', error.response?.data);
-      console.error('Error message:', error.message);
-      console.error('Error status:', error.status);
+      let errorMessage = 'Unknown error occurred';
       
-      let errorMessage = 'Unknown error';
-      if (error.response?.data?.message) {
-        errorMessage = error.response.data.message;
-      } else if (error.response?.data) {
-        errorMessage = JSON.stringify(error.response.data);
+      if (error.response?.data) {
+        if (typeof error.response.data === 'string') {
+          errorMessage = error.response.data;
+        } else if (error.response.data.message) {
+          errorMessage = error.response.data.message;
+        } else if (error.response.data.data) {
+          const errorData = error.response.data.data;
+          const errorFields = Object.keys(errorData);
+          if (errorFields.length > 0) {
+            const firstField = errorFields[0];
+            const fieldError = errorData[firstField];
+            errorMessage = `${firstField}: ${fieldError.message || fieldError.code || 'Validation error'}`;
+          }
+        }
       } else if (error.message) {
         errorMessage = error.message;
       }
@@ -326,22 +294,9 @@ export default function RichTextEditor({
 
   // Insert image into Quill editor with settings
   const insertImageIntoEditor = useCallback((settings: ImageSettings) => {
-    console.log('=== Starting image insertion ===');
-    console.log('Image settings:', settings);
-    console.log('ReactQuill ref:', !!reactQuillRef.current);
-    console.log('Quill ref:', !!quillRef.current);
-    
     // Create image HTML with all settings
     const createImageHtml = (settings: ImageSettings) => {
       const { url, alt, width, height, alignment } = settings;
-      
-      console.log('🔧 Creating image HTML with settings:', {
-        url: url.substring(url.lastIndexOf('/') + 1),
-        alt,
-        width,
-        height,
-        alignment
-      });
       
       let style = `max-width: none;`; // Don't constrain by default
       if (width && height) {
@@ -354,15 +309,10 @@ export default function RichTextEditor({
       if (alignment === 'center') {
         alignmentStyle = ' display: inline-block;';
         wrapperStyle = ' style="text-align: center;"';
-        console.log('🔧 Applied CENTER alignment styles');
       } else if (alignment === 'left') {
         alignmentStyle = ' float: left; margin-right: 15px; margin-bottom: 10px;';
-        console.log('🔧 Applied LEFT alignment styles');
       } else if (alignment === 'right') {
         alignmentStyle = ' float: right; margin-left: 15px; margin-bottom: 10px;';
-        console.log('🔧 Applied RIGHT alignment styles');
-      } else {
-        console.log('🔧 No alignment styles applied (alignment:', alignment, ')');
       }
       
       const finalStyle = style + alignmentStyle;
@@ -374,21 +324,17 @@ export default function RichTextEditor({
       // Wrap centered images in a div for proper alignment
       if (alignment === 'center') {
         const result = `<div${wrapperStyle}>${imageTag}</div>`;
-        console.log('🔧 Created centered image HTML:', result);
         return result;
       }
       
-      console.log('🔧 Created image HTML:', imageTag);
       return imageTag;
     };
 
     // Method 1: Try using the stored quill reference
     if (quillRef.current) {
       try {
-        console.log('Method 1: Using stored quill reference');
         const length = quillRef.current.getLength();
         const insertIndex = Math.max(0, length - 1);
-        console.log('Inserting at index:', insertIndex, 'of', length);
         
         quillRef.current.insertEmbed(insertIndex, 'image', settings.url);
         
@@ -398,7 +344,6 @@ export default function RichTextEditor({
           const lastImage = images[images.length - 1] as HTMLImageElement;
           
           if (lastImage) {
-            console.log('Applying image attributes, attempt:', attempt + 1);
             lastImage.alt = settings.alt || 'Image';
             
             // Apply size settings with !important styles
@@ -417,8 +362,6 @@ export default function RichTextEditor({
             
             // Apply alignment settings
             if (settings.alignment && settings.alignment !== 'none') {
-              console.log('Applying alignment:', settings.alignment);
-              
               // Reset all alignment styles first
               lastImage.style.removeProperty('float');
               lastImage.style.removeProperty('display');
@@ -435,20 +378,16 @@ export default function RichTextEditor({
                 // For center alignment, we need to set text-align on parent
                 if (parent) {
                   parent.style.setProperty('text-align', 'center', 'important');
-                  console.log('✓ Set parent text-align to center');
                 }
                 lastImage.style.setProperty('display', 'inline-block', 'important');
-                console.log('✓ Applied center alignment styles');
               } else if (settings.alignment === 'left') {
                 lastImage.style.setProperty('float', 'left', 'important');
                 lastImage.style.setProperty('margin-right', '15px', 'important');
                 lastImage.style.setProperty('margin-bottom', '10px', 'important');
-                console.log('✓ Applied left alignment styles');
               } else if (settings.alignment === 'right') {
                 lastImage.style.setProperty('float', 'right', 'important');
                 lastImage.style.setProperty('margin-left', '15px', 'important');
                 lastImage.style.setProperty('margin-bottom', '10px', 'important');
-                console.log('✓ Applied right alignment styles');
               }
               
               // Force a reflow to ensure styles are applied
@@ -461,8 +400,7 @@ export default function RichTextEditor({
                   onChange(content);
                 }, 100);
               }
-            } else {
-              console.log('Resetting alignment styles');
+        } else {
               // Reset alignment styles
               const parent = lastImage.parentElement;
               if (parent) {
@@ -474,13 +412,9 @@ export default function RichTextEditor({
               lastImage.style.removeProperty('margin-right');
               lastImage.style.removeProperty('margin-bottom');
             }
-            
-            console.log('Image attributes applied successfully');
           } else if (attempt < 5) {
             // Retry up to 5 times with increasing delays
             setTimeout(() => applyImageAttributes(attempt + 1), 50 * (attempt + 1));
-        } else {
-            console.warn('Failed to apply image attributes after 5 attempts');
           }
         };
         
@@ -488,17 +422,15 @@ export default function RichTextEditor({
         applyImageAttributes();
         
         quillRef.current.insertText(insertIndex + 1, '\n');
-        console.log('✓ Image inserted successfully via stored reference');
         return;
       } catch (error) {
-        console.warn('Method 1 failed:', error);
+        // Silent error handling
       }
     }
     
     // Method 2: Try using container to find ReactQuill component
     if (reactQuillRef.current) {
       try {
-        console.log('Method 2: Using container to find ReactQuill');
         const quillComponent = reactQuillRef.current.querySelector('.ql-editor');
         if (quillComponent) {
           const quillInstance = (quillComponent as any).__quill || 
@@ -507,7 +439,6 @@ export default function RichTextEditor({
           if (quillInstance) {
             const length = quillInstance.getLength();
             const insertIndex = Math.max(0, length - 1);
-            console.log('Inserting at index:', insertIndex, 'of', length);
             
             quillInstance.insertEmbed(insertIndex, 'image', settings.url);
             
@@ -517,7 +448,6 @@ export default function RichTextEditor({
               const lastImage = images[images.length - 1] as HTMLImageElement;
               
               if (lastImage) {
-                console.log('Method 2: Applying image attributes, attempt:', attempt + 1);
                 lastImage.alt = settings.alt || 'Image';
                 
                 // Apply size settings with !important styles
@@ -536,8 +466,6 @@ export default function RichTextEditor({
                 
                 // Apply alignment settings
                 if (settings.alignment && settings.alignment !== 'none') {
-                  console.log('Applying alignment:', settings.alignment);
-                  
                   // Reset all alignment styles first
                   lastImage.style.removeProperty('float');
                   lastImage.style.removeProperty('display');
@@ -554,20 +482,16 @@ export default function RichTextEditor({
                     // For center alignment, we need to set text-align on parent
                     if (parent) {
                       parent.style.setProperty('text-align', 'center', 'important');
-                      console.log('✓ Set parent text-align to center');
                     }
                     lastImage.style.setProperty('display', 'inline-block', 'important');
-                    console.log('✓ Applied center alignment styles');
                   } else if (settings.alignment === 'left') {
                     lastImage.style.setProperty('float', 'left', 'important');
                     lastImage.style.setProperty('margin-right', '15px', 'important');
                     lastImage.style.setProperty('margin-bottom', '10px', 'important');
-                    console.log('✓ Applied left alignment styles');
                   } else if (settings.alignment === 'right') {
                     lastImage.style.setProperty('float', 'right', 'important');
                     lastImage.style.setProperty('margin-left', '15px', 'important');
                     lastImage.style.setProperty('margin-bottom', '10px', 'important');
-                    console.log('✓ Applied right alignment styles');
                   }
                   
                   // Force a reflow to ensure styles are applied
@@ -581,7 +505,6 @@ export default function RichTextEditor({
                     }, 100);
                   }
                 } else {
-                  console.log('Resetting alignment styles');
                   // Reset alignment styles
                   const parent = lastImage.parentElement;
                   if (parent) {
@@ -593,13 +516,9 @@ export default function RichTextEditor({
                   lastImage.style.removeProperty('margin-right');
                   lastImage.style.removeProperty('margin-bottom');
                 }
-                
-                console.log('Method 2: Image attributes applied successfully');
               } else if (attempt < 5) {
                 // Retry up to 5 times with increasing delays
                 setTimeout(() => applyImageAttributes2(attempt + 1), 50 * (attempt + 1));
-              } else {
-                console.warn('Method 2: Failed to apply image attributes after 5 attempts');
               }
             };
             
@@ -607,18 +526,16 @@ export default function RichTextEditor({
             applyImageAttributes2();
             
             quillInstance.insertText(insertIndex + 1, '\n');
-            console.log('✓ Image inserted successfully via container search');
             return;
           }
         }
       } catch (error) {
-        console.warn('Method 2 failed:', error);
+        // Silent error handling
       }
     }
     
     // Method 3: Try finding Quill instance in DOM
     try {
-      console.log('Method 3: Finding Quill instance in DOM');
       const quillContainer = document.querySelector('.ql-editor');
       if (quillContainer) {
         // Try different ways to get the Quill instance
@@ -629,20 +546,17 @@ export default function RichTextEditor({
         if (quillInstance) {
           const length = quillInstance.getLength();
           const insertIndex = Math.max(0, length - 1);
-          console.log('Inserting at index:', insertIndex, 'of', length);
           
           quillInstance.insertEmbed(insertIndex, 'image', settings.url);
           quillInstance.insertText(insertIndex + 1, '\n');
-          console.log('✓ Image inserted successfully via DOM search');
           return;
         }
       }
     } catch (error) {
-      console.warn('Method 3 failed:', error);
+      // Silent error handling
     }
     
     // Method 4: Improved HTML fallback with proper positioning
-    console.log('Method 4: Using HTML fallback');
     try {
       const imageHtml = createImageHtml(settings);
       
@@ -671,10 +585,11 @@ export default function RichTextEditor({
             insertionPoint.insertNode(imageElement);
             
             // Clear selection and trigger content update
-            selection?.removeAllRanges();
+            if (selection) {
+              selection.removeAllRanges();
+            }
             setTimeout(() => {
               onChange(editorElement.innerHTML);
-              console.log('✓ Image inserted at cursor via HTML fallback');
             }, 10);
             return;
           }
@@ -692,7 +607,6 @@ export default function RichTextEditor({
         // Trigger onChange after DOM update
         setTimeout(() => {
           onChange(finalHtml);
-          console.log('✓ Image appended to editor via HTML fallback');
         }, 10);
         return;
       }
@@ -706,9 +620,8 @@ export default function RichTextEditor({
       }
       
       onChange(newContent + '<br>');
-      console.log('✓ Image inserted via onChange fallback');
     } catch (error) {
-      console.error('All methods failed:', error);
+      // Silent error handling
     }
   }, [value, onChange]);
 
@@ -733,22 +646,18 @@ export default function RichTextEditor({
       setShowImageModal(false);
       setShowImageSettings(true);
     } catch (error) {
-      console.error('Error setting up image:', error);
+      // Silent error handling
     }
   };
 
   // Handle image selection from collection
   const handleImageSelect = async (image: CollectionImage) => {
-    console.log('Selecting image from collection:', image);
     const imageUrl = pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image);
-    console.log('Generated image URL:', imageUrl);
     await showImageSettingsModal(imageUrl);
   };
 
   // Custom image handler for Quill toolbar - completely rewritten
   const imageHandler = useCallback(() => {
-    console.log('=== Image button clicked ===');
-    
     // Try to get and store the Quill instance from container
     if (reactQuillRef.current) {
       try {
@@ -759,11 +668,10 @@ export default function RichTextEditor({
                                (quillComponent.closest('.ql-container') as any).__quill;
           if (quillInstance) {
             quillRef.current = quillInstance;
-            console.log('✓ Quill instance stored from container');
           }
         }
       } catch (error) {
-        console.warn('Could not get editor from container:', error);
+        // Silent error handling
       }
     }
     
@@ -776,12 +684,9 @@ export default function RichTextEditor({
                              (quillContainer.closest('.ql-container') as any).__quill;
         if (quillInstance) {
           quillRef.current = quillInstance;
-          console.log('✓ Quill instance stored from global DOM');
         }
       }
     }
-    
-    console.log('Final quill reference status:', !!quillRef.current);
     
     // Open the modal
     setShowImageModal(true);
@@ -822,10 +727,6 @@ export default function RichTextEditor({
   };
 
   const handleInsertImage = () => {
-    console.log('🎯 INSERTING IMAGE WITH SETTINGS:', imageSettings);
-    console.log('🎯 Alignment setting:', imageSettings.alignment);
-    console.log('🎯 Current imageSettings object:', JSON.stringify(imageSettings, null, 2));
-    console.log('🎯 About to call insertImageIntoEditor...');
     insertImageIntoEditor(imageSettings);
     setShowImageSettings(false);
     
@@ -962,8 +863,6 @@ export default function RichTextEditor({
       selectedImageElement.style.setProperty('margin-left', '15px', 'important');
       selectedImageElement.style.setProperty('margin-bottom', '10px', 'important');
     }
-
-    console.log(`Applied ${alignment} alignment to selected image`);
   };
 
   // Delete selected image
@@ -1402,10 +1301,7 @@ export default function RichTextEditor({
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
-                            console.log('🎯 ALIGNMENT BUTTON CLICKED:', align.value);
-                            console.log('🎯 Current alignment before change:', imageSettings.alignment);
                             setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }));
-                            console.log('🎯 Setting alignment to:', align.value);
                           }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.alignment === align.value
