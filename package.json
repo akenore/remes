@@ -9,12 +9,12 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@tinymce/tinymce-react": "^6.2.1",
     "next": "15.3.4",
     "next-intl": "^4.3.0",
     "pocketbase": "^0.26.1",
     "react": "^19.0.0",
-    "react-dom": "^19.0.0",
-    "react-quill-new": "^3.4.6"
+    "react-dom": "^19.0.0"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
