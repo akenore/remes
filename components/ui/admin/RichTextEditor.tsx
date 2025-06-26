@@ -72,9 +72,54 @@ export default function RichTextEditor({
   const quillRef = useRef<any>(null);
   const reactQuillRef = useRef<any>(null);
 
+  // Image selection and editing state
+  const [selectedImageElement, setSelectedImageElement] = useState<HTMLImageElement | null>(null);
+  const [showImageToolbar, setShowImageToolbar] = useState(false);
+  const [imageToolbarPosition, setImageToolbarPosition] = useState({ top: 0, left: 0 });
+
   useEffect(() => {
     setIsMounted(true);
   }, []);
+
+  // Effect to track imageSettings changes for debugging
+  useEffect(() => {
+    if (showImageSettings) {
+      console.log('🔍 ImageSettings changed:', {
+        alignment: imageSettings.alignment,
+        size: imageSettings.size,
+        width: Math.round(imageSettings.width),
+        height: Math.round(imageSettings.height)
+      });
+    }
+  }, [imageSettings, showImageSettings]);
+
+  // Effect to set up Quill reference after mount
+  useEffect(() => {
+    if (isMounted && reactQuillRef.current) {
+      const setupQuillRef = () => {
+        try {
+          const quillComponent = reactQuillRef.current?.querySelector('.ql-editor');
+          if (quillComponent) {
+            const quillInstance = (quillComponent as any).__quill || 
+                                 (quillComponent.parentElement as any).__quill ||
+                                 (quillComponent.closest('.ql-container') as any).__quill;
+            if (quillInstance && !quillRef.current) {
+              quillRef.current = quillInstance;
+              console.log('✓ Quill editor reference set up on mount');
+            }
+          }
+        } catch (error) {
+          console.warn('Could not get editor reference on mount:', error);
+        }
+      };
+
+      // Try immediately and with a short delay to ensure Quill is ready
+      setupQuillRef();
+      const timer = setTimeout(setupQuillRef, 100);
+      
+      return () => clearTimeout(timer);
+    }
+  }, [isMounted]);
 
   // Optional: Cleanup old rich text images (can be called manually if needed)
   const cleanupOldRichTextImages = async () => {
@@ -233,7 +278,7 @@ export default function RichTextEditor({
       console.log('Uploading file:', file.name, file.type, file.size);
 
       // Upload image to media collection instead of posts
-      const formData = new FormData();
+        const formData = new FormData();
       
       // Add the file to the 'file' field (as per the media collection schema)
       formData.append('file', file, file.name);
@@ -290,25 +335,51 @@ export default function RichTextEditor({
     const createImageHtml = (settings: ImageSettings) => {
       const { url, alt, width, height, alignment } = settings;
       
+      console.log('🔧 Creating image HTML with settings:', {
+        url: url.substring(url.lastIndexOf('/') + 1),
+        alt,
+        width,
+        height,
+        alignment
+      });
+      
       let style = `max-width: none;`; // Don't constrain by default
       if (width && height) {
         style = `width: ${Math.round(width)}px; height: ${Math.round(height)}px; max-width: none;`;
       }
       
       let alignmentStyle = '';
+      let wrapperStyle = '';
+      
       if (alignment === 'center') {
-        alignmentStyle = ' display: block; margin-left: auto; margin-right: auto;';
+        alignmentStyle = ' display: inline-block;';
+        wrapperStyle = ' style="text-align: center;"';
+        console.log('🔧 Applied CENTER alignment styles');
       } else if (alignment === 'left') {
         alignmentStyle = ' float: left; margin-right: 15px; margin-bottom: 10px;';
+        console.log('🔧 Applied LEFT alignment styles');
       } else if (alignment === 'right') {
         alignmentStyle = ' float: right; margin-left: 15px; margin-bottom: 10px;';
+        console.log('🔧 Applied RIGHT alignment styles');
+      } else {
+        console.log('🔧 No alignment styles applied (alignment:', alignment, ')');
       }
       
       const finalStyle = style + alignmentStyle;
       const widthAttr = width ? ` width="${Math.round(width)}"` : '';
       const heightAttr = height ? ` height="${Math.round(height)}"` : '';
       
-      return `<img src="${url}" alt="${alt || 'Image'}" style="${finalStyle}"${widthAttr}${heightAttr} />`;
+      const imageTag = `<img src="${url}" alt="${alt || 'Image'}" style="${finalStyle}"${widthAttr}${heightAttr} />`;
+      
+      // Wrap centered images in a div for proper alignment
+      if (alignment === 'center') {
+        const result = `<div${wrapperStyle}>${imageTag}</div>`;
+        console.log('🔧 Created centered image HTML:', result);
+        return result;
+      }
+      
+      console.log('🔧 Created image HTML:', imageTag);
+      return imageTag;
     };
 
     // Method 1: Try using the stored quill reference
@@ -346,26 +417,69 @@ export default function RichTextEditor({
             
             // Apply alignment settings
             if (settings.alignment && settings.alignment !== 'none') {
+              console.log('Applying alignment:', settings.alignment);
+              
+              // Reset all alignment styles first
+              lastImage.style.removeProperty('float');
+              lastImage.style.removeProperty('display');
+              lastImage.style.removeProperty('margin-left');
+              lastImage.style.removeProperty('margin-right');
+              lastImage.style.removeProperty('margin-bottom');
+              
+              const parent = lastImage.parentElement;
+              if (parent) {
+                parent.style.removeProperty('text-align');
+              }
+              
               if (settings.alignment === 'center') {
-                lastImage.style.setProperty('display', 'block', 'important');
-                lastImage.style.setProperty('margin-left', 'auto', 'important');
-                lastImage.style.setProperty('margin-right', 'auto', 'important');
+                // For center alignment, we need to set text-align on parent
+                if (parent) {
+                  parent.style.setProperty('text-align', 'center', 'important');
+                  console.log('✓ Set parent text-align to center');
+                }
+                lastImage.style.setProperty('display', 'inline-block', 'important');
+                console.log('✓ Applied center alignment styles');
               } else if (settings.alignment === 'left') {
                 lastImage.style.setProperty('float', 'left', 'important');
                 lastImage.style.setProperty('margin-right', '15px', 'important');
                 lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                console.log('✓ Applied left alignment styles');
               } else if (settings.alignment === 'right') {
                 lastImage.style.setProperty('float', 'right', 'important');
                 lastImage.style.setProperty('margin-left', '15px', 'important');
                 lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                console.log('✓ Applied right alignment styles');
               }
+              
+              // Force a reflow to ensure styles are applied
+              lastImage.offsetHeight;
+              
+              // Also try to update the Quill content
+              if (quillRef.current) {
+                setTimeout(() => {
+                  const content = quillRef.current.root.innerHTML;
+                  onChange(content);
+                }, 100);
+              }
+            } else {
+              console.log('Resetting alignment styles');
+              // Reset alignment styles
+              const parent = lastImage.parentElement;
+              if (parent) {
+                parent.style.removeProperty('text-align');
+              }
+              lastImage.style.removeProperty('float');
+              lastImage.style.removeProperty('display');
+              lastImage.style.removeProperty('margin-left');
+              lastImage.style.removeProperty('margin-right');
+              lastImage.style.removeProperty('margin-bottom');
             }
             
             console.log('Image attributes applied successfully');
           } else if (attempt < 5) {
             // Retry up to 5 times with increasing delays
             setTimeout(() => applyImageAttributes(attempt + 1), 50 * (attempt + 1));
-          } else {
+        } else {
             console.warn('Failed to apply image attributes after 5 attempts');
           }
         };
@@ -422,19 +536,62 @@ export default function RichTextEditor({
                 
                 // Apply alignment settings
                 if (settings.alignment && settings.alignment !== 'none') {
+                  console.log('Applying alignment:', settings.alignment);
+                  
+                  // Reset all alignment styles first
+                  lastImage.style.removeProperty('float');
+                  lastImage.style.removeProperty('display');
+                  lastImage.style.removeProperty('margin-left');
+                  lastImage.style.removeProperty('margin-right');
+                  lastImage.style.removeProperty('margin-bottom');
+                  
+                  const parent = lastImage.parentElement;
+                  if (parent) {
+                    parent.style.removeProperty('text-align');
+                  }
+                  
                   if (settings.alignment === 'center') {
-                    lastImage.style.setProperty('display', 'block', 'important');
-                    lastImage.style.setProperty('margin-left', 'auto', 'important');
-                    lastImage.style.setProperty('margin-right', 'auto', 'important');
+                    // For center alignment, we need to set text-align on parent
+                    if (parent) {
+                      parent.style.setProperty('text-align', 'center', 'important');
+                      console.log('✓ Set parent text-align to center');
+                    }
+                    lastImage.style.setProperty('display', 'inline-block', 'important');
+                    console.log('✓ Applied center alignment styles');
                   } else if (settings.alignment === 'left') {
                     lastImage.style.setProperty('float', 'left', 'important');
                     lastImage.style.setProperty('margin-right', '15px', 'important');
                     lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                    console.log('✓ Applied left alignment styles');
                   } else if (settings.alignment === 'right') {
                     lastImage.style.setProperty('float', 'right', 'important');
                     lastImage.style.setProperty('margin-left', '15px', 'important');
                     lastImage.style.setProperty('margin-bottom', '10px', 'important');
+                    console.log('✓ Applied right alignment styles');
                   }
+                  
+                  // Force a reflow to ensure styles are applied
+                  lastImage.offsetHeight;
+                  
+                  // Also try to update the Quill content
+                  if (quillRef.current) {
+                    setTimeout(() => {
+                      const content = quillRef.current.root.innerHTML;
+                      onChange(content);
+                    }, 100);
+                  }
+                } else {
+                  console.log('Resetting alignment styles');
+                  // Reset alignment styles
+                  const parent = lastImage.parentElement;
+                  if (parent) {
+                    parent.style.removeProperty('text-align');
+                  }
+                  lastImage.style.removeProperty('float');
+                  lastImage.style.removeProperty('display');
+                  lastImage.style.removeProperty('margin-left');
+                  lastImage.style.removeProperty('margin-right');
+                  lastImage.style.removeProperty('margin-bottom');
                 }
                 
                 console.log('Method 2: Image attributes applied successfully');
@@ -484,13 +641,72 @@ export default function RichTextEditor({
       console.warn('Method 3 failed:', error);
     }
     
-    // Method 4: Fallback to direct HTML manipulation
+    // Method 4: Improved HTML fallback with proper positioning
     console.log('Method 4: Using HTML fallback');
     try {
-      const imageHtml = `<p>${createImageHtml(settings)}</p>`;
-      const newValue = value ? value + imageHtml : imageHtml;
-      onChange(newValue);
-      console.log('✓ Image inserted successfully via HTML fallback');
+      const imageHtml = createImageHtml(settings);
+      
+      // Try to insert at a logical position in the editor
+      const editorElement = reactQuillRef.current?.querySelector('.ql-editor');
+      if (editorElement) {
+        // Get current selection or insert at end
+        const selection = window.getSelection();
+        let insertionPoint = null;
+        
+        if (selection && selection.rangeCount > 0) {
+          const range = selection.getRangeAt(0);
+          if (editorElement.contains(range.commonAncestorContainer)) {
+            insertionPoint = range;
+          }
+        }
+        
+        if (insertionPoint) {
+          // Insert at cursor position
+          const tempDiv = document.createElement('div');
+          tempDiv.innerHTML = imageHtml;
+          const imageElement = tempDiv.firstElementChild;
+          
+          if (imageElement) {
+            insertionPoint.deleteContents();
+            insertionPoint.insertNode(imageElement);
+            
+            // Clear selection and trigger content update
+            selection?.removeAllRanges();
+            setTimeout(() => {
+              onChange(editorElement.innerHTML);
+              console.log('✓ Image inserted at cursor via HTML fallback');
+            }, 10);
+            return;
+          }
+        }
+        
+        // Fallback: append to end with proper spacing
+        let currentHtml = editorElement.innerHTML.trim();
+        if (currentHtml && !currentHtml.endsWith('<br>') && !currentHtml.endsWith('</p>')) {
+          currentHtml += '<br>';
+        }
+        
+        const finalHtml = currentHtml + imageHtml + '<br>';
+        editorElement.innerHTML = finalHtml;
+        
+        // Trigger onChange after DOM update
+        setTimeout(() => {
+          onChange(finalHtml);
+          console.log('✓ Image appended to editor via HTML fallback');
+        }, 10);
+        return;
+      }
+      
+      // Final fallback: use onChange callback
+      const currentContent = value.trim();
+      let newContent = imageHtml;
+      
+      if (currentContent) {
+        newContent = currentContent + (currentContent.endsWith('>') ? '<br>' : '<br>') + imageHtml;
+      }
+      
+      onChange(newContent + '<br>');
+      console.log('✓ Image inserted via onChange fallback');
     } catch (error) {
       console.error('All methods failed:', error);
     }
@@ -606,6 +822,10 @@ export default function RichTextEditor({
   };
 
   const handleInsertImage = () => {
+    console.log('🎯 INSERTING IMAGE WITH SETTINGS:', imageSettings);
+    console.log('🎯 Alignment setting:', imageSettings.alignment);
+    console.log('🎯 Current imageSettings object:', JSON.stringify(imageSettings, null, 2));
+    console.log('🎯 About to call insertImageIntoEditor...');
     insertImageIntoEditor(imageSettings);
     setShowImageSettings(false);
     
@@ -657,29 +877,116 @@ export default function RichTextEditor({
     'align', 'code-block'
   ];
 
-  // Handle ReactQuill ready event
-  const handleReady = useCallback(() => {
-    console.log('ReactQuill ready, attempting to get editor reference');
-    // Use a small delay to ensure Quill is fully initialized
-    setTimeout(() => {
-      if (reactQuillRef.current) {
-        try {
-          const quillComponent = reactQuillRef.current.querySelector('.ql-editor');
-          if (quillComponent) {
-            const quillInstance = (quillComponent as any).__quill || 
-                                 (quillComponent.parentElement as any).__quill ||
-                                 (quillComponent.closest('.ql-container') as any).__quill;
-            if (quillInstance) {
-              quillRef.current = quillInstance;
-              console.log('✓ Quill editor reference obtained on ready');
-            }
+  // Add click handler for image selection in the editor
+  useEffect(() => {
+    const handleImageClick = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (target.tagName === 'IMG' && target.closest('.ql-editor')) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const imgElement = target as HTMLImageElement;
+        setSelectedImageElement(imgElement);
+        
+        // Position the toolbar near the image
+        const rect = imgElement.getBoundingClientRect();
+        setImageToolbarPosition({
+          top: rect.bottom + window.scrollY + 10,
+          left: rect.left + window.scrollX
+        });
+        setShowImageToolbar(true);
+        
+        // Add visual selection indicator
+        imgElement.classList.add('image-selected');
+        
+        // Remove selection from other images
+        document.querySelectorAll('.ql-editor img').forEach(img => {
+          if (img !== imgElement) {
+            img.classList.remove('image-selected');
           }
-        } catch (error) {
-          console.warn('Could not get editor reference on ready:', error);
-        }
+        });
       }
-    }, 100);
-  }, []);
+    };
+
+    const handleClickOutside = (e: Event) => {
+      const target = e.target as HTMLElement;
+      if (!target.closest('.image-toolbar') && !target.closest('.ql-editor img')) {
+        setShowImageToolbar(false);
+        setSelectedImageElement(null);
+        document.querySelectorAll('.ql-editor img').forEach(img => {
+          img.classList.remove('image-selected');
+        });
+      }
+    };
+
+    if (isMounted) {
+      document.addEventListener('click', handleImageClick);
+      document.addEventListener('click', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('click', handleImageClick);
+      document.removeEventListener('click', handleClickOutside);
+    };
+  }, [isMounted]);
+
+  // Apply alignment to selected image
+  const applyAlignmentToSelectedImage = (alignment: 'left' | 'center' | 'right' | 'none') => {
+    if (!selectedImageElement) return;
+
+    const parent = selectedImageElement.parentElement;
+    
+    // Reset all alignment styles first
+    selectedImageElement.style.removeProperty('float');
+    selectedImageElement.style.removeProperty('display');
+    selectedImageElement.style.removeProperty('margin-left');
+    selectedImageElement.style.removeProperty('margin-right');
+    selectedImageElement.style.removeProperty('margin-bottom');
+    
+    if (parent) {
+      parent.style.removeProperty('text-align');
+    }
+
+    // Apply new alignment
+    if (alignment === 'center') {
+      if (parent) {
+        parent.style.setProperty('text-align', 'center', 'important');
+      }
+      selectedImageElement.style.setProperty('display', 'inline-block', 'important');
+    } else if (alignment === 'left') {
+      selectedImageElement.style.setProperty('float', 'left', 'important');
+      selectedImageElement.style.setProperty('margin-right', '15px', 'important');
+      selectedImageElement.style.setProperty('margin-bottom', '10px', 'important');
+    } else if (alignment === 'right') {
+      selectedImageElement.style.setProperty('float', 'right', 'important');
+      selectedImageElement.style.setProperty('margin-left', '15px', 'important');
+      selectedImageElement.style.setProperty('margin-bottom', '10px', 'important');
+    }
+
+    console.log(`Applied ${alignment} alignment to selected image`);
+  };
+
+  // Delete selected image
+  const deleteSelectedImage = () => {
+    if (!selectedImageElement) return;
+
+    const parent = selectedImageElement.parentElement;
+    selectedImageElement.remove();
+    
+    // If parent is empty, remove it too
+    if (parent && parent.innerHTML.trim() === '') {
+      parent.remove();
+    }
+    
+    setShowImageToolbar(false);
+    setSelectedImageElement(null);
+    
+    // Trigger onChange to update the content
+    if (quillRef.current) {
+      const content = quillRef.current.root.innerHTML;
+      onChange(content);
+    }
+  };
 
   if (!isMounted) {
     return (
@@ -688,15 +995,96 @@ export default function RichTextEditor({
   }
 
   return (
-    <div className={`relative ${className}`}>
-      {/* Add custom CSS to override Quill's default image styles */}
+    <div className={`rich-text-editor ${className}`}>
+      {/* Custom styles for better image alignment and selection */}
       <style dangerouslySetInnerHTML={{
         __html: `
           .ql-editor img {
-            max-width: none !important;
+            max-width: 100% !important;
+            cursor: pointer;
+            transition: all 0.2s ease;
           }
-          .ql-editor img[style*="width"] {
-            max-width: none !important;
+          
+          .ql-editor img:hover {
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+          }
+          
+          .ql-editor img.image-selected {
+            box-shadow: 0 0 0 3px #0ea5e9 !important;
+            border-radius: 4px;
+          }
+          
+          .ql-editor p {
+            margin-bottom: 1em;
+          }
+          
+          .ql-editor p[style*="text-align: center"] {
+            text-align: center !important;
+          }
+          
+          .ql-editor img[style*="float: left"] {
+            float: left !important;
+            margin-right: 15px !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .ql-editor img[style*="float: right"] {
+            float: right !important;
+            margin-left: 15px !important;
+            margin-bottom: 10px !important;
+          }
+          
+          .ql-editor img[style*="display: inline-block"] {
+            display: inline-block !important;
+          }
+          
+          /* Clear floats after images */
+          .ql-editor p:after {
+            content: "";
+            display: table;
+            clear: both;
+          }
+          
+          /* Image toolbar styles */
+          .image-toolbar {
+            position: absolute;
+            background: white;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+            z-index: 1000;
+            padding: 8px;
+            display: flex;
+            gap: 4px;
+          }
+          
+          .image-toolbar button {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 32px;
+            height: 32px;
+            border: none;
+            border-radius: 4px;
+            background: transparent;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            color: #64748b;
+          }
+          
+          .image-toolbar button:hover {
+            background-color: #f1f5f9;
+            color: #334155;
+          }
+          
+          .image-toolbar button.active {
+            background-color: #0ea5e9;
+            color: white;
+          }
+          
+          .image-toolbar button svg {
+            width: 16px;
+            height: 16px;
           }
         `
       }} />
@@ -709,12 +1097,11 @@ export default function RichTextEditor({
         theme="snow"
         value={value}
         onChange={onChange}
-          onFocus={handleReady}
         placeholder={defaultPlaceholder}
         modules={modules}
         formats={formats}
-          className="bg-white"
-        />
+        className="bg-white"
+      />
       </div>
 
       {/* Image Selection Modal */}
@@ -1015,7 +1402,10 @@ export default function RichTextEditor({
                           type="button"
                           onClick={(e) => {
                             e.preventDefault();
-                            setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }))
+                            console.log('🎯 ALIGNMENT BUTTON CLICKED:', align.value);
+                            console.log('🎯 Current alignment before change:', imageSettings.alignment);
+                            setImageSettings(prev => ({ ...prev, alignment: align.value as ImageSettings['alignment'] }));
+                            console.log('🎯 Setting alignment to:', align.value);
                           }}
                           className={`px-3 py-2 text-sm rounded-md transition-colors ${
                             imageSettings.alignment === align.value
@@ -1056,6 +1446,68 @@ export default function RichTextEditor({
               </button>
             </div>
           </div>
+        </div>
+      )}
+
+      {/* Floating Image Toolbar */}
+      {showImageToolbar && selectedImageElement && (
+        <div 
+          className="image-toolbar"
+          style={{
+            top: `${imageToolbarPosition.top}px`,
+            left: `${imageToolbarPosition.left}px`
+          }}
+        >
+          {/* Align Left */}
+          <button
+            type="button"
+            onClick={() => applyAlignmentToSelectedImage('left')}
+            title="Align Left"
+            className={selectedImageElement?.style.float === 'left' ? 'active' : ''}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 000 2h16a1 1 0 100-2H2zM2 7a1 1 0 000 2h10a1 1 0 100-2H2zM2 11a1 1 0 100 2h16a1 1 0 100-2H2zM2 15a1 1 0 100 2h10a1 1 0 100-2H2z" />
+            </svg>
+          </button>
+
+          {/* Align Center */}
+          <button
+            type="button"
+            onClick={() => applyAlignmentToSelectedImage('center')}
+            title="Align Center"
+            className={selectedImageElement?.parentElement?.style.textAlign === 'center' ? 'active' : ''}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 000 2h16a1 1 0 100-2H2zM5 7a1 1 0 000 2h10a1 1 0 100-2H5zM2 11a1 1 0 100 2h16a1 1 0 100-2H2zM5 15a1 1 0 100 2h10a1 1 0 100-2H5z" />
+            </svg>
+          </button>
+
+          {/* Align Right */}
+          <button
+            type="button"
+            onClick={() => applyAlignmentToSelectedImage('right')}
+            title="Align Right"
+            className={selectedImageElement?.style.float === 'right' ? 'active' : ''}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path d="M2 3a1 1 0 000 2h16a1 1 0 100-2H2zM8 7a1 1 0 100 2h10a1 1 0 100-2H8zM2 11a1 1 0 100 2h16a1 1 0 100-2H2zM8 15a1 1 0 100 2h10a1 1 0 100-2H8z" />
+            </svg>
+          </button>
+
+          {/* Separator */}
+          <div style={{ width: '1px', height: '24px', backgroundColor: '#e2e8f0', margin: '4px 2px' }}></div>
+
+          {/* Delete Image */}
+          <button
+            type="button"
+            onClick={deleteSelectedImage}
+            title="Delete Image"
+            style={{ color: '#dc2626' }}
+          >
+            <svg fill="currentColor" viewBox="0 0 20 20">
+              <path fillRule="evenodd" d="M9 2a1 1 0 00-.894.553L7.382 4H4a1 1 0 000 2v10a2 2 0 002 2h8a2 2 0 002-2V6a1 1 0 100-2h-3.382l-.724-1.447A1 1 0 0011 2H9zM7 8a1 1 0 012 0v6a1 1 0 11-2 0V8zm5-1a1 1 0 00-1 1v6a1 1 0 102 0V8a1 1 0 00-1-1z" clipRule="evenodd" />
+            </svg>
+          </button>
         </div>
       )}
     </div>
