@@ -64,24 +64,24 @@ export default function Navbar() {
             <div className="hidden md:flex items-center justify-between w-full">
               {/* Left Navigation */}
               <div className="flex items-center space-x-8">
-                <Link 
-                  href="/" 
-                  className="text-white hover:text-gray-200 transition-colors duration-200 font-medium"
-                >
-                  {t('menu.home')}
-                </Link>
-                <Link 
-                  href="/maison-de-repos" 
-                  className="text-white hover:text-gray-200 transition-colors duration-200 font-medium"
-                >
-                  {t('menu.retirementHome')}
-                </Link>
-                <Link 
-                  href="/sejour-adaptee" 
-                  className="text-white hover:text-gray-200 transition-colors duration-200 font-medium"
-                >
-                  {t('menu.adaptedStay')}
-                </Link>
+                {[
+                  { href: '/', label: t('menu.home') },
+                  { href: '/retirement-home', label: t('menu.retirementHome') },
+                  { href: '/adapted-stay', label: t('menu.adaptedStay') },
+                ].map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`relative font-medium text-xl px-1 transition-colors duration-200 ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                    >
+                      <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
+                        {item.label}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
 
               {/* Center Logo */}
@@ -100,18 +100,23 @@ export default function Navbar() {
                 >
                   <SearchIcon />
                 </button>
-                <Link 
-                  href="/about" 
-                  className="text-white hover:text-gray-200 transition-colors duration-200 font-medium"
-                >
-                  {t('menu.about')}
-                </Link>
-                <Link 
-                  href="/magasin" 
-                  className="text-white hover:text-gray-200 transition-colors duration-200 font-medium"
-                >
-                  {t('menu.magazine')}
-                </Link>
+                {[
+                  { href: '/about', label: t('menu.about') },
+                  { href: '/magazine', label: t('menu.magazine') },
+                ].map((item) => {
+                  const isActive = pathname === item.href;
+                  return (
+                    <Link
+                      key={item.href}
+                      href={item.href}
+                      className={`relative font-medium text-xl px-1 transition-colors duration-200 ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                    >
+                      <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
+                        {item.label}
+                      </span>
+                    </Link>
+                  );
+                })}
               </div>
             </div>
           </div>
