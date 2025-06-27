@@ -6,6 +6,7 @@ import { pb } from '@/lib/pocketbase';
 import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
+import CoverImageSelector from '@/components/ui/admin/CoverImageSelector';
 import { useTranslations } from 'next-intl';
 
 interface Category {
@@ -50,6 +51,7 @@ export default function EditPostPage() {
     categories: [] as string[],
     cover_image: null as File | null,
     current_cover_image: '',
+    cover_image_url: '' as string, // For images selected from library
   });
   const [isSlugEditable, setIsSlugEditable] = useState(false);
 
@@ -88,6 +90,7 @@ export default function EditPostPage() {
         categories: typedPost.categories,
         cover_image: null,
         current_cover_image: typedPost.cover_image,
+        cover_image_url: '',
       });
     } catch (err) {
       setError(t('errors.loadFailed'));
@@ -177,17 +180,22 @@ export default function EditPostPage() {
     }));
   };
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (file: File | null, url?: string) => {
     // Clear messages when user selects an image
     if (error) setError('');
     if (success) setSuccess('');
     
-    const file = e.target.files?.[0] || null;
-    setFormData(prev => ({ ...prev, cover_image: file }));
+    if (file) {
+      // File upload
+      setFormData(prev => ({ ...prev, cover_image: file, cover_image_url: '', current_cover_image: '' }));
+    } else if (url) {
+      // Library selection
+      setFormData(prev => ({ ...prev, cover_image: null, cover_image_url: url, current_cover_image: '' }));
+    }
   };
 
   const removeImage = () => {
-    setFormData(prev => ({ ...prev, cover_image: null, current_cover_image: '' }));
+    setFormData(prev => ({ ...prev, cover_image: null, current_cover_image: '', cover_image_url: '' }));
   };
 
   const handleSave = async (publishStatus: boolean) => {
@@ -222,7 +230,7 @@ export default function EditPostPage() {
       }
       
       // Check if cover image is required (either existing or new)
-      if (!formData.cover_image && !formData.current_cover_image) {
+      if (!formData.cover_image && !formData.current_cover_image && !formData.cover_image_url) {
         errors.push(t('validation.coverImageRequired'));
       }
       
@@ -245,6 +253,17 @@ export default function EditPostPage() {
       // Only add cover image if a new one was selected
       if (formData.cover_image) {
         data.append('cover_image', formData.cover_image);
+      } else if (formData.cover_image_url) {
+        // For library images, fetch the image and convert to blob
+        try {
+          const response = await fetch(formData.cover_image_url);
+          const blob = await response.blob();
+          const urlParts = formData.cover_image_url.split('/');
+          const filename = urlParts[urlParts.length - 1];
+          data.append('cover_image', blob, filename);
+        } catch (err) {
+          throw new Error('Failed to process selected image from library');
+        }
       }
 
       await pb.collection('posts').update(postId, data);
@@ -345,6 +364,9 @@ export default function EditPostPage() {
   const getCurrentImageUrl = () => {
     if (formData.cover_image) {
       return URL.createObjectURL(formData.cover_image);
+    }
+    if (formData.cover_image_url) {
+      return formData.cover_image_url;
     }
     if (formData.current_cover_image && originalPost) {
       return `${process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090'}/api/files/posts/${originalPost.id}/${formData.current_cover_image}`;
@@ -648,67 +670,11 @@ export default function EditPostPage() {
           </div>
 
           {/* Featured Image */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <h3 className="text-lg font-medium text-gray-900 mb-4">{t('form.coverImage')}</h3>
-              
-              {!getCurrentImageUrl() ? (
-                <div className="border-2 border-dashed border-gray-300 rounded-lg p-6 text-center hover:border-gray-400 transition-colors">
-                  <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                    <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                  </svg>
-                  <div className="mt-4">
-                    <label htmlFor="cover_image" className="cursor-pointer">
-                      <span className="block text-sm font-medium text-gray-900">
-                        {t('form.clickToUpload')}
-                      </span>
-                      <span className="block text-sm text-gray-500">
-                        {t('form.imageFormats')}
-                      </span>
-                      <input
-                        id="cover_image"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="sr-only"
-                      />
-                    </label>
-                  </div>
-                </div>
-              ) : (
-                <div className="relative">
-                  <img
-                    src={getCurrentImageUrl()!}
-                    alt={t('form.imagePreview')}
-                    className="w-full h-48 object-cover rounded-lg"
-                  />
-                  <button
-                    type="button"
-                    onClick={removeImage}
-                    className="absolute top-2 right-2 p-1 bg-red-600 text-white rounded-full hover:bg-red-700 transition-colors"
-                  >
-                    <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-                    </svg>
-                  </button>
-                  <div className="mt-3">
-                    <label htmlFor="cover_image_change" className="cursor-pointer">
-                      <span className="inline-flex items-center px-3 py-2 border border-gray-300 shadow-sm text-sm leading-4 font-medium rounded-md text-gray-700 bg-white hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
-                        {t('form.changeImage')}
-                      </span>
-                      <input
-                        id="cover_image_change"
-                        type="file"
-                        accept="image/*"
-                        onChange={handleImageChange}
-                        className="sr-only"
-                      />
-                    </label>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <CoverImageSelector
+            currentImageUrl={getCurrentImageUrl()}
+            onImageChange={handleImageChange}
+            onImageRemove={removeImage}
+          />
         </div>
       </div>
     </div>
