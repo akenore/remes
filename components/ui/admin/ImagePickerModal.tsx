@@ -50,10 +50,9 @@ export default function ImagePickerModal({ open, onClose, onSelect }: ImagePicke
               collection: 'media' as const
             }));
           allImages.push(...mediaImages);
-          console.log(`✅ Modal: Loaded ${mediaImages.length} images from media collection`);
         }
       } catch (error) {
-        console.warn('⚠️ Modal: Could not fetch from media collection:', error);
+        // Continue silently
       }
       
       // Fetch from posts with cover images
@@ -76,17 +75,14 @@ export default function ImagePickerModal({ open, onClose, onSelect }: ImagePicke
               collection: 'posts' as const
             }));
           allImages.push(...postImages);
-          console.log(`✅ Modal: Loaded ${postImages.length} images from posts collection`);
         }
       } catch (error) {
-        console.warn('⚠️ Modal: Could not fetch from posts collection:', error);
+        // Continue silently
       }
       
       allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
-      console.log(`📸 Modal: Total images available: ${allImages.length}`);
       setCollectionImages(allImages);
     } catch (error) {
-      console.error('❌ Modal: Error in fetchCollectionImages:', error);
       setCollectionImages([]);
     }
   };

@@ -58,13 +58,16 @@ export default function RichTextEditor({
       try {
         const mediaResult = await pb.collection('media').getList(1, 100, {
           sort: '-created',
-          fields: 'id,file,created',
+          fields: 'id,file,created,author',
           requestKey: null // Prevent request caching issues
         });
         
         if (mediaResult.items && mediaResult.items.length > 0) {
           const mediaImages = mediaResult.items
-            .filter(item => item.file && Array.isArray(item.file) && item.file.length > 0) // Check if file array exists and has items
+            .filter(item => {
+              const hasFile = item.file && Array.isArray(item.file) && item.file.length > 0;
+              return hasFile;
+            })
             .map(item => ({
               id: item.id,
               cover_image: item.file[0], // media collection uses 'file' array, get first file
@@ -74,10 +77,8 @@ export default function RichTextEditor({
             }));
           
           allImages.push(...mediaImages);
-          console.log(`✅ Loaded ${mediaImages.length} images from media collection`);
         }
-      } catch (error) {
-        console.warn('⚠️ Could not fetch from media collection:', error);
+      } catch (error: any) {
         // Continue silently - media collection might not exist or have permission issues
       }
 
@@ -102,20 +103,16 @@ export default function RichTextEditor({
             }));
           
           allImages.push(...postImages);
-          console.log(`✅ Loaded ${postImages.length} images from posts collection`);
         }
       } catch (error) {
-        console.warn('⚠️ Could not fetch from posts collection:', error);
         // Continue silently
       }
 
       // Sort all images by creation date (newest first)
       allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
       
-      console.log(`📸 Total images available: ${allImages.length}`);
       setCollectionImages(allImages);
     } catch (error) {
-      console.error('❌ Error in fetchCollectionImages:', error);
       setCollectionImages([]); // Set empty array on error
     }
   };
