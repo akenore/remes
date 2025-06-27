@@ -481,5 +481,12 @@
     "email": "Please enter a valid email address",
     "password": "Password must be at least 6 characters",
     "confirmPassword": "Passwords do not match"
+  },
+  "menu": {
+    "home": "Home",
+    "retirementHome": "Retirement Home",
+    "adaptedStay": "Adapted Stay",
+    "about": "About",
+    "magazine": "Magazine"
   }
 } 

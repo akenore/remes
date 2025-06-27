@@ -481,5 +481,12 @@
     "email": "Veuillez saisir une adresse email valide",
     "password": "Le mot de passe doit contenir au moins 6 caractères",
     "confirmPassword": "Les mots de passe ne correspondent pas"
+  },
+  "menu": {
+    "home": "Accueil",
+    "retirementHome": "Maison de repos",
+    "adaptedStay": "Sejour adaptee",
+    "about": "A Propos",
+    "magazine": "Magazine"
   }
 } 
