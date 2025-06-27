@@ -53,67 +53,70 @@ export default function RichTextEditor({
   const fetchCollectionImages = async () => {
     try {
       const allImages: CollectionImage[] = [];
-      console.log('Fetching collection images...'); // Debug log
 
-      // Fetch from media collection
+      // Fetch from media collection with better error handling and pagination
       try {
-        console.log('Fetching from media collection...'); // Debug log
-        const mediaResult = await pb.collection('media').getList(1, 50, {
+        const mediaResult = await pb.collection('media').getList(1, 100, {
           sort: '-created',
-          fields: 'id,file,created'
+          fields: 'id,file,created',
+          requestKey: null // Prevent request caching issues
         });
         
-        console.log('Media collection result:', mediaResult.items); // Debug log
-        
-        const mediaImages = mediaResult.items.map(item => ({
-          id: item.id,
-          cover_image: item.file, // media collection uses 'file' for the file
-          title: `Image ${item.id.slice(-6)}`, // Generate a simple title
-          created: item.created,
-          collection: 'media' as const
-        }));
-        
-        allImages.push(...mediaImages);
-        console.log('Media images processed:', mediaImages); // Debug log
+        if (mediaResult.items && mediaResult.items.length > 0) {
+          const mediaImages = mediaResult.items
+            .filter(item => item.file && Array.isArray(item.file) && item.file.length > 0) // Check if file array exists and has items
+            .map(item => ({
+              id: item.id,
+              cover_image: item.file[0], // media collection uses 'file' array, get first file
+              title: `Media Image ${item.id.slice(-6)}`, // Generate a simple title
+              created: item.created,
+              collection: 'media' as const
+            }));
+          
+          allImages.push(...mediaImages);
+          console.log(`✅ Loaded ${mediaImages.length} images from media collection`);
+        }
       } catch (error) {
-        console.error('Error fetching media collection:', error); // Debug log
-        // Silent error handling
+        console.warn('⚠️ Could not fetch from media collection:', error);
+        // Continue silently - media collection might not exist or have permission issues
       }
 
       // Fetch from posts with cover images (excluding rich text images)
       try {
-        console.log('Fetching from posts collection...'); // Debug log
-        const postsResult = await pb.collection('posts').getList(1, 25, {
+        const postsResult = await pb.collection('posts').getList(1, 50, {
           sort: '-created',
-          filter: 'cover_image != "" && title !~ "[RICH_TEXT_IMG]" && title !~ "📷"', // Exclude rich text images
-          fields: 'id,cover_image,title,created'
+          filter: 'cover_image != ""', // Get all posts with cover images
+          fields: 'id,cover_image,title,created',
+          requestKey: null // Prevent request caching issues
         });
         
-        console.log('Posts collection result:', postsResult.items); // Debug log
-        
-        const postImages = postsResult.items.map(item => ({
-          id: item.id,
-          cover_image: item.cover_image,
-          title: item.title || 'Untitled',
-          created: item.created,
-          collection: 'posts' as const
-        }));
-        
-        allImages.push(...postImages);
-        console.log('Post images processed:', postImages); // Debug log
+        if (postsResult.items && postsResult.items.length > 0) {
+          const postImages = postsResult.items
+            .filter(item => item.cover_image && item.cover_image.trim() !== '') // Only include items with cover images
+            .map(item => ({
+              id: item.id,
+              cover_image: item.cover_image,
+              title: item.title || `Post ${item.id.slice(-6)}`,
+              created: item.created,
+              collection: 'posts' as const
+            }));
+          
+          allImages.push(...postImages);
+          console.log(`✅ Loaded ${postImages.length} images from posts collection`);
+        }
       } catch (error) {
-        console.error('Error fetching posts collection:', error); // Debug log
-        // Silent error handling
+        console.warn('⚠️ Could not fetch from posts collection:', error);
+        // Continue silently
       }
 
       // Sort all images by creation date (newest first)
       allImages.sort((a, b) => new Date(b.created).getTime() - new Date(a.created).getTime());
       
-      console.log('Final allImages array:', allImages); // Debug log
+      console.log(`📸 Total images available: ${allImages.length}`);
       setCollectionImages(allImages);
     } catch (error) {
-      console.error('Error in fetchCollectionImages:', error); // Debug log
-      // Silent error handling
+      console.error('❌ Error in fetchCollectionImages:', error);
+      setCollectionImages([]); // Set empty array on error
     }
   };
 
@@ -143,7 +146,7 @@ export default function RichTextEditor({
       }
 
       // Upload image to media collection
-      const formData = new FormData();
+        const formData = new FormData();
       formData.append('file', file, file.name);
 
       // Create the record in media collection
@@ -187,13 +190,13 @@ export default function RichTextEditor({
     await fetchCollectionImages();
     setShowImageModal(true);
   };
-
+            
   // New: handle image insert from modal
   const handleInsertImageFromModal = (url: string, title: string) => {
     if (editorRef.current) {
       editorRef.current.insertContent(`<img src="${url}" alt="${title}" style="max-width:100%;" />`);
     }
-    setShowImageModal(false);
+      setShowImageModal(false);
   };
 
   // Replace TinyMCE image handler to open our modal
@@ -222,7 +225,7 @@ export default function RichTextEditor({
       return new Promise<string>((resolve, reject) => {
         const file = blobInfo.blob();
         handleImageUpload(file, resolve, reject);
-      });
+        });
     },
     file_picker_callback: undefined, // Remove default
     setup: (editor: any) => {
@@ -292,11 +295,11 @@ export default function RichTextEditor({
             <div className="p-6 max-h-96 overflow-y-auto">
               {activeTab === 'upload' ? (
                 <div className="space-y-4">
-                  <input
-                    type="file"
-                    accept="image/*"
+                    <input
+                      type="file"
+                      accept="image/*"
                     onChange={async (e) => {
-                      const file = e.target.files?.[0];
+                        const file = e.target.files?.[0];
                       if (file) {
                         setUploading(true);
                         await handleImageUpload(file, (url) => {
@@ -307,20 +310,20 @@ export default function RichTextEditor({
                           alert(err);
                         });
                       }
-                    }}
-                    className="hidden"
+                      }}
+                      className="hidden"
                     id="image-upload-modal"
-                    disabled={uploading}
-                  />
+                      disabled={uploading}
+                    />
                   <label htmlFor="image-upload-modal" className={`cursor-pointer ${uploading ? 'opacity-50 cursor-not-allowed' : ''}`}>
                     <div className="flex flex-col items-center border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                      <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
-                        <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
+                        <svg className="mx-auto h-12 w-12 text-gray-400" stroke="currentColor" fill="none" viewBox="0 0 48 48">
+                          <path d="M28 8H12a4 4 0 00-4 4v20m32-12v8m0 0v8a4 4 0 01-4 4H12a4 4 0 01-4-4v-4m32-4l-3.172-3.172a4 4 0 00-5.656 0L28 28M8 32l9.172-9.172a4 4 0 015.656 0L28 28m0 0l4 4m4-24h8m-4-4v8m-12 4h.02" strokeWidth={2} strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
                       <span className="mt-2 text-sm text-indigo-600 font-medium">{uploading ? (locale === 'fr' ? 'Téléchargement...' : 'Uploading...') : (locale === 'fr' ? 'Cliquez pour télécharger' : 'Click to upload')}</span>
                       <span className="text-xs text-gray-500">PNG, JPG, GIF up to 10MB</span>
-                    </div>
-                  </label>
+                      </div>
+                    </label>
                 </div>
               ) : (
                 <div className="space-y-4">
@@ -332,15 +335,26 @@ export default function RichTextEditor({
                           onClick={() => handleInsertImageFromModal(pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image), image.title)}
                           className="group relative cursor-pointer border border-gray-200 rounded-lg p-2 hover:border-indigo-500 hover:shadow-md transition-all"
                         >
-                          <div className="aspect-square overflow-hidden rounded-md bg-gray-100">
+                          <div className="aspect-square overflow-hidden rounded-md bg-gray-100 relative">
                             <img
                               src={pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image)}
                               alt={image.title}
                               className="w-full h-full object-cover group-hover:scale-105 transition-transform"
                             />
+                            {/* Collection type badge */}
+                            <div className={`absolute top-1 right-1 px-1.5 py-0.5 text-xs font-medium rounded-full text-white shadow-sm ${
+                              image.collection === 'media' 
+                                ? 'bg-green-500' 
+                                : 'bg-blue-500'
+                            }`}>
+                              {image.collection === 'media' ? '📁' : '📄'}
+                            </div>
                           </div>
                           <p className="mt-2 text-xs text-gray-600 truncate" title={image.title}>
                             {image.title}
+                          </p>
+                          <p className="text-xs text-gray-400 capitalize">
+                            {image.collection === 'media' ? 'Media Library' : 'Post Image'}
                           </p>
                         </div>
                       ))}
