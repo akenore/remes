@@ -24,7 +24,7 @@ export default function Card({ image, title, description, buttonText, buttonHref
       <div className="flex-1 p-6 flex flex-col justify-between">
         <div className='lg:p-5'>
           <h2 className="text-lg md:text-[32px] text-[var(--dark-blue)] mb-10 font-[var(--font-myanmar)] group-hover:text-[var(--gold)] transition-colors duration-400">{title}</h2>
-          <p className="text-gray-600 text-sm md:text-base mb-4 group-hover:text-blue-300 transition-colors duration-300">{description}</p>
+          <p className="text-gray-600 text-sm md:text-base mb-4 group-hover:text-[var(--light-blue2)] transition-colors duration-300">{description}</p>
         </div>
         <Link href={buttonHref} className="inline-block text-center bg-white border border-[var(--blue)] text-[var(--blue)] px-4 py-4 shadow group-hover:bg-[var(--gold)] group-hover:text-[var(--dark-blue)] group-hover:border-[var(--gold)] font-medium text-sm transition-colors duration-300">
           {buttonText}

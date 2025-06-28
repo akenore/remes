@@ -47,7 +47,7 @@ export default function Hero() {
   }, [total]);
 
   return (
-    <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/desktop-hero-home.jpg')] bg-no-repeat">
+    <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/hero-1/bg-desktop.jpg')] bg-no-repeat">
       < Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-1/2'>
