@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="relative z-50 bg-transparent font-[var(--font-myanmar)] py-20 text-[1.18rem] mb-20">
+      <nav className="relative z-50 bg-transparent font-[var(--font-myanmar)] py-20 text-[1.18rem] md:mb-40">
         <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 

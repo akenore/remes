@@ -47,7 +47,7 @@ export default function Hero() {
   }, [total]);
 
   return (
-    <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/desktop-hero-home.jpg')]">
+    <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/desktop-hero-home.jpg')] bg-no-repeat">
       < Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-1/2'>
@@ -57,11 +57,13 @@ export default function Hero() {
               className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
               style={{ minWidth: '100%' }}
             >
-              <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-[var(--gold)] leading-tight font-[var(--font-myanmar)]">{slide.headline}</h1>
-              <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">{slide.subheadline}</p>
+              <div className="h-64 flex flex-col justify-center">
+                <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-[var(--gold)] leading-tight font-[var(--font-myanmar)]">{slide.headline}</h1>
+                <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">{slide.subheadline}</p>
+              </div>
               {slide.buttonText && (
                 <div className="mb-10">
-                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 rounded shadow hover:bg-[var(--dark-gold)] transition-colors mt-8 mb-8">
+                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--dark-blue)] transition-colors mt-8 mb-8">
                     {slide.buttonText}
                   </button>
                 </div>
@@ -69,7 +71,7 @@ export default function Hero() {
             </div>
           ))}
         </div>
-        <div className="pt-32 md:pt-72">
+        <div className="pt-52 md:pt-72">
           <button
             aria-label="Previous slide"
             onClick={() => goTo(current - 1)}
@@ -86,7 +88,7 @@ export default function Hero() {
           </button>
         </div>
       </div>
-      <div className="pt-40 lg:pt-72 xl:pt-92 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
+      <div className="pt-40  w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
         <Card
           image="/card/card-1.jpg"
           title="Maison de Repos"
@@ -102,80 +104,6 @@ export default function Hero() {
           buttonHref="/sejour-adaptee"
         />
       </div>
-
-      {/* HERO SECTION */}
-      {/* <section className="relative min-h-screen w-full flex flex-col justify-center items-center pt-32 md:pt-40 overflow-hidden -mt-32 md:-mt-36">
-      
-        
-        <div className="absolute inset-0 w-full h-full z-0">
-          <Image
-            src="/desktop-hero-home.jpg"
-            alt="Hero background desktop"
-            fill
-            sizes="(min-width: 768px) 100vw, 0vw"
-            className="hidden md:block object-cover object-bottom"
-            priority
-          />
-          <Image
-            src="/mobile-hero-home.png"
-            alt="Hero background mobile"
-            fill
-            sizes="(max-width: 767px) 100vw, 0vw"
-            className="block md:hidden object-cover object-bottom"
-            priority
-          />
-        </div>
-        <div className=" z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4">
-          {carouselSlides.map((slide, idx) => (
-            <div
-              key={idx}
-              className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-              style={{ minWidth: '100%' }}
-            >
-              <h1 className="text-3xl md:text-5xl mb-6 text-[var(--gold)] leading-tight font-[var(--font-myanmar)]">{slide.headline}</h1>
-              <p className="text-white text-base md:text-lg mb-8 drop-shadow-lg">{slide.subheadline}</p>
-              {slide.buttonText && (
-                <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 rounded shadow hover:bg-[var(--dark-gold)] transition-colors mt-8 mb-8">
-                  {slide.buttonText}
-                </button>
-              )}
-            </div>
-          ))}
-        </div>
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center space-x-8">
-          <button
-            aria-label="Previous slide"
-            onClick={() => goTo(current - 1)}
-            className="p-2 transition-colors"
-          >
-            <PrevArrow />
-          </button>
-          <button
-            aria-label="Next slide"
-            onClick={() => goTo(current + 1)}
-            className="p-2 transition-colors"
-          >
-            <NextArrow />
-          </button>
-        </div>
-      </section>
-      
-      <div className="relative z-30 w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch -mt-16 md:-mt-24 px-4 pb-12">
-        <Card
-          image="/card/card-1.jpg"
-          title="Maison de Repos"
-          description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
-          buttonText="En savoir plus"
-          buttonHref="/maison-de-repos"
-        />
-        <Card
-          image="/card/card-1.jpg"
-          title="Séjour Adaptée"
-          description="Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
-          buttonText="En savoir plus"
-          buttonHref="/sejour-adaptee"
-        />
-      </div> */}
     </div >
   );
 }
