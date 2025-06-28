@@ -87,7 +87,7 @@ export default function Navbar() {
               {/* Center Logo */}
               <div className="flex-shrink-0 flex justify-center">
                 <Link href="/" className="flex items-center">
-                  <Image src="/logo.png" alt="Remes" width={219} height={172} />
+                  <Image src="/logo.png" alt="Remes" width={219} height={172} style={{width: "100%", height: "auto"}}/>
                 </Link>
               </div>
 
