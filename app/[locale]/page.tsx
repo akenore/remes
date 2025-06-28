@@ -1,12 +1,13 @@
 import Hero from "@/components/ui/Hero";
 import Image from "next/image";
+import Footer from "@/components/ui/Footer";
 
 export default function Home() {
   return (
     <>
       <Hero />
       <main className="pt-96 mx-5 md:mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-96">
           <div className="md:px-10">
             <h2 className="text-[1.5rem] md:text-[2rem] text-center md:text-left text-[var(--dark-blue)] font-[var(--font-myanmar)] mb-8">Premiere maison de retraite
               hoteliers, vivez une retraite
@@ -30,6 +31,7 @@ export default function Home() {
           </div>
         </div>
       </main>
+      <Footer />
     </>
   );
 }
