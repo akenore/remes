@@ -5,9 +5,9 @@ export default function Home() {
   return (
     <>
       <Hero />
-      <main className="pt-72 mx-5 md:mx-auto max-w-7xl">
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div>
+      <main className="pt-96 mx-5 md:mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+          <div className="px-10">
             <h2 className="text-[2rem] text-[var(--dark-blue)] font-[var(--font-myanmar)] mb-8">Premiere maison de retraite
               hoteliers, vivez une retraite
               paisible et exceptionnelle
@@ -22,8 +22,9 @@ export default function Home() {
             </p>
           </div>
           <div className="h-auto relative p-5">
-              <Image src="/home/h-r-1.jpg" alt="Maison de Repos" fill sizes="33vw" className="object-cover object-center" />
-            </div>
+            <Image src="/home/h-r-1.jpg" alt="Maison de Repos" fill sizes="33vw" className="object-cover object-center" />
+            <Image src="/home/h-r-1.jpg" alt="Maison de Repos" fill sizes="33vw" className="object-cover object-center" />
+          </div>
         </div>
       </main>
     </>
