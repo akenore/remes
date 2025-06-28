@@ -28,12 +28,12 @@ export default function Navbar() {
 
   return (
     <>
-      <nav className="relative z-50 bg-transparent font-[var(--font-myanmar)] py-4">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+      <nav className="relative z-50 bg-transparent font-[var(--font-myanmar)] py-20 text-[1.18rem] mb-20">
+        <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
             {/* Mobile Layout */}
-            <div className="md:hidden flex items-center justify-between w-full">
+            <div className="xl:hidden flex items-center justify-between w-full">
               {/* Hamburger Menu */}
               <button
                 onClick={() => setIsMenuOpen(true)}
@@ -61,9 +61,9 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Layout */}
-            <div className="hidden md:flex items-center justify-between w-full">
+            <div className="hidden xl:flex items-center w-full">
               {/* Left Navigation */}
-              <div className="flex items-center space-x-8">
+              <div className="flex items-center space-x-8 flex-1 justify-start pr-16">
                 {[
                   { href: '/', label: t('menu.home') },
                   { href: '/retirement-home', label: t('menu.retirementHome') },
@@ -85,14 +85,14 @@ export default function Navbar() {
               </div>
 
               {/* Center Logo */}
-              <div className="flex-shrink-0">
+              <div className="flex-shrink-0 flex justify-center">
                 <Link href="/" className="flex items-center">
                   <Image src="/logo.png" alt="Remes" width={219} height={172} />
                 </Link>
               </div>
 
               {/* Right Navigation */}
-              <div className="flex items-center space-x-6">
+              <div className="flex items-center space-x-6 flex-1 justify-end pl-16">
                 <button
                   onClick={() => setIsSearchOpen(true)}
                   className="text-white hover:text-gray-200 transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
@@ -125,8 +125,8 @@ export default function Navbar() {
 
       {/* Full Screen Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[60] md:hidden">
-          <div className="absolute inset-0" style={{ backgroundColor: '#000A1A' }}>
+        <div className="fixed inset-0 z-[60] xl:hidden">
+          <div className="absolute inset-0 bg-[var(--dark-blue)]">
             {/* Close Button */}
             <div className="absolute top-12 left-8 z-20">
               <button

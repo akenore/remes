@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import Card from './Card';
+import Navbar from './Navbar';
 
 const carouselSlides = [
   {
@@ -24,12 +25,12 @@ const carouselSlides = [
 // Custom arrow icons
 const NextArrow = () => (
   <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M17.0333 9.66667L30.5667 23.2L17.0333 36.7333" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M17.0333 9.66667L30.5667 23.2L17.0333 36.7333" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 const PrevArrow = () => (
   <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <path d="M29.9667 36.7334L16.4333 23.2L29.9667 9.66669" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"/>
+    <path d="M29.9667 36.7334L16.4333 23.2L29.9667 9.66669" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
 
@@ -46,10 +47,66 @@ export default function Hero() {
   }, [total]);
 
   return (
-    <>
+    <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/desktop-hero-home.jpg')]">
+      < Navbar />
+      <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
+        <div className='mb-20 max-h-1/2'>
+          {carouselSlides.map((slide, idx) => (
+            <div
+              key={idx}
+              className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+              style={{ minWidth: '100%' }}
+            >
+              <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-[var(--gold)] leading-tight font-[var(--font-myanmar)]">{slide.headline}</h1>
+              <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">{slide.subheadline}</p>
+              {slide.buttonText && (
+                <div className="mb-10">
+                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 rounded shadow hover:bg-[var(--dark-gold)] transition-colors mt-8 mb-8">
+                    {slide.buttonText}
+                  </button>
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+        <div className="pt-32 md:pt-72">
+          <button
+            aria-label="Previous slide"
+            onClick={() => goTo(current - 1)}
+            className="p-2 transition-colors cursor-pointer"
+          >
+            <PrevArrow />
+          </button>
+          <button
+            aria-label="Next slide"
+            onClick={() => goTo(current + 1)}
+            className="p-2 transition-colors cursor-pointer"
+          >
+            <NextArrow />
+          </button>
+        </div>
+      </div>
+      <div className="pt-40 lg:pt-72 xl:pt-92 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
+        <Card
+          image="/card/card-1.jpg"
+          title="Maison de Repos"
+          description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+          buttonText="En savoir plus"
+          buttonHref="/maison-de-repos"
+        />
+        <Card
+          image="/card/card-1.jpg"
+          title="Séjour Adaptée"
+          description="Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
+          buttonText="En savoir plus"
+          buttonHref="/sejour-adaptee"
+        />
+      </div>
+
       {/* HERO SECTION */}
-      <section className="relative min-h-screen w-full flex flex-col justify-center items-center pt-32 md:pt-40 overflow-hidden -mt-24 md:-mt-32">
-        {/* Background image for desktop and mobile */}
+      {/* <section className="relative min-h-screen w-full flex flex-col justify-center items-center pt-32 md:pt-40 overflow-hidden -mt-32 md:-mt-36">
+      
+        
         <div className="absolute inset-0 w-full h-full z-0">
           <Image
             src="/desktop-hero-home.jpg"
@@ -68,9 +125,7 @@ export default function Hero() {
             priority
           />
         </div>
-        {/* Background overlay removed */}
-        {/* Centered Content */}
-        <div className="relative z-10 flex flex-col items-center justify-top w-full max-w-3xl mx-auto text-center gap-6 px-4">
+        <div className=" z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4">
           {carouselSlides.map((slide, idx) => (
             <div
               key={idx}
@@ -87,7 +142,6 @@ export default function Hero() {
             </div>
           ))}
         </div>
-        {/* Carousel Arrows at bottom center */}
         <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center space-x-8">
           <button
             aria-label="Previous slide"
@@ -105,7 +159,7 @@ export default function Hero() {
           </button>
         </div>
       </section>
-      {/* CARDS SECTION - visually cut out from hero */}
+      
       <div className="relative z-30 w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch -mt-16 md:-mt-24 px-4 pb-12">
         <Card
           image="/card/card-1.jpg"
@@ -121,7 +175,7 @@ export default function Hero() {
           buttonText="En savoir plus"
           buttonHref="/sejour-adaptee"
         />
-      </div>
-    </>
+      </div> */}
+    </div >
   );
 }
