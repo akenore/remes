@@ -1,0 +1,127 @@
+'use client';
+import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
+import Card from './Card';
+
+const carouselSlides = [
+  {
+    headline: 'Un lieu de vie, de soin et de serenite',
+    subheadline: 'Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité.',
+    buttonText: 'En savoir plus'
+  },
+  {
+    headline: 'Un accompagnement personnalisé',
+    subheadline: 'Des équipes médicales et paramédicales à votre écoute, pour un suivi adapté à chaque résident.',
+    buttonText: 'En savoir plus'
+  },
+  {
+    headline: 'Confort et sécurité au quotidien',
+    subheadline: 'Des espaces de vie modernes, sécurisés et pensés pour le bien-être de tous.',
+    buttonText: 'En savoir plus'
+  }
+];
+
+// Custom arrow icons
+const NextArrow = () => (
+  <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.0333 9.66667L30.5667 23.2L17.0333 36.7333" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+const PrevArrow = () => (
+  <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M29.9667 36.7334L16.4333 23.2L29.9667 9.66669" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round"/>
+  </svg>
+);
+
+export default function Hero() {
+  const [current, setCurrent] = useState(0);
+  const total = carouselSlides.length;
+  const goTo = (idx: number) => setCurrent((idx + total) % total);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrent((prev) => (prev + 1) % total);
+    }, 3500);
+    return () => clearInterval(interval);
+  }, [total]);
+
+  return (
+    <>
+      {/* HERO SECTION */}
+      <section className="relative min-h-screen w-full flex flex-col justify-center items-center pt-32 md:pt-40 overflow-hidden -mt-24 md:-mt-32">
+        {/* Background image for desktop and mobile */}
+        <div className="absolute inset-0 w-full h-full z-0">
+          <Image
+            src="/desktop-hero-home.jpg"
+            alt="Hero background desktop"
+            fill
+            sizes="(min-width: 768px) 100vw, 0vw"
+            className="hidden md:block object-cover object-bottom"
+            priority
+          />
+          <Image
+            src="/mobile-hero-home.png"
+            alt="Hero background mobile"
+            fill
+            sizes="(max-width: 767px) 100vw, 0vw"
+            className="block md:hidden object-cover object-bottom"
+            priority
+          />
+        </div>
+        {/* Background overlay removed */}
+        {/* Centered Content */}
+        <div className="relative z-10 flex flex-col items-center justify-top w-full max-w-3xl mx-auto text-center gap-6 px-4">
+          {carouselSlides.map((slide, idx) => (
+            <div
+              key={idx}
+              className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+              style={{ minWidth: '100%' }}
+            >
+              <h1 className="text-3xl md:text-5xl mb-6 text-[var(--gold)] leading-tight font-[var(--font-myanmar)]">{slide.headline}</h1>
+              <p className="text-white text-base md:text-lg mb-8 drop-shadow-lg">{slide.subheadline}</p>
+              {slide.buttonText && (
+                <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 rounded shadow hover:bg-[var(--dark-gold)] transition-colors mt-8 mb-8">
+                  {slide.buttonText}
+                </button>
+              )}
+            </div>
+          ))}
+        </div>
+        {/* Carousel Arrows at bottom center */}
+        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-20 flex items-center justify-center space-x-8">
+          <button
+            aria-label="Previous slide"
+            onClick={() => goTo(current - 1)}
+            className="p-2 transition-colors"
+          >
+            <PrevArrow />
+          </button>
+          <button
+            aria-label="Next slide"
+            onClick={() => goTo(current + 1)}
+            className="p-2 transition-colors"
+          >
+            <NextArrow />
+          </button>
+        </div>
+      </section>
+      {/* CARDS SECTION - visually cut out from hero */}
+      <div className="relative z-30 w-full max-w-5xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch -mt-16 md:-mt-24 px-4 pb-12">
+        <Card
+          image="/card/card-1.jpg"
+          title="Maison de Repos"
+          description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+          buttonText="En savoir plus"
+          buttonHref="/maison-de-repos"
+        />
+        <Card
+          image="/card/card-1.jpg"
+          title="Séjour Adaptée"
+          description="Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
+          buttonText="En savoir plus"
+          buttonHref="/sejour-adaptee"
+        />
+      </div>
+    </>
+  );
+}

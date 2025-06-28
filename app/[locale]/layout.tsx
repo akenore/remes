@@ -19,7 +19,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Remes Admin Portal",
+  title: "Remes",
   description: "Admin portal for Remes platform",
 };
 

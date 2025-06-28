@@ -1,4 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
+
+@font-face {
+  font-family: 'Myanmar MN';
+  src: url('/fonts/myanmar-mn.woff2') format('woff2'),
+       url('/fonts/myanmar-mn.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* @font-face {
+  font-family: 'Myanmar MN';
+  src: url('/fonts/myanmar-mn.woff2') format('woff2'),
+       url('/fonts/myanmar-mn.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+} */
 
 :root {
   --background: #ffffff;
@@ -9,13 +28,16 @@
   --gold: #EEDAB8;
   --dark-gold: #E2C397;
   --gray: #585858;
+  --font-myanmar: 'Myanmar MN', 'MyanmarMN', Arial, sans-serif;
+  --font-poppins: 'Poppins', Arial, sans-serif;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: var(--font-poppins);
+  --font-myanmar: var(--font-myanmar);
+  --font-poppins: var(--font-poppins);
 }
 
 /* @media (prefers-color-scheme: dark) {
@@ -28,6 +50,11 @@
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-poppins);
 }
 
+@layer utilities {
+  .font-myanmar {
+    font-family: var(--font-myanmar);
+  }
+}
