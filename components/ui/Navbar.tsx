@@ -93,13 +93,45 @@ export default function Navbar() {
 
               {/* Right Navigation */}
               <div className="flex items-center space-x-6 flex-1 justify-end pl-16">
-                <button
-                  onClick={() => setIsSearchOpen(true)}
-                  className="text-white hover:text-gray-200 transition-colors duration-200 p-2 rounded-full hover:bg-white/10"
-                  aria-label="Search"
-                >
-                  <SearchIcon />
-                </button>
+                {/* Desktop Search */}
+                <div className="relative">
+                  {!isSearchOpen ? (
+                    <button
+                      onClick={() => setIsSearchOpen(true)}
+                      className="text-white hover:text-gray-200 transition-colors duration-500 p-2 rounded-full hover:bg-white/10"
+                      aria-label="Search"
+                    >
+                      <SearchIcon />
+                    </button>
+                  ) : (
+                    <div className="flex items-center animate-in slide-in-from-right-5 duration-500 ease-out">
+                      <div className="relative max-w-[250px] w-full bg-[#1e4a73] rounded border-white/20 transition-all duration-500 ease-in-out">
+                        <input
+                          type="text"
+                          placeholder="Recherche"
+                          className="w-full bg-transparent px-4 py-2 text-white placeholder-[var(--light-blue2)] focus:outline-none"
+                          autoFocus
+                        />
+                        <button
+                          type="submit"
+                          className="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-white transition-colors p-1"
+                          aria-label="Search"
+                        >
+                          <SearchIcon />
+                        </button>
+                      </div>
+                      <button
+                        onClick={() => setIsSearchOpen(false)}
+                        className="ml-2 text-white/70 hover:text-white transition-all duration-500 ease-in-out p-1 hover:scale-110"
+                        aria-label="Close search"
+                      >
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      </button>
+                    </div>
+                  )}
+                </div>
                 {[
                   { href: '/about', label: t('menu.about') },
                   { href: '/magazine', label: t('menu.magazine') },
@@ -109,7 +141,7 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`relative text-xl px-1 transition-colors duration-200 font-[var(--font-myanmar)] ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                      className={`relative text-xl px-1 transition-colors duration-500 font-[var(--font-myanmar)] ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
                     >
                       <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
                         {item.label}
@@ -279,35 +311,37 @@ export default function Navbar() {
         </div>
       )}
 
-      {/* Full Screen Search Modal */}
+      {/* Full Screen Search Modal - Mobile Only */}
       {isSearchOpen && (
-        <div className="fixed inset-0 z-[70] flex items-center justify-center" style={{ backgroundColor: 'rgba(0,10,26,0.92)' }}>
-          {/* Close Button */}
-          <button
-            onClick={() => setIsSearchOpen(false)}
-            className="absolute top-8 left-6 text-white hover:text-gray-200 transition-colors duration-200 p-2"
-            aria-label="Close search"
-          >
-            <CloseIcon />
-          </button>
+        <div className="xl:hidden">
+          <div className="fixed inset-0 z-[70] flex items-center justify-center" style={{ backgroundColor: 'rgba(0,10,26,0.92)' }}>
+            {/* Close Button */}
+            <button
+              onClick={() => setIsSearchOpen(false)}
+              className="absolute top-8 left-6 text-white hover:text-gray-200 transition-colors duration-200 p-2"
+              aria-label="Close search"
+            >
+              <CloseIcon />
+            </button>
 
-          {/* Centered Search Input */}
-          <form className="w-full flex justify-center items-center">
-            <div className="relative w-4/5 max-w-md">
-              <input
-                type="text"
-                placeholder="Chercher"
-                className="w-full bg-transparent border border-white/60 rounded-none px-4 py-3 text-white placeholder-white/80 focus:outline-none focus:border-[#EEDAB8] transition-colors pr-12"
-                autoFocus
-              />
-              <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-[#EEDAB8] transition-colors">
-                <svg width="24" height="24" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                  <circle cx="10.2243" cy="10.3776" r="8.98856" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                  <path d="M16.476 17.0961L20 20.611" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                </svg>
-              </button>
-            </div>
-          </form>
+            {/* Centered Search Input */}
+            <form className="w-full flex justify-center items-center">
+              <div className="relative w-4/5 max-w-md">
+                <input
+                  type="text"
+                  placeholder="Chercher"
+                  className="w-full bg-transparent border border-white/60 rounded-none px-4 py-3 text-white placeholder-white/80 focus:outline-none focus:border-[#EEDAB8] transition-colors pr-12"
+                  autoFocus
+                />
+                <button type="submit" className="absolute right-2 top-1/2 -translate-y-1/2 text-white/80 hover:text-[#EEDAB8] transition-colors">
+                  <svg width="24" height="24" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="10.2243" cy="10.3776" r="8.98856" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                    <path d="M16.476 17.0961L20 20.611" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                  </svg>
+                </button>
+              </div>
+            </form>
+          </div>
         </div>
       )}
     </header>

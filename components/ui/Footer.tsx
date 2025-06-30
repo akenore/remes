@@ -122,7 +122,7 @@ export default function Footer() {
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
                               <h2 className="text-[var(--gold)] text-2xl font-[var(--font-myanmar)] mb-10">Menu</h2>
-                              <ul className="text-white">
+                              <ul className="text-white space-y-4">
                                    <li>
                                         <a href="#">Accueil</a>
                                    </li>
@@ -139,7 +139,7 @@ export default function Footer() {
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-2 md:col-span-2">
                               <h2 className="text-[var(--gold)] text-2xl font-[var(--font-myanmar)] mb-10">Resousrs</h2>
-                              <ul className="text-white">
+                              <ul className="text-white space-y-4">
                                    <li>
                                         <a href="#">About</a>
                                    </li>
@@ -156,7 +156,7 @@ export default function Footer() {
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
                               <h2 className="text-[var(--gold)] text-2xl font-[var(--font-myanmar)] mb-10">Legal</h2>
-                              <ul className="text-white">
+                              <ul className="text-white space-y-4">
                                    <li>
                                         <a href="#">Terms of services</a>
                                    </li>
@@ -170,8 +170,8 @@ export default function Footer() {
                <div className="mt-auto">
                     <hr className="text-[var(--blue)] mt-8 md:mt-16"/>
                     <div className="text-[var(--light-blue)] sm:flex sm:justify-around pt-4 md:pt-8 pb-8">
-                         <div>© 2025 - 2026 Remes, All Rights Reserved</div>
-                         <div>Designed and Dev by Be&Go</div>
+                         <div className="ml-3 md:ml-0">© 2025 - 2026 Remes, All Rights Reserved</div>
+                         <div className="ml-3 md:ml-0">Designed and Dev by Be&Go</div>
                     </div>
                </div>
           </footer>
