@@ -99,22 +99,78 @@ export default function Masonary() {
           <div className="px-4 md:px-0">
             {/* Mobile Layout - 2x2 Grid */}
             <div className="grid grid-cols-2 gap-4 h-[400px] lg:hidden">
-              {currentImages.slice(0, 4).map((image, index) => (
-                <div
-                  key={index}
-                  className="relative overflow-hidden cursor-pointer group"
-                  onClick={() => openPopup(image)}
-                >
-                  <Image
-                    src={image}
-                    alt={`Gallery image ${index + 1}`}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="50vw"
-                  />
-                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
-                </div>
-              ))}
+              {/* Top Row - 2 images */}
+              <div
+                className="relative overflow-hidden cursor-pointer group"
+                onClick={() => openPopup(currentImages[0])}
+              >
+                <Image
+                  src={currentImages[0]}
+                  alt="Gallery image 1"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="50vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              </div>
+              <div
+                className="relative overflow-hidden cursor-pointer group"
+                onClick={() => openPopup(currentImages[1])}
+              >
+                <Image
+                  src={currentImages[1]}
+                  alt="Gallery image 2"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="50vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              </div>
+              
+              {/* Bottom Row - 2 images */}
+              <div
+                className="relative overflow-hidden cursor-pointer group"
+                onClick={() => openPopup(currentImages[2])}
+              >
+                <Image
+                  src={currentImages[2]}
+                  alt="Gallery image 3"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="50vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              </div>
+              <div
+                className="relative overflow-hidden cursor-pointer group"
+                onClick={() => openPopup(currentImages[3])}
+              >
+                <Image
+                  src={currentImages[3]}
+                  alt="Gallery image 4"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="50vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              </div>
+            </div>
+
+            {/* Mobile - 5th Image Below (Full width of grid) */}
+            <div className="lg:hidden mt-4">
+              <div
+                className="relative overflow-hidden cursor-pointer group h-[200px]"
+                onClick={() => openPopup(currentImages[4])}
+              >
+                <Image
+                  src={currentImages[4]}
+                  alt="Gallery image 5"
+                  fill
+                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  sizes="100vw"
+                />
+                <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
+              </div>
             </div>
 
             {/* Desktop Layout: Left Big - Center (1 medium + 2 small) - Right Big */}
@@ -154,7 +210,7 @@ export default function Masonary() {
                 {/* Bottom Row - 2 Small Images */}
                 <div className="grid grid-cols-2 gap-4">
                   <div
-                    className="relative  overflow-hidden cursor-pointer group"
+                    className="relative overflow-hidden cursor-pointer group"
                     onClick={() => openPopup(currentImages[2])}
                   >
                     <Image
