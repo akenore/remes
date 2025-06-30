@@ -2,7 +2,7 @@ import Image from "next/image";
 
 export default function Footer() {
      return (
-          <footer className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat">
+          <footer className="w-full min-h-[1220px] lg:min-h-[1330px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
                <div className="flex flex-col items-center justify-center pt-96 mb-20">
                     <Image src="/logo-footer.png" alt="Remes" width={335} height={263} className="w-1/2 md:w-1/6" />
                </div>
@@ -167,10 +167,12 @@ export default function Footer() {
                          </div>
                     </div>
                </div>
-               <hr className="text-[var(--blue)] pt-4 md:pt-10"/>
-               <div className="text-[var(--light-blue)] sm:flex sm:justify-around">
-                    <div>© 2025 - 2026 Remes, All Rights Reserved</div>
-                    <div>Designed and Dev by Be&Go</div>
+               <div className="mt-auto">
+                    <hr className="text-[var(--blue)] mt-8 md:mt-16"/>
+                    <div className="text-[var(--light-blue)] sm:flex sm:justify-around pt-4 md:pt-8 pb-8">
+                         <div>© 2025 - 2026 Remes, All Rights Reserved</div>
+                         <div>Designed and Dev by Be&Go</div>
+                    </div>
                </div>
           </footer>
      );

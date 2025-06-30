@@ -25,13 +25,13 @@ export default function Home() {
           <div>
             <Image src="/home/h-r-1.jpg" alt="Maison de Repos" width={610} height={648} style={{ width: "100%", height: "auto" }} />
             <div className="flex justify-center lg:hidden">
-              <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="-mt-16 md:-mt-20 h-auto max-w-full" style={{ width: "auto", height: "40%" }} />
+              <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="-mt-16 md:-mt-20 h-auto max-w-full" style={{ width: "auto", height: "25%" }} />
             </div>
-            <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="hidden lg:block -mt-16 md:-mt-20 lg:-ml-10 h-auto max-w-full" style={{ width: "auto", height: "40%" }} />
+            <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="hidden lg:block -mt-16 md:-mt-20 lg:-ml-10 h-auto max-w-full" style={{ width: "auto", height: "25%" }} />
           </div>
         </div>
       </main>
-      <div className="bg-[var(--dark-blue)] pb-10 md:pb-0">
+      <div className="bg-[var(--dark-blue)] pb-10">
         <Footer />
       </div>
     </>
