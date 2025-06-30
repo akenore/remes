@@ -66,7 +66,7 @@ export default function Masonary() {
   return (
     <>
       <div className="w-full min-h-[1610px] lg:min-h-[1750px] bg-cover bg-top bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')] bg-no-repeat flex flex-col justify-between">
-        <div className="container md:mx-4 xl:mx-auto pt-40 max-w-7xl">
+        <div className="container md:mx-4 xl:mx-auto pt-62 max-w-7xl">
           {/* Header with Navigation */}
           <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-12">
             <div className="mb-8 md:mb-0">
@@ -76,7 +76,8 @@ export default function Masonary() {
                 dsfsf..s.df..sdfs
               </p>
             </div>
-            <div className="flex items-center justify-center md:justify-end space-x-6">
+            {/* Desktop Navigation */}
+            <div className="hidden md:flex items-center justify-center md:justify-end space-x-6">
               <button
                 onClick={goToPrevious}
                 className="text-white hover:text-[var(--gold)] transition-colors duration-300 p-2 md:p-3"
@@ -94,14 +95,14 @@ export default function Masonary() {
             </div>
           </div>
 
-          {/* Gallery Grid - Mobile: Single Column, Desktop: 3 Column Layout */}
+          {/* Gallery Grid - Mobile: 2x2 Grid, Desktop: 3 Column Layout */}
           <div className="px-4 md:px-0">
-            {/* Mobile Layout */}
-            <div className="grid grid-cols-1 gap-4 h-[400px] lg:hidden">
-              {currentImages.map((image, index) => (
+            {/* Mobile Layout - 2x2 Grid */}
+            <div className="grid grid-cols-2 gap-4 h-[400px] lg:hidden">
+              {currentImages.slice(0, 4).map((image, index) => (
                 <div
                   key={index}
-                  className="relative rounded-lg overflow-hidden cursor-pointer group"
+                  className="relative overflow-hidden cursor-pointer group"
                   onClick={() => openPopup(image)}
                 >
                   <Image
@@ -109,7 +110,7 @@ export default function Masonary() {
                     alt={`Gallery image ${index + 1}`}
                     fill
                     className="object-cover group-hover:scale-105 transition-transform duration-500"
-                    sizes="100vw"
+                    sizes="50vw"
                   />
                   <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                 </div>
@@ -117,10 +118,10 @@ export default function Masonary() {
             </div>
 
             {/* Desktop Layout: Left Big - Center (1 medium + 2 small) - Right Big */}
-            <div className="hidden lg:grid lg:grid-cols-3 gap-4 h-[400px]">
+            <div className="hidden lg:grid lg:grid-cols-3 gap-4 h-[600px]">
               {/* Left Big Image */}
               <div 
-                className="relative rounded-lg overflow-hidden cursor-pointer group"
+                className="relative overflow-hidden cursor-pointer group"
                 onClick={() => openPopup(currentImages[0])}
               >
                 <Image
@@ -137,7 +138,7 @@ export default function Masonary() {
               <div className="grid grid-rows-2 gap-4">
                 {/* Top Medium Image */}
                 <div
-                  className="relative rounded-lg overflow-hidden cursor-pointer group"
+                  className="relative overflow-hidden cursor-pointer group"
                   onClick={() => openPopup(currentImages[1])}
                 >
                   <Image
@@ -153,7 +154,7 @@ export default function Masonary() {
                 {/* Bottom Row - 2 Small Images */}
                 <div className="grid grid-cols-2 gap-4">
                   <div
-                    className="relative rounded-lg overflow-hidden cursor-pointer group"
+                    className="relative  overflow-hidden cursor-pointer group"
                     onClick={() => openPopup(currentImages[2])}
                   >
                     <Image
@@ -166,7 +167,7 @@ export default function Masonary() {
                     <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
                   </div>
                   <div
-                    className="relative rounded-lg overflow-hidden cursor-pointer group"
+                    className="relative overflow-hidden cursor-pointer group"
                     onClick={() => openPopup(currentImages[3])}
                   >
                     <Image
@@ -183,7 +184,7 @@ export default function Masonary() {
 
               {/* Right Big Image */}
               <div 
-                className="relative rounded-lg overflow-hidden cursor-pointer group"
+                className="relative overflow-hidden cursor-pointer group"
                 onClick={() => openPopup(currentImages[4])}
               >
                 <Image
@@ -196,6 +197,24 @@ export default function Masonary() {
                 <div className="absolute inset-0 bg-black/0 group-hover:bg-black/20 transition-colors duration-300" />
               </div>
             </div>
+          </div>
+
+          {/* Mobile Navigation - Bottom */}
+          <div className="flex md:hidden items-center justify-center space-x-6 mt-8">
+            <button
+              onClick={goToPrevious}
+              className="text-white hover:text-[var(--gold)] transition-colors duration-300 p-2"
+              aria-label="Previous images"
+            >
+              <ArrowLeft />
+            </button>
+            <button
+              onClick={goToNext}
+              className="text-white hover:text-[var(--gold)] transition-colors duration-300 p-2"
+              aria-label="Next images"
+            >
+              <ArrowRight />
+            </button>
           </div>
         </div>
       </div>
