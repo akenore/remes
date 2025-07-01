@@ -65,9 +65,9 @@ export default function Navbar() {
               {/* Left Navigation */}
               <div className="flex items-center space-x-8 flex-1 justify-start pr-16">
                 {[
-                  { href: '/', label: t('menu.home') },
-                  { href: '/retirement-home', label: t('menu.retirementHome') },
-                  { href: '/adapted-stay', label: t('menu.adaptedStay') },
+                  { href: '/', label: t('frontend.menu.home') },
+                  { href: '/retirement-home', label: t('frontend.menu.retirementHome') },
+                  { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
                 ].map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -133,8 +133,8 @@ export default function Navbar() {
                   )}
                 </div>
                 {[
-                  { href: '/about', label: t('menu.about') },
-                  { href: '/magazine', label: t('menu.magazine') },
+                  { href: '/about', label: t('frontend.menu.about') },
+                  { href: '/magazine', label: t('frontend.menu.magazine') },
                 ].map((item) => {
                   const isActive = pathname === item.href;
                   return (
@@ -173,11 +173,11 @@ export default function Navbar() {
             {/* Menu Items */}
             <div className="mt-40 px-8 space-y-2">
               {[
-                { href: '/', label: t('menu.home') },
-                { href: '/retirement-home', label: t('menu.retirementHome') },
-                { href: '/adapted-stay', label: t('menu.adaptedStay') },
-                { href: '/about', label: t('menu.about') },
-                { href: '/magazine', label: t('menu.magazine') },
+                { href: '/', label: t('frontend.menu.home') },
+                { href: '/retirement-home', label: t('frontend.menu.retirementHome') },
+                { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
+                { href: '/about', label: t('frontend.menu.about') },
+                { href: '/magazine', label: t('frontend.menu.magazine') },
               ].map((item, idx) => {
                 const isActive = pathname === item.href;
                 return (

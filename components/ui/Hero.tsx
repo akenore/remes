@@ -1,6 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import Image from 'next/image';
+import { useTranslations } from 'next-intl';
 import Card from './Card';
 import Navbar from './Navbar';
 
@@ -22,12 +22,12 @@ const carouselSlides = [
   }
 ];
 
-// Custom arrow icons
 const NextArrow = () => (
   <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M17.0333 9.66667L30.5667 23.2L17.0333 36.7333" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round" />
   </svg>
 );
+
 const PrevArrow = () => (
   <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
     <path d="M29.9667 36.7334L16.4333 23.2L29.9667 9.66669" stroke="white" strokeWidth="2.9" strokeLinecap="round" strokeLinejoin="round" />
@@ -35,6 +35,8 @@ const PrevArrow = () => (
 );
 
 export default function Hero() {
+  const t = useTranslations('frontend');
+  const homeT = useTranslations('frontend.home');
   const [current, setCurrent] = useState(0);
   const total = carouselSlides.length;
   const goTo = (idx: number) => setCurrent((idx + total) % total);
@@ -48,7 +50,7 @@ export default function Hero() {
 
   return (
     <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/hero-1/bg-desktop.jpg')] bg-no-repeat">
-      < Navbar />
+      <Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
           {carouselSlides.map((slide, idx) => (
@@ -64,7 +66,7 @@ export default function Hero() {
               {slide.buttonText && (
                 <div className="mb-10">
                   <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--gold)] transition-colors mt-8 mb-8">
-                    {slide.buttonText}
+                    {t('button')}
                   </button>
                 </div>
               )}
@@ -73,14 +75,14 @@ export default function Hero() {
         </div>
         <div className="pt-52 md:pt-72">
           <button
-            aria-label="Previous slide"
+            aria-label={homeT('hero.previous')}
             onClick={() => goTo(current - 1)}
             className="p-2 transition-colors cursor-pointer"
           >
             <PrevArrow />
           </button>
           <button
-            aria-label="Next slide"
+            aria-label={homeT('hero.next')}
             onClick={() => goTo(current + 1)}
             className="p-2 transition-colors cursor-pointer"
           >
@@ -88,22 +90,22 @@ export default function Hero() {
           </button>
         </div>
       </div>
-      <div className="pt-40  w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
+      <div className="pt-40 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
         <Card
           image="/card/card-1.jpg"
-          title="Maison de Repos"
-          description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
-          buttonText="En savoir plus"
-          buttonHref="/maison-de-repos"
+          title={homeT('cards.retirement.title')}
+          description={homeT('cards.retirement.description')}
+          buttonText={t('button')}
+          buttonHref="/retirement-home"
         />
         <Card
           image="/card/card-1.jpg"
-          title="Séjour Adaptée"
-          description="Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
-          buttonText="En savoir plus"
-          buttonHref="/sejour-adaptee"
+          title={homeT('cards.adapted.title')}
+          description={homeT('cards.adapted.description')}
+          buttonText={t('button')}
+          buttonHref="/adapted-stay"
         />
       </div>
-    </div >
+    </div>
   );
 }

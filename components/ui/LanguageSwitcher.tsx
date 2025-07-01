@@ -16,10 +16,16 @@ export default function LanguageSwitcher() {
 
   return (
     <div className="relative inline-block text-left">
+      <label htmlFor="language-select" className="sr-only">
+        {t('selectLanguage')}
+      </label>
       <select
+        id="language-select"
+        name="language"
         value={locale}
         onChange={(e) => handleLocaleChange(e.target.value)}
         className="appearance-none bg-white border border-gray-300 rounded-md px-3 py-2 pr-8 text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500"
+        aria-label={t('selectLanguage')}
       >
         {routing.locales.map((loc) => (
           <option key={loc} value={loc}>
@@ -33,6 +39,7 @@ export default function LanguageSwitcher() {
           fill="none"
           viewBox="0 0 24 24"
           stroke="currentColor"
+          aria-hidden="true"
         >
           <path
             strokeLinecap="round"

@@ -1,12 +1,13 @@
 import Image from 'next/image';
 
 const partners = [
-  '/partners/p1.png',
-  '/partners/p2.png',
-  '/partners/p3.png',
-  '/partners/p4.png',
-  '/partners/p5.png',
-  '/partners/p6.png',
+  // '/partners/p1.png',
+  '/home/left-h.jpg',
+  '/home/left-h.jpg',
+  '/home/left-h.jpg',
+  '/home/left-h.jpg',
+  '/home/left-h.jpg',
+  '/home/left-h.jpg',
 ];
 
 export default function Partners() {

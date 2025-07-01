@@ -276,7 +276,7 @@
     "richTextEditor": {
       "placeholder": "Start writing...",
       "selectImage": "Select an image",
-      "uploadFromPC": "Upload from PC", 
+      "uploadFromPC": "Upload from PC",
       "fromCollection": "From collection",
       "uploading": "Uploading...",
       "clickToUpload": "Click to upload",
@@ -394,7 +394,7 @@
       "success": {
         "profileUpdated": "Profile updated successfully!",
         "profileUpdatedEmailChange": "Profile updated! Please check your email to confirm the new email address.",
-      "profileUpdatedEmailChangeSecure": "Profile updated! Please check your email to confirm the new address. IMPORTANT: After confirming the email change, you will be automatically logged out for security reasons and will need to log in again with your new email.",
+        "profileUpdatedEmailChangeSecure": "Profile updated! Please check your email to confirm the new address. IMPORTANT: After confirming the email change, you will be automatically logged out for security reasons and will need to log in again with your new email.",
         "passwordUpdated": "Password updated successfully!"
       },
       "errors": {
@@ -466,7 +466,8 @@
     "draft": "Draft",
     "language": "Language",
     "english": "English",
-    "french": "French"
+    "french": "French",
+    "selectLanguage": "Select language"
   },
   "navigation": {
     "home": "Home",
@@ -482,11 +483,34 @@
     "password": "Password must be at least 6 characters",
     "confirmPassword": "Passwords do not match"
   },
-  "menu": {
-    "home": "Home",
-    "retirementHome": "Retirement Home",
-    "adaptedStay": "Adapted Stay",
-    "about": "About",
-    "magazine": "Magazine"
+  "frontend": {
+    "menu": {
+      "home": "Home",
+      "retirementHome": "Nursing Home Services",
+      "adaptedStay": "Tailored Stays",
+      "about": "About us",
+      "magazine": "magazine"
+    },
+    "button": "Read more",
+    "home": {
+      "meta": {
+        "title": "Remes Medical Residence - Home",
+        "description": "A place of life, care and serenity. A high-end medical residence by the sea, dedicated to comfort, care and serenity."
+      },
+      "hero": {
+        "previous": "Previous slide",
+        "next": "Next slide"
+      },
+      "cards": {
+        "retirement": {
+          "title": "Retirement Home",
+          "description": "A calm and secure living space, with personalized medical care on a daily basis."
+        },
+        "adapted": {
+          "title": "Adapted Stay",
+          "description": "A flexible solution for temporary care, in complete tranquility and in a comfortable setting."
+        }
+      }
+    }
   }
-} 
+}

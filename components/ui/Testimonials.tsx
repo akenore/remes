@@ -91,7 +91,7 @@ export default function Testimonials() {
                   className="w-12 h-12 rounded-full object-cover shadow-lg mb-4 sm:mb-0"
                 />
                 <div>
-                  <h4 className="text-[var(--dark-blue)] font-semibold">{t.author}</h4>
+                  <h3 className="text-[var(--dark-blue)] font-semibold">{t.author}</h3>
                   <span className="text-sm text-[var(--gray)]">{t.role}</span>
                 </div>
               </div>

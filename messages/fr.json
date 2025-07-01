@@ -466,7 +466,8 @@
     "draft": "Brouillon",
     "language": "Langue",
     "english": "Anglais",
-    "french": "Français"
+    "french": "Français",
+    "selectLanguage": "Sélectionner la langue"
   },
   "navigation": {
     "home": "Accueil",
@@ -482,11 +483,34 @@
     "password": "Le mot de passe doit contenir au moins 6 caractères",
     "confirmPassword": "Les mots de passe ne correspondent pas"
   },
-  "menu": {
-    "home": "Accueil",
-    "retirementHome": "Maison de repos",
-    "adaptedStay": "Sejour adaptee",
-    "about": "A Propos",
-    "magazine": "Magazine"
+  "frontend": {
+    "menu": {
+      "home": "Accueil",
+      "retirementHome": "Maison de repos",
+      "adaptedStay": "Sejour adaptee",
+      "about": "À propos",
+      "magazine": "magazine"
+    },
+    "button": "En savoir plus",
+    "home": {
+      "meta": {
+        "title": "Résidence médicalisée Remes - Accueil",
+        "description": "Un lieu de vie, de soin et de sérénité. Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité."
+      },
+      "hero": {
+        "previous": "Diapositive précédente",
+        "next": "Diapositive suivante"
+      },
+      "cards": {
+        "retirement": {
+          "title": "Maison de Repos",
+          "description": "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+        },
+        "adapted": {
+          "title": "Séjour Adaptée",
+          "description": "Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
+        }
+      }
+    }
   }
 } 
