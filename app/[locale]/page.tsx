@@ -2,6 +2,7 @@ import Hero from "@/components/ui/Hero";
 import Image from "next/image";
 import Footer from "@/components/ui/Footer";
 import Masonary from "@/components/ui/gallery/Masonry";
+import Testimonials from "@/components/ui/Testimonials";
 
 
 export default function Home() {
@@ -40,6 +41,7 @@ export default function Home() {
           </div>
         </div>
         <Masonary />
+        <Testimonials />
       </main>
       <div className="bg-[var(--dark-blue)] pb-10">
         <Footer />
