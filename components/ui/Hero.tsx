@@ -50,7 +50,7 @@ export default function Hero() {
     <div className="w-full h-[1220px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/hero-1/bg-desktop.jpg')] bg-no-repeat">
       < Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
-        <div className='mb-20 max-h-1/2'>
+        <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
           {carouselSlides.map((slide, idx) => (
             <div
               key={idx}
@@ -63,7 +63,7 @@ export default function Hero() {
               </div>
               {slide.buttonText && (
                 <div className="mb-10">
-                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--dark-blue)] transition-colors mt-8 mb-8">
+                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--gold)] transition-colors mt-8 mb-8">
                     {slide.buttonText}
                   </button>
                 </div>
