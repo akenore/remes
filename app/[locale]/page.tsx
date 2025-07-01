@@ -3,6 +3,7 @@ import Image from "next/image";
 import Footer from "@/components/ui/Footer";
 import Masonary from "@/components/ui/gallery/Masonry";
 import Testimonials from "@/components/ui/Testimonials";
+import Partners from "@/components/ui/Partners";
 
 
 export default function Home() {
@@ -42,6 +43,24 @@ export default function Home() {
         </div>
         <Masonary />
         <Testimonials />
+        {/* Marquee strip */}
+        <div className="overflow-hidden py-20">
+          <div className="flex items-center space-x-10 animate-marquee whitespace-nowrap">
+            {Array.from({length:6}).map((_, idx) => (
+              <div key={"first-"+idx} className="flex items-center space-x-5 mx-5">
+                <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] flex-shrink-0" />
+                <span className="text-[var(--dark-blue)] text-[2.25rem] lg:text-[4.3rem] font-vensfolk uppercase tracking-wide">Remes résidence médicalisée</span>
+              </div>
+            ))}
+            {Array.from({length:6}).map((_, idx) => (
+              <div key={"second-"+idx} className="flex items-center space-x-5 mx-5">
+                <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] flex-shrink-0" />
+                <span className="text-[var(--dark-blue)] text-[2.25rem] lg:text-[4.3rem] font-vensfolk uppercase tracking-wide">Remes résidence médicalisée</span>
+              </div>
+            ))}
+          </div>
+        </div>
+        <Partners />
       </main>
       <div className="bg-[var(--dark-blue)] pb-10">
         <Footer />
