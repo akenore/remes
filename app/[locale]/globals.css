@@ -1,52 +1,37 @@
-@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
 @import "tailwindcss";
-
-@font-face {
-  font-family: 'Myanmar MN';
-  src: url('/fonts/myanmar-mn.woff2') format('woff2'),
-       url('/fonts/myanmar-mn.woff') format('woff');
-  font-weight: 400;
-  font-style: normal;
-  font-display: swap;
-}
-
-/* @font-face {
-  font-family: 'Myanmar MN';
-  src: url('/fonts/myanmar-mn.woff2') format('woff2'),
-       url('/fonts/myanmar-mn.woff') format('woff');
-  font-weight: 700;
-  font-style: normal;
-  font-display: swap;
-} */
 
 :root {
   --background: #ffffff;
   --foreground: #171717;
   --blue: #073563;
   --light-blue: #346AA1;
-  --light-blue2 : #6EB7FF;
+  --light-blue2: #6EB7FF;
   --dark-blue: #011738;
   --gold: #EEDAB8;
   --dark-gold: #E2C397;
   --gray: #585858;
-  --font-myanmar: 'Myanmar MN', 'MyanmarMN', Arial, sans-serif;
-  --font-poppins: 'Poppins', Arial, sans-serif;
 }
 
-@theme inline {
+@theme {
+  /* Colors */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-blue: var(--blue);
+  --color-light-blue: var(--light-blue);
+  --color-light-blue2: var(--light-blue2);
+  --color-dark-blue: var(--dark-blue);
+  --color-gold: var(--gold);
+  --color-dark-gold: var(--dark-gold);
+  --color-gray: var(--gray);
+
+  /* Fonts - Using Next.js font optimization variables */
   --font-sans: var(--font-poppins);
   --font-myanmar: var(--font-myanmar);
   --font-poppins: var(--font-poppins);
+  --font-vensfolk: var(--font-vensfolk);
+  --font-geist-sans: var(--font-geist-sans);
+  --font-geist-mono: var(--font-geist-mono);
 }
-
-/* @media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-} */
 
 body {
   background: var(--background);
@@ -57,5 +42,13 @@ body {
 @layer utilities {
   .font-myanmar {
     font-family: var(--font-myanmar);
+  }
+  
+  .font-vensfolk {
+    font-family: var(--font-vensfolk);
+  }
+  
+  .font-poppins {
+    font-family: var(--font-poppins);
   }
 }

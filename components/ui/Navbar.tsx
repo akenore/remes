@@ -28,7 +28,7 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="relative z-50 bg-transparent font-[var(--font-myanmar)] py-20 text-[1.18rem] md:mb-40">
+      <nav className="relative z-50 bg-transparent font-myanmar py-20 text-[1.18rem] md:mb-40">
         <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
@@ -74,7 +74,7 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`relative text-xl px-1 transition-colors duration-200 font-[var(--font-myanmar)] ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                      className={`relative text-xl px-1 transition-colors duration-200 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
                     >
                       <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
                         {item.label}
@@ -141,7 +141,7 @@ export default function Navbar() {
                     <Link
                       key={item.href}
                       href={item.href}
-                      className={`relative text-xl px-1 transition-colors duration-500 font-[var(--font-myanmar)] ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                      className={`relative text-xl px-1 transition-colors duration-500 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
                     >
                       <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
                         {item.label}

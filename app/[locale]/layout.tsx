@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Poppins } from "next/font/google";
+import localFont from "next/font/local";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
 import { NextIntlClientProvider } from 'next-intl';
@@ -15,6 +16,41 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: "--font-geist-mono",
   subsets: ["latin"],
+});
+
+// Optimized Poppins with next/font/google
+const poppins = Poppins({
+  weight: ['400', '500', '600', '700'],
+  subsets: ['latin'],
+  variable: '--font-poppins',
+  display: 'swap',
+});
+
+// Local custom fonts with next/font/local
+const myanmarMN = localFont({
+  src: [
+    {
+      path: '../../public/fonts/myanmar-mn.woff2',
+      weight: '400',
+      style: 'normal',
+    },
+    {
+      path: '../../public/fonts/myanmar-mn.woff',
+      weight: '400',
+      style: 'normal',
+    },
+  ],
+  variable: '--font-myanmar',
+  display: 'swap',
+  fallback: ['MyanmarMN', 'Arial', 'sans-serif'],
+});
+
+const vensfolk = localFont({
+  src: '../../public/fonts/vensfolk.woff',
+  variable: '--font-vensfolk',
+  weight: '400',
+  display: 'swap',
+  fallback: ['Arial', 'sans-serif'],
 });
 
 export const metadata: Metadata = {
@@ -47,7 +83,7 @@ export default async function LocaleLayout({
   return (
     <html lang={locale}>
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${myanmarMN.variable} ${vensfolk.variable} antialiased`}
       >
         <NextIntlClientProvider messages={messages}>
         <AuthProvider>

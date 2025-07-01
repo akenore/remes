@@ -73,7 +73,7 @@ export default function Masonary() {
             <header className="text-center lg:text-left mb-12 lg:mb-16">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div className="flex-1">
-                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-[var(--font-myanmar)] mb-4">
+                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
                     Notre Gallerie
                   </h2>
                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
