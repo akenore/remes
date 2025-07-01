@@ -1,7 +1,7 @@
 import Hero from "@/components/ui/Hero";
 import Image from "next/image";
 import Footer from "@/components/ui/Footer";
-import Masonary from "@/components/ui/gallery/Masonary";
+import Masonary from "@/components/ui/gallery/Masonry";
 
 
 export default function Home() {
