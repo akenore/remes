@@ -13,7 +13,7 @@ const partners = [
 export default function Partners() {
   return (
     <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
-      <h2 className="text-[var(--dark-blue)] font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Nos Partenaires</h2>
+      <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Nos Partenaires</h2>
       <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
         Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
       </p>

@@ -49,7 +49,7 @@ export default function Testimonials() {
     <section className="max-w-7xl mx-5 md:mx-auto px-5 md:px-8 my-24 md:my-32">
       {/* Section heading */}
       <div className="mb-12 md:mb-20 max-w-3xl">
-        <h2 className="text-[2rem] text-center md:text-left md:text-[2.5rem] text-[var(--dark-blue)] font-myanmar mb-4">Temoignages</h2>
+        <h2 className="text-[2rem] text-center md:text-left md:text-[2.5rem] text-dark-blue font-myanmar mb-4">Temoignages</h2>
         <p className="text-[var(--gray)] text-center md:text-left leading-relaxed text-[1.063rem] md:max-w-lg w-full">
           Ils partagent leur expérience à REMES — des paroles sincères de confiance, de confort et de bien-être.
         </p>
@@ -91,7 +91,7 @@ export default function Testimonials() {
                   className="w-12 h-12 rounded-full object-cover shadow-lg mb-4 sm:mb-0"
                 />
                 <div>
-                  <h3 className="text-[var(--dark-blue)] font-semibold">{t.author}</h3>
+                  <h3 className="text-dark-blue font-semibold">{t.author}</h3>
                   <span className="text-sm text-[var(--gray)]">{t.role}</span>
                 </div>
               </div>

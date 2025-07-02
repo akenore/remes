@@ -109,7 +109,7 @@ export default function Navbar() {
                         <input
                           type="text"
                           placeholder="Recherche"
-                          className="w-full bg-transparent px-4 py-2 text-white placeholder-[var(--light-blue2)] focus:outline-none"
+                          className="w-full bg-transparent px-4 py-2 text-white placeholder-light-blue2 focus:outline-none"
                           autoFocus
                         />
                         <button
@@ -158,7 +158,7 @@ export default function Navbar() {
       {/* Full Screen Mobile Menu */}
       {isMenuOpen && (
         <div className="fixed inset-0 z-[60] xl:hidden">
-          <div className="absolute inset-0 bg-[var(--dark-blue)]">
+          <div className="absolute inset-0 bg-dark-blue">
             {/* Close Button */}
             <div className="absolute top-12 left-8 z-20">
               <button

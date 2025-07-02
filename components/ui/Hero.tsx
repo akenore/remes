@@ -65,7 +65,7 @@ export default function Hero() {
               </div>
               {slide.buttonText && (
                 <div className="mb-10">
-                  <button className="bg-[var(--gold)] text-[var(--dark-blue)] font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--gold)] transition-colors mt-8 mb-8">
+                  <button className="bg-[var(--gold)] text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--gold)] transition-colors mt-8 mb-8">
                     {t('button')}
                   </button>
                 </div>
