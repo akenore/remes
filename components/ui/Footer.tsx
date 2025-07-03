@@ -13,7 +13,7 @@ export default function Footer() {
                               <p className="pl-3 text-white mb-8 mx-2 md:mx-auto text-center sm:text-left">
                                    Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité.
                               </p>
-                              <div className="pl-3 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
+                              <div className="pl-3 pt-20 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
                                    <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook">
                                         <svg
                                              width={26}
@@ -120,7 +120,7 @@ export default function Footer() {
                               </div>
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
-                              <h2 className="text-[var(--gold)] text-2xl font-myanmar mb-10">Menu</h2>
+                              <h2 className="text-gold text-2xl font-myanmar mb-10">Menu</h2>
                               <ul className="text-white space-y-4">
                                    <li>
                                         <a href="#">Accueil</a>
@@ -136,8 +136,8 @@ export default function Footer() {
                                    </li>
                               </ul>
                          </div>
-                         <div className="mx-5 md:mx-auto col-span-4 sm:col-span-2 md:col-span-2">
-                              <h2 className="text-[var(--gold)] text-2xl font-myanmar mb-10">Resousrs</h2>
+                         <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
+                              <h2 className="text-gold text-2xl font-myanmar mb-10">Resousrs</h2>
                               <ul className="text-white space-y-4">
                                    <li>
                                         <a href="#">About</a>
@@ -154,7 +154,7 @@ export default function Footer() {
                               </ul>
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
-                              <h2 className="text-[var(--gold)] text-2xl font-myanmar mb-10">Legal</h2>
+                              <h2 className="text-gold text-2xl font-myanmar mb-10">Legal</h2>
                               <ul className="text-white space-y-4 mb-10">
                                    <li>
                                         <a href="#">Terms of services</a>

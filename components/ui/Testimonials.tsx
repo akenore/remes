@@ -1,5 +1,5 @@
 'use client'
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import Image from 'next/image';
 
 // Testimonial data structure
@@ -37,6 +37,25 @@ export default function Testimonials() {
   const [current, setCurrent] = useState(0);
   const total = testimonials.length;
 
+  // Refs to measure individual slide heights
+  const slideRefs = useRef<Array<HTMLDivElement | null>>([]);
+  const [maxSlideHeight, setMaxSlideHeight] = useState<number>(0);
+
+  // Calculate the tallest slide on mount & whenever the window resizes
+  useEffect(() => {
+    const calcHeight = () => {
+      const heights = slideRefs.current.map((el) => el?.offsetHeight || 0);
+      setMaxSlideHeight(Math.max(...heights));
+    };
+
+    // Initial calculation
+    calcHeight();
+
+    // Re-calculate on resize to keep responsiveness
+    window.addEventListener('resize', calcHeight);
+    return () => window.removeEventListener('resize', calcHeight);
+  }, []);
+
   // Auto-rotate every 6s (optional)
   useEffect(() => {
     const id = setInterval(() => setCurrent((prev) => (prev + 1) % total), 6000);
@@ -68,14 +87,20 @@ export default function Testimonials() {
         </div>
 
         {/* Right slider */}
-        <div className="relative flex flex-col md:pl-8 lg:pl-12 xl:pl-16 max-w-xl mx-auto md:mx-0">
+        <div
+          className="relative flex flex-col md:pl-8 lg:pl-12 xl:pl-16 max-w-xl mx-auto md:mx-0"
+          style={{ minHeight: maxSlideHeight }}
+        >
           {/* Slides */}
           {testimonials.map((t, idx) => (
             <div
+              ref={(el) => {
+                slideRefs.current[idx] = el;
+              }}
               key={idx}
               className={`transition-opacity duration-700 ease-in-out ${
-                current === idx 
-                  ? 'opacity-100 pointer-events-auto' 
+                current === idx
+                  ? 'opacity-100 pointer-events-auto'
                   : 'opacity-0 pointer-events-none absolute'
               }`}
             >
