@@ -15,8 +15,8 @@ export default function HeroPage() {
                     <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
                          <div className="h-64 flex flex-col justify-center md:justify-start">
                               <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">
-                                   A Propos
-                                   de Nous
+                                   Maison
+                                   de Repos
                               </h1>
                               <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">
                                    A cat named Mittens has made national headlines after she managed to find her way back home, despite being lost for over a week. Mittens

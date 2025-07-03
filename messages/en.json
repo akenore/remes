@@ -669,6 +669,11 @@
     "password": "Password must be at least 6 characters",
     "confirmPassword": "Passwords do not match"
   },
+  "notFound": {
+    "title": "Page Not Found",
+    "description": "The page you are looking for does not exist.",
+    "button": "Go to Home"
+  },
   "frontend": {
     "menu": {
       "home": "Home",

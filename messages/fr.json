@@ -669,6 +669,11 @@
     "password": "Le mot de passe doit contenir au moins 6 caractères",
     "confirmPassword": "Les mots de passe ne correspondent pas"
   },
+  "notFound": {
+    "title": "Page non trouvée",
+    "description": "La page que vous cherchez n'existe pas ou a été déplacée.",
+    "button": "Retour à l'accueil"
+  },
   "frontend": {
     "menu": {
       "home": "Accueil",
