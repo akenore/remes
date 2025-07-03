@@ -3,6 +3,7 @@ import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
 import { AuthProvider } from "@/lib/auth-context";
+import { ToastProvider } from "@/lib/toast-context";
 import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
 import { notFound } from 'next/navigation';
@@ -90,7 +91,9 @@ export default async function LocaleLayout({
       >
         <NextIntlClientProvider messages={messages}>
         <AuthProvider>
+        <ToastProvider>
         {children}
+        </ToastProvider>
         </AuthProvider>
         </NextIntlClientProvider>
       </body>

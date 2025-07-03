@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
+import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 
 interface Post {
@@ -240,11 +241,12 @@ export default function PostsPage() {
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
                           {post.cover_image && (
-                            <div className="flex-shrink-0 h-10 w-10">
-                              <img
-                                className="h-10 w-10 rounded-lg object-cover"
+                            <div className="flex-shrink-0 h-10 w-10 relative">
+                              <Image
                                 src={pb.files.getURL(post, post.cover_image, { thumb: '40x40' })}
-                                alt=""
+                                alt={post.title}
+                                fill
+                                className="rounded-lg object-cover"
                               />
                             </div>
                           )}

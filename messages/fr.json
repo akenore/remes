@@ -41,6 +41,9 @@
       "dashboard": "Tableau de bord",
       "posts": "Articles",
       "categories": "Catégories",
+      "homeSlider": "Slider d'accueil",
+      "medicalEquipment": "Équipements médicaux",
+      "testimonials": "Témoignages",
       "settings": "Paramètres"
     },
     "pageHeaders": {
@@ -49,6 +52,15 @@
       "addNewPost": "Ajouter un nouvel article",
       "editPost": "Modifier l'article",
       "categories": "Catégories",
+      "homeSlider": "Slider d'accueil",
+      "addNewSlide": "Ajouter une nouvelle diapositive",
+      "editSlide": "Modifier la diapositive",
+      "medicalEquipment": "Équipements médicaux",
+      "addNewEquipment": "Ajouter un nouvel équipement",
+      "editEquipment": "Modifier l'équipement",
+      "testimonials": "Témoignages",
+      "addNewTestimonial": "Ajouter un nouveau témoignage",
+      "editTestimonial": "Modifier le témoignage",
       "settings": "Paramètres"
     },
     "dashboard": {
@@ -400,6 +412,180 @@
       "errors": {
         "updateFailed": "Échec de la mise à jour du profil. Veuillez réessayer.",
         "passwordUpdateFailed": "Échec de la mise à jour du mot de passe. Veuillez réessayer."
+      }
+    },
+    "homeSlider": {
+      "title": "Slider d'accueil",
+      "description": "Gérez les diapositives affichées sur la page d'accueil",
+      "addNew": "Ajouter une nouvelle diapositive",
+      "searchPlaceholder": "Rechercher des diapositives...",
+      "searchLabel": "Rechercher des diapositives",
+      "table": {
+        "title": "Titre",
+        "description": "Description",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "Aucune diapositive trouvée",
+        "loadingSlides": "Chargement des diapositives..."
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cette diapositive ?",
+      "add": {
+        "title": "Ajouter une nouvelle diapositive",
+        "backToSlides": "Retour aux diapositives",
+        "form": {
+          "title": "Titre",
+          "titlePlaceholder": "Saisissez le titre de la diapositive...",
+          "description": "Description",
+          "descriptionPlaceholder": "Saisissez la description de la diapositive..."
+        },
+        "actions": {
+          "save": "Enregistrer la diapositive",
+          "saving": "Enregistrement..."
+        },
+        "success": {
+          "created": "Diapositive créée avec succès !"
+        },
+        "validation": {
+          "titleRequired": "Le titre est obligatoire",
+          "descriptionRequired": "La description est obligatoire"
+        }
+      },
+      "edit": {
+        "title": "Modifier la diapositive",
+        "backToSlides": "Retour aux diapositives",
+        "loading": "Chargement de la diapositive...",
+        "notFound": "Diapositive non trouvée",
+        "actions": {
+          "update": "Mettre à jour la diapositive",
+          "updating": "Mise à jour..."
+        },
+        "success": {
+          "updated": "Diapositive mise à jour avec succès !"
+        }
+      }
+    },
+    "medicalEquipment": {
+      "title": "Équipements médicaux",
+      "description": "Gérez le catalogue des équipements médicaux",
+      "addNew": "Ajouter un nouvel équipement",
+      "searchPlaceholder": "Rechercher des équipements...",
+      "searchLabel": "Rechercher des équipements",
+      "table": {
+        "image": "Image",
+        "description": "Description",
+        "pricePerDay": "Prix/Jour",
+        "pricePerMonth": "Prix/Mois",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "Aucun équipement trouvé",
+        "loadingEquipment": "Chargement des équipements..."
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer cet équipement ?",
+      "add": {
+        "title": "Ajouter un nouvel équipement",
+        "backToEquipment": "Retour aux équipements",
+        "form": {
+          "image": "Image de l'équipement",
+          "imageRequired": "L'image de l'équipement est obligatoire",
+          "description": "Description",
+          "descriptionPlaceholder": "Saisissez la description de l'équipement...",
+          "pricePerDay": "Prix par jour (€)",
+          "pricePerDayPlaceholder": "0,00",
+          "pricePerMonth": "Prix par mois (€)",
+          "pricePerMonthPlaceholder": "0,00",
+          "clickToUpload": "Cliquer pour télécharger",
+          "imageFormats": "PNG, JPG, GIF jusqu'à 10 Mo",
+          "imagePreview": "Aperçu de l'image",
+          "changeImage": "Changer l'image"
+        },
+        "actions": {
+          "save": "Enregistrer l'équipement",
+          "saving": "Enregistrement..."
+        },
+        "success": {
+          "created": "Équipement créé avec succès !"
+        },
+        "validation": {
+          "descriptionRequired": "La description est obligatoire",
+          "pricePerDayRequired": "Le prix par jour est obligatoire",
+          "pricePerMonthRequired": "Le prix par mois est obligatoire",
+          "imageRequired": "L'image de l'équipement est obligatoire"
+        }
+      },
+      "edit": {
+        "title": "Modifier l'équipement",
+        "backToEquipment": "Retour aux équipements",
+        "loading": "Chargement de l'équipement...",
+        "notFound": "Équipement non trouvé",
+        "actions": {
+          "update": "Mettre à jour l'équipement",
+          "updating": "Mise à jour..."
+        },
+        "success": {
+          "updated": "Équipement mis à jour avec succès !"
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Témoignages",
+      "description": "Gérez les témoignages des clients",
+      "addNew": "Ajouter un nouveau témoignage",
+      "searchPlaceholder": "Rechercher des témoignages...",
+      "searchLabel": "Rechercher des témoignages",
+      "table": {
+        "fullName": "Nom",
+        "description": "Témoignage",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "Aucun témoignage trouvé",
+        "loadingTestimonials": "Chargement des témoignages..."
+      },
+      "actions": {
+        "edit": "Modifier",
+        "delete": "Supprimer"
+      },
+      "deleteConfirm": "Êtes-vous sûr de vouloir supprimer ce témoignage ?",
+      "add": {
+        "title": "Ajouter un nouveau témoignage",
+        "backToTestimonials": "Retour aux témoignages",
+        "form": {
+          "fullName": "Nom complet",
+          "fullNamePlaceholder": "Saisissez le nom complet du client...",
+          "description": "Témoignage",
+          "descriptionPlaceholder": "Saisissez le témoignage du client..."
+        },
+        "actions": {
+          "save": "Enregistrer le témoignage",
+          "saving": "Enregistrement..."
+        },
+        "success": {
+          "created": "Témoignage créé avec succès !"
+        },
+        "validation": {
+          "fullNameRequired": "Le nom complet est obligatoire",
+          "descriptionRequired": "Le témoignage est obligatoire"
+        }
+      },
+      "edit": {
+        "title": "Modifier le témoignage",
+        "backToTestimonials": "Retour aux témoignages",
+        "loading": "Chargement du témoignage...",
+        "notFound": "Témoignage non trouvé",
+        "actions": {
+          "update": "Mettre à jour le témoignage",
+          "updating": "Mise à jour..."
+        },
+        "success": {
+          "updated": "Témoignage mis à jour avec succès !"
+        }
       }
     }
   },

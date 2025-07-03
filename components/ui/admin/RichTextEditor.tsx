@@ -4,6 +4,7 @@ import { useEffect, useState, useRef } from 'react';
 import { Editor } from '@tinymce/tinymce-react';
 import { pb } from '@/lib/pocketbase';
 import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 
 interface RichTextEditorProps {
   value: string;
@@ -333,10 +334,11 @@ export default function RichTextEditor({
                           className="group relative cursor-pointer border border-gray-200 rounded-lg p-2 hover:border-indigo-500 hover:shadow-md transition-all"
                         >
                           <div className="aspect-square overflow-hidden rounded-md bg-gray-100 relative">
-                            <img
+                            <Image
                               src={pb.files.getURL({ id: image.id, collectionName: image.collection }, image.cover_image)}
                               alt={image.title}
-                              className="w-full h-full object-cover group-hover:scale-105 transition-transform"
+                              fill
+                              className="object-cover group-hover:scale-105 transition-transform"
                             />
                             {/* Collection type badge */}
                             <div className={`absolute top-1 right-1 px-1.5 py-0.5 text-xs font-medium rounded-full text-white shadow-sm ${

@@ -41,6 +41,9 @@
       "dashboard": "Dashboard",
       "posts": "Posts",
       "categories": "Categories",
+      "homeSlider": "Home Slider",
+      "medicalEquipment": "Medical Equipment",
+      "testimonials": "Testimonials",
       "settings": "Settings"
     },
     "pageHeaders": {
@@ -49,6 +52,15 @@
       "addNewPost": "Add New Post",
       "editPost": "Edit Post",
       "categories": "Categories",
+      "homeSlider": "Home Slider",
+      "addNewSlide": "Add New Slide",
+      "editSlide": "Edit Slide",
+      "medicalEquipment": "Medical Equipment",
+      "addNewEquipment": "Add New Equipment",
+      "editEquipment": "Edit Equipment",
+      "testimonials": "Testimonials",
+      "addNewTestimonial": "Add New Testimonial",
+      "editTestimonial": "Edit Testimonial",
       "settings": "Settings"
     },
     "dashboard": {
@@ -400,6 +412,180 @@
       "errors": {
         "updateFailed": "Failed to update profile. Please try again.",
         "passwordUpdateFailed": "Failed to update password. Please try again."
+      }
+    },
+    "homeSlider": {
+      "title": "Home Slider",
+      "description": "Manage the slides displayed on the homepage",
+      "addNew": "Add New Slide",
+      "searchPlaceholder": "Search slides...",
+      "searchLabel": "Search slides",
+      "table": {
+        "title": "Title",
+        "description": "Description",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "No slides found",
+        "loadingSlides": "Loading slides..."
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirm": "Are you sure you want to delete this slide?",
+      "add": {
+        "title": "Add New Slide",
+        "backToSlides": "Back to Slides",
+        "form": {
+          "title": "Title",
+          "titlePlaceholder": "Enter slide title...",
+          "description": "Description",
+          "descriptionPlaceholder": "Enter slide description..."
+        },
+        "actions": {
+          "save": "Save Slide",
+          "saving": "Saving..."
+        },
+        "success": {
+          "created": "Slide created successfully!"
+        },
+        "validation": {
+          "titleRequired": "Title is required",
+          "descriptionRequired": "Description is required"
+        }
+      },
+      "edit": {
+        "title": "Edit Slide",
+        "backToSlides": "Back to Slides",
+        "loading": "Loading slide...",
+        "notFound": "Slide not found",
+        "actions": {
+          "update": "Update Slide",
+          "updating": "Updating..."
+        },
+        "success": {
+          "updated": "Slide updated successfully!"
+        }
+      }
+    },
+    "medicalEquipment": {
+      "title": "Medical Equipment",
+      "description": "Manage medical equipment catalog",
+      "addNew": "Add New Equipment",
+      "searchPlaceholder": "Search equipment...",
+      "searchLabel": "Search equipment",
+      "table": {
+        "image": "Image",
+        "description": "Description",
+        "pricePerDay": "Price/Day",
+        "pricePerMonth": "Price/Month",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "No equipment found",
+        "loadingEquipment": "Loading equipment..."
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirm": "Are you sure you want to delete this equipment?",
+      "add": {
+        "title": "Add New Equipment",
+        "backToEquipment": "Back to Equipment",
+        "form": {
+          "image": "Equipment Image",
+          "imageRequired": "Equipment image is required",
+          "description": "Description",
+          "descriptionPlaceholder": "Enter equipment description...",
+          "pricePerDay": "Price per Day (€)",
+          "pricePerDayPlaceholder": "0.00",
+          "pricePerMonth": "Price per Month (€)",
+          "pricePerMonthPlaceholder": "0.00",
+          "clickToUpload": "Click to upload",
+          "imageFormats": "PNG, JPG, GIF up to 10MB",
+          "imagePreview": "Image preview",
+          "changeImage": "Change Image"
+        },
+        "actions": {
+          "save": "Save Equipment",
+          "saving": "Saving..."
+        },
+        "success": {
+          "created": "Equipment created successfully!"
+        },
+        "validation": {
+          "descriptionRequired": "Description is required",
+          "pricePerDayRequired": "Price per day is required",
+          "pricePerMonthRequired": "Price per month is required",
+          "imageRequired": "Equipment image is required"
+        }
+      },
+      "edit": {
+        "title": "Edit Equipment",
+        "backToEquipment": "Back to Equipment",
+        "loading": "Loading equipment...",
+        "notFound": "Equipment not found",
+        "actions": {
+          "update": "Update Equipment",
+          "updating": "Updating..."
+        },
+        "success": {
+          "updated": "Equipment updated successfully!"
+        }
+      }
+    },
+    "testimonials": {
+      "title": "Testimonials",
+      "description": "Manage customer testimonials",
+      "addNew": "Add New Testimonial",
+      "searchPlaceholder": "Search testimonials...",
+      "searchLabel": "Search testimonials",
+      "table": {
+        "fullName": "Name",
+        "description": "Testimonial",
+        "date": "Date",
+        "actions": "Actions",
+        "noResults": "No testimonials found",
+        "loadingTestimonials": "Loading testimonials..."
+      },
+      "actions": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "deleteConfirm": "Are you sure you want to delete this testimonial?",
+      "add": {
+        "title": "Add New Testimonial",
+        "backToTestimonials": "Back to Testimonials",
+        "form": {
+          "fullName": "Full Name",
+          "fullNamePlaceholder": "Enter customer full name...",
+          "description": "Testimonial",
+          "descriptionPlaceholder": "Enter customer testimonial..."
+        },
+        "actions": {
+          "save": "Save Testimonial",
+          "saving": "Saving..."
+        },
+        "success": {
+          "created": "Testimonial created successfully!"
+        },
+        "validation": {
+          "fullNameRequired": "Full name is required",
+          "descriptionRequired": "Testimonial is required"
+        }
+      },
+      "edit": {
+        "title": "Edit Testimonial",
+        "backToTestimonials": "Back to Testimonials",
+        "loading": "Loading testimonial...",
+        "notFound": "Testimonial not found",
+        "actions": {
+          "update": "Update Testimonial",
+          "updating": "Updating..."
+        },
+        "success": {
+          "updated": "Testimonial updated successfully!"
+        }
       }
     }
   },

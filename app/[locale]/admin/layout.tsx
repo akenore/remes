@@ -56,6 +56,33 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
       ),
     },
     {
+      name: tNav('homeSlider'),
+      href: '/admin/home-slider',
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
+        </svg>
+      ),
+    },
+    {
+      name: tNav('medicalEquipment'),
+      href: '/admin/medical-equipment',
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+        </svg>
+      ),
+    },
+    {
+      name: tNav('testimonials'),
+      href: '/admin/testimonials',
+      icon: (
+        <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z" />
+        </svg>
+      ),
+    },
+    {
       name: tNav('settings'),
       href: '/admin/settings',
       icon: (
@@ -73,6 +100,15 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
     if (pathname === '/admin/posts/add') return tPageHeaders('addNewPost');
     if (pathname.startsWith('/admin/posts/edit')) return tPageHeaders('editPost');
     if (pathname === '/admin/categories') return tPageHeaders('categories');
+    if (pathname === '/admin/home-slider') return tPageHeaders('homeSlider');
+    if (pathname === '/admin/home-slider/add') return tPageHeaders('addNewSlide');
+    if (pathname.startsWith('/admin/home-slider/edit')) return tPageHeaders('editSlide');
+    if (pathname === '/admin/medical-equipment') return tPageHeaders('medicalEquipment');
+    if (pathname === '/admin/medical-equipment/add') return tPageHeaders('addNewEquipment');
+    if (pathname.startsWith('/admin/medical-equipment/edit')) return tPageHeaders('editEquipment');
+    if (pathname === '/admin/testimonials') return tPageHeaders('testimonials');
+    if (pathname === '/admin/testimonials/add') return tPageHeaders('addNewTestimonial');
+    if (pathname.startsWith('/admin/testimonials/edit')) return tPageHeaders('editTestimonial');
     if (pathname === '/admin/settings') return tPageHeaders('settings');
     return tPageHeaders('dashboard');
   };
