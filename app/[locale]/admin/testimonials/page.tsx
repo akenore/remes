@@ -58,7 +58,7 @@ export default function TestimonialsPage() {
     try {
       await pb.collection('testimonials').delete(deleteId);
       fetchTestimonials();
-      showToast('Deleted!', 'success');
+      showToast('Deleted!', 'warning');
     } catch (err) {
       console.error('Failed to delete testimonial:', err);
       showToast('Failed to delete testimonial', 'error');

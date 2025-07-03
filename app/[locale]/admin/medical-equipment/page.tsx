@@ -61,7 +61,7 @@ export default function MedicalEquipmentPage() {
     try {
       await pb.collection('medical_equipment').delete(deleteId);
       fetchEquipment();
-      showToast('Deleted!', 'success');
+      showToast('Deleted!', 'warning');
     } catch (err) {
       console.error('Failed to delete equipment:', err);
       showToast('Failed to delete equipment', 'error');

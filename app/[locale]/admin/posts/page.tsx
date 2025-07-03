@@ -6,6 +6,8 @@ import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
+import { useToast } from '@/lib/toast-context';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface Post {
   id: string;
@@ -42,6 +44,8 @@ export default function PostsPage() {
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
   const postsPerPage = 10;
+  const { showToast } = useToast();
+  const [deleteId, setDeleteId] = useState<string | null>(null);
 
   useEffect(() => {
     fetchPosts();
@@ -85,17 +89,18 @@ export default function PostsPage() {
     }
   };
 
-  const handleDeletePost = async (postId: string) => {
-    if (!window.confirm(t('deleteConfirm'))) {
-      return;
-    }
-
+  const confirmDelete = async () => {
+    if (!deleteId) return;
     try {
-      await pb.collection('posts').delete(postId);
-      fetchPosts(); // Refresh the list
+      await pb.collection('posts').delete(deleteId);
+      fetchPosts();
+      showToast('Deleted!', 'warning');
     } catch (err) {
       setError(t('errors.deleteFailed'));
       console.error(err);
+      showToast('Failed to delete post', 'error');
+    } finally {
+      setDeleteId(null);
     }
   };
 
@@ -300,7 +305,7 @@ export default function PostsPage() {
                             {t('actions.edit')}
                           </Link>
                           <button
-                            onClick={() => handleDeletePost(post.id)}
+                            onClick={() => setDeleteId(post.id)}
                             className="text-red-600 hover:text-red-900 transition-colors"
                           >
                             {t('actions.delete')}
@@ -365,6 +370,16 @@ export default function PostsPage() {
                 </div>
               </div>
             )}
+
+            <ConfirmDialog
+              open={Boolean(deleteId)}
+              title={t('deleteConfirm')}
+              message=""
+              confirmText={t('actions.delete')}
+              cancelText={t('pagination.previous')}
+              onConfirm={confirmDelete}
+              onCancel={() => setDeleteId(null)}
+            />
           </>
         )}
       </div>

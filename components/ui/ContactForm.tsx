@@ -101,7 +101,7 @@ export default function ContactForm() {
                                         sizes="50vw"
                                    />
                               </div>
-                         </div>
+                    </div>
                     </div>
                </div>
           </div>

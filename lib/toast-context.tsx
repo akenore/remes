@@ -2,7 +2,7 @@
 
 import React, { createContext, useCallback, useContext, useState } from 'react';
 
-export type ToastType = 'success' | 'error' | 'info';
+export type ToastType = 'success' | 'error' | 'info' | 'warning';
 
 interface Toast {
   id: number;
@@ -33,9 +33,10 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
   };
 
   const typeStyles: Record<ToastType, string> = {
-    success: 'bg-green-600',
-    error: 'bg-red-600',
-    info: 'bg-blue-600',
+    success: 'text-green-800 bg-green-50',
+    error: 'text-red-800 bg-red-50',
+    info: 'text-blue-800 bg-blue-50',
+    warning: 'text-yellow-800 bg-yellow-50',
   };
 
   return (
@@ -46,7 +47,7 @@ export const ToastProvider: React.FC<{ children: React.ReactNode }> = ({ childre
         {toasts.map((toast) => (
           <div
             key={toast.id}
-            className={`flex items-center text-white px-4 py-3 rounded shadow-md ${typeStyles[toast.type]}`}
+            className={`flex items-center px-4 py-3 rounded-lg shadow ${typeStyles[toast.type]}`}
           >
             <span className="flex-1">{toast.message}</span>
             <button

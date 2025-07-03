@@ -58,7 +58,7 @@ export default function HomeSlidersPage() {
     try {
       await pb.collection('home_slider').delete(deleteId);
       fetchSlides();
-      showToast('Deleted!', 'success');
+      showToast('Deleted!', 'warning');
     } catch (err) {
       console.error('Failed to delete slide:', err);
       showToast('Failed to delete slide', 'error');

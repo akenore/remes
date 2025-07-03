@@ -4,6 +4,9 @@ import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useTranslations } from 'next-intl';
+import Link from 'next/link';
+import { useToast } from '@/lib/toast-context';
+import ConfirmDialog from '@/components/ui/ConfirmDialog';
 
 interface Category {
   id: string;
@@ -25,7 +28,9 @@ export default function CategoriesPage() {
   const [showAddForm, setShowAddForm] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [totalPages, setTotalPages] = useState(1);
-  const categoriesPerPage = 10;
+  const itemsPerPage = 10;
+  const { showToast } = useToast();
+  const [deleteId, setDeleteId] = useState<string | null>(null);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -46,7 +51,7 @@ export default function CategoriesPage() {
         filter = `title ~ "${searchTerm}" || slug ~ "${searchTerm}"`;
       }
 
-      const result = await pb.collection('categories').getList(currentPage, categoriesPerPage, {
+      const result = await pb.collection('categories').getList(currentPage, itemsPerPage, {
         filter,
         sort: '-created',
       });
@@ -167,17 +172,17 @@ export default function CategoriesPage() {
     }
   };
 
-  const handleDeleteCategory = async (categoryId: string, categoryTitle: string) => {
-    if (!window.confirm(t('deleteConfirm', { title: categoryTitle }))) {
-      return;
-    }
-
+  const confirmDelete = async () => {
+    if (!deleteId) return;
     try {
-      await pb.collection('categories').delete(categoryId);
-      await fetchCategories();
+      await pb.collection('categories').delete(deleteId);
+      fetchCategories();
+      showToast('Deleted!', 'warning');
     } catch (err) {
-      setError(t('errors.deleteFailed'));
-      console.error(err);
+      console.error('Failed to delete category:', err);
+      showToast('Failed to delete category', 'error');
+    } finally {
+      setDeleteId(null);
     }
   };
 
@@ -401,7 +406,7 @@ export default function CategoriesPage() {
 {tCommon('edit')}
                           </button>
                           <button
-                            onClick={() => handleDeleteCategory(category.id, category.title)}
+                            onClick={() => setDeleteId(category.id)}
                             className="text-red-600 hover:text-red-900 text-sm font-medium transition-colors"
                           >
 {tCommon('delete')}
@@ -482,6 +487,15 @@ export default function CategoriesPage() {
           </div>
         </div>
       </div>
+      <ConfirmDialog
+        open={Boolean(deleteId)}
+        title={t('deleteConfirm')}
+        message=""
+        confirmText={t('actions.delete')}
+        cancelText={tCommon('cancel')}
+        onConfirm={confirmDelete}
+        onCancel={() => setDeleteId(null)}
+      />
     </div>
   );
 } 
