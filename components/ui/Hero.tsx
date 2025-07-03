@@ -36,7 +36,6 @@ const PrevArrow = () => (
 
 export default function Hero() {
   const t = useTranslations('frontend');
-  const homeT = useTranslations('frontend.home');
   const [current, setCurrent] = useState(0);
   const total = carouselSlides.length;
   const goTo = (idx: number) => setCurrent((idx + total) % total);
@@ -75,14 +74,14 @@ export default function Hero() {
         </div>
         <div className="pt-52 md:pt-72">
           <button
-            aria-label={homeT('hero.previous')}
+            aria-label={t('home.hero.previous')}
             onClick={() => goTo(current - 1)}
             className="p-2 transition-colors cursor-pointer"
           >
             <PrevArrow />
           </button>
           <button
-            aria-label={homeT('hero.next')}
+            aria-label={t('home.hero.next')}
             onClick={() => goTo(current + 1)}
             className="p-2 transition-colors cursor-pointer"
           >
@@ -93,15 +92,15 @@ export default function Hero() {
       <div className="pt-40 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
         <Card
           image="/card/card-1.jpg"
-          title={homeT('cards.retirement.title')}
-          description={homeT('cards.retirement.description')}
+          title={t('home.cards.retirement.title')}
+          description={t('home.cards.retirement.description')}
           buttonText={t('button')}
           buttonHref="/retirement-home"
         />
         <Card
           image="/card/card-1.jpg"
-          title={homeT('cards.adapted.title')}
-          description={homeT('cards.adapted.description')}
+          title={t('home.cards.adapted.title')}
+          description={t('home.cards.adapted.description')}
           buttonText={t('button')}
           buttonHref="/adapted-stay"
         />
