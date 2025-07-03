@@ -30,7 +30,7 @@ export default function CategoriesPage() {
   const [totalPages, setTotalPages] = useState(1);
   const itemsPerPage = 10;
   const { showToast } = useToast();
-  const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleteItem, setDeleteItem] = useState<{id:string,title:string}|null>(null);
   
   const [formData, setFormData] = useState({
     title: '',
@@ -161,8 +161,10 @@ export default function CategoriesPage() {
 
       if (editingCategory) {
         await pb.collection('categories').update(editingCategory.id, data);
+        showToast(t('success.updated'), 'success');
       } else {
         await pb.collection('categories').create(data);
+        showToast(t('success.created'), 'success');
       }
 
       await fetchCategories();
@@ -173,16 +175,16 @@ export default function CategoriesPage() {
   };
 
   const confirmDelete = async () => {
-    if (!deleteId) return;
+    if (!deleteItem) return;
     try {
-      await pb.collection('categories').delete(deleteId);
+      await pb.collection('categories').delete(deleteItem.id);
       fetchCategories();
       showToast('Deleted!', 'warning');
     } catch (err) {
       console.error('Failed to delete category:', err);
       showToast('Failed to delete category', 'error');
     } finally {
-      setDeleteId(null);
+      setDeleteItem(null);
     }
   };
 
@@ -406,7 +408,7 @@ export default function CategoriesPage() {
 {tCommon('edit')}
                           </button>
                           <button
-                            onClick={() => setDeleteId(category.id)}
+                            onClick={() => setDeleteItem({id:category.id, title:category.title})}
                             className="text-red-600 hover:text-red-900 text-sm font-medium transition-colors"
                           >
 {tCommon('delete')}
@@ -488,13 +490,13 @@ export default function CategoriesPage() {
         </div>
       </div>
       <ConfirmDialog
-        open={Boolean(deleteId)}
-        title={t('deleteConfirm')}
+        open={Boolean(deleteItem)}
+        title={t('deleteConfirm', {title: deleteItem?.title ?? ''})}
         message=""
         confirmText={t('actions.delete')}
         cancelText={tCommon('cancel')}
         onConfirm={confirmDelete}
-        onCancel={() => setDeleteId(null)}
+        onCancel={() => setDeleteItem(null)}
       />
     </div>
   );
