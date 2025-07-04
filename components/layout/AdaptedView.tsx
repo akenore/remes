@@ -2,7 +2,6 @@ import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
 import Image from "next/image";
-import Card3 from "../ui/card/Card3";
 import { useTranslations, useLocale } from 'next-intl';
 import Icon from "../ui/Icon";
 
@@ -45,6 +44,8 @@ export default function AdaptedView() {
                               buttonHref: "/adapted",
                          },
                     ]}
+                    bgMobile="/hero-2/bg-mobile.jpg"
+                    bgDesktop="/hero-3/bg-desktop.jpg"
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">

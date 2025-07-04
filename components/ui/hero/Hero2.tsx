@@ -32,10 +32,12 @@ interface HeroCard {
 interface Hero2Props {
   title?: string;
   description?: string;
-  cards?: HeroCard[];
+  cards?: HeroCard[] | null;
+  bgMobile?: string;
+  bgDesktop?: string;
 }
 
-export default function Hero2({ title, description, cards }: Hero2Props) {
+export default function Hero2({ title, description, cards, bgMobile, bgDesktop }: Hero2Props) {
   const t = useTranslations();
   const locale = useLocale();
 
@@ -70,10 +72,19 @@ export default function Hero2({ title, description, cards }: Hero2Props) {
     },
   ];
 
-  const cardsToShow = cards ?? defaultCards;
+  const cardsToShow = cards === undefined ? defaultCards : cards;
+
+  const mobileBg = bgMobile ?? "/hero-2/bg-mobile.jpg";
+  const desktopBg = bgDesktop ?? "/hero-2/bg-desktop.jpg";
 
   return (
-    <div className="relative w-full bg-cover bg-top bg-[url('/hero-2/bg-mobile.jpg')] sm:bg-[url('/hero-2/bg-desktop.jpg')] bg-no-repeat pb-32 md:pb-48 lg:pb-56">
+    <div
+      className="relative w-full bg-cover bg-top bg-no-repeat pb-32 md:pb-48 lg:pb-56 dynamic-hero-bg"
+      style={{
+        '--hero-mobile-bg': `url('${mobileBg}')`,
+        '--hero-desktop-bg': `url('${desktopBg}')`,
+      } as React.CSSProperties}
+    >
       <Navbar />
       <div className='relative z-10 flex flex-col items-start justify-start w-full max-w-xl mx-auto text-center md:text-left gap-6 px-4'>
         <HeroHeader
@@ -81,11 +92,13 @@ export default function Hero2({ title, description, cards }: Hero2Props) {
           description={description ?? "A cat named Mittens has made national headlines after she managed to find her way back home, despite being lost for over a week. Mittens"}
         />
       </div>
-      <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-0 justify-center items-stretch px-4">
-        {cardsToShow.map((card, i) => (
-          <Card2 key={i} {...card} />
-        ))}
-      </div>
+      {cardsToShow && (
+        <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-0 justify-center items-stretch px-4">
+          {cardsToShow.map((card, i) => (
+            <Card2 key={i} {...card} />
+          ))}
+        </div>
+      )}
     </div>
   );
 }

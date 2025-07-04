@@ -61,3 +61,12 @@ body {
     animation: marquee 30s linear infinite;
   }
 }
+
+.dynamic-hero-bg {
+  background-image: var(--hero-mobile-bg);
+}
+@media (min-width: 640px) {
+  .dynamic-hero-bg {
+    background-image: var(--hero-desktop-bg);
+  }
+}
