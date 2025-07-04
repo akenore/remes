@@ -1,6 +1,7 @@
 'use client';
 import { useTranslations, useLocale } from 'next-intl';
-import Card from './Card';
+import Card2 from './Card2';
+import Icon from './Icon';
 import Navbar from './Navbar';
 
 
@@ -23,8 +24,35 @@ export default function Hero2() {
                          </div>
                     </div>
                </div>
-               <div className="pt-40 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
-
+               <div className="pt-10 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-4 md:gap-0 justify-center items-stretch px-4 pb-12">
+                    <Card2
+                         icon={<Icon name="HomeIcon" sizeClass="w-full h-full" className="hover:text-gold" />}
+                         title="Hébergement Permanent"
+                         description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                         buttonText="Button 1"
+                         buttonHref="/"
+                    />
+                    <Card2
+                         icon={<Icon name="HomeIcon" sizeClass="w-full h-full" className="hover:text-gold" />}
+                         title="Hébergement Temporaire"
+                         description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                         buttonText="Button 1"
+                         buttonHref="/"
+                    />
+                    <Card2
+                         icon={<Icon name="HomeIcon" sizeClass="w-full h-full" className="hover:text-gold" />}
+                         title="Accueil de Jour"
+                         description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                         buttonText="Button 1"
+                         buttonHref="/"
+                    />
+                    <Card2
+                         icon={<Icon name="HomeIcon" sizeClass="w-full h-full" className="hover:text-gold" />}
+                         title="Séjour de Convalescence"
+                         description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                         buttonText="Button 1"
+                         buttonHref="/"
+                    />
                </div>
           </div>
      );

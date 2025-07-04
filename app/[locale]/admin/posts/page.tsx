@@ -7,7 +7,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
 import { useToast } from '@/lib/toast-context';
-import ConfirmDialog from '@/components/ui/ConfirmDialog';
+import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
 
 interface Post {
   id: string;
