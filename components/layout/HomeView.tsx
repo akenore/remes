@@ -1,7 +1,7 @@
 import { useTranslations, useLocale } from 'next-intl';
 import Image from "next/image";
 
-import Hero from "../ui/Hero";
+import Hero from "../ui/hero/Hero";
 import Footer from "../ui/Footer";
 import Masonary from "../ui/gallery/Masonry";
 import Testimonials from "../ui/Testimonials";

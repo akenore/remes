@@ -1,10 +1,14 @@
-import Hero2 from "../ui/Hero2";
+import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
 import Image from "next/image";
-import Card3 from "../ui/Card3";
+import Card3 from "../ui/card/Card3";
+import { useTranslations, useLocale } from 'next-intl';
 
 export default function NursingView() {
+     const t = useTranslations();
+     const locale = useLocale();
+
      return (
           <>
                <Hero2 />
@@ -56,9 +60,23 @@ export default function NursingView() {
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
                                              <Card3
                                                   image="/nursing-l-desktop.png"
-                                                  title="Card 1"
-                                                  description="Card 1"
-                                                  buttonText="Button 1"
+                                                  title="Nos Activités"
+                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                                                  buttonText={t('frontend.button')}
+                                                  buttonHref="/"
+                                             />
+                                             <Card3
+                                                  image="/nursing-l-desktop.png"
+                                                  title="Nos Animations"
+                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                                                  buttonText={t('frontend.button')}
+                                                  buttonHref="/"
+                                             />
+                                             <Card3
+                                                  image="/nursing-l-desktop.png"
+                                                  title="Nos Services"
+                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
+                                                  buttonText={t('frontend.button')}
                                                   buttonHref="/"
                                              />
 
@@ -67,6 +85,16 @@ export default function NursingView() {
 
                                    </div>
                               </div>
+                         </div>
+                    </section>
+                    <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
+                         <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
+                         <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
+                              Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
+                         </p>
+
+                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
+                              MAP
                          </div>
                     </section>
                     <ContactForm />

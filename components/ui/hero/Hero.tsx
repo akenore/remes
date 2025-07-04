@@ -1,8 +1,8 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import Card from './Card';
-import Navbar from './Navbar';
+import Card from '../card/Card';
+import Navbar from '../Navbar';
 
 const carouselSlides = [
   {

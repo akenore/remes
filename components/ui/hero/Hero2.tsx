@@ -1,8 +1,8 @@
 'use client';
 import { useTranslations, useLocale } from 'next-intl';
-import Card2 from './Card2';
-import Icon from './Icon';
-import Navbar from './Navbar';
+import Card2 from '../card/Card2';
+import Icon from '../Icon';
+import Navbar from '../Navbar';
 
 
 export default function Hero2() {
