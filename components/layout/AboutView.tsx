@@ -1,10 +1,9 @@
+import Image from "next/image";
+import { useTranslations, useLocale } from 'next-intl';
 import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
-import Image from "next/image";
-import { useTranslations, useLocale } from 'next-intl';
 import Masonary from "../ui/gallery/Masonry";
-import Playbutton from "../animations/Playbutton";
 import Video from "../ui/Video";
 
 export default function AboutView() {
@@ -35,11 +34,6 @@ export default function AboutView() {
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>
-                                   <div className="flex justify-center md:justify-start">
-                                        <button className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
-                                             En savoir plus
-                                        </button>
-                                   </div>
                               </div>
                               <div>
                                    <Image src="/adapted-r-desktop.jpg" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
@@ -48,10 +42,9 @@ export default function AboutView() {
                          </div>
                     </div>
                     <Masonary showIcons={false} />
-                    <Video />
-                    {/* <div className="flex justify-center items-center">
-                         <Playbutton className="w-40"/>
-                    </div> */}
+                    <div className="-mt-20 md:mt-40 xl:mt-72 z-10">
+                         <Video />
+                    </div>
                     <div className="mx-5 md:mx-auto max-w-7xl pt-40">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
                               <div>
@@ -70,11 +63,11 @@ export default function AboutView() {
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>
-                                   <div className="flex justify-center md:justify-start">
-                                        <button className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
+                                   {/* <div className="flex justify-center md:justify-start">
+                                        <Link href="/about" className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
                                              {t('frontend.button')}
-                                        </button>
-                                   </div>
+                                        </Link>
+                                   </div> */}
                               </div>
                          </div>
                     </div>
