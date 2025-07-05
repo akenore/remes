@@ -11,7 +11,11 @@ const galleryImages = [
   '/home/gallery/5.png'
 ];
 
-export default function Masonary() {
+interface MasonaryProps {
+  showIcons?: boolean;
+}
+
+export default function Masonary({ showIcons = true }: MasonaryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupImage, setPopupImage] = useState('');
@@ -66,21 +70,20 @@ export default function Masonary() {
 
   return (
     <>
-      {/* Main Gallery Section */}
       <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')]">
         <div className="w-full min-h-screen">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
             <header className="text-center lg:text-left mb-12 lg:mb-16">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div className="flex-1">
-                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
+                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4 pt-20">
                     Notre Gallerie
                   </h2>
                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
                     A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
                   </p>
                 </div>
-                
+
                 {/* Desktop Navigation */}
                 <nav className="hidden lg:flex items-center gap-4">
                   <button
@@ -101,7 +104,7 @@ export default function Masonary() {
               </div>
             </header>
             <div className="w-full">
-              
+
               {/* Mobile Layout: 2x2 + 1 full width (up to md) */}
               <div className="block md:hidden">
                 <div className="grid grid-cols-2 gap-3 sm:gap-4 mb-4">
@@ -123,7 +126,7 @@ export default function Masonary() {
                     </div>
                   ))}
                 </div>
-                
+
                 {/* Fifth image full width */}
                 <div
                   className="group relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.99]"
@@ -144,7 +147,7 @@ export default function Masonary() {
               {/* Tablet Layout: 2 columns with different arrangements (md to lg) */}
               <div className="hidden md:block lg:hidden">
                 <div className="grid grid-cols-2 gap-6 h-[70vh] max-h-[600px]">
-                  
+
                   {/* Left Column */}
                   <div className="flex flex-col gap-4">
                     <div
@@ -230,7 +233,7 @@ export default function Masonary() {
               {/* Desktop Layout: 3 columns masonry (lg+) */}
               <div className="hidden lg:block">
                 <div className="grid grid-cols-3 gap-6 h-[75vh] max-h-[700px]">
-                  
+
                   {/* Left Big Image */}
                   <div
                     className="group relative overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
@@ -330,16 +333,12 @@ export default function Masonary() {
               </button>
             </nav>
           </div>
-          <div className="w-full px-4 sm:px-6 lg:px-8 pb-8">
-            <div className="max-w-7xl mx-auto">
-              <Icons />
-            </div>
-          </div>
+          {showIcons && <Icons />}
         </div>
       </section>
 
       {isPopupOpen && (
-        <div 
+        <div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
           onClick={closePopup}
         >

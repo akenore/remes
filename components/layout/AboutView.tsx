@@ -3,7 +3,9 @@ import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
 import Image from "next/image";
 import { useTranslations, useLocale } from 'next-intl';
-import Icon from "../ui/Icon";
+import Masonary from "../ui/gallery/Masonry";
+import Playbutton from "../animations/Playbutton";
+import Video from "../ui/Video";
 
 export default function AboutView() {
      const t = useTranslations();
@@ -23,7 +25,7 @@ export default function AboutView() {
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
-                                        Services aux professionnels B2B
+                                        C'est Quoi REMES ?
                                    </h2>
                                    <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
                                         Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
@@ -45,16 +47,37 @@ export default function AboutView() {
                               </div>
                          </div>
                     </div>
-                    <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
-                         <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
-                         <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
-                              Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
-                         </p>
-
-                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
-                              MAP
+                    <Masonary showIcons={false} />
+                    <Video />
+                    {/* <div className="flex justify-center items-center">
+                         <Playbutton className="w-40"/>
+                    </div> */}
+                    <div className="mx-5 md:mx-auto max-w-7xl pt-40">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
+                              <div>
+                                   <Image src="/adapted-r-desktop.jpg" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/adapted-r-desktop.jpg" alt="Maison de Repos" className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
+                              </div>
+                              <div className="md:px-14">
+                                   <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
+                                        C'est Quoi REMES ?
+                                   </h2>
+                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
+                                        Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
+                                        Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
+                                   </p>
+                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-10">
+                                        Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
+                                        L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
+                                   </p>
+                                   <div className="flex justify-center md:justify-start">
+                                        <button className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
+                                             {t('frontend.button')}
+                                        </button>
+                                   </div>
+                              </div>
                          </div>
-                    </section>
+                    </div>
                     <ContactForm />
                </main>
 
