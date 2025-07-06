@@ -44,8 +44,8 @@ export default function AdaptedView() {
                               buttonHref: "/adapted",
                          },
                     ]}
-                    bgMobile="/hero-2/bg-mobile.jpg"
-                    bgDesktop="/hero-3/bg-desktop.jpg"
+                    bgMobile="/hero-4/bg-mobile.jpg"
+                    bgDesktop="/hero-4/bg-desktop.jpg"
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">
