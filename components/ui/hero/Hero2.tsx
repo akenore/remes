@@ -79,7 +79,7 @@ export default function Hero2({ title, description, cards, bgMobile, bgDesktop }
 
   return (
     <div
-      className="relative w-full bg-cover bg-top bg-no-repeat pb-32 md:pb-48 lg:pb-56 dynamic-hero-bg"
+      className="relative w-full bg-cover bg-top bg-no-repeat dynamic-hero-bg min-h-[800px]"
       style={{
         '--hero-mobile-bg': `url('${mobileBg}')`,
         '--hero-desktop-bg': `url('${desktopBg}')`,

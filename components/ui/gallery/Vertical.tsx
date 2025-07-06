@@ -49,16 +49,16 @@ export default function VerticalGallery() {
 
   // Desktop: vertical thumbs left, main image right; Mobile: main image, horizontal thumbs below
   return (
-    <section className="relative w-full min-h-screen overflow-hidden bg-white">
-      <div className="w-full min-h-screen pt-20 pb-40">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+    <section className="relative w-full overflow-hidden bg-white">
+      <div className="w-full pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
+        <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
           {/* Header (mobile: centered, desktop: left + right arrows) */}
-          <div className="mb-8">
+          <div className="mb-4 md:mb-8">
             <div className="text-center lg:text-left">
-              <h2 className="text-[var(--dark-blue)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
+              <h2 className="text-[var(--dark-blue)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
                 Notre Gallerie
               </h2>
-              <p className="text-[var(--gray)] text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-[var(--gray)] text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
               </p>
             </div>
@@ -81,7 +81,7 @@ export default function VerticalGallery() {
             </nav>
           </div>
           {/* Main gallery layout */}
-          <div className="flex flex-col lg:flex-row gap-8 items-start">
+          <div className="flex flex-col items-center lg:flex-row lg:items-start gap-4 md:gap-8">
             {/* Thumbnails (vertical on desktop, horizontal on mobile) */}
             <div className="hidden lg:flex flex-col gap-4 w-28">
               {galleryImages.map((img, idx) => (
@@ -103,14 +103,14 @@ export default function VerticalGallery() {
               ))}
             </div>
             {/* Main image */}
-            <div className="flex-1 flex flex-col items-center">
-              <div className="relative w-full aspect-[16/9] bg-gray-100 rounded-md overflow-hidden max-w-4xl mx-auto">
+            <div className="w-full flex flex-col items-center">
+              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-gray-100 rounded-md overflow-hidden max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
                 <Image
                   src={galleryImages[currentIndex]}
                   alt={`Gallery image ${currentIndex + 1}`}
                   fill
                   className="object-cover"
-                  sizes="(min-width: 1024px) 70vw, 100vw"
+                  sizes="(min-width: 1024px) 70vw, (min-width: 768px) 80vw, 100vw"
                   quality={90}
                   onClick={() => openPopup(galleryImages[currentIndex])}
                   style={{ cursor: 'pointer' }}
@@ -118,26 +118,26 @@ export default function VerticalGallery() {
               </div>
               {/* Mobile thumbnails and arrows below image */}
               <div className="flex flex-col gap-2 w-full lg:hidden">
-                <div className="flex gap-2 mt-4 overflow-x-auto w-full justify-center">
+                <div className="flex gap-2 mt-3 md:mt-4 overflow-x-auto w-full justify-center">
                   {galleryImages.map((img, idx) => (
                     <button
                       key={img}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`flex-shrink-0 w-16 h-12 rounded-md border-2 ${idx === currentIndex ? 'border-[var(--gold)]' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]`}
+                      className={`flex-shrink-0 w-14 h-10 sm:w-16 sm:h-12 md:w-20 md:h-16 rounded-md border-2 ${idx === currentIndex ? 'border-[var(--gold)]' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]`}
                       style={{ opacity: idx === currentIndex ? 1 : 0.5 }}
                       aria-label={`Show image ${idx + 1}`}
                     >
                       <Image
                         src={img}
                         alt={`Thumbnail ${idx + 1}`}
-                        width={64}
-                        height={48}
+                        width={80}
+                        height={64}
                         className="object-cover w-full h-full"
                       />
                     </button>
                   ))}
                 </div>
-                <nav className="flex items-center justify-center gap-4 mt-2">
+                <nav className="flex items-center justify-center gap-4 mt-2 md:mt-3">
                   <button
                     onClick={goToPrevious}
                     className="group p-3 text-[var(--dark-blue)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"

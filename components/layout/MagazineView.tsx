@@ -1,10 +1,8 @@
+import { useTranslations, useLocale } from 'next-intl';
 import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
-import ContactForm from "../ui/ContactForm";
-import Image from "next/image";
-import { useTranslations, useLocale } from 'next-intl';
-import Icon from "../ui/Icon";
 import VerticalGallery from "../ui/gallery/Vertical";
+import VideosCarousel from "../ui/gallery/Videos";
 
 export default function MagazineView() {
      const t = useTranslations();
@@ -19,19 +17,29 @@ export default function MagazineView() {
                     bgMobile="/hero-4/bg-mobile.jpg"
                     bgDesktop="/hero-4/bg-desktop.jpg"
                />
-               <main className="pt-20">
-                    <VerticalGallery />
-                    <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
-                         <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
-                         <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
-                              Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
-                         </p>
-
-                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
-                              MAP
+               <main className="pt-10">
+                    <section>
+                         <VerticalGallery />
+                    </section>
+                    <section className="pt-10">
+                         <VideosCarousel />
+                    </section>
+                    <section className="relative w-full overflow-hidden bg-white">
+                         <div className="w-full pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
+                              <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
+                                   <div className="mb-4 md:mb-8">
+                                        <div className="text-center lg:text-left">
+                                             <h2 className="text-[var(--dark-blue)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
+                                                  Notre Blog
+                                             </h2>
+                                             <p className="text-[var(--gray)] text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                                                  A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
+                                             </p>
+                                        </div>
+                                   </div>
+                              </div>
                          </div>
                     </section>
-                    <ContactForm />
                </main>
 
                <div className="bg-dark-blue pb-10">

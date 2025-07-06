@@ -11,7 +11,13 @@ export default function NursingView() {
 
      return (
           <>
-               <Hero2 />
+               <Hero2 
+                    title="Maison de Repos"
+                    description="A cat named Mittens has made national headlines after she managed to find her way back home, despite being lost for over a week. Mittens"
+                    
+                    bgMobile="/hero-2/bg-mobile.jpg"
+                    bgDesktop="/hero-2/bg-desktop.jpg"
+               />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">

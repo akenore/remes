@@ -5,7 +5,7 @@ export default function Footer() {
      return (
           <footer className="w-full min-h-[1220px] lg:min-h-[1330px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
                <div className="flex flex-col items-center justify-center pt-96 mb-20">
-                    <Image src="/logo-footer.png" alt="Remes" width={335} height={263} className="w-1/2 md:w-1/6" />
+                    <Image src="/logo-footer.png" alt="Remes" width={335} height={263} className="w-1/2 lg:w-1/6" />
                </div>
                <div className="container mx-auto mb-10 md:mb-50">
                     <div className="grid grid-cols-9 gap-4 mt-10">
