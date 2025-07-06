@@ -3,6 +3,7 @@ import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import VerticalGallery from "../ui/gallery/Vertical";
 import VideosCarousel from "../ui/gallery/Videos";
+import Card4 from '../ui/card/Card4';
 
 export default function MagazineView() {
      const t = useTranslations();
@@ -37,8 +38,47 @@ export default function MagazineView() {
                                              </p>
                                         </div>
                                    </div>
+                                   <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 pt-10">
+                              <Card4
+                                   image="/videos/video-1.jpg"
+                                   category="Thérapie"
+                                   date="11 Mai 2025"
+                                   title="Blog Post 1"
+                                   description="This is the description of the blog post 1."
+                                   buttonText={t('frontend.button')}
+                                   buttonHref="/blog/blog-1"
+                              />
+                              <Card4
+                                   image="/videos/video-1.jpg"
+                                   category="Thérapie"
+                                   date="11 Mai 2025"
+                                   title="Blog Post 1"
+                                   description="This is the description of the blog post 1."
+                                   buttonText={t('frontend.button')}
+                                   buttonHref="/blog/blog-1"
+                              />
+                              <Card4
+                                   image="/videos/video-1.jpg"
+                                   category="Thérapie"
+                                   date="11 Mai 2025"
+                                   title="Blog Post 1"
+                                   description="This is the description of the blog post 1."
+                                   buttonText={t('frontend.button')}
+                                   buttonHref="/blog/blog-1"
+                              />
+                              <Card4
+                                   image="/videos/video-1.jpg"
+                                   category="Thérapie"
+                                   date="11 Mai 2025"
+                                   title="Blog Post 1"
+                                   description="This is the description of the blog post 1."
+                                   buttonText={t('frontend.button')}
+                                   buttonHref="/blog/blog-1"
+                              />
+                         </div>
                               </div>
                          </div>
+                         
                     </section>
                </main>
 
