@@ -1,9 +1,12 @@
+import { useTranslations, useLocale } from 'next-intl';
+import Image from "next/image";
+
 import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
-import Image from "next/image";
 import Card3 from "../ui/card/Card3";
-import { useTranslations, useLocale } from 'next-intl';
+import Icon from "../ui/Icon";
+
 
 export default function NursingView() {
      const t = useTranslations();
@@ -14,9 +17,38 @@ export default function NursingView() {
                <Hero2 
                     title="Maison de Repos"
                     description="A cat named Mittens has made national headlines after she managed to find her way back home, despite being lost for over a week. Mittens"
-                    
                     bgMobile="/hero-2/bg-mobile.jpg"
                     bgDesktop="/hero-2/bg-desktop.jpg"
+                    cards={[
+                         {
+                              icon: <Icon name="HomeIcon" sizeClass="w-full h-full" />,
+                              title: "Hébergement Permanent",
+                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              buttonText: t('frontend.button'),
+                              buttonHref: "/nursing-home/permanent-accommodation",
+                         },
+                         {
+                              icon: <Icon name="BuildingIcon" sizeClass="w-full h-full" />,
+                              title: "Hébergement Temporaire",
+                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              buttonText: t('frontend.button'),
+                              buttonHref: "/adapted",
+                         },
+                         {
+                              icon: <Icon name="SunIcon" sizeClass="w-full h-full" />,
+                              title: "Accueil de Jour",
+                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              buttonText: t('frontend.button'),
+                              buttonHref: "/adapted",
+                         },
+                         {
+                              icon: <Icon name="MedicalPlusIcon" sizeClass="w-full h-full" />,
+                              title: "Séjour de Convalescence",
+                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              buttonText: t('frontend.button'),
+                              buttonHref: "/adapted",
+                         },
+                    ]}
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">

@@ -1,7 +1,10 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
+import Link from "next/link";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
+     const t = useTranslations();
      return (
           <footer className="w-full min-h-[1220px] lg:min-h-[1330px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
                <div className="flex flex-col items-center justify-center pt-96 mb-20">
@@ -123,16 +126,16 @@ export default function Footer() {
                               <h2 className="text-gold text-2xl font-myanmar mb-10">Menu</h2>
                               <ul className="text-white space-y-4">
                                    <li>
-                                        <a href="#">Accueil</a>
+                                        <Link href="/">{t('frontend.menu.home')}</Link>
                                    </li>
                                    <li>
-                                        <a href="#">Sejour adptee</a>
+                                        <Link href="/nursing-home">{t('frontend.menu.nursingHome')}</Link>
                                    </li>
                                    <li>
-                                        <a href="#">Maison de repos</a>
+                                        <Link href="/adapted-stay">{t('frontend.menu.adaptedStay')}</Link>
                                    </li>
                                    <li>
-                                        <a href="#">Magazine</a>
+                                        <Link href="/magazine">{t('frontend.menu.magazine')}</Link>
                                    </li>
                               </ul>
                          </div>
