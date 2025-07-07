@@ -3,7 +3,7 @@ import { useTranslations } from 'next-intl';
 
 export default function ContactForm() {
      return (
-          <div className="relative -mb-80 mb:-mb-50 z-10">
+          <div className="relative -mb-32 z-10">
                <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                     <div className="bg-white shadow-2xl overflow-hidden">
                          <div className="flex flex-col lg:flex-row">

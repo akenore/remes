@@ -93,7 +93,7 @@ export default function Hero2({ title, description, cards, bgMobile, bgDesktop }
         />
       </div>
       {cardsToShow && (
-        <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-0 justify-center items-stretch px-4">
+        <div className="w-full max-w-7xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-0 justify-center items-stretch px-4 mb-20">
           {cardsToShow.map((card, i) => (
             <Card2 key={i} {...card} />
           ))}

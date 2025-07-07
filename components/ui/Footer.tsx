@@ -6,8 +6,8 @@ import { useTranslations } from "next-intl";
 export default function Footer() {
      const t = useTranslations();
      return (
-          <footer className="w-full min-h-[1220px] lg:min-h-[1330px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
-               <div className="flex flex-col items-center justify-center pt-96 mb-20">
+          <footer className="w-full min-h-[1220px] lg:min-h-[930px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
+               <div className="flex flex-col items-center justify-center pt-40 mb-20">
                     <Image src="/logo-footer.png" alt="Remes" width={335} height={263} className="w-1/2 lg:w-1/6" />
                </div>
                <div className="container mx-auto mb-10 md:mb-50">
@@ -143,10 +143,10 @@ export default function Footer() {
                               <h2 className="text-gold text-2xl font-myanmar mb-10">Resousrs</h2>
                               <ul className="text-white space-y-4">
                                    <li>
-                                        <a href="#">About</a>
+                                        <Link href="/about">{t('frontend.menu.about')}</Link>
                                    </li>
                                    <li>
-                                        <a href="#">Blog</a>
+                                        <Link href="/adapted-stay/professional-services">Professionnels services</Link>
                                    </li>
                                    <li>
                                         <a href="#">FAQ</a>

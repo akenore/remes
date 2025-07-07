@@ -32,21 +32,21 @@ export default function NursingView() {
                               title: "Hébergement Temporaire",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/nursing-home/temporary-accommodation",
                          },
                          {
                               icon: <Icon name="SunIcon" sizeClass="w-full h-full" />,
                               title: "Accueil de Jour",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/nursing-home/day-care",
                          },
                          {
                               icon: <Icon name="MedicalPlusIcon" sizeClass="w-full h-full" />,
                               title: "Séjour de Convalescence",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/nursing-home/convalescence-stay",
                          },
                     ]}
                />

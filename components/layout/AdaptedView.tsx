@@ -20,28 +20,28 @@ export default function AdaptedView() {
                               title: "Hébergement adapté",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/adapted-stay/adapted-accommodation",
                          },
                          {
                               icon: <Icon name="BusIcon" sizeClass="w-full h-full" />,
                               title: "Transport adapté",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/adapted-stay/adapted-transport",
                          },
                          {
                               icon: <Icon name="HeartHandIcon" sizeClass="w-full h-full" />,
                               title: "Soins adapté",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/adapted-stay/adapted-care",
                          },
                          {
                               icon: <Icon name="WheelchairIcon" sizeClass="w-full h-full" />,
                               title: "Matériel médical",
                               description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
                               buttonText: t('frontend.button'),
-                              buttonHref: "/adapted",
+                              buttonHref: "/adapted-stay/medical-equipment",
                          },
                     ]}
                     bgMobile="/hero-4/bg-mobile.jpg"
