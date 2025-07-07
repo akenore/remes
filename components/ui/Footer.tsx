@@ -172,7 +172,7 @@ export default function Footer() {
                </div>
                <div className="mt-auto">
                     <hr className="text-blue mt-8 md:mt-16"/>
-                    <div className="text-light-blue sm:flex sm:justify-around pt-4 md:pt-8 pb-8">
+                    <div className="text-light-blue sm:flex sm:justify-around pt-4 md:pt-8">
                          <div className="ml-3 md:ml-0">© 2025 - 2026 Remes, All Rights Reserved</div>
                          <div className="ml-3 md:ml-0">Designed and Developed by <a href="https://beandgo.us" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Be&Go</a></div>
                     </div>
