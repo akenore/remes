@@ -26,11 +26,11 @@ export default function AboutView() {
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
                                         C'est Quoi REMES ?
                                    </h2>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
                                         Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
                                         Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
                                    </p>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-10">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>
@@ -55,11 +55,11 @@ export default function AboutView() {
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
                                         C'est Quoi REMES ?
                                    </h2>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
                                         Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
                                         Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
                                    </p>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-10">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>

@@ -20,7 +20,7 @@ export default function Card2({ icon, image, title, description, buttonText, but
     >
       <div className="flex flex-col items-center text-center p-8 h-full">
         {icon ? (
-          <div className="mb-6 w-12 h-12 flex items-center justify-center text-dark-blue group-hover:text-[var(--gold)] transition-colors duration-400">
+          <div className="mb-6 w-12 h-12 flex items-center justify-center text-dark-blue group-hover:text-gold transition-colors duration-400">
             {icon}
           </div>
         ) : (
@@ -35,13 +35,13 @@ export default function Card2({ icon, image, title, description, buttonText, but
           )
         )}
 
-        <h2 className="text-[1.375rem] md:text-[1.75rem] leading-tight text-dark-blue mb-6 font-myanmar group-hover:text-[var(--gold)] transition-colors duration-400">
+        <h2 className="text-[1.375rem] md:text-[1.75rem] leading-tight text-dark-blue mb-6 font-myanmar group-hover:text-gold transition-colors duration-400">
           {title}
         </h2>
         <p className="text-gray-600 text-sm md:text-base mb-10 group-hover:text-light-blue2 transition-colors duration-300">
           {description}
         </p>
-        <span className="mt-auto inline-block text-center bg-white border border-blue text-blue px-6 py-3 shadow group-hover:bg-[var(--gold)] group-hover:text-dark-blue group-hover:border-[var(--gold)] font-medium text-sm transition-colors duration-300">
+        <span className="mt-auto inline-block text-center bg-white border border-blue text-blue px-6 py-3 shadow group-hover:bg-gold group-hover:text-dark-blue group-hover:border-gold font-medium text-sm transition-colors duration-300">
           {buttonText}
           <span className="sr-only">{` - ${title}`}</span>
         </span>

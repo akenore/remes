@@ -23,7 +23,7 @@ export default function RootNotFoundPage() {
         </p>
         <Link
           href="/"
-          className="inline-block px-6 py-3 bg-[var(--dark-gold)] text-dark-blue hover:opacity-90 transition"
+          className="inline-block px-6 py-3 bg-dark-gold text-dark-blue hover:opacity-90 transition"
         >
           {t('button')}
         </Link>

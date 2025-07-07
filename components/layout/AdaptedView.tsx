@@ -54,11 +54,11 @@ export default function AdaptedView() {
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
                                    Services aux professionnels B2B
                                    </h2>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
                                         Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
                                         Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
                                    </p>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-10">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>
@@ -76,7 +76,7 @@ export default function AdaptedView() {
                     </div>
                     <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
                          <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
-                         <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
+                         <p className="text-gray max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
                               Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
                          </p>
 

@@ -29,11 +29,11 @@ export default function NursingView() {
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
                                         Equipe & Soin
                                    </h2>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-8">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
                                         Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
                                         Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
                                    </p>
-                                   <p className="text-[1.313rem] text-center md:text-left text-[var(--gray)] mb-10">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
                                         L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
                                    </p>
@@ -52,7 +52,7 @@ export default function NursingView() {
                                    <header className="text-center lg:text-left mb-12 lg:mb-16 pt-40">
                                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                                              <div className="flex-1">
-                                                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
+                                                  <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
                                                        Notre Gallerie
                                                   </h2>
                                                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
@@ -95,7 +95,7 @@ export default function NursingView() {
                     </section>
                     <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
                          <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
-                         <p className="text-[var(--gray)] max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
+                         <p className="text-gray max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
                               Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
                          </p>
 

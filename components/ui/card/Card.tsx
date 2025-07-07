@@ -28,10 +28,10 @@ export default function Card({ image, title, description, buttonText, buttonHref
         </div>
         <div className="flex-1 p-6 flex flex-col justify-between">
           <div className='lg:p-5'>
-            <h2 className="text-lg md:text-[32px] text-dark-blue mb-10 font-myanmar group-hover:text-[var(--gold)] transition-colors duration-400">{title}</h2>
+            <h2 className="text-lg md:text-[32px] text-dark-blue mb-10 font-myanmar group-hover:text-gold transition-colors duration-400">{title}</h2>
             <p className="text-gray-600 text-sm md:text-base mb-4 group-hover:text-light-blue2 transition-colors duration-300">{description}</p>
           </div>
-          <span className="inline-block text-center bg-white border border-blue text-blue px-4 py-4 shadow group-hover:bg-[var(--gold)] group-hover:text-dark-blue group-hover:border-[var(--gold)] font-medium text-sm transition-colors duration-300">
+          <span className="inline-block text-center bg-white border border-blue text-blue px-4 py-4 shadow group-hover:bg-gold group-hover:text-dark-blue group-hover:border-gold font-medium text-sm transition-colors duration-300">
             {buttonText}
             <span className="sr-only">{` - ${title}`}</span>
           </span>

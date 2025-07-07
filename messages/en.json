@@ -677,7 +677,7 @@
   "frontend": {
     "menu": {
       "home": "Home",
-      "retirementHome": "Nursing Home Services",
+      "nursingHome": "Nursing Home",
       "adaptedStay": "Tailored Stays",
       "about": "About us",
       "magazine": "magazine"

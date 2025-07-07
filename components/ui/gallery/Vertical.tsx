@@ -55,10 +55,10 @@ export default function VerticalGallery() {
           {/* Header (mobile: centered, desktop: left + right arrows) */}
           <div className="mb-4 md:mb-8">
             <div className="text-center lg:text-left">
-              <h2 className="text-[var(--dark-blue)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
+              <h2 className="text-dark-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
                 Notre Gallerie
               </h2>
-              <p className="text-[var(--gray)] text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
+              <p className="text-gray text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
               </p>
             </div>
@@ -66,14 +66,14 @@ export default function VerticalGallery() {
             <nav className="hidden lg:flex items-center gap-4 justify-end mt-4">
               <button
                 onClick={goToPrevious}
-                className="group p-3 text-[var(--dark-blue)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                className="group p-3 text-dark-blue hover:text-gold transition-all duration-300 hover:scale-105"
                 aria-label="Previous images"
               >
                 <ArrowLeft />
               </button>
               <button
                 onClick={goToNext}
-                className="group p-3 text-[var(--dark-blue)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                className="group p-3 text-dark-blue hover:text-gold transition-all duration-300 hover:scale-105"
                 aria-label="Next images"
               >
                 <ArrowRight />
@@ -88,7 +88,7 @@ export default function VerticalGallery() {
                 <button
                   key={img}
                   onClick={() => setCurrentIndex(idx)}
-                  className={`overflow-hidden rounded-md border-2 ${idx === currentIndex ? 'border-[var(--gold)]' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]`}
+                  className={`overflow-hidden rounded-md border-2 ${idx === currentIndex ? 'border-gold' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold`}
                   style={{ opacity: idx === currentIndex ? 1 : 0.5 }}
                   aria-label={`Show image ${idx + 1}`}
                 >
@@ -123,7 +123,7 @@ export default function VerticalGallery() {
                     <button
                       key={img}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`flex-shrink-0 w-14 h-10 sm:w-16 sm:h-12 md:w-20 md:h-16 rounded-md border-2 ${idx === currentIndex ? 'border-[var(--gold)]' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-[var(--gold)]`}
+                      className={`flex-shrink-0 w-14 h-10 sm:w-16 sm:h-12 md:w-20 md:h-16 rounded-md border-2 ${idx === currentIndex ? 'border-gold' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold`}
                       style={{ opacity: idx === currentIndex ? 1 : 0.5 }}
                       aria-label={`Show image ${idx + 1}`}
                     >
@@ -140,14 +140,14 @@ export default function VerticalGallery() {
                 <nav className="flex items-center justify-center gap-4 mt-2 md:mt-3">
                   <button
                     onClick={goToPrevious}
-                    className="group p-3 text-[var(--dark-blue)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                    className="group p-3 text-dark-blue hover:text-gold transition-all duration-300 hover:scale-105"
                     aria-label="Previous images"
                   >
                     <ArrowLeft />
                   </button>
                   <button
                     onClick={goToNext}
-                    className="group p-3 text-[var(--dark-blue)] hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                    className="group p-3 text-dark-blue hover:text-gold transition-all duration-300 hover:scale-105"
                     aria-label="Next images"
                   >
                     <ArrowRight />
@@ -168,7 +168,7 @@ export default function VerticalGallery() {
           <div className="relative max-w-6xl max-h-[95vh] w-full" onClick={e => e.stopPropagation()}>
             <button
               onClick={closePopup}
-              className="absolute -top-12 right-0 z-10 text-white hover:text-[var(--gold)] transition-colors duration-300 p-2"
+              className="absolute -top-12 right-0 z-10 text-white hover:text-gold transition-colors duration-300 p-2"
               aria-label="Close popup"
             >
               <svg width="32" height="32" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">

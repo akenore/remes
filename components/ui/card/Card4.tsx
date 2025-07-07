@@ -67,7 +67,7 @@ export default function Card4({
           </div>
 
           {/* Button */}
-          <span className="inline-block text-center bg-white border border-dark-blue text-dark-blue px-4 py-4 shadow group-hover:bg-white group-hover:text-[var(--dark-blue)] group-hover:border-white font-medium text-sm transition-colors duration-300">
+          <span className="inline-block text-center bg-white border border-dark-blue text-dark-blue px-4 py-4 shadow group-hover:bg-white group-hover:text-dark-blue group-hover:border-white font-medium text-sm transition-colors duration-300">
             {buttonText}
             <span className="sr-only">{` - ${title}`}</span>
           </span>

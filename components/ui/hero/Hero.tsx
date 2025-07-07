@@ -59,12 +59,12 @@ export default function Hero() {
               style={{ minWidth: '100%' }}
             >
               <div className="h-64 flex flex-col justify-center">
-                <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-[var(--gold)] leading-tight font-myanmar">{slide.headline}</h1>
+                <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">{slide.headline}</h1>
                 <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">{slide.subheadline}</p>
               </div>
               {slide.buttonText && (
                 <div className="mb-10">
-                  <button className="bg-[var(--gold)] text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-[var(--gold)] hover:border-[var(--gold)] border border-[var(--gold)] transition-colors mt-8 mb-8">
+                  <button className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
                     {t('button')}
                   </button>
                 </div>

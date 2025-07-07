@@ -30,10 +30,10 @@ export default function MagazineView() {
                               <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
                                    <div className="mb-4 md:mb-8">
                                         <div className="text-center lg:text-left">
-                                             <h2 className="text-[var(--dark-blue)] text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
+                                             <h2 className="text-dark-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
                                                   Notre Blog
                                              </h2>
-                                             <p className="text-[var(--gray)] text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
+                                             <p className="text-gray text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
                                                   A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
                                              </p>
                                         </div>

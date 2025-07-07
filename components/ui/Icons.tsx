@@ -28,7 +28,7 @@ export default function Icons() {
                          <div className="flex flex-col items-center justify-center text-white">
                               <Image src="/icons/user.svg" alt="Maison de Repos" width={86} height={86} className="w-[55px] h-[55px] md:w-[86px] md:h-[86px]" />
                               <span className="text-[2rem] md:text-[2.75rem] mt-5 mb-2">+320</span>
-                              <p className="text-[0.875rem] font-[var(--font-vensfolk)]">Personnel dédié</p>
+                              <p className="text-[0.875rem]">Personnel dédié</p>
                          </div>
                          <div className="flex flex-col items-center justify-center text-white">
                               <Image src="/icons/user.svg" alt="Maison de Repos" width={86} height={86} className="w-[50px] h-[50px] md:w-[86px] md:h-[86px]" />

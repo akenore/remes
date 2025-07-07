@@ -69,7 +69,7 @@ export default function Testimonials() {
       {/* Section heading */}
       <div className="mb-12 md:mb-20 max-w-3xl">
         <h2 className="text-[2rem] text-center md:text-left md:text-[2.5rem] text-dark-blue font-myanmar mb-4">Temoignages</h2>
-        <p className="text-[var(--gray)] text-center md:text-left leading-relaxed text-[1.063rem] md:max-w-lg w-full">
+        <p className="text-gray text-center md:text-left leading-relaxed text-[1.063rem] md:max-w-lg w-full">
           Ils partagent leur expérience à REMES — des paroles sincères de confiance, de confort et de bien-être.
         </p>
       </div>
@@ -104,7 +104,7 @@ export default function Testimonials() {
                   : 'opacity-0 pointer-events-none absolute'
               }`}
             >
-              <p className="text-[1.063rem] text-[var(--gray)] mb-10 leading-relaxed text-center md:text-left">{t.quote}</p>
+              <p className="text-[1.063rem] text-gray mb-10 leading-relaxed text-center md:text-left">{t.quote}</p>
 
               {/* Author */}
               <div className="flex flex-col sm:flex-row sm:items-center sm:space-x-5 items-center text-center sm:text-left">
@@ -117,7 +117,7 @@ export default function Testimonials() {
                 />
                 <div>
                   <h3 className="text-dark-blue font-semibold">{t.author}</h3>
-                  <span className="text-sm text-[var(--gray)]">{t.role}</span>
+                  <span className="text-sm text-gray">{t.role}</span>
                 </div>
               </div>
             </div>

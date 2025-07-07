@@ -77,7 +77,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
             <header className="text-center lg:text-left mb-12 lg:mb-16">
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div className="flex-1">
-                  <h2 className="text-[var(--gold)] text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4 pt-20">
+                  <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4 pt-20">
                     Notre Gallerie
                   </h2>
                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
@@ -89,14 +89,14 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                 <nav className="hidden lg:flex items-center gap-4">
                   <button
                     onClick={goToPrevious}
-                    className="group p-3 text-white hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                    className="group p-3 text-white hover:text-gold transition-all duration-300 hover:scale-105"
                     aria-label="Previous images"
                   >
                     <ArrowLeft />
                   </button>
                   <button
                     onClick={goToNext}
-                    className="group p-3 text-white hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                    className="group p-3 text-white hover:text-gold transition-all duration-300 hover:scale-105"
                     aria-label="Next images"
                   >
                     <ArrowRight />
@@ -320,14 +320,14 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
             <nav className="lg:hidden flex items-center justify-center gap-6 mt-8">
               <button
                 onClick={goToPrevious}
-                className="group p-3 text-white hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                className="group p-3 text-white hover:text-gold transition-all duration-300 hover:scale-105"
                 aria-label="Previous images"
               >
                 <ArrowLeft />
               </button>
               <button
                 onClick={goToNext}
-                className="group p-3 text-white hover:text-[var(--gold)] transition-all duration-300 hover:scale-105"
+                className="group p-3 text-white hover:text-gold transition-all duration-300 hover:scale-105"
                 aria-label="Next images"
               >
                 <ArrowRight />
@@ -346,7 +346,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
           <div className="relative max-w-6xl max-h-[95vh] w-full" onClick={(e) => e.stopPropagation()}>
             <button
               onClick={closePopup}
-              className="absolute -top-12 right-0 z-10 text-white hover:text-[var(--gold)] transition-colors duration-300 p-2"
+              className="absolute -top-12 right-0 z-10 text-white hover:text-gold transition-colors duration-300 p-2"
               aria-label="Close popup"
             >
               <CloseIcon />
