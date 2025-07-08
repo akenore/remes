@@ -7,10 +7,12 @@ import { useTranslations } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 
 interface Category {
   id: string;
   title: string;
+  title_fr: string;
   slug: string;
   created: string;
   updated: string;
@@ -34,6 +36,7 @@ export default function CategoriesPage() {
   
   const [formData, setFormData] = useState({
     title: '',
+    title_fr: '',
     slug: '',
   });
   const [isSlugEditable, setIsSlugEditable] = useState(false);
@@ -58,6 +61,7 @@ export default function CategoriesPage() {
       setCategories(result.items.map((item) => ({
         id: item.id,
         title: item.title as string,
+        title_fr: item.title_fr as string || '',
         slug: item.slug as string,
         created: item.created as string,
         updated: item.updated as string,
@@ -121,7 +125,7 @@ export default function CategoriesPage() {
   };
 
   const resetForm = () => {
-    setFormData({ title: '', slug: '' });
+    setFormData({ title: '', title_fr: '', slug: '' });
     setEditingCategory(null);
     setShowAddForm(false);
     setIsSlugEditable(false);
@@ -136,6 +140,7 @@ export default function CategoriesPage() {
   const handleEditCategory = (category: Category) => {
     setFormData({
       title: category.title,
+      title_fr: category.title_fr,
       slug: category.slug,
     });
     setEditingCategory(category);
@@ -156,6 +161,7 @@ export default function CategoriesPage() {
 
       const data = {
         title: formData.title.trim(),
+        title_fr: formData.title_fr.trim(),
         slug: formData.slug.trim(),
       };
 
@@ -194,6 +200,10 @@ export default function CategoriesPage() {
       month: 'short',
       day: 'numeric',
     });
+  };
+
+  const isTranslated = (category: Category) => {
+    return category.title_fr && category.title_fr.trim() !== '';
   };
 
   const filteredCategories = categories;
@@ -238,20 +248,23 @@ export default function CategoriesPage() {
 
               {showAddForm ? (
                 <form onSubmit={handleSubmit} className="space-y-4">
-                  <div>
-                    <label htmlFor="category-title" className="block text-sm font-medium text-gray-700 mb-2">
-{t('form.title')} *
-                    </label>
-                    <input
-                      type="text"
-                      id="category-title"
-                      className="block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm transition-colors"
-                      value={formData.title}
-                      onChange={(e) => handleTitleChange(e.target.value)}
-                      placeholder={t('form.titlePlaceholder')}
-                      required
-                    />
-                  </div>
+                  <HorizontalAccordion
+                    englishLabel="Category Title (English)"
+                    englishValue={formData.title}
+                    englishPlaceholder={t('form.titlePlaceholder')}
+                    onEnglishChange={handleTitleChange}
+                    englishRequired={true}
+                    frenchLabel="Category Title (French)"
+                    frenchValue={formData.title_fr}
+                    frenchPlaceholder="Titre de catégorie en français"
+                    onFrenchChange={(value) => {
+                      setFormData(prev => ({ ...prev, title_fr: value }));
+                    }}
+                    frenchRequired={false}
+                    fieldType="text"
+                    uniqueId="category-title"
+                    className=""
+                  />
                   
                   <div>
                     <label className="block text-sm font-medium text-gray-700 mb-2">
@@ -394,7 +407,16 @@ export default function CategoriesPage() {
                         className="flex items-center justify-between p-4 border border-gray-200 rounded-lg hover:bg-gray-50 transition-colors"
                       >
                         <div className="flex-1">
-                          <h4 className="text-sm font-medium text-gray-900">{category.title}</h4>
+                          <div className="flex items-center space-x-2">
+                            <h4 className="text-sm font-medium text-gray-900">{category.title}</h4>
+                            <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium ${
+                              isTranslated(category)
+                                ? 'bg-green-100 text-green-800'
+                                : 'bg-gray-100 text-gray-800'
+                            }`}>
+                              🇫🇷 {isTranslated(category) ? 'FR' : 'Missing'}
+                            </span>
+                          </div>
                           <p className="text-sm text-gray-500">/{category.slug}</p>
                           <p className="text-xs text-gray-400 mt-1">
                             {t('created')} {formatDate(category.created)}

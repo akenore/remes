@@ -7,11 +7,13 @@ import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/lib/toast-context';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 
 interface MedicalEquipment {
   id: string;
   image: string;
   description: string;
+  description_fr: string;
   price_per_day: number;
   price_per_month: number;
   created: string;
@@ -27,6 +29,7 @@ export default function EditEquipmentPage() {
   
   const [formData, setFormData] = useState({
     description: '',
+    description_fr: '',
     price_per_day: '',
     price_per_month: ''
   });
@@ -52,6 +55,7 @@ export default function EditEquipmentPage() {
       setEquipment(equipmentData);
       setFormData({
         description: equipmentData.description,
+        description_fr: equipmentData.description_fr || '',
         price_per_day: equipmentData.price_per_day.toString(),
         price_per_month: equipmentData.price_per_month.toString()
       });
@@ -90,6 +94,7 @@ export default function EditEquipmentPage() {
     try {
       const submitData = new FormData();
       submitData.append('description', formData.description);
+      submitData.append('description_fr', formData.description_fr);
       submitData.append('price_per_day', formData.price_per_day);
       submitData.append('price_per_month', formData.price_per_month);
       
@@ -133,7 +138,7 @@ export default function EditEquipmentPage() {
   const getImageUrl = () => {
     if (imagePreview) return imagePreview;
     if (equipment && currentImage) {
-      return pb.files.getUrl(equipment, currentImage);
+      return pb.files.getURL(equipment, currentImage);
     }
     return null;
   };
@@ -207,16 +212,34 @@ export default function EditEquipmentPage() {
                       className="object-cover rounded-lg"
                     />
                   </div>
-                  <button
-                    type="button"
-                    onClick={() => {
-                      setSelectedImage(null);
-                      setImagePreview(null);
-                    }}
-                    className="text-sm text-red-600 hover:text-red-500"
-                  >
-                    {t('add.form.changeImage')}
-                  </button>
+                  <div className="flex space-x-2">
+                    <label
+                      htmlFor="image-upload"
+                      className="cursor-pointer text-sm text-indigo-600 hover:text-indigo-500 font-medium"
+                    >
+                      {t('add.form.changeImage')}
+                    </label>
+                    <span className="text-gray-300">|</span>
+                    <button
+                      type="button"
+                      onClick={() => {
+                        setSelectedImage(null);
+                        setImagePreview(null);
+                        setCurrentImage('');
+                      }}
+                      className="text-sm text-red-600 hover:text-red-500"
+                    >
+                      Remove Image
+                    </button>
+                  </div>
+                  <input
+                    id="image-upload"
+                    name="image-upload"
+                    type="file"
+                    className="sr-only"
+                    accept="image/*"
+                    onChange={handleImageChange}
+                  />
                 </div>
               ) : (
                 <div className="space-y-1 text-center">
@@ -256,25 +279,27 @@ export default function EditEquipmentPage() {
           </div>
 
           {/* Description */}
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              {t('add.form.description')}
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows={4}
-              className={`mt-1 block w-full px-3 py-2 border ${
-                errors.description ? 'border-red-300' : 'border-gray-300'
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-              placeholder={t('add.form.descriptionPlaceholder')}
-            />
-            {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-            )}
-          </div>
+          <HorizontalAccordion
+            uniqueId="edit-equipment-description"
+            englishLabel={t('add.form.description')}
+            frenchLabel="Description"
+            fieldType="textarea"
+            englishValue={formData.description}
+            frenchValue={formData.description_fr}
+            onEnglishChange={(value) => {
+              setFormData(prev => ({ ...prev, description: value }));
+              if (errors.description) {
+                setErrors(prev => ({ ...prev, description: '' }));
+              }
+            }}
+            onFrenchChange={(value) => {
+              setFormData(prev => ({ ...prev, description_fr: value }));
+            }}
+            englishPlaceholder={t('add.form.descriptionPlaceholder')}
+            frenchPlaceholder="Description en français"
+            error={errors.description}
+            englishRequired={true}
+          />
 
           {/* Pricing */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

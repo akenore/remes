@@ -7,6 +7,7 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
 import CoverImageSelector from '@/components/ui/admin/CoverImageSelector';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 import { useTranslations } from 'next-intl';
 
 interface Category {
@@ -28,8 +29,10 @@ export default function AddPostPage() {
   
   const [formData, setFormData] = useState({
     title: '',
+    title_fr: '',
     slug: '',
     content: '',
+    content_fr: '',
     published: false,
     categories: [] as string[],
     cover_image: null as File | null,
@@ -177,8 +180,10 @@ export default function AddPostPage() {
 
       const data = new FormData();
       data.append('title', formData.title);
+      data.append('title_fr', formData.title_fr);
       data.append('slug', formData.slug);
       data.append('content', formData.content);
+      data.append('content_fr', formData.content_fr);
       data.append('author', user?.id || '');
       data.append('published', publishStatus.toString());
       
@@ -312,19 +317,26 @@ export default function AddPostPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Main Content Area (Left) */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Title */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <input
-                type="text"
-                  placeholder={t('form.titlePlaceholder')}
-                className="block w-full text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none"
-                value={formData.title}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          {/* Title - English & French */}
+          <HorizontalAccordion
+            englishLabel="Title (English)"
+            englishValue={formData.title}
+            englishPlaceholder={t('form.titlePlaceholder')}
+            onEnglishChange={handleTitleChange}
+            englishRequired={true}
+            frenchLabel="Title (French)"
+            frenchValue={formData.title_fr}
+            frenchPlaceholder="Titre en français"
+            onFrenchChange={(value) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, title_fr: value }));
+            }}
+            frenchRequired={false}
+            fieldType="text"
+            uniqueId="post-title"
+            textInputClassName="text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none"
+          />
 
           {/* Permalink */}
           <div className="bg-white shadow rounded-lg">
@@ -388,21 +400,30 @@ export default function AddPostPage() {
             </div>
           </div>
 
-          {/* Content Editor */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <RichTextEditor
-                value={formData.content}
-                  onChange={(content) => {
-                    // Clear messages when user starts typing content
-                  if (error) setError('');
-                    if (success) setSuccess('');
-                    setFormData(prev => ({ ...prev, content }));
-                }}
-                  placeholder={t('form.contentPlaceholder')}
-              />
-            </div>
-          </div>
+          {/* Content - English & French */}
+          <HorizontalAccordion
+            englishLabel="Content (English)"
+            englishValue={formData.content}
+            englishPlaceholder={t('form.contentPlaceholder')}
+            onEnglishChange={(content) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, content }));
+            }}
+            englishRequired={true}
+            frenchLabel="Content (French)"
+            frenchValue={formData.content_fr}
+            frenchPlaceholder="Contenu en français"
+            onFrenchChange={(content) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, content_fr: content }));
+            }}
+            frenchRequired={false}
+            fieldType="richtext"
+            uniqueId="post-content"
+            RichTextComponent={RichTextEditor}
+          />
         </div>
 
         {/* Sidebar (Right) */}

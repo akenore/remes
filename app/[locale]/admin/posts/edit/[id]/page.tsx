@@ -7,6 +7,7 @@ import { useRouter, useParams } from 'next/navigation';
 import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
 import CoverImageSelector from '@/components/ui/admin/CoverImageSelector';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 import { useTranslations } from 'next-intl';
 
 interface Category {
@@ -17,8 +18,10 @@ interface Category {
 interface Post {
   id: string;
   title: string;
+  title_fr: string;
   slug: string;
   content: string;
+  content_fr: string;
   author: string;
   published: boolean;
   categories: string[];
@@ -45,8 +48,10 @@ export default function EditPostPage() {
   
   const [formData, setFormData] = useState({
     title: '',
+    title_fr: '',
     slug: '',
     content: '',
+    content_fr: '',
     published: false,
     categories: [] as string[],
     cover_image: null as File | null,
@@ -71,8 +76,10 @@ export default function EditPostPage() {
       const typedPost: Post = {
         id: post.id,
         title: post.title as string,
+        title_fr: post.title_fr as string || '',
         slug: post.slug as string,
         content: post.content as string,
+        content_fr: post.content_fr as string || '',
         author: post.author as string,
         published: post.published as boolean,
         categories: post.categories as string[] || [],
@@ -84,8 +91,10 @@ export default function EditPostPage() {
       setOriginalPost(typedPost);
       setFormData({
         title: typedPost.title,
+        title_fr: typedPost.title_fr,
         slug: typedPost.slug,
         content: typedPost.content,
+        content_fr: typedPost.content_fr,
         published: typedPost.published,
         categories: typedPost.categories,
         cover_image: null,
@@ -240,8 +249,10 @@ export default function EditPostPage() {
 
       const data = new FormData();
       data.append('title', formData.title);
+      data.append('title_fr', formData.title_fr);
       data.append('slug', formData.slug);
       data.append('content', formData.content);
+      data.append('content_fr', formData.content_fr);
       data.append('author', user?.id || ''); // Required field - keep original author
       data.append('published', publishStatus.toString());
       
@@ -469,19 +480,26 @@ export default function EditPostPage() {
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6">
         {/* Main Content Area (Left) */}
         <div className="lg:col-span-3 space-y-6">
-          {/* Title */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
-              <input
-                type="text"
-                placeholder={t('form.titlePlaceholder')}
-                className="block w-full text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none resize-none"
-                value={formData.title}
-                onChange={(e) => handleTitleChange(e.target.value)}
-                required
-              />
-            </div>
-          </div>
+          {/* Title - English & French */}
+          <HorizontalAccordion
+            englishLabel="Title (English)"
+            englishValue={formData.title}
+            englishPlaceholder={t('form.titlePlaceholder')}
+            onEnglishChange={handleTitleChange}
+            englishRequired={true}
+            frenchLabel="Title (French)"
+            frenchValue={formData.title_fr}
+            frenchPlaceholder="Titre en français"
+            onFrenchChange={(value) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, title_fr: value }));
+            }}
+            frenchRequired={false}
+            fieldType="text"
+            uniqueId="edit-post-title"
+            textInputClassName="text-2xl font-bold border-0 p-0 placeholder-gray-400 focus:ring-0 focus:outline-none"
+          />
 
           {/* Permalink */}
           <div className="bg-white shadow rounded-lg">
@@ -545,17 +563,37 @@ export default function EditPostPage() {
             </div>
           </div>
 
-          {/* Content Editor */}
-          <div className="bg-white shadow rounded-lg">
-            <div className="px-4 py-5 sm:p-6">
+          {/* Content - English & French */}
+          <HorizontalAccordion
+            englishLabel="Content (English)"
+            englishValue={formData.content}
+            englishPlaceholder={t('form.contentPlaceholder')}
+            onEnglishChange={(content) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, content }));
+            }}
+            englishRequired={true}
+            frenchLabel="Content (French)"
+            frenchValue={formData.content_fr}
+            frenchPlaceholder="Contenu en français"
+            onFrenchChange={(content) => {
+              if (error) setError('');
+              if (success) setSuccess('');
+              setFormData(prev => ({ ...prev, content_fr: content }));
+            }}
+            frenchRequired={false}
+            fieldType="richtext"
+            uniqueId="edit-post-content"
+            RichTextComponent={({ value, onChange, placeholder }) => (
               <RichTextEditor
-                value={formData.content}
-                onChange={(value) => setFormData(prev => ({ ...prev, content: value }))}
-                placeholder={t('form.contentPlaceholder')}
+                value={value}
+                onChange={onChange}
+                placeholder={placeholder}
                 postId={postId}
               />
-            </div>
-          </div>
+            )}
+          />
         </div>
 
         {/* Sidebar (Right) */}

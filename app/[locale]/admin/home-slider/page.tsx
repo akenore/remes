@@ -11,7 +11,9 @@ import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
 interface HomeSlide {
   id: string;
   title: string;
+  title_fr: string;
   description: string;
+  description_fr: string;
   created: string;
   updated: string;
 }
@@ -71,6 +73,11 @@ export default function HomeSlidersPage() {
     return new Date(dateString).toLocaleDateString();
   };
 
+  const isTranslated = (slide: HomeSlide) => {
+    return slide.title_fr && slide.title_fr.trim() !== '' && 
+           slide.description_fr && slide.description_fr.trim() !== '';
+  };
+
   return (
     <div className="space-y-6">
       <div className="sm:flex sm:items-center sm:justify-between">
@@ -116,6 +123,9 @@ export default function HomeSlidersPage() {
                 {t('table.description')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Translation
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('table.date')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -126,13 +136,13 @@ export default function HomeSlidersPage() {
           <tbody className="bg-white divide-y divide-gray-200">
             {loading ? (
               <tr>
-                <td colSpan={4} className="px-6 py-4 text-center text-sm text-gray-500">
+                <td colSpan={5} className="px-6 py-4 text-center text-sm text-gray-500">
                   {t('table.loadingSlides')}
                 </td>
               </tr>
             ) : slides.length === 0 ? (
               <tr>
-                <td colSpan={4} className="px-6 py-4 text-center text-sm text-gray-500">
+                <td colSpan={5} className="px-6 py-4 text-center text-sm text-gray-500">
                   {t('table.noResults')}
                 </td>
               </tr>
@@ -145,6 +155,18 @@ export default function HomeSlidersPage() {
                   <td className="px-6 py-4 text-sm text-gray-500">
                     <div className="max-w-xs truncate">
                       {slide.description || '-'}
+                    </div>
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg">🇬🇧</span>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                        isTranslated(slide)
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        🇫🇷 {isTranslated(slide) ? 'Translated' : 'Missing'}
+                      </span>
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

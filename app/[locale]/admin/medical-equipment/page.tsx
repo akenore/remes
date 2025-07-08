@@ -13,6 +13,7 @@ interface MedicalEquipment {
   id: string;
   image: string;
   description: string;
+  description_fr: string;
   price_per_day: number;
   price_per_month: number;
   created: string;
@@ -82,7 +83,11 @@ export default function MedicalEquipmentPage() {
   };
 
   const getImageUrl = (record: MedicalEquipment, filename: string) => {
-    return pb.files.getUrl(record, filename);
+    return pb.files.getURL(record, filename);
+  };
+
+  const isTranslated = (item: MedicalEquipment) => {
+    return item.description_fr && item.description_fr.trim() !== '';
   };
 
   return (
@@ -136,6 +141,9 @@ export default function MedicalEquipmentPage() {
                 {t('table.pricePerMonth')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                Translation
+              </th>
+              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('table.date')}
               </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -146,13 +154,13 @@ export default function MedicalEquipmentPage() {
           <tbody className="bg-white divide-y divide-gray-200">
             {loading ? (
               <tr>
-                <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
+                <td colSpan={7} className="px-6 py-4 text-center text-sm text-gray-500">
                   {t('table.loadingEquipment')}
                 </td>
               </tr>
             ) : equipment.length === 0 ? (
               <tr>
-                <td colSpan={6} className="px-6 py-4 text-center text-sm text-gray-500">
+                <td colSpan={7} className="px-6 py-4 text-center text-sm text-gray-500">
                   {t('table.noResults')}
                 </td>
               </tr>
@@ -166,6 +174,7 @@ export default function MedicalEquipmentPage() {
                           src={getImageUrl(item, item.image)}
                           alt={item.description}
                           fill
+                          sizes="64px"
                           className="object-cover rounded-lg"
                         />
                       </div>
@@ -181,6 +190,18 @@ export default function MedicalEquipmentPage() {
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {formatPrice(item.price_per_month)}
+                  </td>
+                  <td className="px-6 py-4 whitespace-nowrap">
+                    <div className="flex items-center space-x-2">
+                      <span className="text-lg">🇬🇧</span>
+                      <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                        isTranslated(item)
+                          ? 'bg-green-100 text-green-800'
+                          : 'bg-gray-100 text-gray-800'
+                      }`}>
+                        🇫🇷 {isTranslated(item) ? 'Translated' : 'Missing'}
+                      </span>
+                    </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                     {formatDate(item.created)}

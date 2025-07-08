@@ -6,11 +6,14 @@ import { useTranslations } from 'next-intl';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 
 interface HomeSlide {
   id: string;
   title: string;
+  title_fr: string;
   description: string;
+  description_fr: string;
   created: string;
   updated: string;
 }
@@ -24,7 +27,9 @@ export default function EditSlidePage() {
   
   const [formData, setFormData] = useState({
     title: '',
-    description: ''
+    title_fr: '',
+    description: '',
+    description_fr: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -45,7 +50,9 @@ export default function EditSlidePage() {
       setSlide(slideData);
       setFormData({
         title: slideData.title,
-        description: slideData.description
+        title_fr: slideData.title_fr || '',
+        description: slideData.description,
+        description_fr: slideData.description_fr || ''
       });
     } catch (err) {
       console.error('Failed to fetch slide:', err);
@@ -78,7 +85,9 @@ export default function EditSlidePage() {
     try {
       await pb.collection('home_slider').update(id, {
         title: formData.title,
-        description: formData.description
+        title_fr: formData.title_fr,
+        description: formData.description,
+        description_fr: formData.description_fr
       });
       // Show success message
       showToast(t('edit.success.updated'), 'success');
@@ -152,47 +161,47 @@ export default function EditSlidePage() {
 
       <div className="bg-white shadow rounded-lg">
         <form onSubmit={handleSubmit} className="px-6 py-6 space-y-6">
-          {/* Title */}
-          <div>
-            <label htmlFor="title" className="block text-sm font-medium text-gray-700">
-              {t('add.form.title')}
-            </label>
-            <input
-              type="text"
-              id="title"
-              name="title"
-              value={formData.title}
-              onChange={handleChange}
-              className={`mt-1 block w-full px-3 py-2 border ${
-                errors.title ? 'border-red-300' : 'border-gray-300'
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-              placeholder={t('add.form.titlePlaceholder')}
-            />
-            {errors.title && (
-              <p className="mt-1 text-sm text-red-600">{errors.title}</p>
-            )}
-          </div>
+          <HorizontalAccordion
+            englishLabel="Title (English)"
+            englishValue={formData.title}
+            englishPlaceholder={t('add.form.titlePlaceholder')}
+            onEnglishChange={(value) => {
+              setFormData(prev => ({ ...prev, title: value }));
+              if (errors.title) {
+                setErrors(prev => ({ ...prev, title: '' }));
+              }
+            }}
+            englishRequired={true}
+            frenchLabel="Title (French)"
+            frenchValue={formData.title_fr}
+            frenchPlaceholder="Titre en français"
+            onFrenchChange={(value) => setFormData(prev => ({ ...prev, title_fr: value }))}
+            frenchRequired={false}
+            fieldType="text"
+            uniqueId="edit-slide-title"
+            error={errors.title}
+          />
 
-          {/* Description */}
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              {t('add.form.description')}
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows={4}
-              className={`mt-1 block w-full px-3 py-2 border ${
-                errors.description ? 'border-red-300' : 'border-gray-300'
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-              placeholder={t('add.form.descriptionPlaceholder')}
-            />
-            {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-            )}
-          </div>
+          <HorizontalAccordion
+            englishLabel="Description (English)"
+            englishValue={formData.description}
+            englishPlaceholder={t('add.form.descriptionPlaceholder')}
+            onEnglishChange={(value) => {
+              setFormData(prev => ({ ...prev, description: value }));
+              if (errors.description) {
+                setErrors(prev => ({ ...prev, description: '' }));
+              }
+            }}
+            englishRequired={false}
+            frenchLabel="Description (French)"
+            frenchValue={formData.description_fr}
+            frenchPlaceholder="Description en français"
+            onFrenchChange={(value) => setFormData(prev => ({ ...prev, description_fr: value }))}
+            frenchRequired={false}
+            fieldType="textarea"
+            uniqueId="edit-slide-description"
+            error={errors.description}
+          />
 
           <div className="flex justify-end space-x-3">
             <Link

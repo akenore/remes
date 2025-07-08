@@ -12,8 +12,10 @@ import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
 interface Post {
   id: string;
   title: string;
+  title_fr: string;
   slug: string;
   content: string;
+  content_fr: string;
   author: string;
   published: boolean;
   categories: string[];
@@ -122,6 +124,11 @@ export default function PostsPage() {
       month: 'short',
       day: 'numeric',
     });
+  };
+
+  const isTranslated = (post: Post) => {
+    return post.title_fr && post.title_fr.trim() !== '' && 
+           post.content_fr && post.content_fr.trim() !== '';
   };
 
   return (
@@ -233,6 +240,9 @@ export default function PostsPage() {
                       {t('table.status')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                      Translation
+                    </th>
+                    <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {t('table.date')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
@@ -251,6 +261,7 @@ export default function PostsPage() {
                                 src={pb.files.getURL(post, post.cover_image, { thumb: '40x40' })}
                                 alt={post.title}
                                 fill
+                                sizes="40px"
                                 className="rounded-lg object-cover"
                               />
                             </div>
@@ -292,6 +303,18 @@ export default function PostsPage() {
                         >
                           {post.published ? t('status.published') : t('status.draft')}
                         </button>
+                      </td>
+                      <td className="px-6 py-4 whitespace-nowrap">
+                        <div className="flex items-center space-x-2">
+                          <span className="text-lg">🇬🇧</span>
+                          <span className={`inline-flex items-center px-2 py-1 rounded-full text-xs font-medium ${
+                            isTranslated(post)
+                              ? 'bg-green-100 text-green-800'
+                              : 'bg-gray-100 text-gray-800'
+                          }`}>
+                            🇫🇷 {isTranslated(post) ? 'Translated' : 'Missing'}
+                          </span>
+                        </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
                         {formatDate(post.created)}

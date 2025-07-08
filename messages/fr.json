@@ -28,7 +28,8 @@
       "error": "Erreur",
       "success": "Succès",
       "warning": "Avertissement",
-      "info": "Information"
+      "info": "Information",
+      "empty": "vide"
     },
     "layout": {
       "brand": "Remes Admin",

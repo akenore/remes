@@ -7,6 +7,7 @@ import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/lib/toast-context';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 
 export default function AddEquipmentPage() {
   const router = useRouter();
@@ -15,6 +16,7 @@ export default function AddEquipmentPage() {
   
   const [formData, setFormData] = useState({
     description: '',
+    description_fr: '',
     price_per_day: '',
     price_per_month: ''
   });
@@ -53,6 +55,7 @@ export default function AddEquipmentPage() {
     try {
       const submitData = new FormData();
       submitData.append('description', formData.description);
+      submitData.append('description_fr', formData.description_fr);
       submitData.append('price_per_day', formData.price_per_day);
       submitData.append('price_per_month', formData.price_per_month);
       if (selectedImage) {
@@ -179,25 +182,27 @@ export default function AddEquipmentPage() {
           </div>
 
           {/* Description */}
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              {t('add.form.description')}
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows={4}
-              className={`mt-1 block w-full px-3 py-2 border ${
-                errors.description ? 'border-red-300' : 'border-gray-300'
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-              placeholder={t('add.form.descriptionPlaceholder')}
-            />
-            {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-            )}
-          </div>
+          <HorizontalAccordion
+            uniqueId="add-equipment-description"
+            englishLabel={t('add.form.description')}
+            frenchLabel="Description"
+            fieldType="textarea"
+            englishValue={formData.description}
+            frenchValue={formData.description_fr}
+            onEnglishChange={(value) => {
+              setFormData(prev => ({ ...prev, description: value }));
+              if (errors.description) {
+                setErrors(prev => ({ ...prev, description: '' }));
+              }
+            }}
+            onFrenchChange={(value) => {
+              setFormData(prev => ({ ...prev, description_fr: value }));
+            }}
+            englishPlaceholder={t('add.form.descriptionPlaceholder')}
+            frenchPlaceholder="Description en français"
+            error={errors.description}
+            englishRequired={true}
+          />
 
           {/* Pricing */}
           <div className="grid grid-cols-1 gap-6 sm:grid-cols-2">

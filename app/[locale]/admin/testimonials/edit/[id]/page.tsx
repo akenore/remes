@@ -6,11 +6,13 @@ import { useTranslations } from 'next-intl';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
+import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
 
 interface Testimonial {
   id: string;
   full_name: string;
   description: string;
+  description_fr: string;
   created: string;
   updated: string;
 }
@@ -24,7 +26,8 @@ export default function EditTestimonialPage() {
   
   const [formData, setFormData] = useState({
     full_name: '',
-    description: ''
+    description: '',
+    description_fr: ''
   });
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
@@ -45,7 +48,8 @@ export default function EditTestimonialPage() {
       setTestimonial(testimonialData);
       setFormData({
         full_name: testimonialData.full_name,
-        description: testimonialData.description
+        description: testimonialData.description,
+        description_fr: testimonialData.description_fr || ''
       });
     } catch (err) {
       console.error('Failed to fetch testimonial:', err);
@@ -78,7 +82,8 @@ export default function EditTestimonialPage() {
     try {
       await pb.collection('testimonials').update(id, {
         full_name: formData.full_name,
-        description: formData.description
+        description: formData.description,
+        description_fr: formData.description_fr
       });
       // Show success message
       showToast(t('edit.success.updated'), 'success');
@@ -174,25 +179,27 @@ export default function EditTestimonialPage() {
           </div>
 
           {/* Description */}
-          <div>
-            <label htmlFor="description" className="block text-sm font-medium text-gray-700">
-              {t('add.form.description')}
-            </label>
-            <textarea
-              id="description"
-              name="description"
-              value={formData.description}
-              onChange={handleChange}
-              rows={6}
-              className={`mt-1 block w-full px-3 py-2 border ${
-                errors.description ? 'border-red-300' : 'border-gray-300'
-              } rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm`}
-              placeholder={t('add.form.descriptionPlaceholder')}
-            />
-            {errors.description && (
-              <p className="mt-1 text-sm text-red-600">{errors.description}</p>
-            )}
-          </div>
+          <HorizontalAccordion
+            uniqueId="edit-testimonial-description"
+            englishLabel={t('add.form.description')}
+            frenchLabel="Description"
+            fieldType="textarea"
+            englishValue={formData.description}
+            frenchValue={formData.description_fr}
+            onEnglishChange={(value) => {
+              setFormData(prev => ({ ...prev, description: value }));
+              if (errors.description) {
+                setErrors(prev => ({ ...prev, description: '' }));
+              }
+            }}
+            onFrenchChange={(value) => {
+              setFormData(prev => ({ ...prev, description_fr: value }));
+            }}
+            englishPlaceholder={t('add.form.descriptionPlaceholder')}
+            frenchPlaceholder="Description en français"
+            error={errors.description}
+            englishRequired={true}
+          />
 
           <div className="flex justify-end space-x-3">
             <Link
