@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useRouter, useParams } from 'next/navigation';
@@ -385,6 +385,20 @@ export default function EditPostPage() {
     return null;
   };
 
+  // Memoize the RichTextComponent to prevent unnecessary re-renders
+  const RichTextComponent = useCallback(({ value, onChange, placeholder }: {
+    value: string;
+    onChange: (value: string) => void;
+    placeholder?: string;
+  }) => (
+    <RichTextEditor
+      value={value}
+      onChange={onChange}
+      placeholder={placeholder}
+      postId={postId}
+    />
+  ), [postId]);
+
   if (pageLoading) {
     return (
       <div className="flex items-center justify-center min-h-screen">
@@ -585,14 +599,7 @@ export default function EditPostPage() {
             frenchRequired={false}
             fieldType="richtext"
             uniqueId="edit-post-content"
-            RichTextComponent={({ value, onChange, placeholder }) => (
-              <RichTextEditor
-                value={value}
-                onChange={onChange}
-                placeholder={placeholder}
-                postId={postId}
-              />
-            )}
+            RichTextComponent={RichTextComponent}
           />
         </div>
 
