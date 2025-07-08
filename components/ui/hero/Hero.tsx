@@ -1,26 +1,20 @@
 'use client';
 import React, { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
+import Link from 'next/link';
 import Card from '../card/Card';
 import Navbar from '../Navbar';
+import { pb } from '@/lib/pocketbase';
 
-const carouselSlides = [
-  {
-    headline: 'Un lieu de vie, de soin et de serenite',
-    subheadline: 'Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité.',
-    buttonText: 'En savoir plus'
-  },
-  {
-    headline: 'Un accompagnement personnalisé',
-    subheadline: 'Des équipes médicales et paramédicales à votre écoute, pour un suivi adapté à chaque résident.',
-    buttonText: 'En savoir plus'
-  },
-  {
-    headline: 'Confort et sécurité au quotidien',
-    subheadline: 'Des espaces de vie modernes, sécurisés et pensés pour le bien-être de tous.',
-    buttonText: 'En savoir plus'
-  }
-];
+interface HomeSlide {
+  id: string;
+  title: string;
+  title_fr: string;
+  description: string;
+  description_fr: string;
+  created: string;
+  updated: string;
+}
 
 const NextArrow = () => (
   <svg width="47" height="47" viewBox="0 0 47 47" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -36,15 +30,64 @@ const PrevArrow = () => (
 
 export default function Hero() {
   const t = useTranslations('frontend');
+  const locale = useLocale();
   const [current, setCurrent] = useState(0);
-  const total = carouselSlides.length;
+  const [slides, setSlides] = useState<HomeSlide[]>([]);
+  const [loading, setLoading] = useState(true);
+  const total = slides.length;
   const goTo = (idx: number) => setCurrent((idx + total) % total);
 
+  // Function to get localized content with fallback
+  const getLocalizedContent = (slide: HomeSlide) => {
+    const isFrench = locale === 'fr';
+    return {
+      title: isFrench && slide.title_fr ? slide.title_fr : slide.title,
+      description: isFrench && slide.description_fr ? slide.description_fr : slide.description
+    };
+  };
+
+  // Fetch home slider data from PocketBase
+  const fetchSlides = async () => {
+    try {
+      setLoading(true);
+      const result = await pb.collection('home_slider').getList(1, 50, {
+        sort: '-created', // Get newest first
+        requestKey: null, // Prevent caching issues
+      });
+
+      const slidesData: HomeSlide[] = result.items.map((item: any) => ({
+        id: item.id,
+        title: item.title || '',
+        title_fr: item.title_fr || '',
+        description: item.description || '',
+        description_fr: item.description_fr || '',
+        created: item.created,
+        updated: item.updated,
+      }));
+
+      setSlides(slidesData);
+    } catch (error) {
+      console.error('Failed to fetch home slider data:', error);
+      // Fallback to empty array to prevent errors
+      setSlides([]);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Fetch slides on component mount
   useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrent((prev) => (prev + 1) % total);
-    }, 3500);
-    return () => clearInterval(interval);
+    fetchSlides();
+  }, []);
+
+  // Auto-advance carousel
+  useEffect(() => {
+    if (total > 1) {
+      const interval = setInterval(() => {
+        setCurrent((prev) => (prev + 1) % total);
+      }, 5000); // Slightly longer interval for better UX
+      return () => clearInterval(interval);
+    }
   }, [total]);
 
   return (
@@ -52,42 +95,72 @@ export default function Hero() {
       <Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
-          {carouselSlides.map((slide, idx) => (
-            <div
-              key={idx}
-              className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
-              style={{ minWidth: '100%' }}
-            >
-              <div className="h-64 flex flex-col justify-center">
-                <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">{slide.headline}</h1>
-                <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">{slide.subheadline}</p>
-              </div>
-              {slide.buttonText && (
-                <div className="mb-10">
-                  <button className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
-                    {t('button')}
-                  </button>
-                </div>
-              )}
+          {loading ? (
+            // Loading state
+            <div className="absolute left-0 right-0 top-0 h-64 flex flex-col justify-center items-center">
+              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold"></div>
+              <p className="text-white text-sm mt-4">Loading...</p>
             </div>
-          ))}
+          ) : slides.length === 0 ? (
+            // Fallback when no slides available
+            <div className="absolute left-0 right-0 top-0 h-64 flex flex-col justify-center">
+              <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">
+                {t('home.hero.fallback.title')}
+              </h1>
+              <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">
+                {t('home.hero.fallback.description')}
+              </p>
+              <div className="my-10">
+                <Link href="/" className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
+                  {t('button')}
+                </Link>
+              </div>
+            </div>
+          ) : (
+            slides.map((slide, idx) => {
+              const localizedContent = getLocalizedContent(slide);
+              return (
+                <div
+                  key={slide.id}
+                  className={`absolute left-0 right-0 top-0 transition-opacity duration-700 ${current === idx ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}
+                  style={{ minWidth: '100%' }}
+                >
+                  <div className="h-64 flex flex-col justify-center">
+                    <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">
+                      {localizedContent.title}
+                    </h1>
+                    <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">
+                      {localizedContent.description}
+                    </p>
+                  </div>
+                  <div className="my-10">
+                    <Link href="/" className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
+                      {t('button')}
+                    </Link>
+                  </div>
+                </div>
+              );
+            })
+          )}
         </div>
-        <div className="pt-52 md:pt-72">
-          <button
-            aria-label={t('home.hero.previous')}
-            onClick={() => goTo(current - 1)}
-            className="p-2 transition-colors cursor-pointer"
-          >
-            <PrevArrow />
-          </button>
-          <button
-            aria-label={t('home.hero.next')}
-            onClick={() => goTo(current + 1)}
-            className="p-2 transition-colors cursor-pointer"
-          >
-            <NextArrow />
-          </button>
-        </div>
+        {slides.length > 1 && (
+          <div className="pt-52 md:pt-72">
+            <button
+              aria-label={t('home.hero.previous')}
+              onClick={() => goTo(current - 1)}
+              className="p-2 transition-colors cursor-pointer"
+            >
+              <PrevArrow />
+            </button>
+            <button
+              aria-label={t('home.hero.next')}
+              onClick={() => goTo(current + 1)}
+              className="p-2 transition-colors cursor-pointer"
+            >
+              <NextArrow />
+            </button>
+          </div>
+        )}
       </div>
       <div className="pt-40 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
         <Card

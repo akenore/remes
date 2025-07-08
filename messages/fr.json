@@ -694,7 +694,11 @@
       },
       "hero": {
         "previous": "Diapositive précédente",
-        "next": "Diapositive suivante"
+        "next": "Diapositive suivante",
+        "fallback": {
+          "title": "Bienvenue chez Remes",
+          "description": "Un lieu de vie, de soin et de sérénité."
+        }
       },
       "cards": {
         "retirement": {
