@@ -120,9 +120,9 @@ export default function TestimonialsPage() {
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('table.description')}
               </th>
-              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                Translation
-              </th>
+                              <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                  {tCommon('translation')}
+                </th>
               <th className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                 {t('table.date')}
               </th>
@@ -163,7 +163,7 @@ export default function TestimonialsPage() {
                           ? 'bg-green-100 text-green-800'
                           : 'bg-gray-100 text-gray-800'
                       }`}>
-                        🇫🇷 {isTranslated(testimonial) ? 'Translated' : 'Missing'}
+                                                 🇫🇷 {isTranslated(testimonial) ? tCommon('translated') : tCommon('missing')}
                       </span>
                     </div>
                   </td>

@@ -29,7 +29,10 @@
       "success": "Succès",
       "warning": "Avertissement",
       "info": "Information",
-      "empty": "vide"
+      "empty": "vide",
+      "translation": "Traduction",
+      "translated": "Traduit",
+      "missing": "Manquant"
     },
     "layout": {
       "brand": "Remes Admin",

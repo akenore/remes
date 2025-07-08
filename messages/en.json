@@ -29,7 +29,10 @@
       "success": "Success",
       "warning": "Warning",
       "info": "Information",
-      "empty": "empty"
+      "empty": "empty",
+      "translation": "Translation",
+      "translated": "Translated",
+      "missing": "Missing"
     },
     "layout": {
       "brand": "Remes Admin",

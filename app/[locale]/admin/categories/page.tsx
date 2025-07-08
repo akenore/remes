@@ -414,7 +414,7 @@ export default function CategoriesPage() {
                                 ? 'bg-green-100 text-green-800'
                                 : 'bg-gray-100 text-gray-800'
                             }`}>
-                              🇫🇷 {isTranslated(category) ? 'FR' : 'Missing'}
+                                                             🇫🇷 {isTranslated(category) ? tCommon('translated') : tCommon('missing')}
                             </span>
                           </div>
                           <p className="text-sm text-gray-500">/{category.slug}</p>

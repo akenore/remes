@@ -240,7 +240,7 @@ export default function PostsPage() {
                       {t('table.status')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                      Translation
+                      {tCommon('translation')}
                     </th>
                     <th scope="col" className="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
                       {t('table.date')}
@@ -312,7 +312,7 @@ export default function PostsPage() {
                               ? 'bg-green-100 text-green-800'
                               : 'bg-gray-100 text-gray-800'
                           }`}>
-                            🇫🇷 {isTranslated(post) ? 'Translated' : 'Missing'}
+                                                         🇫🇷 {isTranslated(post) ? tCommon('translated') : tCommon('missing')}
                           </span>
                         </div>
                       </td>
