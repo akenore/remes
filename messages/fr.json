@@ -687,6 +687,9 @@
       "magazine": "magazine"
     },
     "button": "En savoir plus",
+    "common": {
+      "loading": "Chargement..."
+    },
     "home": {
       "meta": {
         "title": "Résidence médicalisée Remes - Accueil",
@@ -708,6 +711,18 @@
         "adapted": {
           "title": "Séjour Adaptée",
           "description": "Une solution flexible pour des soins temporaires, en toute tranquillité et dans un cadre confortable."
+        }
+      },
+      "testimonials": {
+        "title": "Témoignages",
+        "subtitle": "Ils partagent leur expérience à REMES — des paroles sincères de confiance, de confort et de bien-être.",
+        "clientLabel": "Client",
+        "previous": "Témoignage précédent",
+        "next": "Témoignage suivant",
+        "fallback": {
+          "message": "Nos résidents et leurs familles nous font confiance pour leur bien-être chaque jour. Leurs témoignages reflètent la qualité des soins et du confort que nous offrons chez REMES.",
+          "author": "Équipe REMES",
+          "role": "Prestataire de soins"
         }
       }
     }

@@ -687,6 +687,9 @@
       "magazine": "magazine"
     },
     "button": "Read more",
+    "common": {
+      "loading": "Loading..."
+    },
     "home": {
       "meta": {
         "title": "Remes Medical Residence - Home",
@@ -708,6 +711,18 @@
         "adapted": {
           "title": "Adapted Stay",
           "description": "A flexible solution for temporary care, in complete tranquility and in a comfortable setting."
+        }
+      },
+      "testimonials": {
+        "title": "Testimonials",
+        "subtitle": "They share their experience at REMES — sincere words of trust, comfort and well-being.",
+        "clientLabel": "Client",
+        "previous": "Previous testimonial",
+        "next": "Next testimonial",
+        "fallback": {
+          "message": "Our residents and their families trust us with their well-being every day. Their testimonials speak to the quality of care and comfort we provide at REMES.",
+          "author": "REMES Team",
+          "role": "Care Provider"
         }
       }
     }
