@@ -1,0 +1,48 @@
+import { SVGProps } from 'react';
+
+export default function GUser({ className, ...rest }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="87"
+      height="87"
+      viewBox="0 0 87 87"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...rest}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M34.8749 54.6877C48.1117 54.6877 59.4252 56.6935 59.4252 64.7059C59.4252 72.7183 48.1871 74.7815 34.8749 74.7815C21.6345 74.7815 10.3246 72.7937 10.3246 64.7777C10.3246 56.7617 21.5592 54.6877 34.8749 54.6877Z"
+        stroke="#EEDAB8"
+        strokeWidth="4.36758"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M34.875 43.2515C26.1844 43.2515 19.1372 36.2079 19.1372 27.5174C19.1372 18.8268 26.1844 11.7832 34.875 11.7832C43.5619 11.7832 50.6091 18.8268 50.6091 27.5174C50.6414 36.1757 43.6445 43.2193 34.9862 43.2515H34.875Z"
+        stroke="#EEDAB8"
+        strokeWidth="4.36758"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M59.603 39.1683C65.3477 38.3609 69.7719 33.4308 69.7827 27.4636C69.7827 21.5826 65.4948 16.7027 59.8721 15.7805"
+        stroke="#EEDAB8"
+        strokeWidth="4.36758"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        d="M67.1824 52.9844C72.7476 53.8132 76.6336 55.7652 76.6336 59.784C76.6336 62.5505 74.8037 64.3446 71.847 65.4677"
+        stroke="#EEDAB8"
+        strokeWidth="4.36758"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+} 

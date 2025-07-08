@@ -42,8 +42,9 @@ const vensfolk = localFont({
   src: '../public/fonts/vensfolk.woff',
   variable: '--font-vensfolk',
   weight: '400',
-  display: 'swap',
+  display: 'block',
   fallback: ['Arial', 'sans-serif'],
+  preload: true,
 });
 
 type Props = {

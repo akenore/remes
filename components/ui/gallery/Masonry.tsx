@@ -1,7 +1,7 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Icons from '../Icons';
+import Icons from '../CardsIcons';
 
 const galleryImages = [
   '/home/gallery/1.png',

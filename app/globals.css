@@ -60,6 +60,14 @@ body {
   .animate-marquee {
     animation: marquee 30s linear infinite;
   }
+
+  /* Prevent font loading layout shifts */
+  .font-vensfolk {
+    font-synthesis: none;
+    font-kerning: normal;
+    font-variant-ligatures: none;
+    text-rendering: optimizeLegibility;
+  }
 }
 
 .dynamic-hero-bg {

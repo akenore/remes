@@ -1,0 +1,34 @@
+import { SVGProps } from 'react';
+
+export default function GLocation({ className, ...rest }: SVGProps<SVGSVGElement>) {
+  return (
+    <svg
+      width="87"
+      height="87"
+      viewBox="0 0 87 87"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+      className={className}
+      {...rest}
+    >
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M52.2972 37.8006C52.2972 32.8444 48.2812 28.8284 43.3286 28.8284C38.3723 28.8284 34.3563 32.8444 34.3563 37.8006C34.3563 42.7532 38.3723 46.7693 43.3286 46.7693C48.2812 46.7693 52.2972 42.7532 52.2972 37.8006Z"
+        stroke="#EEDAB8"
+        strokeWidth="4.36934"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+      <path
+        fillRule="evenodd"
+        clipRule="evenodd"
+        d="M43.3251 75.4747C39.0248 75.4747 16.4155 57.1691 16.4155 38.0259C16.4155 23.0393 28.4614 10.8875 43.3251 10.8875C58.1888 10.8875 70.2382 23.0393 70.2382 38.0259C70.2382 57.1691 47.6255 75.4747 43.3251 75.4747Z"
+        stroke="#EEDAB8"
+        strokeWidth="4.36934"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+} 
