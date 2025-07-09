@@ -1,11 +1,11 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import AdminGuard from '@/components/ui/admin/AdminGuard';
 import { useAuth } from '@/lib/auth-context';
 import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
    
    export default function AdminLayout({
@@ -17,10 +17,17 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
   const { user, logout } = useAuth();
   const router = useRouter();
   const pathname = usePathname();
+  const locale = useLocale(); // Add locale to force re-render when language changes
   const t = useTranslations('admin');
   const tLayout = useTranslations('admin.layout');
   const tNav = useTranslations('admin.navigation');
   const tPageHeaders = useTranslations('admin.pageHeaders');
+
+  // Force re-render when locale changes
+  const [localeKey, setLocaleKey] = useState(0);
+  useEffect(() => {
+    setLocaleKey(prev => prev + 1);
+  }, [locale]);
 
   const handleLogout = () => {
     logout();
@@ -114,7 +121,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
   };
 
   return (
-    <AdminGuard>
+    <AdminGuard key={localeKey}>
       <div className="min-h-screen bg-gray-50">
         {/* Mobile sidebar overlay */}
         <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ease-in-out ${
@@ -154,7 +161,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
                   const isActive = pathname === item.href;
                   return (
                     <Link
-                      key={item.name}
+                      key={`${item.href}-${locale}`}
                       href={item.href}
                       className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                         isActive
@@ -194,7 +201,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
                   const isActive = pathname === item.href;
      return (
                     <Link
-                      key={item.name}
+                      key={`${item.href}-${locale}`}
                       href={item.href}
                       className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
                         isActive

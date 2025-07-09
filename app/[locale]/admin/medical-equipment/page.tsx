@@ -3,7 +3,7 @@
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
 import { useToast } from '@/lib/toast-context';
@@ -22,6 +22,7 @@ interface MedicalEquipment {
 
 export default function MedicalEquipmentPage() {
   const { user } = useAuth();
+  const locale = useLocale();
   const t = useTranslations('admin.medicalEquipment');
   const tCommon = useTranslations('admin.common');
   const [equipment, setEquipment] = useState<MedicalEquipment[]>([]);
@@ -32,6 +33,16 @@ export default function MedicalEquipmentPage() {
   const [itemsPerPage] = useState(10);
   const { showToast } = useToast();
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // Function to get localized description with fallback
+  const getLocalizedDescription = (item: MedicalEquipment) => {
+    const isFrench = locale === 'fr';
+    // Always show original text if translation is missing to avoid errors
+    if (isFrench && item.description_fr && item.description_fr.trim() !== '') {
+      return item.description_fr;
+    }
+    return item.description || 'No description available';
+  };
 
   useEffect(() => {
     fetchEquipment();
@@ -182,7 +193,7 @@ export default function MedicalEquipmentPage() {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-900">
                     <div className="max-w-xs">
-                      {item.description}
+                      {getLocalizedDescription(item)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">

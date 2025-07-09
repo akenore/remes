@@ -3,7 +3,7 @@
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
@@ -20,6 +20,7 @@ interface HomeSlide {
 
 export default function HomeSlidersPage() {
   const { user } = useAuth();
+  const locale = useLocale();
   const t = useTranslations('admin.homeSlider');
   const tCommon = useTranslations('admin.common');
   const [slides, setSlides] = useState<HomeSlide[]>([]);
@@ -30,6 +31,24 @@ export default function HomeSlidersPage() {
   const itemsPerPage = 10;
   const { showToast } = useToast();
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // Function to get localized slide title with fallback
+  const getLocalizedTitle = (slide: HomeSlide) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && slide.title_fr && slide.title_fr.trim() !== '') {
+      return slide.title_fr;
+    }
+    return slide.title || 'No title available';
+  };
+
+  // Function to get localized slide description with fallback
+  const getLocalizedDescription = (slide: HomeSlide) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && slide.description_fr && slide.description_fr.trim() !== '') {
+      return slide.description_fr;
+    }
+    return slide.description || 'No description available';
+  };
 
   useEffect(() => {
     fetchSlides();
@@ -150,11 +169,11 @@ export default function HomeSlidersPage() {
               slides.map((slide) => (
                 <tr key={slide.id} className="hover:bg-gray-50">
                   <td className="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                    {slide.title}
+                    {getLocalizedTitle(slide)}
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
                     <div className="max-w-xs truncate">
-                      {slide.description || '-'}
+                      {getLocalizedDescription(slide) || '-'}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

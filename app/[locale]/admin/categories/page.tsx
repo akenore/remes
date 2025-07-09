@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
@@ -20,6 +20,7 @@ interface Category {
 
 export default function CategoriesPage() {
   const { user } = useAuth();
+  const locale = useLocale();
   const t = useTranslations('admin.categories');
   const tCommon = useTranslations('admin.common');
   const [categories, setCategories] = useState<Category[]>([]);
@@ -40,6 +41,15 @@ export default function CategoriesPage() {
     slug: '',
   });
   const [isSlugEditable, setIsSlugEditable] = useState(false);
+
+  // Function to get localized category title with fallback
+  const getLocalizedTitle = (category: Category) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && category.title_fr && category.title_fr.trim() !== '') {
+      return category.title_fr;
+    }
+    return category.title || 'No title available';
+  };
 
   useEffect(() => {
     fetchCategories();
@@ -408,7 +418,7 @@ export default function CategoriesPage() {
                       >
                         <div className="flex-1">
                           <div className="flex items-center space-x-2">
-                            <h4 className="text-sm font-medium text-gray-900">{category.title}</h4>
+                            <h4 className="text-sm font-medium text-gray-900">{getLocalizedTitle(category)}</h4>
                             <span className={`inline-flex items-center px-1.5 py-0.5 rounded-full text-xs font-medium ${
                               isTranslated(category)
                                 ? 'bg-green-100 text-green-800'
@@ -430,7 +440,7 @@ export default function CategoriesPage() {
 {tCommon('edit')}
                           </button>
                           <button
-                            onClick={() => setDeleteItem({id:category.id, title:category.title})}
+                            onClick={() => setDeleteItem({id:category.id, title:getLocalizedTitle(category)})}
                             className="text-red-600 hover:text-red-900 text-sm font-medium transition-colors"
                           >
 {tCommon('delete')}

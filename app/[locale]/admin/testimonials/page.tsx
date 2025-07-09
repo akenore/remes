@@ -3,7 +3,7 @@
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
@@ -19,6 +19,7 @@ interface Testimonial {
 
 export default function TestimonialsPage() {
   const { user } = useAuth();
+  const locale = useLocale();
   const t = useTranslations('admin.testimonials');
   const tCommon = useTranslations('admin.common');
   const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
@@ -29,6 +30,15 @@ export default function TestimonialsPage() {
   const itemsPerPage = 10;
   const { showToast } = useToast();
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // Function to get localized testimonial description with fallback
+  const getLocalizedDescription = (testimonial: Testimonial) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && testimonial.description_fr && testimonial.description_fr.trim() !== '') {
+      return testimonial.description_fr;
+    }
+    return testimonial.description || 'No description available';
+  };
 
   useEffect(() => {
     fetchTestimonials();
@@ -152,7 +162,7 @@ export default function TestimonialsPage() {
                   </td>
                   <td className="px-6 py-4 text-sm text-gray-500">
                     <div className="max-w-xs truncate">
-                      {testimonial.description}
+                      {getLocalizedDescription(testimonial)}
                     </div>
                   </td>
                   <td className="px-6 py-4 whitespace-nowrap">

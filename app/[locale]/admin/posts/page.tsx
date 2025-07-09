@@ -5,7 +5,7 @@ import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
 import Image from 'next/image';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
 
@@ -30,12 +30,14 @@ interface Post {
     categories?: Array<{
       id: string;
       title: string;
+      title_fr?: string;
     }>;
   };
 }
 
 export default function PostsPage() {
   const { user } = useAuth();
+  const locale = useLocale();
   const t = useTranslations('admin.posts');
   const tCommon = useTranslations('admin.common');
   const [posts, setPosts] = useState<Post[]>([]);
@@ -48,6 +50,24 @@ export default function PostsPage() {
   const postsPerPage = 10;
   const { showToast } = useToast();
   const [deleteId, setDeleteId] = useState<string | null>(null);
+
+  // Function to get localized post title with fallback
+  const getLocalizedTitle = (post: Post) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && post.title_fr && post.title_fr.trim() !== '') {
+      return post.title_fr;
+    }
+    return post.title || 'No title available';
+  };
+
+  // Function to get localized category title with fallback
+  const getLocalizedCategoryTitle = (category: { title: string; title_fr?: string }) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && category.title_fr && category.title_fr.trim() !== '') {
+      return category.title_fr;
+    }
+    return category.title || 'No category title';
+  };
 
   useEffect(() => {
     fetchPosts();
@@ -259,7 +279,7 @@ export default function PostsPage() {
                             <div className="flex-shrink-0 h-10 w-10 relative">
                               <Image
                                 src={pb.files.getURL(post, post.cover_image, { thumb: '40x40' })}
-                                alt={post.title}
+                                alt={getLocalizedTitle(post)}
                                 fill
                                 sizes="40px"
                                 className="rounded-lg object-cover"
@@ -268,7 +288,7 @@ export default function PostsPage() {
                           )}
                           <div className={post.cover_image ? 'ml-4' : ''}>
                             <div className="text-sm font-medium text-gray-900">
-                              {post.title}
+                              {getLocalizedTitle(post)}
                             </div>
                             <div className="text-sm text-gray-500">
                               /{post.slug}
@@ -286,7 +306,7 @@ export default function PostsPage() {
                               key={category.id}
                               className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-indigo-100 text-indigo-800"
                             >
-                              {category.title}
+                              {getLocalizedCategoryTitle(category)}
                             </span>
                           ))}
                         </div>
