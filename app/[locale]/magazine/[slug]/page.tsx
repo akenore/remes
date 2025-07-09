@@ -19,6 +19,8 @@ interface Post {
   status: boolean;
   created: string;
   updated: string;
+  collectionName?: string;
+  collectionId?: string;
 }
 
 interface Category {
@@ -76,8 +78,8 @@ export default function PostDetailPage() {
         requestKey: null,
       });
 
-      // Check if post is published (status is boolean)
-      if (postResult.status !== true) {
+      // Check if post is published (published is boolean)
+      if (postResult.published !== true) {
         setNotFound(true);
         return;
       }
@@ -91,9 +93,11 @@ export default function PostDetailPage() {
         content_fr: postResult.content_fr || '',
         cover_image: postResult.cover_image || null,
         categories: postResult.expand?.categories || [],
-        status: postResult.status || false,
+        status: postResult.published || false,
         created: postResult.created,
         updated: postResult.updated,
+        collectionName: postResult.collectionName,
+        collectionId: postResult.collectionId,
       };
 
       // Fetch categories for display
@@ -157,7 +161,7 @@ export default function PostDetailPage() {
         />
         <main className="pt-10">
           <section className="relative w-full overflow-hidden bg-white">
-            <div className="w-full pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
+            <div className="w-full pb-12 md:pb-16 lg:pb-24">
               <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
                 <div className="flex flex-col items-center justify-center py-20">
                   <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-dark-gold"></div>
@@ -194,9 +198,9 @@ export default function PostDetailPage() {
                   <p className="text-gray text-lg mb-8">L'article que vous recherchez n'existe pas ou a été supprimé.</p>
                   <button
                     onClick={() => router.push(`/${locale}/magazine`)}
-                    className="bg-dark-blue text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors"
+                    className="bg-dark-blue text-white px-6 py-3 rounded-lg hover:bg-opacity-90 transition-colors cursor-pointer"
                   >
-                    Retour au magazine
+                    {t('magazine.backToMagazine')}
                   </button>
                 </div>
               </div>
@@ -212,6 +216,35 @@ export default function PostDetailPage() {
 
   const localizedContent = getLocalizedContent(post);
   const categoryNames = getPostCategoryNames(post.categories);
+
+  // Get proper image URL with fallback
+  const getImageUrl = () => {
+    // Check if cover_image exists and is a valid string
+    if (post.cover_image !== null && 
+        post.cover_image !== undefined && 
+        typeof post.cover_image === 'string' && 
+        post.cover_image.trim() !== '') {
+      try {
+        // Use the correct PocketBase method (getURL, not getUrl)
+        const imageUrl = pb.files.getURL(post, post.cover_image);
+        
+        // Double check the URL is valid and not empty
+        if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
+          return imageUrl;
+        }
+      } catch (error) {
+        console.warn('Error getting image URL for post:', post.id, 'image:', post.cover_image, 'error:', error);
+        // Fallback to manual URL construction
+        try {
+          return `${pb.baseUrl}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
+        } catch (e2) {
+          console.warn('Manual URL construction failed:', e2);
+        }
+      }
+    }
+    // Always return a valid fallback image
+    return '/form.jpg';
+  };
 
   return (
     <>
@@ -231,7 +264,7 @@ export default function PostDetailPage() {
               <div className="mb-8">
                 <button
                   onClick={() => router.push(`/${locale}/magazine`)}
-                  className="flex items-center text-dark-blue hover:text-dark-gold transition-colors"
+                  className="flex items-center text-dark-blue hover:text-dark-gold transition-colors cursor-pointer"
                 >
                   <svg className="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
@@ -261,7 +294,7 @@ export default function PostDetailPage() {
                post.cover_image.trim() !== '' && (
                 <div className="mb-12">
                   <Image
-                    src={pb.files.getURL(post, post.cover_image)}
+                    src={getImageUrl()}
                     alt={localizedContent.title}
                     width={1200}
                     height={600}
@@ -283,7 +316,7 @@ export default function PostDetailPage() {
               <div className="mt-16 text-center">
                 <button
                   onClick={() => router.push(`/${locale}/magazine`)}
-                  className="bg-dark-blue text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors"
+                  className="bg-dark-blue text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors cursor-pointer"
                 >
                   {t('magazine.backToMagazine')}
                 </button>
