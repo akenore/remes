@@ -725,6 +725,24 @@
           "role": "Care Provider"
         }
       }
+    },
+    "magazine": {
+      "hero": {
+        "title": "Magazine & Blog",
+        "description": "Discover our latest articles, news and insights about health, wellness and life at REMES."
+      },
+      "blog": {
+        "title": "Our Blog",
+        "description": "Stay informed with our latest articles and insights.",
+        "noPosts": "No articles available at the moment.",
+        "uncategorized": "Uncategorized"
+      },
+      "pagination": {
+        "previous": "Previous",
+        "next": "Next",
+        "page": "Page {current} of {total}"
+      },
+      "backToMagazine": "Back to Magazine"
     }
   }
 }

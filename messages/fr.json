@@ -725,6 +725,24 @@
           "role": "Prestataire de soins"
         }
       }
+    },
+    "magazine": {
+      "hero": {
+        "title": "Magazine & Blog",
+        "description": "Découvrez nos derniers articles, actualités et conseils sur la santé, le bien-être et la vie chez REMES."
+      },
+      "blog": {
+        "title": "Notre Blog",
+        "description": "Restez informé avec nos derniers articles et conseils.",
+        "noPosts": "Aucun article disponible pour le moment.",
+        "uncategorized": "Non catégorisé"
+      },
+      "pagination": {
+        "previous": "Précédent",
+        "next": "Suivant",
+        "page": "Page {current} sur {total}"
+      },
+      "backToMagazine": "Retour au Magazine"
     }
   }
 } 
