@@ -40,6 +40,15 @@ export default function MagazineView() {
      const [totalPages, setTotalPages] = useState(1);
      const postsPerPage = 6;
 
+     // Function to decode HTML entities
+     const decodeHtmlEntities = (text: string): string => {
+          if (typeof window === 'undefined') return text; // Server-side fallback
+          
+          const textarea = document.createElement('textarea');
+          textarea.innerHTML = text;
+          return textarea.value;
+     };
+
      // Function to get localized content with fallback
      const getLocalizedContent = (post: Post) => {
           const isFrench = locale === 'fr';
@@ -133,8 +142,12 @@ export default function MagazineView() {
 
      // Truncate content for preview
      const truncateContent = (content: string, maxLength: number = 150) => {
-          if (content.length <= maxLength) return content;
-          return content.substring(0, maxLength).trim() + '...';
+          // Strip HTML tags and decode HTML entities
+          const strippedContent = content.replace(/<[^>]*>/g, '');
+          const decodedContent = decodeHtmlEntities(strippedContent);
+          
+          if (decodedContent.length <= maxLength) return decodedContent;
+          return decodedContent.substring(0, maxLength).trim() + '...';
      };
 
      return (
@@ -219,7 +232,7 @@ export default function MagazineView() {
                                                                  category={categoryNames || t('magazine.blog.uncategorized')}
                                                                  date={formatDate(post.created)}
                                                                  title={localizedContent.title}
-                                                                 description={truncateContent(localizedContent.content.replace(/<[^>]*>/g, ''))}
+                                                                 description={truncateContent(localizedContent.content)}
                                                                  buttonText={t('button')}
                                                                  buttonHref={`/${locale}/magazine/${post.slug}`}
                                                             />

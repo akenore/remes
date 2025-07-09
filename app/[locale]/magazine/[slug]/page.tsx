@@ -39,12 +39,23 @@ export default function PostDetailPage() {
 
   const slug = params?.slug as string;
 
+  // Function to decode HTML entities
+  const decodeHtmlEntities = (text: string): string => {
+    if (typeof window === 'undefined') return text; // Server-side fallback
+    
+    const textarea = document.createElement('textarea');
+    textarea.innerHTML = text;
+    return textarea.value;
+  };
+
   // Function to get localized content with fallback
   const getLocalizedContent = (post: Post) => {
     const isFrench = locale === 'fr';
+    const content = isFrench && post.content_fr ? post.content_fr : post.content;
+    
     return {
       title: isFrench && post.title_fr ? post.title_fr : post.title,
-      content: isFrench && post.content_fr ? post.content_fr : post.content
+      content: content // Keep as HTML - dangerouslySetInnerHTML should handle entities
     };
   };
 

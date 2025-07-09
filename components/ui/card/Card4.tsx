@@ -33,7 +33,7 @@ export default function Card4({
             src={image}
             alt={title}
             fill
-            sizes="100vw"
+            sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 33vw"
             className="object-cover object-center"
           />
         </div>
