@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import { useParams, useRouter } from 'next/navigation';
 import Image from 'next/image';
-import Hero2 from "@/components/ui/hero/Hero2";
+import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import { pb } from '@/lib/pocketbase';
 
@@ -152,14 +152,13 @@ export default function PostDetailPage() {
   if (loading) {
     return (
       <>
-        <Hero2
+        <Hero3
           title={t('magazine.hero.title')}
           description={t('magazine.hero.description')}
-          cards={null}
           bgMobile="/hero-4/bg-mobile.jpg"
           bgDesktop="/hero-4/bg-desktop.jpg"
         />
-        <main className="pt-10">
+        <main>
           <section className="relative w-full overflow-hidden bg-white">
             <div className="w-full pb-12 md:pb-16 lg:pb-24">
               <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
@@ -182,16 +181,15 @@ export default function PostDetailPage() {
   if (notFound || !post) {
     return (
       <>
-        <Hero2
+        <Hero3
           title={t('magazine.hero.title')}
           description={t('magazine.hero.description')}
-          cards={null}
           bgMobile="/hero-4/bg-mobile.jpg"
           bgDesktop="/hero-4/bg-desktop.jpg"
         />
-        <main className="pt-10">
+        <main>
           <section className="relative w-full overflow-hidden bg-white">
-            <div className="w-full pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
+            <div className="w-full pt-8 pb-12 md:pb-16 lg:pb-24">
               <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
                 <div className="text-center py-20">
                   <h1 className="text-dark-blue text-3xl font-myanmar mb-4">Article non trouvé</h1>
@@ -246,22 +244,57 @@ export default function PostDetailPage() {
     return '/form.jpg';
   };
 
+  // JSON-LD structured data for SEO
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": localizedContent.title,
+    "image": post.cover_image ? getImageUrl() : null,
+    "author": {
+      "@type": "Organization",
+      "name": "Resort Medical"
+    },
+    "publisher": {
+      "@type": "Organization", 
+      "name": "Resort Medical",
+      "logo": {
+        "@type": "ImageObject",
+        "url": "/icon-remes.png"
+      }
+    },
+    "datePublished": post.created,
+    "dateModified": post.updated,
+    "description": categoryNames || t('magazine.blog.uncategorized'),
+    "articleBody": localizedContent.content.replace(/<[^>]*>/g, ''),
+    "keywords": categoryNames,
+    "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${post.slug}`,
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${post.slug}`
+    }
+  };
+
   return (
     <>
-      <Hero2
+      {/* JSON-LD structured data */}
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+      
+      <Hero3
         title={localizedContent.title}
         description={categoryNames || t('magazine.blog.uncategorized')}
-        cards={null}
         bgMobile="/hero-4/bg-mobile.jpg"
         bgDesktop="/hero-4/bg-desktop.jpg"
       />
-      <main className="pt-10">
+      <main>
         <section className="relative w-full overflow-hidden bg-white">
-          <div className="w-full pt-8 pb-12 md:pt-12 md:pb-16 lg:pt-20 lg:pb-24">
+          <div className="w-full pb-12 md:pb-16 lg:pb-24">
             <div className="max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
               
-              {/* Back to magazine link */}
-              <div className="mb-8">
+              {/* Navigation breadcrumb */}
+              <nav className="mb-8" aria-label="Breadcrumb">
                 <button
                   onClick={() => router.push(`/${locale}/magazine`)}
                   className="flex items-center text-dark-blue hover:text-dark-gold transition-colors cursor-pointer"
@@ -271,56 +304,63 @@ export default function PostDetailPage() {
                   </svg>
                   {t('magazine.backToMagazine')}
                 </button>
-              </div>
+              </nav>
 
-              {/* Article metadata */}
-              <div className="mb-8">
-                <div className="flex flex-wrap items-center gap-4 text-sm text-gray mb-4">
-                  {categoryNames && (
-                    <span className="bg-dark-gold text-white px-3 py-1 rounded-full text-xs">
-                      {categoryNames}
-                    </span>
-                  )}
-                  <span>{formatDate(post.created)}</span>
-                </div>
-                <h1 className="text-dark-blue text-3xl sm:text-4xl md:text-5xl font-myanmar mb-6">
-                  {localizedContent.title}
-                </h1>
-              </div>
+              {/* Article */}
+              <article itemScope itemType="https://schema.org/BlogPosting">
+                {/* Article header */}
+                <header className="mb-8">
+                  <div className="flex flex-wrap items-center gap-4 text-sm text-gray mb-4">
+                    {categoryNames && (
+                      <span className="bg-dark-gold text-white px-3 py-1 rounded-full text-xs" itemProp="keywords">
+                        {categoryNames}
+                      </span>
+                    )}
+                    <time dateTime={post.created} itemProp="datePublished" className="text-gray">
+                      {formatDate(post.created)}
+                    </time>
+                    <meta itemProp="dateModified" content={post.updated} />
+                  </div>
+                  <h1 className="text-dark-blue text-3xl sm:text-4xl md:text-5xl font-myanmar mb-6" itemProp="headline">
+                    {localizedContent.title}
+                  </h1>
+                </header>
 
-              {/* Featured image */}
-              {post.cover_image && 
-               typeof post.cover_image === 'string' && 
-               post.cover_image.trim() !== '' && (
-                <div className="mb-12">
-                  <Image
-                    src={getImageUrl()}
-                    alt={localizedContent.title}
-                    width={1200}
-                    height={600}
-                    className="w-full h-auto object-cover rounded-lg shadow-lg"
-                    priority
+                {/* Featured image */}
+                {post.cover_image && 
+                 typeof post.cover_image === 'string' && 
+                 post.cover_image.trim() !== '' && (
+                  <figure className="mb-12">
+                    <Image
+                      src={getImageUrl()}
+                      alt={localizedContent.title}
+                      width={1200}
+                      height={600}
+                      className="w-full h-auto object-cover rounded-lg shadow-lg"
+                      priority
+                      itemProp="image"
+                    />
+                  </figure>
+                )}
+
+                {/* Article content */}
+                <div className="prose prose-lg max-w-none" itemProp="articleBody">
+                  <div 
+                    className="text-gray leading-relaxed text-lg prose-headings:text-dark-blue prose-a:text-dark-gold hover:prose-a:text-gold"
+                    dangerouslySetInnerHTML={{ __html: localizedContent.content }}
                   />
                 </div>
-              )}
+              </article>
 
-              {/* Article content */}
-              <div className="prose prose-lg max-w-none">
-                <div 
-                  className="text-gray leading-relaxed text-lg"
-                  dangerouslySetInnerHTML={{ __html: localizedContent.content }}
-                />
-              </div>
-
-              {/* Back to magazine button */}
-              <div className="mt-16 text-center">
+              {/* Back to magazine navigation */}
+              <nav className="mt-16 text-center">
                 <button
                   onClick={() => router.push(`/${locale}/magazine`)}
                   className="bg-dark-blue text-white px-8 py-3 rounded-lg hover:bg-opacity-90 transition-colors cursor-pointer"
                 >
                   {t('magazine.backToMagazine')}
                 </button>
-              </div>
+              </nav>
             </div>
           </div>
         </section>
