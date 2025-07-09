@@ -688,7 +688,8 @@
     },
     "button": "Read more",
     "common": {
-      "loading": "Loading..."
+      "loading": "Loading...",
+      "retry": "Retry"
     },
     "home": {
       "meta": {
@@ -743,6 +744,15 @@
         "page": "Page {current} of {total}"
       },
       "backToMagazine": "Back to Magazine"
+    },
+    "equipment": {
+      "table": {
+        "image": "Image",
+        "designation": "Designation",
+        "dayPrice": "Day*",
+        "monthPrice": "Month*"
+      },
+      "noEquipment": "No equipment available"
     }
   }
 }

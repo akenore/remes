@@ -688,7 +688,8 @@
     },
     "button": "En savoir plus",
     "common": {
-      "loading": "Chargement..."
+      "loading": "Chargement...",
+      "retry": "Réessayer"
     },
     "home": {
       "meta": {
@@ -743,6 +744,15 @@
         "page": "Page {current} sur {total}"
       },
       "backToMagazine": "Retour au Magazine"
+    },
+    "equipment": {
+      "table": {
+        "image": "Image",
+        "designation": "Désignation", 
+        "dayPrice": "Jour*",
+        "monthPrice": "Mois*"
+      },
+      "noEquipment": "Aucun équipement disponible"
     }
   }
 } 
