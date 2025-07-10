@@ -204,7 +204,7 @@ export default function RichTextEditor({
 
   // TinyMCE configuration
   const init = {
-    apiKey: 'pg6me9oxkjckfoljxo0v0oi3yypu9oy3okpbajeyh5l4gud9',
+    apiKey: process.env.NEXT_PUBLIC_TINYMCE_API_KEY || 'pg6me9oxkjckfoljxo0v0oi3yypu9oy3okpbajeyh5l4gud9',
     height: 500,
     menubar: false,
     // Disable analytics and telemetry

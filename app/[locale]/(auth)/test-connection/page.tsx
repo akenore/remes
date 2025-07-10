@@ -148,7 +148,7 @@ export default function TestConnectionPage() {
             <h3 className="font-medium text-red-800">Troubleshooting:</h3>
             <ol className="list-decimal list-inside text-sm text-red-700 mt-2 space-y-1">
               <li>Make sure PocketBase is running: <code>cd data && ./pocketbase serve</code></li>
-              <li>Check PocketBase admin: <a href="http://127.0.0.1:8090/_/" target="_blank" className="underline">http://127.0.0.1:8090/_/</a></li>
+              <li>Check PocketBase admin: <a href={`${pb.baseURL}/_/`} target="_blank" className="underline">{pb.baseURL}/_/</a></li>
               <li>Check if you created admin or regular user</li>
               <li>Check browser console for detailed errors</li>
             </ol>

@@ -284,7 +284,7 @@ export default function CategoriesPage() {
                       {!isSlugEditable ? (
                         <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
                           <div className="flex items-center text-sm">
-                            <span className="text-gray-500 font-mono">http://127.0.0.1:3000/categories/</span>
+                            <span className="text-gray-500 font-mono">{process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://127.0.0.1:3000'}/categories/</span>
                             <span className="font-semibold text-indigo-600">{formData.slug || 'category-slug'}</span>
                           </div>
                           <button
@@ -298,7 +298,7 @@ export default function CategoriesPage() {
                       ) : (
                         <div className="space-y-3">
                           <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
-                            <span className="text-gray-500 font-mono text-sm">http://127.0.0.1:3000/categories/</span>
+                            <span className="text-gray-500 font-mono text-sm">{process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://127.0.0.1:3000'}/categories/</span>
                             <input
                               type="text"
                               className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"

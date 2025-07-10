@@ -234,7 +234,7 @@ export default function PostDetailPage() {
         console.warn('Error getting image URL for post:', post.id, 'image:', post.cover_image, 'error:', error);
         // Fallback to manual URL construction
         try {
-          return `${pb.baseUrl}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
+          return `${pb.baseURL}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
         } catch (e2) {
           console.warn('Manual URL construction failed:', e2);
         }
