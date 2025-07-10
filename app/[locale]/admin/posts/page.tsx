@@ -99,9 +99,57 @@ export default function PostsPage() {
         filter,
         sort: '-created',
         expand: 'author,categories',
+        // Add requestKey to prevent caching issues
+        requestKey: null,
       });
 
-      setPosts(result.items as unknown as Post[]);
+      // Manually fetch author info for posts where expansion failed
+      const postsWithAuthors = await Promise.all(
+        result.items.map(async (post: any) => {
+          // If expansion worked, keep as is
+          if (post.expand?.author) {
+            return post;
+          }
+          
+          // If no expansion but we have an author ID, try to fetch manually
+          if (post.author) {
+            console.log(`Fetching author for post ${post.id}, author ID: ${post.author}`);
+            try {
+              // Try regular users first
+              const user = await pb.collection('users').getOne(post.author);
+              console.log(`Found user:`, user);
+              post.expand = { 
+                ...post.expand, 
+                author: { 
+                  name: user.name || user.username || user.email?.split('@')[0], 
+                  email: user.email 
+                } 
+              };
+            } catch (userError: any) {
+              console.log(`User not found in users collection:`, userError.message);
+              // If not found in users, try admin users
+              try {
+                const admin = await pb.admins.getOne(post.author);
+                console.log(`Found admin:`, admin);
+                post.expand = { 
+                  ...post.expand, 
+                  author: { 
+                    name: admin.name || admin.email?.split('@')[0], 
+                    email: admin.email 
+                  } 
+                };
+                              } catch (adminError: any) {
+                  console.log(`Admin not found:`, adminError.message);
+                // If still not found, leave as is (will show fallback)
+              }
+            }
+          }
+          
+          return post;
+        })
+      );
+
+      setPosts(postsWithAuthors as unknown as Post[]);
       setTotalPages(result.totalPages);
     } catch (err) {
       setError(t('errors.fetchFailed'));
@@ -297,7 +345,22 @@ export default function PostsPage() {
                         </div>
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                        {post.expand?.author?.name || post.expand?.author?.email || 'Unknown'}
+                        {(() => {
+                          // Handle expanded author data (from users collection)
+                          if (post.expand?.author?.name && post.expand.author.name.trim() !== '') {
+                            return post.expand.author.name;
+                          }
+                          if (post.expand?.author?.email) {
+                            return post.expand.author.email.split('@')[0]; // Show username part of email
+                          }
+                          // Handle author ID directly (fallback) - this should rarely trigger now
+                          if (post.author && post.author.trim() !== '') {
+                            console.log(`Showing fallback for author ID: ${post.author}, expand data:`, post.expand?.author);
+                            return `User ${post.author.slice(-6)}`; // Show last 6 chars of ID
+                          }
+                          // Unknown author
+                          return t('table.unknownAuthor') || 'Unknown Author';
+                        })()}
                       </td>
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex flex-wrap gap-1">
