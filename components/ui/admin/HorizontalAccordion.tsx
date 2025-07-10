@@ -65,7 +65,7 @@ export default function HorizontalAccordion({
     required?: boolean,
     language?: 'english' | 'french'
   ) => {
-    const baseInputClasses = `block w-full border-gray-300 rounded-md shadow-sm focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${textInputClassName}`;
+    const baseInputClasses = `block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500 sm:text-sm ${textInputClassName}`;
     const fieldId = `${uniqueId}_${language}`;
 
     switch (fieldType) {
