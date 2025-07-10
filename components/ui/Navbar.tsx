@@ -4,13 +4,15 @@ import { useState } from 'react';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
 
 export default function Navbar() {
   const t = useTranslations();
   const locale = useLocale();
+  const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
 
   const SearchIcon = () => (
@@ -25,6 +27,15 @@ export default function Navbar() {
       <path d="M18 6L6 18M6 6l12 12" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
     </svg>
   );
+
+  // Handle search functionality
+  const handleSearch = (query: string) => {
+    if (query.trim()) {
+      router.push(`/${locale}/search?q=${encodeURIComponent(query.trim())}`);
+      setIsSearchOpen(false);
+      setSearchQuery('');
+    }
+  };
 
   return (
     <header>
@@ -104,10 +115,18 @@ export default function Navbar() {
                       <SearchIcon />
                     </button>
                   ) : (
-                    <div className="flex items-center animate-in slide-in-from-right-5 duration-500 ease-out">
+                    <form 
+                      onSubmit={(e) => {
+                        e.preventDefault();
+                        handleSearch(searchQuery);
+                      }}
+                      className="flex items-center animate-in slide-in-from-right-5 duration-500 ease-out"
+                    >
                       <div className="relative max-w-[250px] w-full bg-[#1e4a73] rounded border-white/20 transition-all duration-500 ease-in-out">
                         <input
                           type="text"
+                          value={searchQuery}
+                          onChange={(e) => setSearchQuery(e.target.value)}
                           placeholder="Recherche"
                           className="w-full bg-transparent px-4 py-2 text-white placeholder-light-blue2 focus:outline-none"
                           autoFocus
@@ -129,7 +148,7 @@ export default function Navbar() {
                           <path d="M18 6L6 18M6 6l12 12" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                         </svg>
                       </button>
-                    </div>
+                    </form>
                   )}
                 </div>
                 {[
@@ -323,10 +342,19 @@ export default function Navbar() {
             </button>
 
             {/* Centered Search Input */}
-            <form className="w-full flex justify-center items-center">
+            <form 
+              onSubmit={(e) => {
+                e.preventDefault();
+                const formData = new FormData(e.currentTarget);
+                const query = formData.get('search') as string;
+                handleSearch(query);
+              }}
+              className="w-full flex justify-center items-center"
+            >
               <div className="relative w-4/5 max-w-md">
                 <input
                   type="text"
+                  name="search"
                   placeholder="Chercher"
                   className="w-full bg-transparent border border-white/60 rounded-none px-4 py-3 text-white placeholder-white/80 focus:outline-none focus:border-[#EEDAB8] transition-colors pr-12"
                   autoFocus

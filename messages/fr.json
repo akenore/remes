@@ -754,6 +754,21 @@
         "monthPrice": "Mois*"
       },
       "noEquipment": "Aucun équipement disponible"
+    },
+    "search": {
+      "meta": {
+        "title": "Résultats de recherche",
+        "description": "Recherchez dans nos articles et contenus"
+      },
+      "title": "Recherche",
+      "description": "Recherchez dans nos articles, billets de blog et contenus pour trouver ce que vous cherchez.",
+      "placeholder": "Rechercher des articles...",
+      "resultsFor": "Résultats de recherche pour",
+      "resultsFound": "résultats trouvés",
+      "for": "pour",
+      "noResults": "Aucun résultat trouvé",
+      "tryDifferent": "Essayez des mots-clés différents ou parcourez nos derniers articles.",
+      "enterQuery": "Saisissez vos termes de recherche pour trouver des articles et contenus pertinents."
     }
   }
 } 

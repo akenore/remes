@@ -754,6 +754,21 @@
         "monthPrice": "Month*"
       },
       "noEquipment": "No equipment available"
+    },
+    "search": {
+      "meta": {
+        "title": "Search Results",
+        "description": "Search through our articles and content"
+      },
+      "title": "Search",
+      "description": "Search through our articles, blog posts and content to find what you're looking for.",
+      "placeholder": "Search articles...",
+      "resultsFor": "Search results for",
+      "resultsFound": "results found",
+      "for": "for",
+      "noResults": "No results found",
+      "tryDifferent": "Try different keywords or browse our latest articles.",
+      "enterQuery": "Enter your search terms to find relevant articles and content."
     }
   }
 }
