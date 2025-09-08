@@ -19,6 +19,12 @@ const nextConfig: NextConfig = {
         pathname: '/api/files/**',
       },
       {
+        protocol: 'http',
+        hostname: '192.168.1.78',
+        port: '3000',
+        pathname: '/api/pb/api/files/**',
+      },
+      {
         protocol: 'https',
         hostname: 'remesapi.beandgo.us',
         pathname: '/api/files/**',
