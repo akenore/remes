@@ -30,6 +30,7 @@ const nextConfig: NextConfig = {
         pathname: '/api/files/**',
       },
     ],
+    qualities: [75, 85, 90, 95, 100],
   },
 };
 

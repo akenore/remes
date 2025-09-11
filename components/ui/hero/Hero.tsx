@@ -168,7 +168,7 @@ export default function Hero() {
           title={t('home.cards.retirement.title')}
           description={t('home.cards.retirement.description')}
           buttonText={t('button')}
-          buttonHref="/retirement-home"
+          buttonHref="/nursing-home"
         />
         <Card
           image="/card/card-1.jpg"

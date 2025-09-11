@@ -193,7 +193,7 @@ export default function Navbar() {
             <div className="mt-40 px-8 space-y-2">
               {[
                 { href: '/', label: t('frontend.menu.home') },
-                { href: '/retirement-home', label: t('frontend.menu.nursingHome') },
+                { href: '/nursing-home', label: t('frontend.menu.nursingHome') },
                 { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
                 { href: '/about', label: t('frontend.menu.about') },
                 { href: '/magazine', label: t('frontend.menu.magazine') },
