@@ -20,15 +20,15 @@ export default function PageSection({
 }: PageSectionProps) {
   return (
     <div className="mx-5 md:mx-auto max-w-7xl">
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
         <div className="md:px-14">
-          <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
+          <h2 className="text-[1.5rem] md:text-[3.1rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
             {title}
           </h2>
           {paragraphs.map((p, idx) => (
             <p
               key={idx}
-              className={`text-[1.313rem] text-center md:text-left text-gray ${
+              className={`text-[1.3rem] text-center md:text-left text-gray ${
                 idx === paragraphs.length - 1 ? "mb-10" : "mb-8"
               }`}
             >

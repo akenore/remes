@@ -14,9 +14,9 @@ export default function NursingView() {
 
      return (
           <>
-               <Hero2 
-                    title="Maison de Repos"
-                    description="A cat named Mittens has made national headlines after she managed to find her way back home, despite being lost for over a week. Mittens"
+               <Hero2
+                    title="Maison de retraite médicalisée"
+                    description="Avec l’âge, certains gestes du quotidien deviennent difficiles et peuvent peser aussi bien sur la personne âgée que sur ses proches."
                     bgMobile="/hero-2/bg-mobile.jpg"
                     bgDesktop="/hero-2/bg-desktop.jpg"
                     cards={[
@@ -52,33 +52,35 @@ export default function NursingView() {
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                               <div>
                                    <Image src="/nursing-l-desktop.png" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
                                    <Image src="/nursing-l-desktop.png" alt="Maison de Repos" className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
                               </div>
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
-                                        Equipe & Soin
+                                        Planifiez un échange avec notre équipe
                                    </h2>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
-                                        Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009.
-                                        Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.
+                                        Nous savons qu’organiser la recherche d’une résidence médicalisée peut être une étape exigeante. Pour vous simplifier la démarche, nous mettons à votre disposition un calendrier en ligne.
                                    </p>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
-                                        Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable.
-                                        L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel.
+                                        Choisissez en toute simplicité le jour et l’heure qui vous conviennent, et notre équipe vous appellera directement à ce moment-là.
                                    </p>
-                                   <div className="flex justify-center md:justify-start">
+                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
+                                        Lors de cet appel, nous prendrons le temps d’écouter vos besoins, de répondre à vos questions et de vous présenter en détail les solutions d’accueil proposées par REMES. Vous disposerez ainsi de toutes les informations nécessaires pour avancer sereinement dans votre projet.
+                                   </p>
+
+                                   {/* <div className="flex justify-center md:justify-start">
                                         <button className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
                                              En savoir plus
                                         </button>
-                                   </div>
+                                   </div> */}
                               </div>
 
                          </div>
                     </div>
-                    <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')] mb-40">
+                    {/* <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')] mb-40">
                          <div className="w-full min-h-screen">
                               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
                                    <header className="text-center lg:text-left mb-12 lg:mb-16 pt-40">
@@ -124,16 +126,18 @@ export default function NursingView() {
                                    </div>
                               </div>
                          </div>
-                    </section>
-                    <section className="max-w-7xl mx-5 md:mx-auto text-center py-24 md:py-32">
-                         <h2 className="text-dark-blue font-myanmar text-[1.75rem] md:text-[2.25rem] mb-4">Emplacement</h2>
-                         <p className="text-gray max-w-xl mx-auto mb-12 leading-relaxed text-[0.938rem] md:text-base">
-                              Nous collaborons avec des acteurs de confiance dans les domaines médical, hôtelier et du bien-être, partageant nos valeurs d'excellence et d'attention.
+                    </section> */}
+                    <section className="max-w-7xl mx-5 md:mx-auto text-center pb-24">
+                        
+
+                         <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
+                              Réservez dès maintenant le créneau de votre choix : c’est simple, rapide et sans engagement.
                          </p>
 
-                         <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
+
+                         {/* <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
                               MAP
-                         </div>
+                         </div> */}
                     </section>
                     <ContactForm />
                </main>

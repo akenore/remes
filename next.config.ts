@@ -25,12 +25,21 @@ const nextConfig: NextConfig = {
         pathname: '/api/pb/api/files/**',
       },
       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3000',
+        pathname: '/api/pb/api/files/**',
+      },
+      {
         protocol: 'https',
         hostname: 'remesapi.beandgo.us',
         pathname: '/api/files/**',
       },
     ],
     qualities: [75, 85, 90, 95, 100],
+  },
+  turbopack: {
+    root: './',
   },
 };
 
