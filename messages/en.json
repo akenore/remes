@@ -668,6 +668,50 @@
     "login": "Login",
     "logout": "Logout"
   },
+  "contact": {
+    "title": "Contact Us",
+    "description": "A question, a specific need or a stay request? Contact us, our team will respond to you as soon as possible.",
+    "form": {
+      "name": "Full Name",
+      "namePlaceholder": "Enter your full name",
+      "email": "Email",
+      "emailPlaceholder": "Enter your email",
+      "phone": "Phone",
+      "phonePlaceholder": "Enter your phone number",
+      "country": "Country",
+      "countryPlaceholder": "Enter your country",
+      "message": "Message",
+      "messagePlaceholder": "Enter your message",
+      "submit": "Send",
+      "submitting": "Sending...",
+      "success": "Your message has been sent successfully! We will respond to you as soon as possible.",
+      "error": "An error occurred while sending the message. Please try again.",
+      "phoneError": "Please enter a valid phone number."
+    }
+  },
+  "b2b": {
+    "form": {
+      "organization": "Agency or Organization",
+      "organizationPlaceholder": "Name of the agency or organization",
+      "contactPerson": "Contact Person Name",
+      "contactPersonPlaceholder": "Name of the contact person",
+      "phone": "Phone",
+      "phonePlaceholder": "Phone number",
+      "email": "Email",
+      "emailPlaceholder": "Email address",
+      "address": "Address",
+      "addressPlaceholder": "Complete address",
+      "country": "Country",
+      "countryPlaceholder": "Country",
+      "message": "Message",
+      "messagePlaceholder": "Your message",
+      "submit": "Send",
+      "submitting": "Sending...",
+      "success": "Your message has been sent successfully! We will respond to you as soon as possible.",
+      "error": "An error occurred while sending the message. Please try again.",
+      "phoneError": "Please enter a valid phone number."
+    }
+  },
   "forms": {
     "required": "This field is required",
     "email": "Please enter a valid email address",

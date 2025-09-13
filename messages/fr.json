@@ -668,6 +668,50 @@
     "login": "Connexion",
     "logout": "Déconnexion"
   },
+  "contact": {
+    "title": "Contactez-Nous",
+    "description": "Une question, un besoin spécifique ou une demande de séjour ? Contactez-nous, notre équipe vous répondra dans les plus brefs délais.",
+    "form": {
+      "name": "Nom et Prénom",
+      "namePlaceholder": "Tapez votre nom complet",
+      "email": "Email",
+      "emailPlaceholder": "Tapez votre email",
+      "phone": "Téléphone",
+      "phonePlaceholder": "Tapez votre numéro de téléphone",
+      "country": "Pays",
+      "countryPlaceholder": "Tapez votre pays",
+      "message": "Message",
+      "messagePlaceholder": "Tapez votre message",
+      "submit": "Envoyer",
+      "submitting": "Envoi en cours...",
+      "success": "Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.",
+      "error": "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+      "phoneError": "Veuillez entrer un numéro de téléphone valide."
+    }
+  },
+  "b2b": {
+    "form": {
+      "organization": "Agence ou Organisation",
+      "organizationPlaceholder": "Nom de l'agence ou de l'organisation",
+      "contactPerson": "Nom de Responsable",
+      "contactPersonPlaceholder": "Nom du responsable",
+      "phone": "Téléphone",
+      "phonePlaceholder": "Numéro de téléphone",
+      "email": "Email",
+      "emailPlaceholder": "Adresse email",
+      "address": "Adresse",
+      "addressPlaceholder": "Adresse complète",
+      "country": "Pays",
+      "countryPlaceholder": "Pays",
+      "message": "Message",
+      "messagePlaceholder": "Votre message",
+      "submit": "Envoyer",
+      "submitting": "Envoi en cours...",
+      "success": "Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.",
+      "error": "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+      "phoneError": "Veuillez entrer un numéro de téléphone valide."
+    }
+  },
   "forms": {
     "required": "Ce champ est obligatoire",
     "email": "Veuillez saisir une adresse email valide",
