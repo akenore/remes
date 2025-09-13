@@ -23,7 +23,7 @@ export default function NursingView() {
                          {
                               icon: <Icon name="HomeIcon" sizeClass="w-full h-full" />,
                               title: "Hébergement Permanent",
-                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              description: "Vivre à REMES, c’est faire le choix d’une résidence médicalisée qui associe sécurité, confort et sérénité dans un cadre adapté à chaque situation.",
                               buttonText: t('frontend.button'),
                               buttonHref: "/nursing-home/permanent-accommodation",
                          },
@@ -37,14 +37,14 @@ export default function NursingView() {
                          {
                               icon: <Icon name="SunIcon" sizeClass="w-full h-full" />,
                               title: "Accueil de Jour",
-                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              description: "L’accueil de jour représente ainsi un équilibre précieux entre maintien à domicile et accompagnement spécialisé.",
                               buttonText: t('frontend.button'),
                               buttonHref: "/nursing-home/day-care",
                          },
                          {
                               icon: <Icon name="MedicalPlusIcon" sizeClass="w-full h-full" />,
                               title: "Séjour de Convalescence",
-                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
+                              description: "Après une hospitalisation, une intervention ou une maladie, le retour à domicile peut sembler fragile et source d’inquiétude.",
                               buttonText: t('frontend.button'),
                               buttonHref: "/nursing-home/convalescence-stay",
                          },

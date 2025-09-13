@@ -1,8 +1,15 @@
 import Image from "next/image";
 
+interface ListItem {
+  text: string;
+  subItems?: string[];
+}
+
 interface PageSectionProps {
   title?: string;
   paragraphs?: string[];
+  lists?: ListItem[];
+  afterParagraphs?: string[];
   imageSrcDesktop?: string;
   imageSrcMobile?: string;
   imageAlt?: string;
@@ -10,10 +17,9 @@ interface PageSectionProps {
 
 export default function PageSection({
   title = "",
-  paragraphs = [
-    "",
-    "",
-  ],
+  paragraphs = [],
+  lists = [],
+  afterParagraphs = [],
   imageSrcDesktop = "/adapted-r-desktop.jpg",
   imageSrcMobile = "/adapted-r-desktop.jpg",
   imageAlt = "Maison de Repos",
@@ -25,11 +31,43 @@ export default function PageSection({
           <h2 className="text-[1.5rem] md:text-[3.1rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
             {title}
           </h2>
+          
+          {/* Render paragraphs */}
           {paragraphs.map((p, idx) => (
             <p
-              key={idx}
+              key={`paragraph-${idx}`}
               className={`text-[1.3rem] text-center md:text-left text-gray ${
-                idx === paragraphs.length - 1 ? "mb-10" : "mb-8"
+                idx === paragraphs.length - 1 && lists.length === 0 && afterParagraphs.length === 0 ? "mb-10" : "mb-8"
+              }`}
+            >
+              {p}
+            </p>
+          ))}
+          
+          {/* Render lists */}
+          {lists.map((listItem, idx) => (
+            <div key={`list-${idx}`} className="text-[1.3rem] text-center md:text-left text-gray mb-8">
+              <ul>
+                <li>
+                  {listItem.text}
+                  {listItem.subItems && listItem.subItems.length > 0 && (
+                    <ol className="ps-5 mt-2 space-y-1 list-disc list-inside">
+                      {listItem.subItems.map((subItem, subIdx) => (
+                        <li key={`sub-${idx}-${subIdx}`}>{subItem}</li>
+                      ))}
+                    </ol>
+                  )}
+                </li>
+              </ul>
+            </div>
+          ))}
+          
+          {/* Render after paragraphs */}
+          {afterParagraphs.map((p, idx) => (
+            <p
+              key={`after-paragraph-${idx}`}
+              className={`text-[1.3rem] text-center md:text-left text-gray ${
+                idx === afterParagraphs.length - 1 ? "mb-10" : "mb-8"
               }`}
             >
               {p}
