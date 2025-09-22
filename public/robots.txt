@@ -1,0 +1,29 @@
+User-agent: *
+Allow: /
+
+# Disallow admin pages
+Disallow: /admin
+Disallow: /*/admin
+
+# Disallow authentication pages
+Disallow: /login
+Disallow: /*/login
+Disallow: /forget-password
+Disallow: /*/forget-password
+Disallow: /create-user
+Disallow: /*/create-user
+Disallow: /confirm-email
+Disallow: /*/confirm-email
+Disallow: /test-connection
+Disallow: /*/test-connection
+
+# Disallow terms of use and privacy policy
+Disallow: /terms-of-use
+Disallow: /*/terms-of-use
+Disallow: /privacy-policy
+Disallow: /*/privacy-policy
+
+# Allow all other pages
+Allow: /
+
+Sitemap: http://remes-tunisie.com/sitemap.xml

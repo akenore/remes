@@ -13,8 +13,8 @@ export default function AdaptedView() {
      return (
           <>
                <Hero2
-                    title="Sejour Adaptee"
-                    description="Chez REMES, nous transformons le séjour en Tunisie en une expérience de liberté, de découvertes et de bien-être — même en situation de handicap ou de dépendance."
+                    title="Découvrez la Tunisie autrement"
+                    description="Plongez au cœur d’un pays aux mille et une couleurs, où l’histoire, les traditions et la beauté des paysages se mêlent pour offrir une expérience unique."
                     cards={[
                          {
                               icon: <Icon name="BedIcon" sizeClass="w-full h-full" />,

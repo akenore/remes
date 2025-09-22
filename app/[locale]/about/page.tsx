@@ -3,7 +3,7 @@ import { Metadata } from "next";
 import { getTranslations } from 'next-intl/server';
 
 export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.home.meta');
+     const t = await getTranslations('frontend.about.meta');
 
      return {
           title: t('title'),

@@ -729,7 +729,14 @@
       "nursingHome": "Nursing Home",
       "adaptedStay": "Tailored Stays",
       "about": "About us",
-      "magazine": "magazine"
+      "magazine": "magazine",
+      "footer": {
+        "resources": "Resources",
+        "legal": "Legal",
+        "privacy": "Privacy Policy",
+        "terms": "Terms of Use",
+        "professionalsServices": "Professionals Services"
+      }
     },
     "button": "Read more",
     "common": {
@@ -773,6 +780,10 @@
       }
     },
     "magazine": {
+      "meta": {
+        "title": "Magazine & Blog | Health & Wellness Articles | REMES Tunisia",
+        "description": "Discover our latest articles, news and insights about health, wellness and life at REMES. Stay informed with expert advice, care tips, and stories from our medical residence in Tunisia."
+      },
       "hero": {
         "title": "Magazine & Blog",
         "description": "Discover our latest articles, news and insights about health, wellness and life at REMES."
@@ -790,6 +801,504 @@
       },
       "backToMagazine": "Back to Magazine"
     },
+    "nursingHome": {
+      "meta": {
+        "title": "Nursing Home | Medical Care Residence | REMES Tunisia",
+        "description": "Discover REMES nursing home in Tunisia. Professional medical care, comfortable accommodation, and personalized services for seniors. Book a consultation with our expert team."
+      },
+      "hero": {
+        "title": "Nursing Home",
+        "description": "An exceptional place, a dedicated team, personalized support. Here, every day is an invitation to live better.",
+        "cards": {
+          "residence": {
+            "title": "The Residence",
+            "description": "An exceptional setting, designed to combine comfort, security and serenity."
+          },
+          "solutions": {
+            "title": "Hosting Solutions",
+            "description": "Flexible and human formulas, designed to adapt to your needs."
+          },
+          "expertise": {
+            "title": "Care Expertise",
+            "description": "Attentive care, reassuring presence, personalized support."
+          },
+          "offer": {
+            "title": "Our Offer",
+            "description": "A unique, simple and transparent rate"
+          }
+        }
+      },
+      "button": "Learn more",
+      "content": {
+        "images": {
+          "alt": "Nursing Home"
+        },
+        "schedule": {
+          "title": "Schedule an exchange with our team",
+          "paragraph1": "We know that organizing the search for a medicalized residence can be a demanding step. To simplify your approach, we provide you with an online calendar.",
+          "paragraph2": "Choose simply the day and time that suit you, and our team will call you directly at that time.",
+          "paragraph3": "During this call, we will take the time to listen to your needs, answer your questions and present in detail the hosting solutions offered by REMES. You will thus have all the necessary information to move forward serenely in your project."
+        },
+        "living": {
+          "title": "Living at REMES",
+          "description": "Living at REMES means enjoying every day a warm and secure environment, where conviviality, comfort and well-being punctuate daily life. Our teams ensure that every moment is full of pleasure, stimulation and serenity.",
+          "cards": {
+            "activities": {
+              "title": "Entertainment and Activities",
+              "description": "Shared moments to stimulate the body, mind and heart."
+            },
+            "meals": {
+              "title": "Meals and Daily Services",
+              "description": "Eat well, live well: tasty meals and attentive services."
+            },
+            "wellbeing": {
+              "title": "Well-being and Comfort",
+              "description": "Moments of relaxation and care, to feel good every day."
+            }
+          }
+        },
+        "reservation": {
+          "text": "Book your preferred time slot now: it's simple, fast and without commitment."
+        }
+      },
+      "careExpertise": {
+        "meta": {
+          "title": "Care Expertise | Medical Team & Professional Care | REMES Tunisia",
+          "description": "Discover REMES care expertise in Tunisia. 24/7 medical presence, multidisciplinary team, and personalized care plans. Professional medical care for seniors with European standards."
+        },
+        "hero": {
+          "title": "Care Expertise",
+          "description": "Nursing Home / Care Expertise"
+        },
+        "content": {
+          "images": {
+            "alt": "Care Expertise"
+          },
+          "presence": {
+            "title": "Continuous and reassuring presence",
+            "paragraph1": "At REMES, the safety and comfort of our residents is based on 24/7 nursing presence. Each care plan is developed in consultation with the resident, their family and management, to offer truly personalized care.",
+            "paragraph2": "Our privileged supervision ratio guarantees close follow-up and constant attention, well beyond European standards. Here, each resident benefits from attentive support that promotes a dignified and serene daily life."
+          },
+          "paramedical": {
+            "paragraph": "Our paramedical team consists of a physiotherapist and an occupational therapist present every day at the residence. They ensure rehabilitation, maintenance of motor skills and adaptation to daily gestures. A speech therapist also intervenes regularly, to stimulate communication skills and promote the maintenance of cognitive autonomy."
+          },
+          "multidisciplinary": {
+            "title": "A multidisciplinary team by your side",
+            "paragraph": "Our medical and paramedical team brings together varied and complementary skills: coordinating doctor, nurses, nursing assistants, physiotherapists, psychologist. Alongside them, liberal professionals (treating doctors, speech therapists, occupational therapists, specialists) intervene regularly, according to the specific needs of each resident. Our doctor relies on a network of specialists quickly available for our residents. Thanks to our partnerships with conventional clinics, notably Carthage and SLM, access to examinations and hospitalizations is facilitated. And because no resident should face these moments alone, we always ensure transport and attentive support by our nursing assistants, present by their side for as long as necessary. This multidisciplinary approach allows comprehensive care: medical, functional and psychological, to respond to all needs related to aging and pathologies."
+          },
+          "safety": {
+            "title": "Safety and quality of care",
+            "paragraph": "continues throughout their career. This approach guarantees the application of best geriatric practices, even during exceptional health situations, and allows adapting care to the evolution of medicine and residents' needs."
+          }
+        }
+      },
+      "hostingSolutions": {
+        "meta": {
+          "title": "Hosting Solutions | Permanent & Temporary Care | REMES Tunisia",
+          "description": "Discover REMES hosting solutions in Tunisia. Permanent accommodation, temporary stays, day care, and convalescence services. Flexible and personalized care solutions for seniors."
+        },
+        "hero": {
+          "title": "Hosting Solutions",
+          "description": "Nursing Home / Hosting Solutions"
+        },
+        "content": {
+          "images": {
+            "alt": "Hosting Solutions"
+          },
+          "permanent": {
+            "title": "Permanent Accommodation",
+            "paragraph1": "With age, certain daily gestures become difficult and can weigh on both the elderly person and their loved ones.",
+            "paragraph2": "Living at REMES means choosing a medicalized residence that combines security, comfort and serenity in a setting adapted to each situation.",
+            "paragraph3": "Our modern and spacious rooms are designed to guarantee total accessibility, regardless of the degree of autonomy. Each resident benefits from a personalized care plan, defined in consultation with them and their family, and followed by a multidisciplinary team available 24/7 and 7/7 (doctors, nurses, nursing assistants, physiotherapists)."
+          },
+          "priority": {
+            "text": "Our priority is simple: that each resident finds at REMES a new 'home', where they feel surrounded by benevolence and attention"
+          },
+          "temporary": {
+            "title": "Temporary Accommodation",
+            "paragraph": "Short stay or temporary accommodation is a flexible solution that responds to different situations:",
+            "benefits": {
+              "benefit1": "Break isolation and regain social life.",
+              "benefit2": "Rest after hospitalization.",
+              "benefit3": "Discover the residence before a permanent stay.",
+              "benefit4": "Or allow families and caregivers to breathe during a trip or vacation."
+            },
+            "details": "At REMES, residents welcomed for temporary stays benefit from the same services, care and attention as those in permanent stays: comfortable accommodation, quality catering, personalized support. The maximum duration is three months. Admission is simple, with an administrative and medical file, completed by a pre-admission visit and the signing of a clear and transparent stay contract."
+          },
+          "daycare": {
+            "title": "Day Care",
+            "paragraph": "Day care at REMES is aimed at seniors with Alzheimer's disease, related disorders or loss of autonomy, who wish to benefit from adapted and stimulating support while remaining at home the rest of the time. It offers several advantages:",
+            "benefits": {
+              "benefit1": "Preserve or restore social contacts",
+              "benefit2": "Maintain cognitive and motor abilities through varied activities",
+              "benefit3": "Provide respite time for family caregivers, reassured to know their parent surrounded and safe."
+            },
+            "conclusion": "Day care thus represents a precious balance between home maintenance and specialized support."
+          },
+          "convalescence": {
+            "title": "Convalescence Stay",
+            "paragraph": "After hospitalization, surgery or illness, returning home can seem fragile and a source of worry. The convalescence stay at REMES allows this transition to be approached with serenity. Our convalescent residents benefit from:",
+            "benefits": {
+              "benefit1": "Comfortable and adapted rooms.",
+              "benefit2": "Balanced meals taking into account each person's nutritional needs.",
+              "benefit3": "Rigorous medicalized follow-up and personalized physiotherapy sessions.",
+              "benefit4": "Complete hotel care and practical services to limit fatigue."
+            },
+            "conclusion": "This secure and soothing setting promotes good recovery. After a few weeks at REMES, everyone can return home with more confidence, strength and serenity."
+          }
+        }
+      },
+      "ourOffer": {
+        "meta": {
+          "title": "Our Offer | Pricing & Services | REMES Tunisia",
+          "description": "Discover REMES pricing and services in Tunisia. Transparent pricing, all-inclusive care, and comprehensive services for seniors. Competitive rates compared to France."
+        },
+        "hero": {
+          "title": "Our Offer",
+          "description": "Nursing Home / Our Offer"
+        },
+        "content": {
+          "title": "A unique, simple and transparent rate",
+          "description": "At REMES, we have chosen clarity and serenity: a single rate, all inclusive, to bring families total peace of mind.",
+          "pricing": {
+            "permanent": {
+              "title": "Permanent Stay",
+              "price": "2,300 €",
+              "period": "/ month",
+              "description": "This rate applies all year round, even in high season, and includes all our services."
+            },
+            "temporary": {
+              "title": "Temporary Stay",
+              "lowSeason": {
+                "price": "2,300 € / month",
+                "period": "from October to May"
+              },
+              "highSeason": {
+                "price": "3,000 € / month",
+                "period": "from July to September (high season)"
+              },
+              "description": "These stays offer the same complete services as a permanent stay."
+            }
+          },
+          "services": {
+            "service1": "Airport transfer – REMES – Airport",
+            "service2": "Accommodation in modern, spacious, ground-floor room, with private terrace, equipped with a medical bed if necessary.",
+            "service3": "Daily care provided by our multidisciplinary team.",
+            "service4": "Individualized support through an assigned nursing assistant, available for each resident during all waking hours, 7 days a week.",
+            "service5": "Regular physiotherapy follow-up, offered daily during the week, to maintain mobility and promote well-being.",
+            "service6": "Activities, entertainment and supervised outings.",
+            "service7": "Complete catering: balanced and adapted meals, snacks, supervised hydration.",
+            "service8": "Included wellness care (a haircut, as well as basic manicure and pedicure, offered regularly). Specific aesthetic services (coloring, advanced hair care, special care) can be performed on request, with additional participation.",
+            "service9": "Laundry: household linen provided and personal clothes carefully maintained.",
+            "service10": "Access to common areas: lounges, restaurants, gardens, pools and private beach."
+          },
+          "comparison": {
+            "text1": "At REMES, we are committed to offering complete services, in a spirit of transparency and trust.",
+            "text2": "The average cost of a permanent stay in Nursing Home in France exceeds",
+            "francePrice": "2,500 €",
+            "text3": "per month. With us, our residents enjoy a high-end setting by the Mediterranean, for a much more accessible rate:",
+            "ourPrice": "2,300 €"
+          }
+        }
+      },
+      "theResidence": {
+        "meta": {
+          "title": "The Residence | Location & Facilities | REMES Tunisia",
+          "description": "Discover REMES residence in Tunisia. Located in Monastir-Skanes, 200m from the beach, integrated into a 4-star hotel with modern rooms and Mediterranean facilities."
+        },
+        "hero": {
+          "title": "The Residence",
+          "description": "Nursing Home / The Residence"
+        },
+        "content": {
+          "images": {
+            "alt": "The Residence"
+          },
+          "location": {
+            "title": "Location",
+            "paragraph1": "Located in Monastir, in the heart of the Skanes tourist area, our medicalized residence benefits from a privileged location, only 200 meters from a fine sand beach. Nestled between Monastir and Sousse, it benefits from both the vitality of two major cities and the calm of a seaside resort.",
+            "paragraph2": "Both cities have first-class hospital and medical infrastructure, providing additional security for our residents and their families. Integrated into a 4-star hotel, the residence opens onto green relaxation spaces, with two pools (indoor and outdoor) that extend the Mediterranean sweetness."
+          },
+          "rooms": {
+            "title": "Rooms to your image",
+            "paragraph1": "Spacious, bright and entirely on one level, REMES rooms combine hotel comfort and medical safety. With their 30 m² and their private terrace, they become real living spaces, where you can enjoy the Mediterranean sun and views of the gardens or pool.",
+            "paragraph2": "Soberly elegant and customizable, they adapt to everyone: alone or as a couple, residents quickly find their bearings by bringing their decoration and personal memories.",
+            "equipment": "Included equipment: medical bed, adapted bathroom, desk with telephone line, television with international channels, air conditioning, wifi, individual safe, small refrigerator and patient call system connected to the team 24/7."
+          },
+          "spaces": {
+            "title": "Living and conviviality spaces",
+            "description": "At REMES, quality of life also comes from the richness of the spaces made available.",
+            "features": {
+              "feature1": "Tree-lined gardens, populated with majestic palm trees, inviting to walk and rest.",
+              "feature2": "Private beach, calm and preserved, to breathe the sea air and contemplate the Mediterranean.",
+              "feature3": "Warm and bright lounges, to meet between residents or with family.",
+              "feature4": "Spacious restaurants, where to enjoy balanced meals in a friendly atmosphere.",
+              "feature5": "Indoor and outdoor pools, true havens of well-being and serenity."
+            },
+            "conclusion": "These varied spaces allow everyone to find their balance between relaxation, conviviality and social connection, in an environment where nature, light and comfort combine harmoniously."
+          }
+        },
+        "livingAtRemes": {
+          "entertainmentAndActivities": {
+            "meta": {
+              "title": "Entertainment & Activities | Senior Activities | REMES Tunisia",
+              "description": "Discover REMES entertainment and activities for seniors in Tunisia. Memory workshops, gentle gymnastics, creative activities, cultural events, and adapted outings for elderly residents."
+            },
+            "hero": {
+              "title": "Entertainment & Activities",
+              "description": "Nursing Home / Living at REMES / Entertainment & Activities"
+            },
+            "content": {
+              "introduction": "Life at REMES is animated by a rich and evolving program, designed to stimulate abilities, encourage creativity and maintain social connection. Our residents participate in:",
+              "activities": {
+                "activity1": "Memory workshops and cognitive games to maintain the mind.",
+                "activity2": "Gentle gymnastics and adapted movements to preserve mobility.",
+                "activity3": "Creative activities (visual arts, light crafts) to express freely.",
+                "activity4": "Shared culinary workshops, combining conviviality and gourmet pleasure.",
+                "activity5": "Cultural and musical moments: readings, film screenings, mini-concerts."
+              },
+              "externalIntervenants": "External intervenants (artists, musicians, chef, zootherapist) regularly come to enrich the programming.",
+              "outings": "To maintain a living link with the outside, we also organize adapted outings: market walks, cultural visits (museums, cinema), sea or zoo walks. A minibus adapted to people with reduced mobility is made available to ensure comfort and safety during these trips.",
+              "conclusion": "Each activity is designed in connection with our multidisciplinary team, to be both fun, stimulating and secure."
+            }
+          },
+          "mealsAndDailyServices": {
+            "meta": {
+              "title": "Meals & Daily Services | Senior Nutrition | REMES Tunisia",
+              "description": "Discover REMES meals and daily services for seniors in Tunisia. Nutritious Mediterranean cuisine, family dining, adapted nutrition, room cleaning, and laundry services for elderly residents."
+            },
+            "hero": {
+              "title": "Meals & Daily Services",
+              "description": "Nursing Home / Living at REMES / Meals & Daily Services"
+            },
+            "content": {
+              "nutritionPhilosophy": "At REMES, eating well to age well is obvious. Our menus, developed with a dietician, combine nutritional balance and gustatory pleasure. Every day, our chef and his team prepare delicious dishes on site using fresh products, inspired by Mediterranean and continental cuisines.",
+              "diningOptions": "Meals can be taken in our bright and friendly restaurant, served in the room if necessary, or in the tree-lined garden on fine days. These outdoor meals, much appreciated, offer real moments of freedom and sharing.",
+              "familyWelcome": "Families are welcome: an open table allows them to share a meal with their resident parent in a friendly atmosphere.",
+              "specialNeeds": "Special attention is paid to residents with specific needs: adapted textures, feeding assistance, hydration monitoring. Finally, for everyone's comfort:",
+              "dailyServices": {
+                "roomCleaning": "Daily (or even twice-daily) maintenance of rooms and private spaces.",
+                "laundry": "Laundry service including provided household linen and personal clothing, carefully maintained and returned."
+              }
+            }
+          },
+          "wellBeingAndComfort": {
+            "meta": {
+              "title": "Well-being & Comfort | Senior Wellness | REMES Tunisia",
+              "description": "Discover REMES well-being and comfort services for seniors in Tunisia. Hair salon, podiatry, massage, indoor/outdoor pools, aquagym, and relaxation services for elderly residents."
+            },
+            "hero": {
+              "title": "Well-being & Comfort",
+              "description": "Nursing Home / Living at REMES / Well-being & Comfort"
+            },
+            "content": {
+              "philosophy": "Overall well-being is at the heart of REMES philosophy. Several services complement the daily life of residents to promote relaxation and fulfillment:",
+              "services": {
+                "hairSalon": "Hair salon and aesthetic treatments, on request.",
+                "podiatry": "Podiatry care.",
+                "massage": "Massages and gentle relaxation sessions.",
+                "pools": "Indoor and outdoor pools, true havens of serenity.",
+                "aquagym": "Possibility to practice gentle aquagym, adapted to everyone's desires and abilities."
+              },
+              "impact": "These attentions contribute to making REMES a unique place of life, where one feels surrounded, valued and in harmony with oneself.",
+              "conclusion": "At REMES, your parent is not only accompanied: they are surrounded, recognized and valued."
+            }
+          }
+        }
+      },
+      "livingAtRemes": {
+        "entertainmentAndActivities": {
+          "meta": {
+            "title": "Entertainment & Activities | Senior Activities | REMES Tunisia",
+            "description": "Discover REMES entertainment and activities for seniors in Tunisia. Memory workshops, gentle gymnastics, creative activities, cultural events, and adapted outings for elderly residents."
+          },
+          "hero": {
+            "title": "Entertainment & Activities",
+            "description": "Nursing Home / Living at REMES / Entertainment & Activities"
+          },
+          "content": {
+            "introduction": "Life at REMES is animated by a rich and evolving program, designed to stimulate abilities, encourage creativity and maintain social connection. Our residents participate in:",
+            "activities": {
+              "activity1": "Memory workshops and cognitive games to maintain the mind.",
+              "activity2": "Gentle gymnastics and adapted movements to preserve mobility.",
+              "activity3": "Creative activities (visual arts, light crafts) to express freely.",
+              "activity4": "Shared culinary workshops, combining conviviality and gourmet pleasure.",
+              "activity5": "Cultural and musical moments: readings, film screenings, mini-concerts."
+            },
+            "externalIntervenants": "External intervenants (artists, musicians, chef, zootherapist) regularly come to enrich the programming.",
+            "outings": "To maintain a living link with the outside, we also organize adapted outings: market walks, cultural visits (museums, cinema), sea or zoo walks. A minibus adapted to people with reduced mobility is made available to ensure comfort and safety during these trips.",
+            "conclusion": "Each activity is designed in connection with our multidisciplinary team, to be both fun, stimulating and secure."
+          }
+        },
+        "mealsAndDailyServices": {
+          "meta": {
+            "title": "Meals & Daily Services | Senior Nutrition | REMES Tunisia",
+            "description": "Discover REMES meals and daily services for seniors in Tunisia. Nutritious Mediterranean cuisine, family dining, adapted nutrition, room cleaning, and laundry services for elderly residents."
+          },
+          "hero": {
+            "title": "Meals & Daily Services",
+            "description": "Nursing Home / Living at REMES / Meals & Daily Services"
+          },
+          "content": {
+            "nutritionPhilosophy": "At REMES, eating well to age well is obvious. Our menus, developed with a dietician, combine nutritional balance and gustatory pleasure. Every day, our chef and his team prepare delicious dishes on site using fresh products, inspired by Mediterranean and continental cuisines.",
+            "diningOptions": "Meals can be taken in our bright and friendly restaurant, served in the room if necessary, or in the tree-lined garden on fine days. These outdoor meals, much appreciated, offer real moments of freedom and sharing.",
+            "familyWelcome": "Families are welcome: an open table allows them to share a meal with their resident parent in a friendly atmosphere.",
+            "specialNeeds": "Special attention is paid to residents with specific needs: adapted textures, feeding assistance, hydration monitoring. Finally, for everyone's comfort:",
+            "dailyServices": {
+              "roomCleaning": "Daily (or even twice-daily) maintenance of rooms and private spaces.",
+              "laundry": "Laundry service including provided household linen and personal clothing, carefully maintained and returned."
+            }
+          }
+        },
+        "wellBeingAndComfort": {
+          "meta": {
+            "title": "Well-being & Comfort | Senior Wellness | REMES Tunisia",
+            "description": "Discover REMES well-being and comfort services for seniors in Tunisia. Hair salon, podiatry, massage, indoor/outdoor pools, aquagym, and relaxation services for elderly residents."
+          },
+          "hero": {
+            "title": "Well-being & Comfort",
+            "description": "Nursing Home / Living at REMES / Well-being & Comfort"
+          },
+          "content": {
+            "philosophy": "Overall well-being is at the heart of REMES philosophy. Several services complement the daily life of residents to promote relaxation and fulfillment:",
+            "services": {
+              "hairSalon": "Hair salon and aesthetic treatments, on request.",
+              "podiatry": "Podiatry care.",
+              "massage": "Massages and gentle relaxation sessions.",
+              "pools": "Indoor and outdoor pools, true havens of serenity.",
+              "aquagym": "Possibility to practice gentle aquagym, adapted to everyone's desires and abilities."
+            },
+            "impact": "These attentions contribute to making REMES a unique place of life, where one feels surrounded, valued and in harmony with oneself.",
+            "conclusion": "At REMES, your parent is not only accompanied: they are surrounded, recognized and valued."
+          }
+        }
+      }
+    },
+    "privacyPolicy": {
+      "meta": {
+        "title": "Privacy Policy | Data Protection | REMES Tunisia",
+        "description": "Learn about REMES privacy policy and data protection in Tunisia. How we collect, use, and protect your personal information. GDPR and Tunisian law compliance."
+      },
+      "hero": {
+        "title": "Privacy Policy",
+        "description": "Home / Privacy Policy"
+      },
+      "content": {
+        "lastUpdated": "Last updated:",
+        "introduction": "The protection of your personal data is a priority for REMES. This policy explains what information we collect, why we use it, and your privacy rights.",
+        "sections": {
+          "section1": {
+            "title": "1. Data Controller",
+            "content": "REMES – www.remes-tunisie.com\nContact: info@remes-tunisie.com"
+          },
+          "section2": {
+            "title": "2. Data Collected",
+            "item1": "Contact data (name, email, phone) via forms.",
+            "item2": "Technical data (IP address, browser type, pages visited).",
+            "item3": "Cookies and trackers (see section 6)."
+          },
+          "section3": {
+            "title": "3. Processing Purposes",
+            "item1": "Respond to your requests and provide our services.",
+            "item2": "Improve user experience and site security.",
+            "item3": "Comply with our legal obligations (billing, compliance)."
+          },
+          "section4": {
+            "title": "4. Data Sharing",
+            "content": "Your data is never sold. It may be transmitted to our technical service providers (hosting, messaging, statistical analysis) only to ensure proper service operation."
+          },
+          "section5": {
+            "title": "5. Retention Period",
+            "content": "Data is retained only for the time necessary for the purposes described, then deleted or anonymized."
+          },
+          "section6": {
+            "title": "6. Cookies",
+            "content": "We use cookies necessary for site operation. With your consent, analytical cookies may be used to improve our services. You can refuse these cookies via the dedicated banner."
+          },
+          "section7": {
+            "title": "7. Your Rights",
+            "content": "In accordance with Tunisian law (Law No. 2004-63) and GDPR if you are in Europe, you have the right to access, rectify, object, delete and port your data. To exercise your rights, contact us at info@remes-tunisie.com."
+          },
+          "section8": {
+            "title": "8. Security",
+            "content": "We implement appropriate technical and organizational measures to protect your information, but no system is completely infallible."
+          },
+          "section9": {
+            "title": "9. Modifications",
+            "content": "This policy may be updated. The online version, with the update date, is authoritative."
+          },
+          "section10": {
+            "title": "10. Contact",
+            "content": "For any questions or requests regarding your personal data: info@remes-tunisie.com"
+          }
+        }
+      }
+    },
+    "termsOfUse": {
+      "meta": {
+        "title": "Terms of Use | Legal Terms | REMES Tunisia",
+        "description": "Read REMES terms of use and legal conditions in Tunisia. Website usage rules, intellectual property, liability limitations, and user responsibilities."
+      },
+      "hero": {
+        "title": "Terms of Use",
+        "description": "Home / Terms of Use"
+      },
+      "content": {
+        "lastUpdated": "Last updated:",
+        "introduction": "Welcome to REMES ('we', 'our', 'ours'). By accessing the site www.remes-tunisie.com, you accept these Terms of Use ('ToU').",
+        "sections": {
+          "section1": {
+            "title": "1. Who are we?",
+            "content": "REMES provides information and services related to elderly care and medical equipment.\nContact: info@remes-tunisie.com."
+          },
+          "section2": {
+            "title": "2. Site Usage",
+            "item1": "You agree to use the site legally and respectfully.",
+            "item2": "Any abusive use (hacking, unauthorized copying...) is prohibited.",
+            "item3": "We reserve the right to suspend access in case of non-compliance."
+          },
+          "section3": {
+            "title": "3. Medical Information",
+            "content": "Published content is for informational purposes only and does not replace the advice of a healthcare professional."
+          },
+          "section4": {
+            "title": "4. Intellectual Property",
+            "content": "Texts, images, logos and site content belong to REMES or its partners. Any reproduction without authorization is prohibited."
+          },
+          "section5": {
+            "title": "5. Limitation of Liability",
+            "content": "REMES cannot be held responsible for direct or indirect damages resulting from the use of the site."
+          },
+          "section6": {
+            "title": "6. External Links",
+            "content": "We may provide links to third-party sites. We are not responsible for their content or practices."
+          },
+          "section7": {
+            "title": "7. Modifications",
+            "content": "We may update these ToU at any time. The online version is authoritative."
+          },
+          "section8": {
+            "title": "8. Contact",
+            "content": "For any questions, contact us at info@remes-tunisie.com."
+          }
+        }
+      }
+    },
+    "search": {
+      "title": "Search",
+      "description": "Search through our articles, blog posts and content to find what you're looking for.",
+      "placeholder": "Search articles...",
+      "resultsFor": "Search results for",
+      "resultsFound": "results found",
+      "for": "for",
+      "noResults": "No results found",
+      "tryDifferent": "Try different keywords or browse our latest articles.",
+      "enterQuery": "Enter your search terms to find relevant articles and content.",
+      "meta": {
+        "title": "Search | Find Articles & Content | REMES Tunisia",
+        "description": "Search through REMES articles, blog posts, and content. Find information about elderly care, medical equipment, and healthcare services in Tunisia."
+      }
+    },
     "equipment": {
       "table": {
         "image": "Image",
@@ -799,20 +1308,316 @@
       },
       "noEquipment": "No equipment available"
     },
-    "search": {
+    "title": "Search",
+    "description": "Search through our articles, blog posts and content to find what you're looking for.",
+    "placeholder": "Search articles...",
+    "resultsFor": "Search results for",
+    "resultsFound": "results found",
+    "for": "for",
+    "noResults": "No results found",
+    "tryDifferent": "Try different keywords or browse our latest articles.",
+    "enterQuery": "Enter your search terms to find relevant articles and content.",
+    "about": {
       "meta": {
-        "title": "Search Results",
-        "description": "Search through our articles and content"
+        "title": "About REMES - Medical Residence in Tunisia | Excellence in Care",
+        "description": "Discover REMES, Tunisia's premier medical residence since 2009. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
       },
-      "title": "Search",
-      "description": "Search through our articles, blog posts and content to find what you're looking for.",
-      "placeholder": "Search articles...",
-      "resultsFor": "Search results for",
-      "resultsFound": "results found",
-      "for": "for",
-      "noResults": "No results found",
-      "tryDifferent": "Try different keywords or browse our latest articles.",
-      "enterQuery": "Enter your search terms to find relevant articles and content."
+      "hero": {
+        "title": "About Us",
+        "description": "Welcome to REMES Where excellence in care meets Mediterranean lifestyle"
+      },
+      "content": {
+        "mission": {
+          "title": "Our Mission",
+          "description": "At REMES, we reinvent medicalized care by offering each person welcomed a safe, human and warm environment, where the quality of care naturally combines with the quality of life. Our absolute priority is to preserve the dignity, comfort and serenity of each person, respecting their personal history."
+        },
+        "philosophy": {
+          "title": "Our Philosophy",
+          "description": "We firmly believe that a medicalized establishment should not only be a place of care, but above all a real place of life. This is why we favor a human-scale approach, where each resident is known by their first name, recognized in their uniqueness and accompanied according to their unique journey and their own needs."
+        },
+        "exceptionalSetting": {
+          "title": "An Exceptional Setting",
+          "description": "Nestled in the heart of a 4-star hotel in the tourist area of Skanes, just 200 meters from the Mediterranean, our residence benefits from a truly exceptional environment. Between landscaped gardens and sunny terraces, this bright and green setting is naturally conducive to well-being and serenity."
+        },
+        "expertTeam": {
+          "title": "A Team of Dedicated Experts",
+          "description": "Our strength lies in an exceptional multidisciplinary team: doctors, specialized nurses, physiotherapists, psychologists and social life staff. Attentive, committed and available 24/7, this team offers personalized support that responds both to specific medical needs and daily expectations, in a constant spirit of human warmth and benevolence."
+        },
+        "customOffer": {
+          "title": "A Tailored Offer",
+          "description": "Whether it's a permanent stay, a short respite or convalescence stay, or even adapted therapeutic vacations, REMES offers flexible and personalized solutions, designed to adapt to each life path. We also support families in this important step, involving them in their loved one's care project. Discover our unique universe where excellence in care and gentleness of living combine daily. Contact us for a personalized visit and meet our dedicated team."
+        },
+        "whatIsRemes": {
+          "title": "What is REMES?",
+          "description1": "Resort Medical is the first medicalized hotel retirement home in Tunisia, welcoming French speakers since 2009. Located in Skanes, just steps from the Mediterranean, it offers a wooded, bright and secure setting.",
+          "description2": "A peaceful and high-end place of life, combining comfort, personalized care and pleasant climate. The objective: preserve autonomy and offer a serene retirement in an exceptional environment."
+        },
+        "images": {
+          "alt": "Medical Residence"
+        }
+      }
+    },
+    "adaptedStay": {
+      "meta": {
+        "title": "Adapted Stays in Tunisia | Accessible Tourism & Medical Care | REMES",
+        "description": "Discover Tunisia with adapted stays at REMES. Accessible accommodation, adapted transport, personalized medical care, and medical equipment. Perfect for seniors, disabled travelers, and accessible tourism. Located in Skanes by the Mediterranean."
+      }
+    },
+    "professionalServices": {
+      "meta": {
+        "title": "B2B Professional Services Tunisia | Accessible Tourism Partners | REMES",
+        "description": "Partner with REMES for accessible tourism in Tunisia. B2B services for travel agencies, tour operators, and organizations. Complete adapted stay solutions, medical care, and accessible accommodation for your clients. Contact us for professional partnerships."
+      },
+      "hero": {
+        "title": "B2B Professional Services",
+        "description": "Adapted Stay / B2B Professional Services"
+      }
+    },
+    "adaptedAccommodation": {
+      "meta": {
+        "title": "Accessible Accommodation Tunisia | Adapted Rooms & Facilities | REMES",
+        "description": "Discover accessible accommodation at REMES Tunisia. Spacious, wheelchair-accessible rooms with garden/pool views, free WiFi, international TV, and emergency call systems. Fully ground-level facility designed for comfort and independence."
+      },
+      "hero": {
+        "title": "Adapted Accommodation",
+        "description": "Adapted stays / Adapted Accommodation"
+      },
+      "content": {
+        "title": "What is Adapted Accommodation?",
+        "paragraph1": "At REMES residence, our rooms combine comfort, accessibility and serenity so that everyone can fully enjoy their stay. Spacious, bright and functional, they are designed to meet everyone's needs, without compromising on well-being.",
+        "features": {
+          "title": "The advantages of our rooms",
+          "item1": "Fully ground-level establishment, without obstacles.",
+          "item2": "Generous surface area to facilitate movement.",
+          "item3": "Accessible terraces, with garden or pool view.",
+          "item4": "Bright and modern rooms, conducive to rest.",
+          "item5": "Free high-speed Wi-Fi throughout the establishment.",
+          "item6": "Televisions with international channels (French, English, Italian).",
+          "item7": "Integrated patient call systems for more security."
+        },
+        "conclusion": "At REMES, we combine the requirement of accessibility with the warmth of a vacation stay, to offer everyone a setting where well-being and autonomy meet."
+      }
+    },
+    "adaptedTransport": {
+      "meta": {
+        "title": "Adapted Transport Tunisia | Accessible Vehicles & Tours | REMES",
+        "description": "Discover adapted transport services at REMES Tunisia. Wheelchair-accessible vehicles, airport transfers, city tours, and excursions to Sousse, Monastir, Carthage. Professional drivers trained in disability assistance. Safe and comfortable travel in Tunisia."
+      },
+      "hero": {
+        "title": "Adapted Transport",
+        "description": "Adapted stays / Adapted Transport"
+      },
+      "content": {
+        "title": "Tunisia, accessible to all",
+        "paragraph1": "transfers, outings, excursions… our adapted vehicles take you everywhere safely.",
+        "paragraph2": "With REMES, enjoy one of the very first transport services specially adapted for people with reduced mobility in Tunisia.",
+        "paragraph3": "Our vehicles, fitted according to international standards, guarantee comfort, safety and dignity, whether you are in a manual or electric wheelchair.",
+        "journeys": {
+          "title": "Customized trips",
+          "item1": "Airport transfers: on arrival as well as departure",
+          "item2": "Relaxation outings: in town, by the sea or for a coffee on the terrace",
+          "item3": "Discovery excursions: Sousse, Monastir, Carthage, Sidi Bou Saïd, the Sahara…"
+        },
+        "drivers": {
+          "title": "Trained and attentive drivers",
+          "description": "Our experienced and caring drivers are sensitized to accompanying people with disabilities. Their mission: to make every trip pleasant and worry-free."
+        }
+      }
+    },
+    "adaptedCare": {
+      "meta": {
+        "title": "Personalized Medical Care Tunisia | Adapted Care Services | REMES",
+        "description": "Discover personalized medical care at REMES Tunisia. Professional nursing team, physiotherapy sessions, personal assistance, and continuous care coordination. Discreet, compassionate care during your vacation in Tunisia."
+      },
+      "hero": {
+        "title": "Adapted Care",
+        "description": "Adapted stays / personalized support"
+      },
+      "content": {
+        "title": "Personalized support",
+        "paragraph1": "Your care, without compromise: a discreet and caring team watches over you, even on vacation.",
+        "paragraph2": "According to your needs, you can benefit from the presence of a caregiver or home care assistant during your travels",
+        "paragraph3": "A discreet, caring and always available nursing team",
+        "paragraph4": "Because going on vacation should never mean giving up safety or continuity of care, REMES residence makes available to you an experienced and attentive multidisciplinary team.",
+        "paragraph5": "Our staff consists of doctors, nurses, nursing assistants, home care assistants and physiotherapists, present on site and available according to your needs, respecting your pace and privacy.",
+        "services": {
+          "title": "A reassuring presence, without intrusion",
+          "item1": "Help with toileting, dressing, moving if necessary",
+          "item2": "Nursing care provided on site, on prescription",
+          "item3": "Possibility of physiotherapy sessions during the stay",
+          "item4": "Support for activities, meals or outings if needed",
+          "item5": "Coordination with usual doctors to ensure continuity of care before, during and after the stay"
+        },
+        "conclusion": "Here, everything is designed so that you can fully enjoy your vacation, with confidence, with the support of a trained, discreet and caring team."
+      }
+    },
+    "medicalEquipment": {
+      "meta": {
+        "title": "Medical Equipment Rental Tunisia | Adapted Medical Devices | REMES",
+        "description": "Rent medical equipment at REMES Tunisia. Wheelchairs, medical beds, patient lifts, and medical supplies available on-site. No need to bring heavy equipment - we provide everything for your comfort and autonomy during your stay in Tunisia."
+      },
+      "hero": {
+        "title": "Medical Equipment",
+        "description": "Adapted Stay / Medical Equipment"
+      },
+      "content": {
+        "title": "Travel light, we take care of the rest",
+        "paragraph1": "So that you can travel with peace of mind, REMES residence makes available to you all the medical equipment necessary for your comfort and autonomy, during your stay in Tunisia.",
+        "paragraph2": "No need to bring wheelchair, medical bed, patient lift or specific medical accessories: We ensure the provision on site of adapted equipment, installed according to your needs, before your arrival.",
+        "paragraph3": "",
+        "paragraph4": "You can also benefit, on request, from all the necessary medical consumables (protections, dressings, hygiene equipment, etc.) for a serene stay without logistical worries."
+      }
+    }
+  },
+  "about": {
+    "meta": {
+      "title": "About REMES - Medical Residence in Tunisia | Excellence in Care",
+      "description": "Discover REMES, Tunisia's premier medical residence since 2009. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
+    },
+    "hero": {
+      "title": "About Us",
+      "description": "Welcome to REMES Where excellence in care meets Mediterranean lifestyle"
+    },
+    "content": {
+      "mission": {
+        "title": "Our Mission",
+        "description": "At REMES, we reinvent medicalized care by offering each person welcomed a safe, human and warm environment, where the quality of care naturally combines with the quality of life. Our absolute priority is to preserve the dignity, comfort and serenity of each person, respecting their personal history."
+      },
+      "philosophy": {
+        "title": "Our Philosophy",
+        "description": "We firmly believe that a medicalized establishment should not only be a place of care, but above all a real place of life. This is why we favor a human-scale approach, where each resident is known by their first name, recognized in their uniqueness and accompanied according to their unique journey and their own needs."
+      },
+      "exceptionalSetting": {
+        "title": "An Exceptional Setting",
+        "description": "Nestled in the heart of a 4-star hotel in the tourist area of Skanes, just 200 meters from the Mediterranean, our residence benefits from a truly exceptional environment. Between landscaped gardens and sunny terraces, this bright and green setting is naturally conducive to well-being and serenity."
+      },
+      "expertTeam": {
+        "title": "A Team of Dedicated Experts",
+        "description": "Our strength lies in an exceptional multidisciplinary team: doctors, specialized nurses, physiotherapists, psychologists and social life staff. Attentive, committed and available 24/7, this team offers personalized support that responds both to specific medical needs and daily expectations, in a constant spirit of human warmth and benevolence."
+      },
+      "customOffer": {
+        "title": "A Tailored Offer",
+        "description": "Whether it's a permanent stay, a short respite or convalescence stay, or even adapted therapeutic vacations, REMES offers flexible and personalized solutions, designed to adapt to each life path. We also support families in this important step, involving them in their loved one's care project. Discover our unique universe where excellence in care and gentleness of living combine daily. Contact us for a personalized visit and meet our dedicated team."
+      },
+      "whatIsRemes": {
+        "title": "What is REMES?",
+        "description1": "Resort Medical is the first medicalized hotel retirement home in Tunisia, welcoming French speakers since 2009. Located in Skanes, just steps from the Mediterranean, it offers a wooded, bright and secure setting.",
+        "description2": "A peaceful and high-end place of life, combining comfort, personalized care and pleasant climate. The objective: preserve autonomy and offer a serene retirement in an exceptional environment."
+      },
+      "images": {
+        "alt": "Medical Residence"
+      }
+    }
+  },
+  "adaptedStay": {
+    "meta": {
+      "title": "Adapted Stays in Tunisia | Accessible Tourism & Medical Care | REMES",
+      "description": "Discover Tunisia with adapted stays at REMES. Accessible accommodation, adapted transport, personalized medical care, and medical equipment. Perfect for seniors, disabled travelers, and accessible tourism. Located in Skanes by the Mediterranean."
+    }
+  },
+  "adaptedAccommodation": {
+    "meta": {
+      "title": "Accessible Accommodation Tunisia | Adapted Rooms & Facilities | REMES",
+      "description": "Discover accessible accommodation at REMES Tunisia. Spacious, wheelchair-accessible rooms with garden/pool views, free WiFi, international TV, and emergency call systems. Fully ground-level facility designed for comfort and independence."
+    },
+    "hero": {
+      "title": "Adapted Accommodation",
+      "description": "Adapted stays / Adapted Accommodation"
+    },
+    "content": {
+      "title": "What is Adapted Accommodation?",
+      "paragraph1": "At REMES residence, our rooms combine comfort, accessibility and serenity so that everyone can fully enjoy their stay. Spacious, bright and functional, they are designed to meet everyone's needs, without compromising on well-being.",
+      "features": {
+        "title": "The advantages of our rooms",
+        "item1": "Fully ground-level establishment, without obstacles.",
+        "item2": "Generous surface area to facilitate movement.",
+        "item3": "Accessible terraces, with garden or pool view.",
+        "item4": "Bright and modern rooms, conducive to rest.",
+        "item5": "Free high-speed Wi-Fi throughout the establishment.",
+        "item6": "Televisions with international channels (French, English, Italian).",
+        "item7": "Integrated patient call systems for more security."
+      },
+      "conclusion": "At REMES, we combine the requirement of accessibility with the warmth of a vacation stay, to offer everyone a setting where well-being and autonomy meet."
+    }
+  },
+  "adaptedCare": {
+    "meta": {
+      "title": "Personalized Medical Care Tunisia | Adapted Care Services | REMES",
+      "description": "Discover personalized medical care at REMES Tunisia. Professional nursing team, physiotherapy sessions, personal assistance, and continuous care coordination. Discreet, compassionate care during your vacation in Tunisia."
+    },
+    "hero": {
+      "title": "Adapted Care",
+      "description": "Adapted stays / personalized support"
+    },
+    "content": {
+      "title": "Personalized support",
+      "paragraph1": "Your care, without compromise: a discreet and caring team watches over you, even on vacation.",
+      "paragraph2": "According to your needs, you can benefit from the presence of a caregiver or home care assistant during your travels",
+      "paragraph3": "A discreet, caring and always available nursing team",
+      "paragraph4": "Because going on vacation should never mean giving up safety or continuity of care, REMES residence makes available to you an experienced and attentive multidisciplinary team.",
+      "paragraph5": "Our staff consists of doctors, nurses, nursing assistants, home care assistants and physiotherapists, present on site and available according to your needs, respecting your pace and privacy.",
+      "services": {
+        "title": "A reassuring presence, without intrusion",
+        "item1": "Help with toileting, dressing, moving if necessary",
+        "item2": "Nursing care provided on site, on prescription",
+        "item3": "Possibility of physiotherapy sessions during the stay",
+        "item4": "Support for activities, meals or outings if needed",
+        "item5": "Coordination with usual doctors to ensure continuity of care before, during and after the stay"
+      },
+      "conclusion": "Here, everything is designed so that you can fully enjoy your vacation, with confidence, with the support of a trained, discreet and caring team."
+    }
+  },
+  "adaptedTransport": {
+    "meta": {
+      "title": "Adapted Transport Tunisia | Accessible Vehicles & Tours | REMES",
+      "description": "Discover adapted transport services at REMES Tunisia. Wheelchair-accessible vehicles, airport transfers, city tours, and excursions to Sousse, Monastir, Carthage. Professional drivers trained in disability assistance. Safe and comfortable travel in Tunisia."
+    },
+    "hero": {
+      "title": "Adapted Transport",
+      "description": "Adapted stays / Adapted Transport"
+    },
+    "content": {
+      "title": "Tunisia, accessible to all",
+      "paragraph1": "transfers, outings, excursions… our adapted vehicles take you everywhere safely.",
+      "paragraph2": "With REMES, enjoy one of the very first transport services specially adapted for people with reduced mobility in Tunisia.",
+      "paragraph3": "Our vehicles, fitted according to international standards, guarantee comfort, safety and dignity, whether you are in a manual or electric wheelchair.",
+      "journeys": {
+        "title": "Customized trips",
+        "item1": "Airport transfers: on arrival as well as departure",
+        "item2": "Relaxation outings: in town, by the sea or for a coffee on the terrace",
+        "item3": "Discovery excursions: Sousse, Monastir, Carthage, Sidi Bou Saïd, the Sahara…"
+      },
+      "drivers": {
+        "title": "Trained and attentive drivers",
+        "description": "Our experienced and caring drivers are sensitized to accompanying people with disabilities. Their mission: to make every trip pleasant and worry-free."
+      }
+    }
+  },
+  "medicalEquipment": {
+    "meta": {
+      "title": "Medical Equipment Rental Tunisia | Adapted Medical Devices | REMES",
+      "description": "Rent medical equipment at REMES Tunisia. Wheelchairs, medical beds, patient lifts, and medical supplies available on-site. No need to bring heavy equipment - we provide everything for your comfort and autonomy during your stay in Tunisia."
+    },
+    "hero": {
+      "title": "Medical Equipment",
+      "description": "Adapted Stay / Medical Equipment"
+    },
+    "content": {
+      "title": "Travel light, we take care of the rest",
+      "paragraph1": "So that you can travel with peace of mind, REMES residence makes available to you all the medical equipment necessary for your comfort and autonomy, during your stay in Tunisia.",
+      "paragraph2": "No need to bring wheelchair, medical bed, patient lift or specific medical accessories: We ensure the provision on site of adapted equipment, installed according to your needs, before your arrival.",
+      "paragraph3": "",
+      "paragraph4": "You can also benefit, on request, from all the necessary medical consumables (protections, dressings, hygiene equipment, etc.) for a serene stay without logistical worries."
+    }
+  },
+  "professionalServices": {
+    "meta": {
+      "title": "B2B Professional Services Tunisia | Accessible Tourism Partners | REMES",
+      "description": "Partner with REMES for accessible tourism in Tunisia. B2B services for travel agencies, tour operators, and organizations. Complete adapted stay solutions, medical care, and accessible accommodation for your clients. Contact us for professional partnerships."
+    },
+    "hero": {
+      "title": "B2B Professional Services",
+      "description": "Adapted Stay / B2B Professional Services"
     }
   }
 }

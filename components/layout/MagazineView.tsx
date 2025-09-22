@@ -160,10 +160,10 @@ export default function MagazineView() {
                     bgDesktop="/hero-4/bg-desktop.jpg"
                />
                <main className="pt-10">
-                    <section>
+                    {/* <section>
                          <VerticalGallery />
-                    </section>
-                    <section className="pt-10">
+                    </section> */}
+                    <section className="pt-20">
                          <VideosCarousel />
                     </section>
                     <section className="relative w-full overflow-hidden bg-white">

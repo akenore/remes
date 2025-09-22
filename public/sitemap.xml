@@ -1,0 +1,337 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <!-- Homepage -->
+  <url>
+    <loc>http://remes-tunisie.com/</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr" />
+  </url>
+  
+  <!-- French Homepage -->
+  <url>
+    <loc>http://remes-tunisie.com/fr</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>1.0</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr" />
+  </url>
+
+  <!-- About Page -->
+  <url>
+    <loc>http://remes-tunisie.com/about</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/about" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/about</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/about" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/about" />
+  </url>
+
+  <!-- Search Page -->
+  <url>
+    <loc>http://remes-tunisie.com/search</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/search" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/search" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/search</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/search" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/search" />
+  </url>
+
+  <!-- Magazine -->
+  <url>
+    <loc>http://remes-tunisie.com/magazine</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/magazine" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/magazine" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/magazine</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/magazine" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/magazine" />
+  </url>
+
+  <!-- Adapted Stay Section -->
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay/adapted-accommodation</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-accommodation" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-accommodation" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay/adapted-accommodation</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-accommodation" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-accommodation" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay/adapted-care</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-care" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-care" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay/adapted-care</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-care" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-care" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay/adapted-transport</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-transport" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-transport" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay/adapted-transport</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/adapted-transport" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/adapted-transport" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay/medical-equipment</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/medical-equipment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/medical-equipment" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay/medical-equipment</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/medical-equipment" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/medical-equipment" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/adapted-stay/professional-services</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/professional-services" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/professional-services" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/adapted-stay/professional-services</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/adapted-stay/professional-services" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/adapted-stay/professional-services" />
+  </url>
+
+  <!-- Nursing Home Section -->
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/care-expertise</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/care-expertise" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/care-expertise" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/care-expertise</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/care-expertise" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/care-expertise" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/hosting-solutions</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/hosting-solutions" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/hosting-solutions" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/hosting-solutions</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/hosting-solutions" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/hosting-solutions" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/our-offer</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/our-offer" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/our-offer" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/our-offer</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/our-offer" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/our-offer" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/the-residence</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/the-residence" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/the-residence" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/the-residence</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/the-residence" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/the-residence" />
+  </url>
+
+  <!-- Living at Remes -->
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/living-at-remes/entertainment-and-activities</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/entertainment-and-activities" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/entertainment-and-activities" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/living-at-remes/entertainment-and-activities</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/entertainment-and-activities" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/entertainment-and-activities" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/living-at-remes/meals-and-daily-services</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/meals-and-daily-services" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/meals-and-daily-services" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/living-at-remes/meals-and-daily-services</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/meals-and-daily-services" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/meals-and-daily-services" />
+  </url>
+
+  <url>
+    <loc>http://remes-tunisie.com/nursing-home/living-at-remes/well-being-and-comfort</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/well-being-and-comfort" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/well-being-and-comfort" />
+  </url>
+  
+  <url>
+    <loc>http://remes-tunisie.com/fr/nursing-home/living-at-remes/well-being-and-comfort</loc>
+    <lastmod>2024-01-20</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+    <xhtml:link rel="alternate" hreflang="en" href="http://remes-tunisie.com/nursing-home/living-at-remes/well-being-and-comfort" />
+    <xhtml:link rel="alternate" hreflang="fr" href="http://remes-tunisie.com/fr/nursing-home/living-at-remes/well-being-and-comfort" />
+  </url>
+
+</urlset>

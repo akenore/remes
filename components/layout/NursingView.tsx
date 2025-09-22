@@ -9,44 +9,44 @@ import Icon from "../ui/Icon";
 
 
 export default function NursingView() {
-     const t = useTranslations();
+     const t = useTranslations('frontend.nursingHome');
      const locale = useLocale();
 
      return (
           <>
                <Hero2
-                    title="Maison de retraite médicalisée"
-                    description="Avec l’âge, certains gestes du quotidien deviennent difficiles et peuvent peser aussi bien sur la personne âgée que sur ses proches."
+                    title={t('hero.title')}
+                    description={t('hero.description')}
                     bgMobile="/hero-2/bg-mobile.jpg"
                     bgDesktop="/hero-2/bg-desktop.jpg"
                     cards={[
                          {
                               icon: <Icon name="HomeIcon" sizeClass="w-full h-full" />,
-                              title: "Hébergement Permanent",
-                              description: "Vivre à REMES, c’est faire le choix d’une résidence médicalisée qui associe sécurité, confort et sérénité dans un cadre adapté à chaque situation.",
-                              buttonText: t('frontend.button'),
-                              buttonHref: "/nursing-home/permanent-accommodation",
+                              title: t('hero.cards.residence.title'),
+                              description: t('hero.cards.residence.description'),
+                              buttonText: t('button'),
+                              buttonHref: "/nursing-home/the-residence",
                          },
                          {
                               icon: <Icon name="BuildingIcon" sizeClass="w-full h-full" />,
-                              title: "Hébergement Temporaire",
-                              description: "Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien.",
-                              buttonText: t('frontend.button'),
-                              buttonHref: "/nursing-home/temporary-accommodation",
+                              title: t('hero.cards.solutions.title'),
+                              description: t('hero.cards.solutions.description'),
+                              buttonText: t('button'),
+                              buttonHref: "/nursing-home/hosting-solutions",
                          },
                          {
                               icon: <Icon name="SunIcon" sizeClass="w-full h-full" />,
-                              title: "Accueil de Jour",
-                              description: "L’accueil de jour représente ainsi un équilibre précieux entre maintien à domicile et accompagnement spécialisé.",
-                              buttonText: t('frontend.button'),
-                              buttonHref: "/nursing-home/day-care",
+                              title: t('hero.cards.expertise.title'),
+                              description: t('hero.cards.expertise.description'),
+                              buttonText: t('button'),
+                              buttonHref: "/nursing-home/care-expertise",
                          },
                          {
                               icon: <Icon name="MedicalPlusIcon" sizeClass="w-full h-full" />,
-                              title: "Séjour de Convalescence",
-                              description: "Après une hospitalisation, une intervention ou une maladie, le retour à domicile peut sembler fragile et source d’inquiétude.",
-                              buttonText: t('frontend.button'),
-                              buttonHref: "/nursing-home/convalescence-stay",
+                              title: t('hero.cards.offer.title'),
+                              description: t('hero.cards.offer.description'),
+                              buttonText: t('button'),
+                              buttonHref: "/nursing-home/our-offer",
                          },
                     ]}
                />
@@ -54,21 +54,21 @@ export default function NursingView() {
                     <div className="mx-5 md:mx-auto max-w-7xl">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                               <div>
-                                   <Image src="/nursing-l-desktop.png" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
-                                   <Image src="/nursing-l-desktop.png" alt="Maison de Repos" className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/nursing-l-desktop.png" alt={t('content.images.alt')} className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/nursing-l-desktop.png" alt={t('content.images.alt')} className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
                               </div>
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
-                                        Planifiez un échange avec notre équipe
+                                        {t('content.schedule.title')}
                                    </h2>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
-                                        Nous savons qu’organiser la recherche d’une résidence médicalisée peut être une étape exigeante. Pour vous simplifier la démarche, nous mettons à votre disposition un calendrier en ligne.
+                                        {t('content.schedule.paragraph1')}
                                    </p>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
-                                        Choisissez en toute simplicité le jour et l’heure qui vous conviennent, et notre équipe vous appellera directement à ce moment-là.
+                                        {t('content.schedule.paragraph2')}
                                    </p>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
-                                        Lors de cet appel, nous prendrons le temps d’écouter vos besoins, de répondre à vos questions et de vous présenter en détail les solutions d’accueil proposées par REMES. Vous disposerez ainsi de toutes les informations nécessaires pour avancer sereinement dans votre projet.
+                                        {t('content.schedule.paragraph3')}
                                    </p>
 
                                    {/* <div className="flex justify-center md:justify-start">
@@ -80,44 +80,44 @@ export default function NursingView() {
 
                          </div>
                     </div>
-                    {/* <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')] mb-40">
+                    <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')] mb-40">
                          <div className="w-full min-h-screen">
                               <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
                                    <header className="text-center lg:text-left mb-12 lg:mb-16 pt-40">
                                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                                              <div className="flex-1">
                                                   <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
-                                                       Notre Gallerie
+                                                  {t('content.living.title')}
                                                   </h2>
-                                                  <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                                                       A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
+                                                  <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-4xl mx-auto lg:mx-0 leading-relaxed">
+                                                  {t('content.living.description')}
                                                   </p>
                                              </div>
 
                                         </div>
                                    </header>
                                    <div className="w-full">
-                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
                                              <Card3
                                                   image="/nursing-l-desktop.png"
-                                                  title="Nos Activités"
-                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
-                                                  buttonText={t('frontend.button')}
-                                                  buttonHref="/"
+                                                  title={t('content.living.cards.activities.title')}
+                                                  description={t('content.living.cards.activities.description')}
+                                                  buttonText={t('button')}
+                                                  buttonHref="/nursing-home/living-at-remes/entertainment-and-activities"
                                              />
                                              <Card3
                                                   image="/nursing-l-desktop.png"
-                                                  title="Nos Animations"
-                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
-                                                  buttonText={t('frontend.button')}
-                                                  buttonHref="/"
+                                                  title={t('content.living.cards.meals.title')}
+                                                  description={t('content.living.cards.meals.description')}
+                                                  buttonText={t('button')}
+                                                  buttonHref="/nursing-home/living-at-remes/meals-and-daily-services"
                                              />
                                              <Card3
                                                   image="/nursing-l-desktop.png"
-                                                  title="Nos Services"
-                                                  description="Un lieu de vie calme et sécurisé, avec un accompagnement médical personnalisé au quotidien."
-                                                  buttonText={t('frontend.button')}
-                                                  buttonHref="/"
+                                                  title={t('content.living.cards.wellbeing.title')}
+                                                  description={t('content.living.cards.wellbeing.description')}
+                                                  buttonText={t('button')}
+                                                  buttonHref="/nursing-home/living-at-remes/well-being-and-comfort"
                                              />
 
                                         </div>
@@ -126,12 +126,12 @@ export default function NursingView() {
                                    </div>
                               </div>
                          </div>
-                    </section> */}
+                    </section>
                     <section className="max-w-7xl mx-5 md:mx-auto text-center pb-24">
                         
 
                          <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
-                              Réservez dès maintenant le créneau de votre choix : c’est simple, rapide et sans engagement.
+                              {t('content.reservation.text')}
                          </p>
 
 

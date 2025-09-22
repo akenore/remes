@@ -140,30 +140,25 @@ export default function Footer() {
                               </ul>
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
-                              <h2 className="text-gold text-2xl font-myanmar mb-10">Resousrs</h2>
+                              <h2 className="text-gold text-2xl font-myanmar mb-10">{t('frontend.menu.footer.resources')}</h2>
                               <ul className="text-white space-y-4">
                                    <li>
                                         <Link href="/about">{t('frontend.menu.about')}</Link>
                                    </li>
                                    <li>
-                                        <Link href="/adapted-stay/professional-services">Professionnels services</Link>
+                                        <Link href="/adapted-stay/professional-services">{t('frontend.menu.footer.professionalsServices')}</Link>
                                    </li>
-                                   <li>
-                                        <a href="#">FAQ</a>
-                                   </li>
-                                   <li>
-                                        <a href="#">Support</a>
-                                   </li>
+                                   
                               </ul>
                          </div>
                          <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
-                              <h2 className="text-gold text-2xl font-myanmar mb-10">Legal</h2>
+                              <h2 className="text-gold text-2xl font-myanmar mb-10">{t('frontend.menu.footer.legal')}</h2>
                               <ul className="text-white space-y-4 mb-10">
                                    <li>
-                                        <a href="#">Terms of services</a>
+                                        <a href="/terms-of-use">{t('frontend.menu.footer.terms')}</a>
                                    </li>
                                    <li>
-                                        <a href="#">Privacy Policy</a>
+                                        <a href="/privacy-policy">{t('frontend.menu.footer.privacy')}</a>
                                    </li>
                               </ul>
                               <LanguageSwitcher />
@@ -172,7 +167,7 @@ export default function Footer() {
                </div>
                <div className="mt-auto">
                     <hr className="text-blue mt-8 md:mt-16"/>
-                    <div className="text-light-blue sm:flex sm:justify-around pt-4 md:pt-8">
+                    <div className="text-light-blue sm:flex sm:justify-around pt-4 md:pt-8 mb-5">
                          <div className="ml-3 md:ml-0">© 2025 - 2026 Remes, All Rights Reserved</div>
                          <div className="ml-3 md:ml-0">Designed and Developed by <a href="https://beandgo.us" target="_blank" rel="noopener noreferrer" className="hover:text-gold transition-colors">Be&Go</a></div>
                     </div>

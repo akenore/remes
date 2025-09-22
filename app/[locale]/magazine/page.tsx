@@ -3,7 +3,7 @@ import { getTranslations } from 'next-intl/server';
 import MagazineView from "@/components/layout/MagazineView";
 
 export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.home.meta');
+     const t = await getTranslations('frontend.magazine.meta');
 
      return {
           title: t('title'),

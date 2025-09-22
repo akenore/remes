@@ -13,7 +13,7 @@ export default function Card({ image, title, description, buttonText, buttonHref
   return (
     <Link 
       href={buttonHref} 
-      className="block bg-white shadow-2xl overflow-hidden w-full mx-auto transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-105 hover:-translate-y-2 hover:bg-blue group xl:h-80"
+      className="block bg-white shadow-2xl overflow-hidden w-full mx-auto transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-105 hover:-translate-y-2 hover:bg-blue group xl:min-h-80"
       aria-label={`${title} - ${description}`}
     >
       <div className="flex flex-row w-full">

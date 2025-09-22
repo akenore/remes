@@ -68,6 +68,10 @@ export default function EquipmentTable() {
         requestKey: null,
       });
 
+      console.log('Medical equipment API result:', result);
+      console.log('Items count:', result.items.length);
+      console.log('First item:', result.items[0]);
+
       // Simple mapping like admin component
       setEquipment(result.items as unknown as EquipmentItem[]);
     } catch (error) {
@@ -132,9 +136,9 @@ export default function EquipmentTable() {
             <th className="px-6 py-4 whitespace-nowrap border-[5px] border-white">
               {t('equipment.table.dayPrice') || 'Day*'}
             </th>
-            <th className="px-6 py-4 whitespace-nowrap border-[5px] border-white">
+            {/* <th className="px-6 py-4 whitespace-nowrap border-[5px] border-white">
               {t('equipment.table.monthPrice') || 'Month*'}
-            </th>
+            </th> */}
           </tr>
         </thead>
         <tbody>
@@ -160,9 +164,9 @@ export default function EquipmentTable() {
               <td className="px-6 py-4 whitespace-nowrap text-sm md:text-base border-[5px] border-white">
                 {formatPrice(item.price_per_day)}
               </td>
-              <td className="px-6 py-4 whitespace-nowrap text-sm md:text-base border-[5px] border-white">
+              {/* <td className="px-6 py-4 whitespace-nowrap text-sm md:text-base border-[5px] border-white">
                 {formatPrice(item.price_per_month)}
-              </td>
+              </td> */}
             </tr>
           ))}
         </tbody>
