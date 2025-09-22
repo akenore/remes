@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
+import Image from 'next/image';
 import ImagePickerModal from './ImagePickerModal';
 
 interface CoverImageSelectorProps {
@@ -24,7 +25,7 @@ export default function CoverImageSelector({
     onImageChange(file);
   };
 
-  const handleImageFromLibrary = (url: string, title: string) => {
+  const handleImageFromLibrary = (url: string) => {
     // When selecting from library, we don't have a File object, just the URL
     onImageChange(null, url);
     setShowImageModal(false);
@@ -90,9 +91,11 @@ export default function CoverImageSelector({
             </div>
           ) : (
             <div className="relative">
-              <img
+              <Image
                 src={currentImageUrl}
                 alt={t('add.form.imagePreview')}
+                width={400}
+                height={192}
                 className="w-full h-48 object-cover rounded-lg"
               />
               <button

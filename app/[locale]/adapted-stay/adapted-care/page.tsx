@@ -2,7 +2,6 @@
 import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import ContactForm from "@/components/ui/ContactForm";
-import PriceCard from "@/components/ui/card/PriceCard";
 import PageSection from "@/components/ui/PageSection";
 import { Metadata } from "next";
 import { getTranslations } from 'next-intl/server';

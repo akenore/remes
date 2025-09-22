@@ -197,7 +197,7 @@ export default function Navbar() {
                 { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
                 { href: '/about', label: t('frontend.menu.about') },
                 { href: '/magazine', label: t('frontend.menu.magazine') },
-              ].map((item, idx) => {
+              ].map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <div className="relative" key={item.href}>

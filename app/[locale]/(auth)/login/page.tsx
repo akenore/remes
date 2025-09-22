@@ -58,7 +58,7 @@ export default function LoginPage() {
       } else {
         setError(result.error || t('errors.loginFailed'));
       }
-    } catch (err) {
+    } catch {
       setError(t('errors.unexpectedError'));
     } finally {
       setIsLoading(false);

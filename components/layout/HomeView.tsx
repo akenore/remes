@@ -1,4 +1,3 @@
-import { useTranslations, useLocale } from 'next-intl';
 import Image from "next/image";
 import Link from "next/link";
 import Hero from "../ui/hero/Hero";
@@ -9,9 +8,6 @@ import Partners from "../ui/Partners";
 import ContactForm from "../ui/ContactForm";
 
 export default function HomeView() {
-
-     const t = useTranslations();
-     const locale = useLocale();
      return (
           <>
                <Hero />

@@ -5,7 +5,6 @@ import { useTranslations, useLocale } from 'next-intl';
 import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import ContactForm from "@/components/ui/ContactForm";
-import Link from "next/link";
 
 export async function generateMetadata(): Promise<Metadata> {
      const t = await getTranslations('frontend.termsOfUse.meta');

@@ -1,9 +1,8 @@
 import Link from 'next/link';
 import FuzzyText from '@/components/animations/FuzzyText';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 
 export default function RootNotFoundPage() {
-  const locale = useLocale();
   const t = useTranslations('notFound');
   return (
     <div className="min-h-screen flex items-center justify-center bg-dark-blue">

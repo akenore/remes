@@ -44,7 +44,7 @@ export default function ForgetPasswordPage() {
       } else {
         setError(result.error || t('errors.sendFailed'));
       }
-    } catch (err) {
+    } catch {
       setError(t('errors.unexpectedError'));
     } finally {
       setIsLoading(false);

@@ -3,7 +3,6 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
-import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { pb } from '@/lib/pocketbase';
 
@@ -17,7 +16,6 @@ export default function ConfirmEmailPage() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const { logout } = useAuth();
-  const t = useTranslations('auth.confirmEmail');
 
   useEffect(() => {
     // Get token from URL parameters
@@ -59,15 +57,16 @@ export default function ConfirmEmailPage() {
         router.push('/login?message=email-changed');
       }, 3000);
       
-    } catch (err: any) {
+    } catch (err: unknown) {
       console.error('Email confirmation error:', err);
       
-      if (err?.data && typeof err.data === 'object') {
+      if (err && typeof err === 'object' && 'data' in err && err.data && typeof err.data === 'object') {
         const fieldErrors: string[] = [];
         
-        Object.keys(err.data).forEach(field => {
-          const fieldError = err.data[field];
-          if (fieldError && fieldError.message) {
+        const errorData = err.data as Record<string, { message?: string } | string>;
+        Object.keys(errorData).forEach(field => {
+          const fieldError = errorData[field];
+          if (fieldError && typeof fieldError === 'object' && fieldError.message) {
             fieldErrors.push(`${field}: ${fieldError.message}`);
           } else if (fieldError && typeof fieldError === 'string') {
             fieldErrors.push(`${field}: ${fieldError}`);
@@ -80,7 +79,10 @@ export default function ConfirmEmailPage() {
           setError('Failed to confirm email change. Please check your password and try again.');
         }
       } else {
-        setError(err?.message || 'Failed to confirm email change. Please check your password and try again.');
+        const errorMessage = err && typeof err === 'object' && 'message' in err && typeof err.message === 'string' 
+          ? err.message 
+          : 'Failed to confirm email change. Please check your password and try again.';
+        setError(errorMessage);
       }
     } finally {
       setIsLoading(false);

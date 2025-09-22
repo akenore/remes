@@ -139,7 +139,7 @@ export default function TestConnectionPage() {
             <h3 className="font-medium text-yellow-800">PocketBase User Types:</h3>
             <ul className="list-disc list-inside text-sm text-yellow-700 mt-2 space-y-1">
               <li><strong>Admin/Superuser:</strong> Created in admin panel (/_/)</li>
-              <li><strong>App User:</strong> Regular user in 'users' collection</li>
+              <li><strong>App User:</strong> Regular user in &apos;users&apos; collection</li>
               <li>Your test@mail.com is likely an <strong>admin</strong> user</li>
             </ul>
           </div>

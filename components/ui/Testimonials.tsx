@@ -175,7 +175,7 @@ export default function Testimonials() {
                     }`}
                   >
                     <p className="text-[1.063rem] text-gray mb-10 leading-relaxed text-center md:text-left">
-                      "{localizedContent.description}"
+                      &ldquo;{localizedContent.description}&rdquo;
                     </p>
 
                     {/* Author */}

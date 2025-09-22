@@ -155,10 +155,10 @@ export default function Footer() {
                               <h2 className="text-gold text-2xl font-myanmar mb-10">{t('frontend.menu.footer.legal')}</h2>
                               <ul className="text-white space-y-4 mb-10">
                                    <li>
-                                        <a href="/terms-of-use">{t('frontend.menu.footer.terms')}</a>
+                                        <Link href="/terms-of-use">{t('frontend.menu.footer.terms')}</Link>
                                    </li>
                                    <li>
-                                        <a href="/privacy-policy">{t('frontend.menu.footer.privacy')}</a>
+                                        <Link href="/privacy-policy">{t('frontend.menu.footer.privacy')}</Link>
                                    </li>
                               </ul>
                               <LanguageSwitcher />

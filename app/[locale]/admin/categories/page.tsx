@@ -1,10 +1,9 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
 import ConfirmDialog from '@/components/ui/admin/ConfirmDialog';
 import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
@@ -19,7 +18,6 @@ interface Category {
 }
 
 export default function CategoriesPage() {
-  const { user } = useAuth();
   const locale = useLocale();
   const t = useTranslations('admin.categories');
   const tCommon = useTranslations('admin.common');
@@ -51,11 +49,7 @@ export default function CategoriesPage() {
     return category.title || 'No title available';
   };
 
-  useEffect(() => {
-    fetchCategories();
-  }, [searchTerm, currentPage]);
-
-  const fetchCategories = async () => {
+  const fetchCategories = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -83,7 +77,11 @@ export default function CategoriesPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [searchTerm, currentPage, itemsPerPage]);
+
+  useEffect(() => {
+    fetchCategories();
+  }, [fetchCategories]);
 
   const generateSlug = (title: string) => {
     return title
@@ -185,8 +183,11 @@ export default function CategoriesPage() {
 
       await fetchCategories();
       resetForm();
-    } catch (err: any) {
-      setError(err.message || t(`errors.${editingCategory ? 'updateFailed' : 'createFailed'}`));
+    } catch (err: unknown) {
+      const errorMessage = err && typeof err === 'object' && 'message' in err && typeof err.message === 'string' 
+        ? err.message 
+        : t(`errors.${editingCategory ? 'updateFailed' : 'createFailed'}`);
+      setError(errorMessage);
     }
   };
 

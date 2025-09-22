@@ -37,7 +37,7 @@ export default function CreateUserPage() {
       } else {
         setError(result.error || 'User creation failed');
       }
-    } catch (err) {
+    } catch {
       setError('An unexpected error occurred');
     } finally {
       setIsLoading(false);
@@ -149,7 +149,7 @@ export default function CreateUserPage() {
 
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
             <div className="text-sm text-yellow-800">
-              <strong>Note:</strong> This creates a regular user account in the 'users' collection, 
+              <strong>Note:</strong> This creates a regular user account in the &apos;users&apos; collection, 
               which is the recommended approach for admin panel authentication.
             </div>
           </div>

@@ -5,7 +5,6 @@ import { useTranslations } from 'next-intl';
 import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import ContactForm from "@/components/ui/ContactForm";
-import Image from "next/image";
 
 export async function generateMetadata(): Promise<Metadata> {
      const t = await getTranslations('frontend.nursingHome.ourOffer.meta');
@@ -18,8 +17,6 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function OurOffer() {
      const t = useTranslations('frontend.nursingHome.ourOffer');
-     const imageSrcDesktop = "/adapted-r-desktop.jpg";
-     const imageSrcMobile = "/adapted-r-desktop.jpg";
      
      return (
           <>

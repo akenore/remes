@@ -18,7 +18,6 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
   const router = useRouter();
   const pathname = usePathname();
   const locale = useLocale(); // Add locale to force re-render when language changes
-  const t = useTranslations('admin');
   const tLayout = useTranslations('admin.layout');
   const tNav = useTranslations('admin.navigation');
   const tPageHeaders = useTranslations('admin.pageHeaders');
