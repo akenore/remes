@@ -4,7 +4,6 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
-  outputFileTracingRoot: __dirname,
   images: {
     remotePatterns: [
       {
@@ -32,8 +31,19 @@ const nextConfig: NextConfig = {
         pathname: '/api/pb/api/files/**',
       },
       {
+        protocol: 'http',
+        hostname: 'localhost',
+        port: '3001',
+        pathname: '/api/pb/api/files/**',
+      },
+      {
         protocol: 'https',
         hostname: 'remesapi.beandgo.us',
+        pathname: '/api/files/**',
+      },
+      {
+        protocol: 'https',
+        hostname: 'pocket.remes-tunisie.com',
         pathname: '/api/files/**',
       },
     ],
