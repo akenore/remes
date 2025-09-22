@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
@@ -19,7 +19,6 @@ interface HomeSlide {
 }
 
 export default function HomeSlidersPage() {
-  const { user } = useAuth();
   const locale = useLocale();
   const t = useTranslations('admin.homeSlider');
   const tCommon = useTranslations('admin.common');
@@ -50,11 +49,7 @@ export default function HomeSlidersPage() {
     return slide.description || 'No description available';
   };
 
-  useEffect(() => {
-    fetchSlides();
-  }, [currentPage, searchTerm]);
-
-  const fetchSlides = async () => {
+  const fetchSlides = useCallback(async () => {
     try {
       setLoading(true);
       const filter = searchTerm ? `title ~ "${searchTerm}" || description ~ "${searchTerm}"` : '';
@@ -72,7 +67,11 @@ export default function HomeSlidersPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, itemsPerPage]);
+
+  useEffect(() => {
+    fetchSlides();
+  }, [fetchSlides]);
 
   const confirmDelete = async () => {
     if (!deleteId) return;

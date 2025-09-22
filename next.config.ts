@@ -4,6 +4,7 @@ import type { NextConfig } from "next";
 const withNextIntl = createNextIntlPlugin();
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: __dirname,
   images: {
     remotePatterns: [
       {
@@ -37,9 +38,6 @@ const nextConfig: NextConfig = {
       },
     ],
     qualities: [75, 85, 90, 95, 100],
-  },
-  turbopack: {
-    root: './',
   },
 };
 

@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import Link from 'next/link';
@@ -36,7 +36,6 @@ interface Post {
 }
 
 export default function PostsPage() {
-  const { user } = useAuth();
   const locale = useLocale();
   const t = useTranslations('admin.posts');
   const tCommon = useTranslations('admin.common');
@@ -69,11 +68,7 @@ export default function PostsPage() {
     return category.title || 'No category title';
   };
 
-  useEffect(() => {
-    fetchPosts();
-  }, [currentPage, searchTerm, statusFilter]);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     try {
       setLoading(true);
       
@@ -105,41 +100,54 @@ export default function PostsPage() {
 
       // Manually fetch author info for posts where expansion failed
       const postsWithAuthors = await Promise.all(
-        result.items.map(async (post: any) => {
+        result.items.map(async (post: unknown) => {
+          // Type guard to ensure post is an object
+          if (!post || typeof post !== 'object') {
+            return post;
+          }
+          
+          const postObj = post as Record<string, unknown>;
+          
           // If expansion worked, keep as is
-          if (post.expand?.author) {
+          if (postObj.expand && typeof postObj.expand === 'object' && 'author' in postObj.expand) {
             return post;
           }
           
           // If no expansion but we have an author ID, try to fetch manually
-          if (post.author) {
-            console.log(`Fetching author for post ${post.id}, author ID: ${post.author}`);
+          if (postObj.author && typeof postObj.author === 'string') {
+            console.log(`Fetching author for post ${postObj.id}, author ID: ${postObj.author}`);
             try {
               // Try regular users first
-              const user = await pb.collection('users').getOne(post.author);
+              const user = await pb.collection('users').getOne(postObj.author as string);
               console.log(`Found user:`, user);
-              post.expand = { 
-                ...post.expand, 
+              postObj.expand = { 
+                ...(postObj.expand as Record<string, unknown>), 
                 author: { 
                   name: user.name || user.username || user.email?.split('@')[0], 
                   email: user.email 
                 } 
               };
-            } catch (userError: any) {
-              console.log(`User not found in users collection:`, userError.message);
+            } catch (userError: unknown) {
+              const errorMessage = userError && typeof userError === 'object' && 'message' in userError && typeof userError.message === 'string'
+                ? userError.message
+                : 'Unknown error';
+              console.log(`User not found in users collection:`, errorMessage);
               // If not found in users, try admin users
               try {
-                const admin = await pb.admins.getOne(post.author);
+                const admin = await pb.admins.getOne(postObj.author as string);
                 console.log(`Found admin:`, admin);
-                post.expand = { 
-                  ...post.expand, 
+                postObj.expand = { 
+                  ...(postObj.expand as Record<string, unknown>), 
                   author: { 
                     name: admin.name || admin.email?.split('@')[0], 
                     email: admin.email 
                   } 
                 };
-                              } catch (adminError: any) {
-                  console.log(`Admin not found:`, adminError.message);
+                              } catch (adminError: unknown) {
+                  const errorMessage = adminError && typeof adminError === 'object' && 'message' in adminError && typeof adminError.message === 'string'
+                    ? adminError.message
+                    : 'Unknown error';
+                  console.log(`Admin not found:`, errorMessage);
                 // If still not found, leave as is (will show fallback)
               }
             }
@@ -157,7 +165,11 @@ export default function PostsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, statusFilter, postsPerPage, t]);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   const confirmDelete = async () => {
     if (!deleteId) return;

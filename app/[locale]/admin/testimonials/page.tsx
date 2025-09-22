@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import { useToast } from '@/lib/toast-context';
@@ -18,7 +18,6 @@ interface Testimonial {
 }
 
 export default function TestimonialsPage() {
-  const { user } = useAuth();
   const locale = useLocale();
   const t = useTranslations('admin.testimonials');
   const tCommon = useTranslations('admin.common');
@@ -40,11 +39,7 @@ export default function TestimonialsPage() {
     return testimonial.description || 'No description available';
   };
 
-  useEffect(() => {
-    fetchTestimonials();
-  }, [currentPage, searchTerm]);
-
-  const fetchTestimonials = async () => {
+  const fetchTestimonials = useCallback(async () => {
     try {
       setLoading(true);
       const filter = searchTerm ? `full_name ~ "${searchTerm}" || description ~ "${searchTerm}"` : '';
@@ -62,7 +57,11 @@ export default function TestimonialsPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, itemsPerPage]);
+
+  useEffect(() => {
+    fetchTestimonials();
+  }, [fetchTestimonials]);
 
   const confirmDelete = async () => {
     if (!deleteId) return;

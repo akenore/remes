@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { pb } from '@/lib/pocketbase';
@@ -42,11 +42,7 @@ export default function EditEquipmentPage() {
   const [equipment, setEquipment] = useState<MedicalEquipment | null>(null);
   const { showToast } = useToast();
 
-  useEffect(() => {
-    fetchEquipment();
-  }, [id]);
-
-  const fetchEquipment = async () => {
+  const fetchEquipment = useCallback(async () => {
     try {
       setLoading(true);
       const record = await pb.collection('medical_equipment').getOne(id);
@@ -66,7 +62,11 @@ export default function EditEquipmentPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, router]);
+
+  useEffect(() => {
+    fetchEquipment();
+  }, [fetchEquipment]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

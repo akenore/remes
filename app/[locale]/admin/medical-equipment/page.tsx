@@ -2,7 +2,7 @@
 
 import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
 import Link from 'next/link';
 import Image from 'next/image';
@@ -21,7 +21,6 @@ interface MedicalEquipment {
 }
 
 export default function MedicalEquipmentPage() {
-  const { user } = useAuth();
   const locale = useLocale();
   const t = useTranslations('admin.medicalEquipment');
   const tCommon = useTranslations('admin.common');
@@ -44,11 +43,7 @@ export default function MedicalEquipmentPage() {
     return item.description || 'No description available';
   };
 
-  useEffect(() => {
-    fetchEquipment();
-  }, [currentPage, searchTerm]);
-
-  const fetchEquipment = async () => {
+  const fetchEquipment = useCallback(async () => {
     try {
       setLoading(true);
       const filter = searchTerm ? `description ~ "${searchTerm}"` : '';
@@ -66,7 +61,11 @@ export default function MedicalEquipmentPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [currentPage, searchTerm, itemsPerPage]);
+
+  useEffect(() => {
+    fetchEquipment();
+  }, [fetchEquipment]);
 
   const confirmDelete = async () => {
     if (!deleteId) return;

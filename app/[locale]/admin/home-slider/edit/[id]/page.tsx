@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { pb } from '@/lib/pocketbase';
@@ -37,11 +37,7 @@ export default function EditSlidePage() {
   const [slide, setSlide] = useState<HomeSlide | null>(null);
   const { showToast } = useToast();
 
-  useEffect(() => {
-    fetchSlide();
-  }, [id]);
-
-  const fetchSlide = async () => {
+  const fetchSlide = useCallback(async () => {
     try {
       setLoading(true);
       const record = await pb.collection('home_slider').getOne(id);
@@ -60,7 +56,11 @@ export default function EditSlidePage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, router]);
+
+  useEffect(() => {
+    fetchSlide();
+  }, [fetchSlide]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -100,13 +100,6 @@ export default function EditSlidePage() {
     }
   };
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: '' }));
-    }
-  };
 
   if (loading) {
     return (

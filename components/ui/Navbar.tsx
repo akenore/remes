@@ -87,7 +87,7 @@ export default function Navbar() {
                       href={item.href}
                       className={`relative text-xl px-1 transition-colors duration-200 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
                     >
-                      <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
+                      <span className={`inline-block pb-1 transition-all duration-200 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
                         {item.label}
                       </span>
                     </Link>
@@ -162,7 +162,7 @@ export default function Navbar() {
                       href={item.href}
                       className={`relative text-xl px-1 transition-colors duration-500 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
                     >
-                      <span className={`inline-block pb-1 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
+                      <span className={`inline-block pb-1 transition-all duration-200 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
                         {item.label}
                       </span>
                     </Link>

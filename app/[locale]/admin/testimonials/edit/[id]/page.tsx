@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useRouter, useParams } from 'next/navigation';
 import { useTranslations } from 'next-intl';
 import { pb } from '@/lib/pocketbase';
@@ -35,11 +35,7 @@ export default function EditTestimonialPage() {
   const [testimonial, setTestimonial] = useState<Testimonial | null>(null);
   const { showToast } = useToast();
 
-  useEffect(() => {
-    fetchTestimonial();
-  }, [id]);
-
-  const fetchTestimonial = async () => {
+  const fetchTestimonial = useCallback(async () => {
     try {
       setLoading(true);
       const record = await pb.collection('testimonials').getOne(id);
@@ -57,7 +53,11 @@ export default function EditTestimonialPage() {
     } finally {
       setLoading(false);
     }
-  };
+  }, [id, router]);
+
+  useEffect(() => {
+    fetchTestimonial();
+  }, [fetchTestimonial]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
