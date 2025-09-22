@@ -8,11 +8,12 @@ import Link from 'next/link';
 import RichTextEditor from '@/components/ui/admin/RichTextEditor';
 import CoverImageSelector from '@/components/ui/admin/CoverImageSelector';
 import HorizontalAccordion from '@/components/ui/admin/HorizontalAccordion';
-import { useTranslations } from 'next-intl';
+import { useTranslations, useLocale } from 'next-intl';
 
 interface Category {
   id: string;
   title: string;
+  title_fr?: string;
 }
 
 interface Post {
@@ -35,6 +36,7 @@ export default function EditPostPage() {
   const router = useRouter();
   const params = useParams();
   const postId = params.id as string;
+  const locale = useLocale();
   const t = useTranslations('admin.posts.edit');
   const tCommon = useTranslations('admin.common');
   
@@ -117,10 +119,20 @@ export default function EditPostPage() {
       setCategories(result.map((item) => ({
         id: item.id,
         title: item.title as string,
+        title_fr: item.title_fr as string,
       })));
     } catch (err) {
       console.error('Failed to fetch categories:', err);
     }
+  };
+
+  // Function to get localized category title
+  const getLocalizedCategoryTitle = (category: Category) => {
+    const isFrench = locale === 'fr';
+    if (isFrench && category.title_fr && category.title_fr.trim() !== '') {
+      return category.title_fr;
+    }
+    return category.title;
   };
 
   const generateSlug = (title: string) => {
@@ -689,7 +701,7 @@ export default function EditPostPage() {
                         />
                       </div>
                       <div className="ml-3 text-sm">
-                        <span className="font-medium text-gray-700">{category.title}</span>
+                        <span className="font-medium text-gray-700">{getLocalizedCategoryTitle(category)}</span>
                       </div>
                     </label>
                   ))
