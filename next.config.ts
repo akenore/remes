@@ -38,11 +38,6 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'remesapi.beandgo.us',
-        pathname: '/api/files/**',
-      },
-      {
-        protocol: 'https',
         hostname: 'pocket.remes-tunisie.com',
         pathname: '/api/files/**',
       },
