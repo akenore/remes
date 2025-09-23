@@ -81,7 +81,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                     Notre Gallerie
                   </h2>
                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                    A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
+                    {/* A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs */}
                   </p>
                 </div>
 

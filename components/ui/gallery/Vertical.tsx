@@ -59,7 +59,7 @@ export default function VerticalGallery() {
                 Notre Gallerie
               </h2>
               <p className="text-gray text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
-                A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs
+                {/* A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs */}
               </p>
             </div>
             {/* Desktop arrows top right */}

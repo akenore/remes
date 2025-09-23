@@ -777,6 +777,78 @@
           "author": "REMES Team",
           "role": "Care Provider"
         }
+      },
+      "mainContent": {
+        "title": "A unique setting, personalized support",
+        "description1": "At REMES, we have chosen a unique model: a medicalized hotel residence located on the Mediterranean coast, which combines care, support and quality of life.",
+        "description2": "We welcome elderly people, those with loss of autonomy or in a situation of disability, as well as anyone who needs adapted support. Here, everyone benefits from personalized follow-up, respectful of their pace, their desires and their history.",
+        "description3": "More than a place of care, REMES is above all a place of life: a bright, green and secure setting, where each resident is recognized as a unique person, surrounded by attention and kindness.",
+        "learnMore": "Learn more"
+      },
+      "quote": {
+        "text": "As director of REMES, my deep conviction is that every person deserves to be accompanied with respect and dignity, in an environment that preserves their identity and their lifestyle habits. Thanks to the continuous presence of a dynamic, competent and committed team, we offer each person welcomed the security of personalized support. We adapt to the needs, pace and habits of each person, whether it's a long-term stay, a short stay or adapted holidays, always with warmth and kindness. Our ambition: to make REMES more than a place of care, a real place of life, where you feel recognized, surrounded and at home."
+      },
+      "marquee": {
+        "text": "Remes medical residence"
+      }
+    },
+    "adaptedStay": {
+      "meta": {
+        "title": "Adapted Stay | Tailored Vacations | REMES Tunisia",
+        "description": "Discover adapted stays in Tunisia with REMES. Accessible accommodation, adapted transport, personalized care and medical equipment. Tailored vacations for everyone."
+      },
+      "hero": {
+        "title": "Discover Tunisia differently",
+        "description": "Immerse yourself in the heart of a country of a thousand and one colors, where history, traditions and the beauty of landscapes blend to offer a unique experience.",
+        "cards": {
+          "accommodation": {
+            "title": "Adapted accommodation",
+            "description": "Comfort and accessibility: rooms designed for everyone."
+          },
+          "transport": {
+            "title": "Adapted transport",
+            "description": "Tunisia, accessible to all: transfers, outings, excursions... our adapted vehicles take you everywhere safely."
+          },
+          "care": {
+            "title": "Personalized support",
+            "description": "Your care, without compromise: a discreet and caring team watches over you, even on vacation."
+          },
+          "equipment": {
+            "title": "Adapted medical equipment",
+            "description": "Travel light, we take care of the rest"
+          }
+        }
+      },
+      "mainContent": {
+        "title": "Professional services",
+        "subtitle": "Adapted stays with confidence",
+        "description1": "Are you a travel agency, association, tour operator or organization specialized in adapted vacations? The REMES residence offers you a complete receptive offer, designed to welcome in the best conditions people with disabilities, seniors or people with loss of autonomy.",
+        "description2": "Located in a 4-star hotel in Monastir, our structure provides:",
+        "list": {
+          "accommodation": "Fully accessible accommodation",
+          "team": "Trained and available nursing team",
+          "equipment": "Medical equipment on site",
+          "setting": "Seaside setting conducive to relaxation and rejuvenation",
+          "outings": "Adapted outings, supervised by local professionals"
+        },
+        "description3": "We work in close collaboration with your teams to guarantee respect for your protocols, offering you a turnkey solution: accommodation, care, equipment, leisure and adapted excursions. You thus benefit from a reliable and experienced partner in Tunisia.",
+        "quote": "Together, let's make Tunisia a destination accessible to all your travelers!"
+      },
+      "geographical": {
+        "title": "Our geographical assets",
+        "list": {
+          "location": "Central location: between Sousse and Monastir, two emblematic coastal cities",
+          "accessibility": {
+            "title": "Optimal accessibility:",
+            "monastir": "5 minutes from Monastir international airport (Habib Bourguiba)",
+            "enfidha": "40 minutes from Enfidha international airport"
+          },
+          "setting": "Privileged seaside setting: direct access to a private beach, proximity to marinas, golf courses, hotels, cafes and shops",
+          "culture": "Cultural richness: medinas of Sousse and Monastir, Ribat, museums, Bourguiba mausoleum, UNESCO classified sites",
+          "medical": "State-of-the-art medical infrastructure: renowned private clinics and hospital centers, covering all specialties, for optimal care if necessary during the stay"
+        },
+        "quote": "Contact us today to organize your adapted vacations with confidence in Tunisia. Our team is listening to respond to your needs.",
+        "contactButton": "Contact us now"
       }
     },
     "magazine": {
@@ -1307,15 +1379,15 @@
         "monthPrice": "Month*"
       },
       "noEquipment": "No equipment available"
-    },
-    "title": "Search",
-    "description": "Search through our articles, blog posts and content to find what you're looking for.",
-    "placeholder": "Search articles...",
-    "resultsFor": "Search results for",
-    "resultsFound": "results found",
-    "for": "for",
-    "noResults": "No results found",
-    "tryDifferent": "Try different keywords or browse our latest articles.",
+      },
+      "title": "Search",
+      "description": "Search through our articles, blog posts and content to find what you're looking for.",
+      "placeholder": "Search articles...",
+      "resultsFor": "Search results for",
+      "resultsFound": "results found",
+      "for": "for",
+      "noResults": "No results found",
+      "tryDifferent": "Try different keywords or browse our latest articles.",
     "enterQuery": "Enter your search terms to find relevant articles and content.",
     "about": {
       "meta": {

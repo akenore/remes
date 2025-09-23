@@ -411,7 +411,7 @@
       "success": {
         "profileUpdated": "Profil mis à jour avec succès !",
         "profileUpdatedEmailChange": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse.",
-        "profileUpdatedEmailChangeSecure": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse. IMPORTANT : Après avoir confirmé le changement d'email, vous serez automatiquement déconnecté pour des raisons de sécurité et devrez vous reconnecter avec votre nouveau email.",
+      "profileUpdatedEmailChangeSecure": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse. IMPORTANT : Après avoir confirmé le changement d'email, vous serez automatiquement déconnecté pour des raisons de sécurité et devrez vous reconnecter avec votre nouveau email.",
         "passwordUpdated": "Mot de passe mis à jour avec succès !"
       },
       "errors": {
@@ -777,6 +777,78 @@
           "author": "Équipe REMES",
           "role": "Prestataire de soins"
         }
+      },
+      "mainContent": {
+        "title": "Un cadre unique, un accompagnement sur mesure",
+        "description1": "À REMES, nous avons fait le choix d'un modèle unique : une résidence hôtelière médicalisée située au bord de la Méditerranée, qui conjugue soins, accompagnement et qualité de vie.",
+        "description2": "Nous accueillons des personnes âgées, en perte d'autonomie ou en situation de handicap, ainsi que toute personne ayant besoin d'un accompagnement adapté. Ici, chacun bénéficie d'un suivi personnalisé, respectueux de son rythme, de ses envies et de son histoire.",
+        "description3": "Plus qu'un lieu de soins, REMES est avant tout un lieu de vie : un cadre lumineux, verdoyant et sécurisé, où chaque résident est reconnu comme une personne unique, entourée d'attention et de bienveillance.",
+        "learnMore": "En savoir plus"
+      },
+      "quote": {
+        "text": "En tant que directrice de REMES, ma conviction profonde est que chaque personne mérite d'être accompagnée avec respect et dignité, dans un environnement qui préserve son identité et ses habitudes de vie. Grâce à la présence continue d'une équipe dynamique, compétente et investie, nous offrons à chaque personne accueillie la sécurité d'un accompagnement personnalisé. Nous nous adaptons aux besoins, au rythme et aux habitudes de chacun, qu'il s'agisse d'un séjour de longue durée, d'un court séjour ou de vacances adaptées, toujours avec chaleur et bienveillance. Notre ambition : faire de REMES plus qu'un lieu de soins, un véritable lieu de vie, où l'on se sent reconnu, entouré et chez soi."
+      },
+      "marquee": {
+        "text": "Remes résidence médicalisée"
+      }
+    },
+    "adaptedStay": {
+      "meta": {
+        "title": "Séjours adaptés | Vacances sur mesure | REMES Tunisie",
+        "description": "Découvrez les séjours adaptés en Tunisie avec REMES. Hébergement accessible, transport adapté, soins personnalisés et équipements médicaux. Vacances sur mesure pour tous."
+      },
+      "hero": {
+        "title": "Découvrez la Tunisie autrement",
+        "description": "Plongez au cœur d'un pays aux mille et une couleurs, où l'histoire, les traditions et la beauté des paysages se mêlent pour offrir une expérience unique.",
+        "cards": {
+          "accommodation": {
+            "title": "Hébergement adapté",
+            "description": "Confort et accessibilité : des chambres pensées pour tous."
+          },
+          "transport": {
+            "title": "Transport adapté",
+            "description": "La Tunisie, accessible à tous : transferts, sorties, excursions… nos véhicules adaptés vous emmènent partout en toute sécurité."
+          },
+          "care": {
+            "title": "Un accompagnement personnalisé",
+            "description": "Vos soins, sans compromis : une équipe discrète et bienveillante veille sur vous, même en vacances."
+          },
+          "equipment": {
+            "title": "Équipements médicaux adaptés",
+            "description": "Voyagez léger, nous nous occupons du reste"
+          }
+        }
+      },
+      "mainContent": {
+        "title": "Services aux professionnels",
+        "subtitle": "Des séjours adaptés en toute confiance",
+        "description1": "Vous êtes une agence de voyages, une association, un tour-opérateur ou un organisme spécialisé dans les vacances adaptées ? La résidence REMES vous propose une offre réceptive complète, pensée pour accueillir dans les meilleures conditions les personnes en situation de handicap, les séniors ou les publics en perte d'autonomie.",
+        "description2": "Installée dans un hôtel 4 étoiles à Monastir, notre structure met à disposition :",
+        "list": {
+          "accommodation": "Un hébergement entièrement accessible",
+          "team": "Une équipe soignante formée et disponible",
+          "equipment": "Du matériel médical sur place",
+          "setting": "Un cadre balnéaire propice à la détente et au ressourcement",
+          "outings": "Des sorties adaptées, encadrées par des professionnels locaux"
+        },
+        "description3": "Nous travaillons en étroite collaboration avec vos équipes pour garantir le respect de vos protocoles, en vous offrant une solution clé en main : hébergement, soins, matériel, loisirs et excursions adaptées. Vous bénéficiez ainsi d'un partenaire fiable et expérimenté en Tunisie.",
+        "quote": "Ensemble, faisons de la Tunisie une destination accessible à tous vos voyageurs!"
+      },
+      "geographical": {
+        "title": "Nos atouts géographiques",
+        "list": {
+          "location": "Emplacement central : entre Sousse et Monastir, deux villes côtières emblématiques",
+          "accessibility": {
+            "title": "Accessibilité optimale :",
+            "monastir": "5 minutes de l'aéroport international de Monastir (Habib Bourguiba)",
+            "enfidha": "40 minutes de l'aéroport international d'Enfidha"
+          },
+          "setting": "Cadre balnéaire privilégié : accès direct à une plage privée, proximité de marinas, terrains de golf, hôtels, cafés et commerces",
+          "culture": "Richesse culturelle : médinas de Sousse et Monastir, Ribat, musées, mausolée Bourguiba, sites classés UNESCO",
+          "medical": "Infrastructures médicales de pointe : cliniques et centres hospitaliers privés renommés, couvrant toutes les spécialités, pour une prise en charge optimale si nécessaire pendant le séjour"
+        },
+        "quote": "Contactez-nous dès aujourd'hui pour organiser vos vacances adaptées en toute confiance en Tunisie. Notre équipe est à votre écoute pour répondre à vos besoins.",
+        "contactButton": "Contactez-nous dès maintenant"
       }
     },
     "magazine": {
@@ -1302,20 +1374,20 @@
     "equipment": {
       "table": {
         "image": "Image",
-        "designation": "Désignation",
+        "designation": "Désignation", 
         "dayPrice": "Jour*",
         "monthPrice": "Mois*"
       },
       "noEquipment": "Aucun équipement disponible"
-    },
-    "title": "Recherche",
-    "description": "Recherchez dans nos articles, billets de blog et contenus pour trouver ce que vous cherchez.",
-    "placeholder": "Rechercher des articles...",
-    "resultsFor": "Résultats de recherche pour",
-    "resultsFound": "résultats trouvés",
-    "for": "pour",
-    "noResults": "Aucun résultat trouvé",
-    "tryDifferent": "Essayez des mots-clés différents ou parcourez nos derniers articles.",
+      },
+      "title": "Recherche",
+      "description": "Recherchez dans nos articles, billets de blog et contenus pour trouver ce que vous cherchez.",
+      "placeholder": "Rechercher des articles...",
+      "resultsFor": "Résultats de recherche pour",
+      "resultsFound": "résultats trouvés",
+      "for": "pour",
+      "noResults": "Aucun résultat trouvé",
+      "tryDifferent": "Essayez des mots-clés différents ou parcourez nos derniers articles.",
     "enterQuery": "Saisissez vos termes de recherche pour trouver des articles et contenus pertinents.",
     "about": {
       "meta": {
@@ -1620,4 +1692,4 @@
       "description": "Séjour Adapté / Services aux professionnels B2B"
     }
   }
-}
+} 
