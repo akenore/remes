@@ -2,6 +2,7 @@
 import React, { useState } from 'react';
 import Image from 'next/image';
 import Icons from '../CardsIcons';
+import { useTranslations } from 'next-intl';
 
 const galleryImages = [
   '/home/gallery/1.png',
@@ -20,6 +21,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupImage, setPopupImage] = useState('');
+  const t = useTranslations('frontend.gallery');
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
@@ -78,7 +80,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
               <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                 <div className="flex-1">
                   <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4 pt-20">
-                    Notre Gallerie
+                    {t('title')}
                   </h2>
                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-lg mx-auto lg:mx-0 leading-relaxed">
                     {/* A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs */}

@@ -14,7 +14,7 @@ export default function Footer() {
                     <div className="grid grid-cols-9 gap-4 mt-10">
                          <div className="col-span-9 sm:col-span-4 md:col-span-3 mb-10 md:mb-0">
                               <p className="pl-3 text-white mb-8 mx-2 md:mx-auto text-center sm:text-left">
-                                   Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité.
+                                   {t('frontend.menu.footer.description')}
                               </p>
                               <div className="pl-3 pt-20 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
                                    <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook">

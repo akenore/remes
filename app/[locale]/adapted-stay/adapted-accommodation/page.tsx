@@ -49,7 +49,7 @@ export default function AdaptedAccommodation() {
                               </li>
                          </ul>
                          <p className="text-gray mt-5">
-                         {t('content.conclusion')}
+                              {t('content.conclusion')}
                          </p>
                     </div>
 

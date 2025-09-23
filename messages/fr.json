@@ -724,6 +724,10 @@
     "button": "Retour à l'accueil"
   },
   "frontend": {
+    "gallery": {
+      "title": "Notre Gallerie",
+      "description": "Découvrez notre galerie de photos et de vidéos."
+    },
     "menu": {
       "home": "Accueil",
       "nursingHome": "EHPAD",
@@ -735,7 +739,8 @@
         "legal": "Mentions légales",
         "privacy": "Politique de confidentialité",
         "terms": "Conditions d'utilisation",
-        "professionalsServices": "Professionnels services"
+        "professionalsServices": "Professionnels services",
+        "description": "Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité."
       }
     },
     "button": "En savoir plus",
@@ -849,7 +854,13 @@
         },
         "quote": "Contactez-nous dès aujourd'hui pour organiser vos vacances adaptées en toute confiance en Tunisie. Notre équipe est à votre écoute pour répondre à vos besoins.",
         "contactButton": "Contactez-nous dès maintenant"
+      },
+      "frontend": {
+        "button": "En savoir plus"
       }
+    },
+    "maintenance": {
+      "message": "Nous mettons actuellement à jour notre site web. Veuillez revenir bientôt."
     },
     "magazine": {
       "meta": {
@@ -1427,12 +1438,6 @@
         "images": {
           "alt": "Maison de Repos"
         }
-      }
-    },
-    "adaptedStay": {
-      "meta": {
-        "title": "Séjours adaptés en Tunisie | Tourisme accessible & Soins médicaux | REMES",
-        "description": "Découvrez la Tunisie avec des séjours adaptés chez REMES. Hébergement accessible, transport adapté, soins médicaux personnalisés et équipements médicaux. Parfait pour seniors, voyageurs handicapés et tourisme accessible. Situé à Skanes en bord de mer."
       }
     },
     "professionalServices": {

@@ -724,6 +724,10 @@
     "button": "Go to Home"
   },
   "frontend": {
+    "gallery": {
+      "title": "Our Gallery",
+      "description": "Discover our gallery of photos and videos."
+    },
     "menu": {
       "home": "Home",
       "nursingHome": "Nursing Home",
@@ -735,7 +739,8 @@
         "legal": "Legal",
         "privacy": "Privacy Policy",
         "terms": "Terms of Use",
-        "professionalsServices": "Professionals Services"
+        "professionalsServices": "Professionals Services",
+        "description": "A high-end medical residence by the sea, dedicated to comfort, care, and serenity."
       }
     },
     "button": "Read more",
@@ -849,7 +854,13 @@
         },
         "quote": "Contact us today to organize your adapted vacations with confidence in Tunisia. Our team is listening to respond to your needs.",
         "contactButton": "Contact us now"
+      },
+      "frontend": {
+        "button": "Learn more"
       }
+    },
+    "maintenance": {
+      "message": "We are currently updating our website. Please check back soon."
     },
     "magazine": {
       "meta": {
@@ -1427,12 +1438,6 @@
         "images": {
           "alt": "Medical Residence"
         }
-      }
-    },
-    "adaptedStay": {
-      "meta": {
-        "title": "Adapted Stays in Tunisia | Accessible Tourism & Medical Care | REMES",
-        "description": "Discover Tunisia with adapted stays at REMES. Accessible accommodation, adapted transport, personalized medical care, and medical equipment. Perfect for seniors, disabled travelers, and accessible tourism. Located in Skanes by the Mediterranean."
       }
     },
     "professionalServices": {

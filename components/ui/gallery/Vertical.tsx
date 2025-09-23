@@ -1,7 +1,8 @@
 'use client';
 import React, { useState } from 'react';
 import Image from 'next/image';
-import Icons from '../CardsIcons';
+// import Icons from '../CardsIcons';
+import { useTranslations } from 'next-intl';
 
 const galleryImages = [
   '/home/gallery/1.png',
@@ -16,6 +17,7 @@ export default function VerticalGallery() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const [popupImage, setPopupImage] = useState('');
+  const t = useTranslations('frontend.gallery');
 
   const goToPrevious = () => {
     setCurrentIndex((prev) => (prev === 0 ? galleryImages.length - 1 : prev - 1));
@@ -56,7 +58,7 @@ export default function VerticalGallery() {
           <div className="mb-4 md:mb-8">
             <div className="text-center lg:text-left">
               <h2 className="text-dark-blue text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-2 md:mb-4">
-                Notre Gallerie
+                {t('title')}
               </h2>
               <p className="text-gray text-sm sm:text-base md:text-lg xl:text-xl max-w-md md:max-w-lg mx-auto lg:mx-0 leading-relaxed">
                 {/* A cat named mitedfsdfsdfsadasdasd dsfsf..s.df..sdfs */}
