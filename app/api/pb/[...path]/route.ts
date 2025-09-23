@@ -27,6 +27,13 @@ async function proxy(request: NextRequest, path: string[]) {
   const responseHeaders = new Headers(response.headers);
   // Ensure CORS is fine for same-origin proxy
   responseHeaders.set('Access-Control-Allow-Origin', '*');
+  responseHeaders.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS');
+  responseHeaders.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
+  
+  // Add cache headers for images
+  if (path.includes('files')) {
+    responseHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
+  }
 
   return new Response(response.body, {
     status: response.status,
@@ -56,6 +63,16 @@ export async function PATCH(request: NextRequest, { params }: { params: Promise<
 }
 
 export async function DELETE(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const { path } = await params;
+  return proxy(request, path || []);
+}
+
+export async function HEAD(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
+  const { path } = await params;
+  return proxy(request, path || []);
+}
+
+export async function OPTIONS(request: NextRequest, { params }: { params: Promise<{ path: string[] }> }) {
   const { path } = await params;
   return proxy(request, path || []);
 }
