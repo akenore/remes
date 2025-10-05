@@ -40,14 +40,7 @@ export default function MealsAndDailyServices() {
                               <p className="text-[1.3rem] text-gray mb-8">
                                    {t('content.specialNeeds')}
                               </p>
-                              <ul className="text-[1.3rem] text-gray mb-8">
-                                   <li>
-                                        <ol className="ps-5 mt-2 space-y-1 list-disc list-inside">
-                                             <li>{t('content.dailyServices.roomCleaning')}</li>
-                                             <li>{t('content.dailyServices.laundry')}</li>
-                                        </ol>
-                                   </li>
-                              </ul>
+                              <p className="text-[1.3rem] text-gray mb-8">{t('content.dailyServices')}</p>
                               
                          </div>
                     </div>

@@ -110,9 +110,9 @@ export default function OurOffer() {
                                         <div className="mt-12 bg-blue border border-green-200 rounded-xl p-6">
                                              <p className="text-white text-[1.3rem] text-left">
                                                   {t('content.comparison.text1')} <br />
-                                                  {t('content.comparison.text2')}{" "}
+                                                  {/* {t('content.comparison.text2')}{" "}
                                                   <span className="font-bold">{t('content.comparison.francePrice')}</span> {t('content.comparison.text3')}{" "}
-                                                  <span className="font-bold text-dark-gold">{t('content.comparison.ourPrice')}</span>.
+                                                  <span className="font-bold text-dark-gold">{t('content.comparison.ourPrice')}</span>. */}
                                              </p>
                                         </div>
                                    </div>

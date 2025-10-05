@@ -967,11 +967,11 @@
           },
           "multidisciplinary": {
             "title": "A multidisciplinary team by your side",
-            "paragraph": "Our medical and paramedical team brings together varied and complementary skills: coordinating doctor, nurses, nursing assistants, physiotherapists, psychologist. Alongside them, liberal professionals (treating doctors, speech therapists, occupational therapists, specialists) intervene regularly, according to the specific needs of each resident. Our doctor relies on a network of specialists quickly available for our residents. Thanks to our partnerships with conventional clinics, notably Carthage and SLM, access to examinations and hospitalizations is facilitated. And because no resident should face these moments alone, we always ensure transport and attentive support by our nursing assistants, present by their side for as long as necessary. This multidisciplinary approach allows comprehensive care: medical, functional and psychological, to respond to all needs related to aging and pathologies."
+            "paragraph": "Our medical and paramedical team brings together a range of varied and complementary skills: coordinating physician, nurses, nursing assistants, physiotherapists, psychologist, speech therapist, and occupational therapist. Alongside them, independent professionals (general practitioners, specialist doctors, podiatrist, etc.) intervene regularly according to each resident’s specific needs. Our physician relies on a network of specialists who are quickly available for our residents. Thanks to our partnerships with accredited clinics, including the international CARTHAGE MÉDICAL center and the ESSALEM clinic in Sousse, access to tests and hospital care is made easier. And because no resident should face these moments alone, we always provide transportation and attentive support from our nursing assistants, who stay by their side for as long as needed. This multidisciplinary approach allows for comprehensive care—medical, functional, and psychological—to address all the needs associated with aging and related conditions."
           },
           "safety": {
             "title": "Safety and quality of care",
-            "paragraph": "continues throughout their career. This approach guarantees the application of best geriatric practices, even during exceptional health situations, and allows adapting care to the evolution of medicine and residents' needs."
+            "paragraph": "REMES pays special attention to securing the medication process: supervised prescriptions, secure storage accessible only to authorized staff, and strict compliance with the cold chain for sensitive treatments. Our teams receive continuous training throughout their careers. This approach ensures the application of best geriatric practices, even in exceptional health situations, and allows care to be adapted to advances in medicine and the evolving needs of residents."
           }
         }
       },
@@ -1058,7 +1058,7 @@
               },
               "highSeason": {
                 "price": "3,000 € / month",
-                "period": "from July to September (high season)"
+                "period": "from June to September (high season)"
               },
               "description": "These stays offer the same complete services as a permanent stay."
             }
@@ -1067,8 +1067,8 @@
             "service1": "Airport transfer – REMES – Airport",
             "service2": "Accommodation in modern, spacious, ground-floor room, with private terrace, equipped with a medical bed if necessary.",
             "service3": "Daily care provided by our multidisciplinary team.",
-            "service4": "Individualized support through an assigned nursing assistant, available for each resident during all waking hours, 7 days a week.",
-            "service5": "Regular physiotherapy follow-up, offered daily during the week, to maintain mobility and promote well-being.",
+            "service4": "Individualized support through an assigned nursing assistant, available for each resident during all waking hours (from 7h to 20h), 7 days a week.",
+            "service5": "Regular physiotherapy sessions offered daily from Monday to Saturday to maintain mobility and promote well-being.",
             "service6": "Activities, entertainment and supervised outings.",
             "service7": "Complete catering: balanced and adapted meals, snacks, supervised hydration.",
             "service8": "Included wellness care (a haircut, as well as basic manicure and pedicure, offered regularly). Specific aesthetic services (coloring, advanced hair care, special care) can be performed on request, with additional participation.",
@@ -1076,7 +1076,7 @@
             "service10": "Access to common areas: lounges, restaurants, gardens, pools and private beach."
           },
           "comparison": {
-            "text1": "At REMES, we are committed to offering complete services, in a spirit of transparency and trust.",
+            "text1": "At REMES, we are committed to offering comprehensive services in a spirit of transparency and trust. While the cost of a stay in a medical residence can be very high in Europe, we offer a single all-inclusive rate, providing high-end care by the Mediterranean, in an exceptional setting and at a controlled cost.",
             "text2": "The average cost of a permanent stay in Nursing Home in France exceeds",
             "francePrice": "2,500 €",
             "text3": "per month. With us, our residents enjoy a high-end setting by the Mediterranean, for a much more accessible rate:",
@@ -1227,10 +1227,7 @@
             "diningOptions": "Meals can be taken in our bright and friendly restaurant, served in the room if necessary, or in the tree-lined garden on fine days. These outdoor meals, much appreciated, offer real moments of freedom and sharing.",
             "familyWelcome": "Families are welcome: an open table allows them to share a meal with their resident parent in a friendly atmosphere.",
             "specialNeeds": "Special attention is paid to residents with specific needs: adapted textures, feeding assistance, hydration monitoring. Finally, for everyone's comfort:",
-            "dailyServices": {
-              "roomCleaning": "Daily (or even twice-daily) maintenance of rooms and private spaces.",
-              "laundry": "Laundry service including provided household linen and personal clothing, carefully maintained and returned."
-            }
+            "dailyServices": "To extend this daily comfort, our rooms are regularly maintained and our laundry service takes care of both household linen and personal clothing, always handled with care."
           }
         },
         "wellBeingAndComfort": {

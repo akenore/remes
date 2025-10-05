@@ -74,9 +74,9 @@ export default function TheResidence() {
                               <p className="text-[1.3rem] text-gray mb-8">
                                    {t('content.rooms.equipment')}
                               </p>
-                              <h3 className="text-[1.3rem] text-dark-blue font-myanmar mb-4">
+                              <h2 className="text-[1.5rem] md:text-[3.1rem] text-dark-blue font-myanmar mb-4">
                                    {t('content.spaces.title')}
-                              </h3>
+                              </h2>
                               <p className="text-[1.3rem] text-gray mb-8">
                                    {t('content.spaces.description')}
                               </p>

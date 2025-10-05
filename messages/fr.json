@@ -894,7 +894,7 @@
         "description": "Un lieu d'exception, une équipe dévouée, un accompagnement sur mesure. Ici, chaque jour est une invitation à vivre mieux.",
         "cards": {
           "residence": {
-            "title": "La résidence",
+            "title": "Notre résidence",
             "description": "Un cadre d'exception, pensé pour conjuguer confort, sécurité et sérénité."
           },
           "solutions": {
@@ -951,7 +951,7 @@
         },
         "hero": {
           "title": "Expertise Soins",
-          "description": "EHPD / Expertise Soins"
+          "description": "EHPAD / Expertise Soins"
         },
         "content": {
           "images": {
@@ -967,11 +967,11 @@
           },
           "multidisciplinary": {
             "title": "Une équipe pluridisciplinaire à vos côtés",
-            "paragraph": "Notre équipe médicale et paramédicale réunit des compétences variées et complémentaires : médecin coordonnateur, infirmiers, aides-soignants, kinésithérapeutes, psychologue. À leurs côtés, des professionnels libéraux (médecins traitants, orthophonistes, ergothérapeutes, spécialistes) interviennent régulièrement, selon les besoins spécifiques de chaque résident. Notre médecin s'appuie sur un réseau de spécialistes disponibles rapidement pour nos résidents. Grâce à nos partenariats avec des cliniques conventionnées, notamment Carthage et SLM, l'accès aux examens et hospitalisations est facilité. Et parce qu'aucun résident ne doit affronter seul ces moments, nous assurons toujours le transport et un accompagnement attentif par nos aides-soignantes, présentes à ses côtés aussi longtemps qu'il le faut. Cette pluridisciplinarité permet une prise en charge globale : médicale, fonctionnelle et psychologique, afin de répondre à l'ensemble des besoins liés au vieillissement et aux pathologies."
+            "paragraph": "Notre équipe médicale et paramédicale réunit des compétences variées et complémentaires : médecin coordonnateur, infirmiers, aides-soignants, kinésithérapeutes, psychologue, orthophoniste et ergothérapeute. À leurs côtés, des professionnels libéraux (médecins traitants, médecins spécialistes, podologue...) interviennent régulièrement, selon les besoins spécifiques de chaque résident. Notre médecin s’appuie sur un réseau de spécialistes disponibles rapidement pour nos résidents. Grâce à nos partenariats avec des cliniques conventionnées, notamment le centre international CARTHAGE MÉDICAL et la clinique ESSALEM à Sousse , l’accès aux examens et hospitalisations est facilité. Et parce qu’aucun résident ne doit affronter seul ces moments, nous assurons toujours le transport et un accompagnement attentif par nos aides-soignantes, présentes à ses côtés aussi longtemps qu’il le faut. Cette pluridisciplinarité permet une prise en charge globale : médicale, fonctionnelle et psychologique, afin de répondre à l’ensemble des besoins liés au vieillissement et aux pathologies."
           },
           "safety": {
             "title": "La sécurité et la qualité des soins",
-            "paragraph": "continue tout au long de leur carrière. Cette démarche garantit l'application des meilleures pratiques gériatriques, même lors de situations sanitaires exceptionnelles, et permet d'adapter les soins aux évolutions de la médecine et des besoins des résidents."
+            "paragraph": "REMES accorde une vigilance particulière à la sécurisation du circuit du médicament : prescriptions encadrées, rangement sécurisé accessible uniquement au personnel autorisé, respect strict de la chaîne du froid pour les traitements sensibles. Nos équipes bénéficient d’une formation continue tout au long de leur carrière. Cette démarche garantit l’application des meilleures pratiques gériatriques, même lors de situations sanitaires exceptionnelles, et permet d’adapter les soins aux évolutions de la médecine et des besoins des résidents."
           }
         }
       },
@@ -982,7 +982,7 @@
         },
         "hero": {
           "title": "Solutions d'accueil",
-          "description": "EHPD / Solutions d'accueil"
+          "description": "EHPAD / Solutions d'accueil"
         },
         "content": {
           "images": {
@@ -1038,7 +1038,7 @@
         },
         "hero": {
           "title": "Notre Offre",
-          "description": "EHPD / Notre Offre"
+          "description": "EHPAD / Notre Offre"
         },
         "content": {
           "title": "Un tarif unique, simple et transparent",
@@ -1058,7 +1058,7 @@
               },
               "highSeason": {
                 "price": "3 000 € / mois",
-                "period": "de juillet à septembre (haute saison)"
+                "period": "de juin à septembre (haute saison)"
               },
               "description": "Ces séjours offrent les mêmes prestations complètes qu'un séjour permanent."
             }
@@ -1067,8 +1067,8 @@
             "service1": "Le transfert Aéroport – REMES – Aéroport",
             "service2": "L'hébergement en chambre moderne, spacieuse, de plain-pied, avec terrasse privative, dotée d'un lit médicalisé si nécessaire.",
             "service3": "Les soins quotidiens assurés par notre équipe pluridisciplinaire.",
-            "service4": "Un accompagnement individualisé grâce à une aide-soignante attitrée, disponible pour chaque résident durant toute la période d'éveil, 7 jours sur 7.",
-            "service5": "Un suivi de kinésithérapie régulier, proposé quotidiennement en semaine, pour entretenir la mobilité et favoriser le bien-être.",
+            "service4": "Un accompagnement individualisé grâce à une aide-soignante attitrée, disponible pour chaque résident durant toute la période d'éveil (de 7h à 20h), 7 jours sur 7.",
+            "service5": "Un suivi de kinésithérapie régulier, proposé chaque jour du lundi au samedi, pour entretenir la mobilité et favoriser le bien-être.",
             "service6": "Les activités, animations et sorties encadrées.",
             "service7": "La restauration complète : repas équilibrés et adaptés, collations, hydratation surveillée.",
             "service8": "Des soins de bien-être inclus (une coupe de cheveux, ainsi qu'une manucure et une pédicure de base, proposés régulièrement). Les prestations esthétiques spécifiques (coloration, soins capillaires avancés, soins particuliers) peuvent être réalisées sur demande, avec participation complémentaire.",
@@ -1076,7 +1076,7 @@
             "service10": "L'accès aux espaces communs : salons, restaurants, jardins, piscines et plage privée."
           },
           "comparison": {
-            "text1": "À REMES, nous tenons à offrir des prestations complètes, dans un esprit de transparence et de confiance.",
+            "text1": "À REMES, nous tenons à offrir des prestations complètes dans un esprit de transparence et de confiance. Alors que le coût d’un séjour en résidence médicalisée peut atteindre des montants très élevés en Europe, nous proposons un tarif unique et tout inclus, permettant de bénéficier d’un accompagnement haut de gamme au bord de la Méditerranée, dans un cadre d’exception et à un coût maîtrisé.",
             "text2": "Le coût moyen d'un séjour permanent en EHPAD en France dépasse",
             "francePrice": "2 500 €",
             "text3": "par mois. Chez nous, nos résidents profitent d'un cadre haut de gamme au bord de la Méditerranée, pour un tarif bien plus accessible :",
@@ -1086,16 +1086,16 @@
       },
       "theResidence": {
         "meta": {
-          "title": "La Résidence | Localisation & Équipements | REMES Tunisie",
-          "description": "Découvrez la résidence REMES en Tunisie. Située à Monastir-Skanes, à 200m de la plage, intégrée dans un hôtel 4 étoiles avec chambres modernes et équipements méditerranéens."
+          "title": "Notre Résidence | Localisation & Équipements | REMES Tunisie",
+          "description": "Découvrez notre résidence REMES en Tunisie. Située à Monastir-Skanes, à 200m de la plage, intégrée dans un hôtel 4 étoiles avec chambres modernes et équipements méditerranéens."
         },
         "hero": {
-          "title": "La résidence",
-          "description": "EHPD / La résidence"
+          "title": "Notre résidence",
+          "description": "EHPAD / Notre résidence"
         },
         "content": {
           "images": {
-            "alt": "La résidence"
+            "alt": "Notre résidence"
           },
           "location": {
             "title": "Localisation",
@@ -1129,7 +1129,7 @@
             },
             "hero": {
               "title": "Animations & activités",
-              "description": "EHPD / Vivre à REMES / Animations & activités"
+              "description": "EHPAD / Vivre à REMES / Animations & activités"
             },
             "content": {
               "introduction": "La vie à REMES est animée par un programme riche et évolutif, conçu pour stimuler les capacités, encourager la créativité et maintenir le lien social. Nos résidents participent à :",
@@ -1152,7 +1152,7 @@
             },
             "hero": {
               "title": "Repas & services du quotidien",
-              "description": "EHPD / Vivre à REMES / Repas & services du quotidien"
+              "description": "EHPAD / Vivre à REMES / Repas & services du quotidien"
             },
             "content": {
               "nutritionPhilosophy": "À REMES, bien manger pour bien vieillir est une évidence. Nos menus, élaborés avec une diététicienne, allient équilibre nutritionnel et plaisir gustatif. Chaque jour, notre chef et son équipe préparent sur place des plats savoureux à base de produits frais, inspirés des cuisines méditerranéenne et continentale.",
@@ -1172,7 +1172,7 @@
             },
             "hero": {
               "title": "Bien-être & confort",
-              "description": "EHPD / Vivre à REMES / Bien-être & confort"
+              "description": "EHPAD / Vivre à REMES / Bien-être & confort"
             },
             "content": {
               "philosophy": "Le bien-être global est au cœur de la philosophie de REMES. Plusieurs services complètent le quotidien des résidents pour favoriser la détente et l'épanouissement :",
@@ -1197,7 +1197,7 @@
           },
           "hero": {
             "title": "Animations & activités",
-            "description": "EHPD / Vivre à REMES / Animations & activités"
+            "description": "EHPAD / Vivre à REMES / Animations & activités"
           },
           "content": {
             "introduction": "La vie à REMES est animée par un programme riche et évolutif, conçu pour stimuler les capacités, encourager la créativité et maintenir le lien social. Nos résidents participent à :",
@@ -1220,17 +1220,14 @@
           },
           "hero": {
             "title": "Repas & services du quotidien",
-            "description": "EHPD / Vivre à REMES / Repas & services du quotidien"
+            "description": "EHPAD / Vivre à REMES / Repas & services du quotidien"
           },
           "content": {
             "nutritionPhilosophy": "À REMES, bien manger pour bien vieillir est une évidence. Nos menus, élaborés avec une diététicienne, allient équilibre nutritionnel et plaisir gustatif. Chaque jour, notre chef et son équipe préparent sur place des plats savoureux à base de produits frais, inspirés des cuisines méditerranéenne et continentale.",
             "diningOptions": "Les repas peuvent être pris dans notre restaurant lumineux et convivial, servis en chambre si nécessaire, ou encore dans le jardin arboré aux beaux jours. Ces repas en plein air, très appréciés, offrent de véritables moments de liberté et de partage.",
             "familyWelcome": "Les familles sont les bienvenues : une table ouverte leur permet de partager un repas avec leur parent résident dans une ambiance conviviale.",
             "specialNeeds": "Une attention particulière est portée aux résidents ayant des besoins spécifiques : textures adaptées, aide à l'alimentation, surveillance de l'hydratation. Enfin, pour le confort de tous :",
-            "dailyServices": {
-              "roomCleaning": "Entretien quotidien (voire bi-quotidien) des chambres et espaces privatifs.",
-              "laundry": "Service de blanchisserie incluant le linge de maison fourni et les vêtements personnels, soigneusement entretenus et restitués."
-            }
+            "dailyServices": "Pour prolonger ce confort au quotidien, nos chambres sont entretenues régulièrement et notre service de blanchisserie prend en charge aussi bien le linge de maison que les vêtements personnels, toujours traités avec soin."
           }
         },
         "wellBeingAndComfort": {
@@ -1240,7 +1237,7 @@
           },
           "hero": {
             "title": "Bien-être & confort",
-            "description": "EHPD / Vivre à REMES / Bien-être & confort"
+            "description": "EHPAD / Vivre à REMES / Bien-être & confort"
           },
           "content": {
             "philosophy": "Le bien-être global est au cœur de la philosophie de REMES. Plusieurs services complètent le quotidien des résidents pour favoriser la détente et l'épanouissement :",
