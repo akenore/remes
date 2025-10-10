@@ -1269,7 +1269,7 @@
         "sections": {
           "section1": {
             "title": "1. Data Controller",
-            "content": "REMES – www.remes-tunisie.com\nContact: info@remes-tunisie.com"
+            "content": "REMES – www.remes-tunisie.com\nContact: contact@remes-tunisie.com"
           },
           "section2": {
             "title": "2. Data Collected",
@@ -1297,7 +1297,7 @@
           },
           "section7": {
             "title": "7. Your Rights",
-            "content": "In accordance with Tunisian law (Law No. 2004-63) and GDPR if you are in Europe, you have the right to access, rectify, object, delete and port your data. To exercise your rights, contact us at info@remes-tunisie.com."
+            "content": "In accordance with Tunisian law (Law No. 2004-63) and GDPR if you are in Europe, you have the right to access, rectify, object, delete and port your data. To exercise your rights, contact us at contact@remes-tunisie.com."
           },
           "section8": {
             "title": "8. Security",
@@ -1309,7 +1309,7 @@
           },
           "section10": {
             "title": "10. Contact",
-            "content": "For any questions or requests regarding your personal data: info@remes-tunisie.com"
+            "content": "For any questions or requests regarding your personal data: contact@remes-tunisie.com"
           }
         }
       }
@@ -1329,7 +1329,7 @@
         "sections": {
           "section1": {
             "title": "1. Who are we?",
-            "content": "REMES provides information and services related to elderly care and medical equipment.\nContact: info@remes-tunisie.com."
+            "content": "REMES provides information and services related to elderly care and medical equipment.\nContact: contact@remes-tunisie.com."
           },
           "section2": {
             "title": "2. Site Usage",
@@ -1359,7 +1359,7 @@
           },
           "section8": {
             "title": "8. Contact",
-            "content": "For any questions, contact us at info@remes-tunisie.com."
+            "content": "For any questions, contact us at contact@remes-tunisie.com."
           }
         }
       }
