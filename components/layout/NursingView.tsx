@@ -5,7 +5,8 @@ import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
 import Card3 from "../ui/card/Card3";
-import Icon from "../ui/Icon";
+import CalendlyButton from '../CalendlyButton';
+import { FaHome, FaBed, FaHandsHelping, FaTags, } from 'react-icons/fa';
 
 
 export default function NursingView() {
@@ -21,28 +22,28 @@ export default function NursingView() {
                     bgDesktop="/hero-2/bg-desktop.jpg"
                     cards={[
                          {
-                              icon: <Icon name="HomeIcon" sizeClass="w-full h-full" />,
+                              icon: <FaHome size={64} />,
                               title: t('hero.cards.residence.title'),
                               description: t('hero.cards.residence.description'),
                               buttonText: t('button'),
                               buttonHref: "/nursing-home/the-residence",
                          },
                          {
-                              icon: <Icon name="BuildingIcon" sizeClass="w-full h-full" />,
+                              icon: <FaBed size={64} />,
                               title: t('hero.cards.solutions.title'),
                               description: t('hero.cards.solutions.description'),
                               buttonText: t('button'),
                               buttonHref: "/nursing-home/hosting-solutions",
                          },
                          {
-                              icon: <Icon name="SunIcon" sizeClass="w-full h-full" />,
+                              icon: <FaHandsHelping size={64} />,
                               title: t('hero.cards.expertise.title'),
                               description: t('hero.cards.expertise.description'),
                               buttonText: t('button'),
                               buttonHref: "/nursing-home/care-expertise",
                          },
                          {
-                              icon: <Icon name="MedicalPlusIcon" sizeClass="w-full h-full" />,
+                              icon: <FaTags size={64} />,
                               title: t('hero.cards.offer.title'),
                               description: t('hero.cards.offer.description'),
                               buttonText: t('button'),
@@ -71,11 +72,9 @@ export default function NursingView() {
                                         {t('content.schedule.paragraph3')}
                                    </p>
 
-                                   {/* <div className="flex justify-center md:justify-start">
-                                        <button className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
-                                             En savoir plus
-                                        </button>
-                                   </div> */}
+                                   <div className="flex justify-center md:justify-start">
+                                        <CalendlyButton />
+                                   </div>
                               </div>
 
                          </div>
@@ -87,10 +86,10 @@ export default function NursingView() {
                                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                                              <div className="flex-1">
                                                   <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
-                                                  {t('content.living.title')}
+                                                       {t('content.living.title')}
                                                   </h2>
                                                   <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-                                                  {t('content.living.description')}
+                                                       {t('content.living.description')}
                                                   </p>
                                              </div>
 
@@ -128,7 +127,7 @@ export default function NursingView() {
                          </div>
                     </section>
                     <section className="max-w-7xl mx-5 md:mx-auto text-center pb-24">
-                        
+
 
                          <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                               {t('content.reservation.text')}

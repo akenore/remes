@@ -791,7 +791,8 @@
         "learnMore": "Learn more"
       },
       "quote": {
-        "text": "As director of REMES, my deep conviction is that every person deserves to be accompanied with respect and dignity, in an environment that preserves their identity and their lifestyle habits. Thanks to the continuous presence of a dynamic, competent and committed team, we offer each person welcomed the security of personalized support. We adapt to the needs, pace and habits of each person, whether it's a long-term stay, a short stay or adapted holidays, always with warmth and kindness. Our ambition: to make REMES more than a place of care, a real place of life, where you feel recognized, surrounded and at home."
+        "text": "As director of REMES, my deep conviction is that every person deserves to be accompanied with respect and dignity, in an environment that preserves their identity and their lifestyle habits. Thanks to the continuous presence of a dynamic, competent and committed team, we offer each person welcomed the security of personalized support. We adapt to the needs, pace and habits of each person, whether it's a long-term stay, a short stay or adapted holidays, always with warmth and kindness. Our ambition: to make REMES more than a place of care, a real place of life, where you feel recognized, surrounded and at home.",
+        "role": "Founder and Director of REMES"
       },
       "marquee": {
         "text": "Remes medical residence"
@@ -920,7 +921,8 @@
           "title": "Schedule an exchange with our team",
           "paragraph1": "We know that organizing the search for a medicalized residence can be a demanding step. To simplify your approach, we provide you with an online calendar.",
           "paragraph2": "Choose simply the day and time that suit you, and our team will call you directly at that time.",
-          "paragraph3": "During this call, we will take the time to listen to your needs, answer your questions and present in detail the hosting solutions offered by REMES. You will thus have all the necessary information to move forward serenely in your project."
+          "paragraph3": "During this call, we will take the time to listen to your needs, answer your questions and present in detail the hosting solutions offered by REMES. You will thus have all the necessary information to move forward serenely in your project.",
+          "cta" : "Schedule a call now"
         },
         "living": {
           "title": "Living at REMES",
@@ -1387,15 +1389,15 @@
         "monthPrice": "Month*"
       },
       "noEquipment": "No equipment available"
-      },
-      "title": "Search",
-      "description": "Search through our articles, blog posts and content to find what you're looking for.",
-      "placeholder": "Search articles...",
-      "resultsFor": "Search results for",
-      "resultsFound": "results found",
-      "for": "for",
-      "noResults": "No results found",
-      "tryDifferent": "Try different keywords or browse our latest articles.",
+    },
+    "title": "Search",
+    "description": "Search through our articles, blog posts and content to find what you're looking for.",
+    "placeholder": "Search articles...",
+    "resultsFor": "Search results for",
+    "resultsFound": "results found",
+    "for": "for",
+    "noResults": "No results found",
+    "tryDifferent": "Try different keywords or browse our latest articles.",
     "enterQuery": "Enter your search terms to find relevant articles and content.",
     "about": {
       "meta": {
@@ -1693,5 +1695,12 @@
       "title": "B2B Professional Services",
       "description": "Adapted Stay / B2B Professional Services"
     }
+  },
+  "remesnumbers": {
+    "1": "people with limited independence welcomed",
+    "2": "employees per resident",
+    "3": "customer satisfaction",
+    "4": "years of experience",
+    "5": "of staff present since opening"
   }
 }

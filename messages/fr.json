@@ -411,7 +411,7 @@
       "success": {
         "profileUpdated": "Profil mis à jour avec succès !",
         "profileUpdatedEmailChange": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse.",
-      "profileUpdatedEmailChangeSecure": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse. IMPORTANT : Après avoir confirmé le changement d'email, vous serez automatiquement déconnecté pour des raisons de sécurité et devrez vous reconnecter avec votre nouveau email.",
+        "profileUpdatedEmailChangeSecure": "Profil mis à jour ! Veuillez vérifier votre email pour confirmer la nouvelle adresse. IMPORTANT : Après avoir confirmé le changement d'email, vous serez automatiquement déconnecté pour des raisons de sécurité et devrez vous reconnecter avec votre nouveau email.",
         "passwordUpdated": "Mot de passe mis à jour avec succès !"
       },
       "errors": {
@@ -791,7 +791,8 @@
         "learnMore": "En savoir plus"
       },
       "quote": {
-        "text": "En tant que directrice de REMES, ma conviction profonde est que chaque personne mérite d'être accompagnée avec respect et dignité, dans un environnement qui préserve son identité et ses habitudes de vie. Grâce à la présence continue d'une équipe dynamique, compétente et investie, nous offrons à chaque personne accueillie la sécurité d'un accompagnement personnalisé. Nous nous adaptons aux besoins, au rythme et aux habitudes de chacun, qu'il s'agisse d'un séjour de longue durée, d'un court séjour ou de vacances adaptées, toujours avec chaleur et bienveillance. Notre ambition : faire de REMES plus qu'un lieu de soins, un véritable lieu de vie, où l'on se sent reconnu, entouré et chez soi."
+        "text": "En tant que directrice de REMES, ma conviction profonde est que chaque personne mérite d'être accompagnée avec respect et dignité, dans un environnement qui préserve son identité et ses habitudes de vie. Grâce à la présence continue d'une équipe dynamique, compétente et investie, nous offrons à chaque personne accueillie la sécurité d'un accompagnement personnalisé. Nous nous adaptons aux besoins, au rythme et aux habitudes de chacun, qu'il s'agisse d'un séjour de longue durée, d'un court séjour ou de vacances adaptées, toujours avec chaleur et bienveillance. Notre ambition : faire de REMES plus qu'un lieu de soins, un véritable lieu de vie, où l'on se sent reconnu, entouré et chez soi.",
+        "role": "Fondatrice & Directrice de REMES"
       },
       "marquee": {
         "text": "Remes résidence médicalisée"
@@ -920,7 +921,8 @@
           "title": "Planifiez un échange avec notre équipe",
           "paragraph1": "Nous savons qu'organiser la recherche d'une résidence médicalisée peut être une étape exigeante. Pour vous simplifier la démarche, nous mettons à votre disposition un calendrier en ligne.",
           "paragraph2": "Choisissez en toute simplicité le jour et l'heure qui vous conviennent, et notre équipe vous appellera directement à ce moment-là.",
-          "paragraph3": "Lors de cet appel, nous prendrons le temps d'écouter vos besoins, de répondre à vos questions et de vous présenter en détail les solutions d'accueil proposées par REMES. Vous disposerez ainsi de toutes les informations nécessaires pour avancer sereinement dans votre projet."
+          "paragraph3": "Lors de cet appel, nous prendrons le temps d'écouter vos besoins, de répondre à vos questions et de vous présenter en détail les solutions d'accueil proposées par REMES. Vous disposerez ainsi de toutes les informations nécessaires pour avancer sereinement dans votre projet.",
+          "cta" : "Planifier un appel dès maintenant"
         },
         "living": {
           "title": "Vivre à REMES",
@@ -1382,20 +1384,20 @@
     "equipment": {
       "table": {
         "image": "Image",
-        "designation": "Désignation", 
+        "designation": "Désignation",
         "dayPrice": "Jour*",
         "monthPrice": "Mois*"
       },
       "noEquipment": "Aucun équipement disponible"
-      },
-      "title": "Recherche",
-      "description": "Recherchez dans nos articles, billets de blog et contenus pour trouver ce que vous cherchez.",
-      "placeholder": "Rechercher des articles...",
-      "resultsFor": "Résultats de recherche pour",
-      "resultsFound": "résultats trouvés",
-      "for": "pour",
-      "noResults": "Aucun résultat trouvé",
-      "tryDifferent": "Essayez des mots-clés différents ou parcourez nos derniers articles.",
+    },
+    "title": "Recherche",
+    "description": "Recherchez dans nos articles, billets de blog et contenus pour trouver ce que vous cherchez.",
+    "placeholder": "Rechercher des articles...",
+    "resultsFor": "Résultats de recherche pour",
+    "resultsFound": "résultats trouvés",
+    "for": "pour",
+    "noResults": "Aucun résultat trouvé",
+    "tryDifferent": "Essayez des mots-clés différents ou parcourez nos derniers articles.",
     "enterQuery": "Saisissez vos termes de recherche pour trouver des articles et contenus pertinents.",
     "about": {
       "meta": {
@@ -1693,5 +1695,12 @@
       "title": "Services aux professionnels B2B",
       "description": "Séjour Adapté / Services aux professionnels B2B"
     }
+  },
+  "remesnumbers": {
+    "1": "personnes en situation de faible autonomie accueillies",
+    "2": "employés par résident",
+    "3": "de satisfaction client",
+    "4": "ans d'expérience",
+    "5": "du personnel présent depuis l’ouverture"
   }
-} 
+}
