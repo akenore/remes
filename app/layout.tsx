@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import localFont from "next/font/local";
 import './globals.css';
+import { GoogleTagManager } from '@next/third-parties/google';
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -54,6 +55,7 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
+      <GoogleTagManager gtmId="GTM-NKG2GQHF" />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${myanmarMN.variable} ${vensfolk.variable} antialiased`}
       >
