@@ -18,8 +18,8 @@ export default function NursingView() {
                <Hero2
                     title={t('hero.title')}
                     description={t('hero.description')}
-                    bgMobile="/hero-2/bg-mobile.jpg"
-                    bgDesktop="/hero-2/bg-desktop.jpg"
+                    bgMobile="/hero-2/bg-mobile.jpeg"
+                    bgDesktop="/hero-2/bg-desktop.jpeg"
                     cards={[
                          {
                               icon: <FaHome size={64} />,
@@ -55,8 +55,8 @@ export default function NursingView() {
                     <div className="mx-5 md:mx-auto max-w-7xl">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                               <div>
-                                   <Image src="/nursing-l-desktop.png" alt={t('content.images.alt')} className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
-                                   <Image src="/nursing-l-desktop.png" alt={t('content.images.alt')} className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/re.jpeg" alt={t('content.images.alt')} className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/re.jpeg" alt={t('content.images.alt')} className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
                               </div>
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
@@ -98,21 +98,21 @@ export default function NursingView() {
                                    <div className="w-full">
                                         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 items-stretch">
                                              <Card3
-                                                  image="/nursing-l-desktop.png"
+                                                  image="/ser-1.jpeg"
                                                   title={t('content.living.cards.activities.title')}
                                                   description={t('content.living.cards.activities.description')}
                                                   buttonText={t('button')}
                                                   buttonHref="/nursing-home/living-at-remes/entertainment-and-activities"
                                              />
                                              <Card3
-                                                  image="/nursing-l-desktop.png"
+                                                  image="/ser-2.jpeg"
                                                   title={t('content.living.cards.meals.title')}
                                                   description={t('content.living.cards.meals.description')}
                                                   buttonText={t('button')}
                                                   buttonHref="/nursing-home/living-at-remes/meals-and-daily-services"
                                              />
                                              <Card3
-                                                  image="/nursing-l-desktop.png"
+                                                  image="/ser-3.jpeg"
                                                   title={t('content.living.cards.wellbeing.title')}
                                                   description={t('content.living.cards.wellbeing.description')}
                                                   buttonText={t('button')}

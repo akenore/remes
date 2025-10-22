@@ -91,7 +91,7 @@ export default function Hero() {
   }, [total]);
 
   return (
-    <div className="w-full h-[1210px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpg')] sm:bg-[url('/hero-1/bg-desktop.jpg')] bg-no-repeat">
+    <div className="w-full h-[1210px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpeg')] sm:bg-[url('/hero-1/bg-desktop.jpeg')] bg-no-repeat">
       <Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
@@ -164,14 +164,14 @@ export default function Hero() {
       </div>
       <div className="pt-40 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4 pb-12">
         <Card
-          image="/card/card-1.jpg"
+          image="/card/card-1.jpeg"
           title={t('home.cards.retirement.title')}
           description={t('home.cards.retirement.description')}
           buttonText={t('button')}
           buttonHref="/nursing-home"
         />
         <Card
-          image="/card/card-1.jpg"
+          image="/card/card-2.jpeg"
           title={t('home.cards.adapted.title')}
           description={t('home.cards.adapted.description')}
           buttonText={t('button')}

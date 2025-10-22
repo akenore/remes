@@ -74,8 +74,8 @@ export default function Hero2({ title, description, cards, bgMobile, bgDesktop }
 
   const cardsToShow = cards === undefined ? defaultCards : cards;
 
-  const mobileBg = bgMobile ?? "/hero-2/bg-mobile.jpg";
-  const desktopBg = bgDesktop ?? "/hero-2/bg-desktop.jpg";
+  const mobileBg = bgMobile ?? "/hero-2/bg-mobile.jpeg";
+  const desktopBg = bgDesktop ?? "/hero-2/bg-desktop.jpeg";
 
   return (
     <div

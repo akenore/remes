@@ -5,11 +5,16 @@ import Icons from '../CardsIcons';
 import { useTranslations } from 'next-intl';
 
 const galleryImages = [
-  '/home/gallery/1.png',
-  '/home/gallery/2.png',
-  '/home/gallery/3.png',
-  '/home/gallery/4.png',
-  '/home/gallery/5.png'
+  '/home/gallery/1.jpeg',
+  '/home/gallery/2.jpeg',
+  '/home/gallery/3.jpeg',
+  '/home/gallery/4.jpeg',
+  '/home/gallery/5.jpeg',
+  '/home/gallery/6.jpeg',
+  '/home/gallery/7.jpeg',
+  '/home/gallery/8.jpeg',
+  '/home/gallery/9.jpeg',
+  '/home/gallery/10.jpeg'
 ];
 
 interface MasonaryProps {

@@ -16,8 +16,8 @@ export default function AboutView() {
                     title={t('hero.title')}
                     description={t('hero.description')}
                     cards={null}
-                    bgMobile="/hero-4/bg-mobile.jpg"
-                    bgDesktop="/hero-4/bg-desktop.jpg"
+                    bgMobile="/hero-4/bg-mobile.jpeg"
+                    bgDesktop="/hero-4/bg-desktop.jpeg"
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">

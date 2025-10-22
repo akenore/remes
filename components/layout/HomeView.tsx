@@ -38,7 +38,7 @@ export default function HomeView() {
                                    </div>
                               </div>
                               <div>
-                                   <Image src="/home/h-r-1.jpg" alt="Maison de Repos" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/home/h-r-1.jpeg" alt="Maison de Repos" width={610} height={648} style={{ width: "100%", height: "auto" }} />
                                    <div className="flex justify-center lg:hidden">
                                         <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="-mt-16 md:-mt-20 h-auto max-w-full" style={{ width: "auto", height: "25%" }} />
                                    </div>

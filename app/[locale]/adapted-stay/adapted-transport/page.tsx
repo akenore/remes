@@ -27,6 +27,9 @@ export default function AdaptedTransport() {
                />
                <main className="pt-40">
                     <PageSection
+                         // imageSrcDesktop="/tr.jpeg"
+                         // imageSrcMobile="/tr.jpeg"
+                         // imageAlt={t('content.title')}
                          title={t('content.title')}
                          paragraphs={[
                               t('content.paragraph1'),

@@ -121,7 +121,7 @@ export default function Testimonials() {
         {/* Left fixed image – hidden on mobile, visible from md */}
         <div className="hidden md:block">
           <Image
-            src="/home/left-h.jpg"
+            src="/home/left-h.jpeg"
             alt="Résident jouant"
             width={610}
             height={648}

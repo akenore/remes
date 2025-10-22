@@ -3,7 +3,7 @@ import { useTranslations, useLocale } from 'next-intl';
 import { useState, useEffect } from 'react';
 import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
-import VerticalGallery from "../ui/gallery/Vertical";
+// import VerticalGallery from "../ui/gallery/Vertical";
 import VideosCarousel from "../ui/gallery/Videos";
 import Card4 from '../ui/card/Card4';
 import { pb } from '@/lib/pocketbase';
@@ -156,8 +156,8 @@ export default function MagazineView() {
                     title={t('magazine.hero.title')}
                     description={t('magazine.hero.description')}
                     cards={null}
-                    bgMobile="/hero-4/bg-mobile.jpg"
-                    bgDesktop="/hero-4/bg-desktop.jpg"
+                    bgMobile="/hero-4/bg-mobile.jpeg"
+                    bgDesktop="/hero-4/bg-desktop.jpeg"
                />
                <main className="pt-10">
                     {/* <section>

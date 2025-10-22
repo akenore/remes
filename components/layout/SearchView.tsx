@@ -193,8 +193,8 @@ export default function SearchView() {
                <Hero3
                     title={searchQuery ? `${t('search.resultsFor')} "${searchQuery}"` : t('search.title')}
                     description={searchQuery ? `${totalItems} ${t('search.resultsFound')}` : t('search.description')}
-                    bgMobile="/hero-4/bg-mobile.jpg"
-                    bgDesktop="/hero-4/bg-desktop.jpg"
+                    bgMobile="/hero-4/bg-mobile.jpeg"
+                    bgDesktop="/hero-4/bg-desktop.jpeg"
                />
                
                <main>

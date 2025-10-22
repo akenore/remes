@@ -43,8 +43,8 @@ export default function AdaptedView() {
                               buttonHref: "/adapted-stay/medical-equipment",
                          },
                     ]}
-                    bgMobile="/hero-4/bg-mobile.jpg"
-                    bgDesktop="/hero-4/bg-desktop.jpg"
+                    bgMobile="/hero-4/bg-mobile.jpeg"
+                    bgDesktop="/hero-4/bg-desktop.jpeg"
                />
                <main className="pt-20">
                     <div className="mx-5 md:mx-auto max-w-7xl">
@@ -70,8 +70,8 @@ export default function AdaptedView() {
 
                               </div>
                               <div>
-                                   <Image src="/adapted-r-desktop.jpg" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
-                                   <Image src="/adapted-r-desktop.jpg" alt="Maison de Repos" className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/se.jpeg" alt="Maison de Repos" className="hidden md:block" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/se.jpeg" alt="Maison de Repos" className="block md:hidden" width={370} height={434} style={{ width: "100%", height: "auto" }} />
                               </div>
                          </div>
                          <div>
