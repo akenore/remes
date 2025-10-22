@@ -11,7 +11,18 @@ export default function LanguageSwitcher() {
   const pathname = usePathname();
 
   const handleLocaleChange = (newLocale: string) => {
-    router.replace(pathname, { locale: newLocale });
+    if (newLocale === locale) return;
+
+    const currentPath = pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
+    const windowPath = typeof window !== 'undefined' ? window.location.pathname : currentPath;
+
+    if (typeof document !== 'undefined') {
+      const basePath = currentPath === '/' ? windowPath : windowPath.replace(currentPath, '');
+      const cookiePath = basePath !== '' ? basePath : '/';
+      document.cookie = `NEXT_LOCALE=${newLocale};path=${cookiePath};SameSite=Lax`;
+    }
+
+    router.replace(currentPath, { locale: newLocale });
   };
 
   return (
