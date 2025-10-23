@@ -33,6 +33,7 @@ export default function AddPostPage() {
     title: '',
     title_fr: '',
     slug: '',
+    slug_fr: '',
     content: '',
     content_fr: '',
     published: false,
@@ -41,6 +42,7 @@ export default function AddPostPage() {
     cover_image_url: '' as string, // For images selected from library
   });
   const [isSlugEditable, setIsSlugEditable] = useState(false);
+  const [isSlugFrEditable, setIsSlugFrEditable] = useState(false);
 
   useEffect(() => {
     fetchCategories();
@@ -79,7 +81,10 @@ export default function AddPostPage() {
       .trim();
   };
 
-  const generateUniqueSlug = async (baseSlug: string) => {
+  const generateUniqueSlug = async (baseSlug: string, field: 'slug' | 'slug_fr') => {
+    if (!baseSlug) {
+      return '';
+    }
     let slug = baseSlug;
     let counter = 1;
 
@@ -87,7 +92,7 @@ export default function AddPostPage() {
       try {
         // Check if slug exists in the database
         const existingPosts = await pb.collection('posts').getList(1, 1, {
-          filter: `slug = "${slug}"`,
+          filter: `${field} = "${slug}"`,
         });
 
         if (existingPosts.totalItems === 0) {
@@ -98,7 +103,7 @@ export default function AddPostPage() {
         slug = `${baseSlug}-${counter}`;
         counter++;
       } catch (err) {
-        console.error('Error checking slug uniqueness:', err);
+        console.error(`Error checking ${field} uniqueness:`, err);
         return baseSlug; // Return original if error
       }
     }
@@ -114,8 +119,37 @@ export default function AddPostPage() {
     // Only auto-update slug if it's not being manually edited
     if (!isSlugEditable) {
       const baseSlug = generateSlug(title);
-      const uniqueSlug = await generateUniqueSlug(baseSlug);
+      if (!baseSlug) {
+        setFormData(prev => ({ ...prev, slug: '' }));
+        if (!isSlugFrEditable && !(formData.title_fr?.trim())) {
+          setFormData(prev => ({ ...prev, slug_fr: '' }));
+        }
+        return;
+      }
+      const uniqueSlug = await generateUniqueSlug(baseSlug, 'slug');
       setFormData(prev => ({ ...prev, slug: uniqueSlug }));
+      if (!isSlugFrEditable && !(formData.title_fr?.trim())) {
+        const uniqueSlugFr = await generateUniqueSlug(baseSlug, 'slug_fr');
+        setFormData(prev => ({ ...prev, slug_fr: uniqueSlugFr }));
+      }
+    }
+  };
+
+  const handleFrenchTitleChange = async (title: string) => {
+    if (error) setError('');
+    if (success) setSuccess('');
+
+    setFormData(prev => ({ ...prev, title_fr: title }));
+
+    if (!isSlugFrEditable) {
+      const sourceTitle = title.trim() ? title : formData.title;
+      const baseSlug = generateSlug(sourceTitle);
+      if (!baseSlug) {
+        setFormData(prev => ({ ...prev, slug_fr: '' }));
+        return;
+      }
+      const uniqueSlugFr = await generateUniqueSlug(baseSlug, 'slug_fr');
+      setFormData(prev => ({ ...prev, slug_fr: uniqueSlugFr }));
     }
   };
 
@@ -194,6 +228,7 @@ export default function AddPostPage() {
       data.append('title', formData.title);
       data.append('title_fr', formData.title_fr);
       data.append('slug', formData.slug);
+      data.append('slug_fr', formData.slug_fr);
       data.append('content', formData.content);
       data.append('content_fr', formData.content_fr);
       data.append('author', user?.id || '');
@@ -274,7 +309,7 @@ export default function AddPostPage() {
       {success && (
         <div className="bg-green-50 border border-green-200 rounded-md p-4">
           <div className="flex">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <svg className="h-5 w-5 text-green-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
               </svg>
@@ -302,7 +337,7 @@ export default function AddPostPage() {
       {error && (
         <div className="bg-red-50 border border-red-200 rounded-md p-4">
           <div className="flex">
-            <div className="flex-shrink-0">
+            <div className="shrink-0">
               <svg className="h-5 w-5 text-red-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-2.5L13.732 4c-.77-.833-1.964-.833-2.732 0L5.732 15.5c-.77.833.192 2.5 1.732 2.5z" />
               </svg>
@@ -339,11 +374,7 @@ export default function AddPostPage() {
             frenchLabel="Title (French)"
             frenchValue={formData.title_fr}
             frenchPlaceholder="Titre en français"
-            onFrenchChange={(value) => {
-              if (error) setError('');
-              if (success) setSuccess('');
-              setFormData(prev => ({ ...prev, title_fr: value }));
-            }}
+            onFrenchChange={handleFrenchTitleChange}
             frenchRequired={false}
             fieldType="text"
             uniqueId="post-title"
@@ -396,7 +427,7 @@ export default function AddPostPage() {
                         type="button"
                         onClick={() => {
                           const baseSlug = generateSlug(formData.title);
-                          generateUniqueSlug(baseSlug).then(uniqueSlug => {
+                          generateUniqueSlug(baseSlug, 'slug').then(uniqueSlug => {
                             setFormData(prev => ({ ...prev, slug: uniqueSlug }));
                           });
                           setIsSlugEditable(false);
@@ -408,6 +439,66 @@ export default function AddPostPage() {
                     </div>
                   </div>
                 )}
+              </div>
+              <div className="mt-6">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                    {t('form.slugFr')}
+                </label>
+                <div className="mt-1">
+                  {!isSlugFrEditable ? (
+                    <div className="flex items-center justify-between p-3 bg-gray-50 border border-gray-200 rounded-md">
+                      <div className="flex items-center text-sm">
+                        <span className="text-gray-500 font-mono">{process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://127.0.0.1:3000'}/fr/posts/</span>
+                        <span className="font-semibold text-indigo-600">{formData.slug_fr || t('form.slugFrPlaceholder')}</span>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setIsSlugFrEditable(true)}
+                        className="ml-3 text-sm font-medium text-indigo-600 hover:text-indigo-500 transition-colors"
+                      >
+                          {tCommon('edit')}
+                      </button>
+                    </div>
+                  ) : (
+                    <div className="space-y-3">
+                      <div className="flex items-center p-3 bg-white border border-gray-300 rounded-md focus-within:border-indigo-500 focus-within:ring-1 focus-within:ring-indigo-500">
+                        <span className="text-gray-500 font-mono text-sm">{process.env.NEXT_PUBLIC_FRONTEND_URL || 'http://127.0.0.1:3000'}/fr/posts/</span>
+                        <input
+                          type="text"
+                          className="flex-1 border-0 p-0 text-sm font-semibold text-indigo-600 placeholder-gray-400 focus:ring-0 focus:outline-none bg-transparent"
+                          value={formData.slug_fr}
+                          onChange={(e) => setFormData(prev => ({ ...prev, slug_fr: e.target.value }))}
+                            placeholder={t('form.slugFrPlaceholder')}
+                        />
+                      </div>
+                      <div className="flex space-x-2">
+                        <button
+                          type="button"
+                          onClick={() => setIsSlugFrEditable(false)}
+                          className="px-3 py-1.5 text-xs font-medium text-white bg-indigo-600 hover:bg-indigo-700 rounded-md transition-colors"
+                        >
+                            {tCommon('save')}
+                        </button>
+                        <button
+                          type="button"
+                          onClick={() => {
+                            const baseSlug = generateSlug(formData.title_fr || formData.title);
+                            generateUniqueSlug(baseSlug, 'slug_fr').then(uniqueSlug => {
+                              setFormData(prev => ({ ...prev, slug_fr: uniqueSlug }));
+                            });
+                            setIsSlugFrEditable(false);
+                          }}
+                          className="px-3 py-1.5 text-xs font-medium text-gray-700 bg-gray-100 hover:bg-gray-200 rounded-md transition-colors"
+                        >
+                            {tCommon('cancel')}
+                        </button>
+                      </div>
+                    </div>
+                  )}
+                </div>
+                <p className="mt-2 text-xs text-gray-500">
+                    {t('form.slugFrHelp')}
+                </p>
               </div>
             </div>
           </div>
