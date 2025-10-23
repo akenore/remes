@@ -27,6 +27,9 @@ export default function AdaptedCare() {
                />
                <main className="pt-40">
                     <PageSection
+                         imageSrcDesktop="/s-a.jpeg"
+                         imageSrcMobile="/s-a.jpeg"
+                         imageAlt={t('content.title')}
                          title={t('content.title')}
                          paragraphs={[
                               t('content.paragraph1'),
@@ -39,7 +42,7 @@ export default function AdaptedCare() {
                     <div className="mx-5 md:mx-auto max-w-7xl text-[1.3rem] mb-20 mt-5">
                          <ul className="md:px-14">
                               <li>
-                              {t('content.services.title')}
+                                   {t('content.services.title')}
                                    <ol className="ps-5 mt-2 space-y-1 list-disc list-inside">
                                         <li>{t('content.services.item1')}</li>
                                         <li>{t('content.services.item2')}</li>

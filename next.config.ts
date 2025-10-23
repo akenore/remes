@@ -9,7 +9,7 @@ const ContentSecurityPolicy = [
   "form-action 'self';",
   "font-src 'self' https://fonts.gstatic.com data:;",
   "frame-ancestors 'self';",
-  "frame-src 'self' https://www.youtube.com https://player.vimeo.com;",
+  "frame-src 'self' https://www.youtube.com https://player.vimeo.com https://calendly.com;",
   "img-src 'self' data: blob: https:;",
   "object-src 'none';",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://assets.calendly.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;",

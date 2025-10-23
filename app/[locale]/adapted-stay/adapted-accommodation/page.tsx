@@ -28,6 +28,9 @@ export default function AdaptedAccommodation() {
                />
                <main className="pt-40">
                     <PageSection
+                         imageSrcDesktop="/h-ad.jpeg"
+                         imageSrcMobile="/h-ad.jpeg"
+                         imageAlt={t('content.title')}
                          title={t('content.title')}
                          paragraphs={[
                               t('content.paragraph1'),

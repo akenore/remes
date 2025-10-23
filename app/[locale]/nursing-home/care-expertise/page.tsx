@@ -18,8 +18,8 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function CareExpertise() {
      const t = useTranslations('frontend.nursingHome.careExpertise');
-     const imageSrcDesktop = "/adapted-r-desktop.jpg";
-     const imageSrcMobile = "/adapted-r-desktop.jpg";
+     const imageSrcDesktop = "/p-c.jpeg";
+     const imageSrcMobile = "/p-c.jpeg";
      
      return (
           <>
