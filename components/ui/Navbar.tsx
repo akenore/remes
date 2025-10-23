@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
 import { usePathname, useRouter } from 'next/navigation';
@@ -14,6 +14,19 @@ export default function Navbar() {
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
   const pathname = usePathname();
+
+  const primaryNavItems = [
+    { href: '/', label: t('frontend.menu.home') },
+    { href: '/nursing-home', label: t('frontend.menu.nursingHome') },
+    { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
+  ] as const;
+
+  const secondaryNavItems = [
+    { href: '/about', label: t('frontend.menu.about') },
+    { href: '/magazine', label: t('frontend.menu.magazine') },
+  ] as const;
+
+  const mobileNavItems = [...primaryNavItems, ...secondaryNavItems] as const;
 
   const SearchIcon = () => (
     <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -75,11 +88,7 @@ export default function Navbar() {
             <div className="hidden xl:flex items-center w-full">
               {/* Left Navigation */}
               <div className="flex items-center space-x-8 flex-1 justify-start pr-16">
-                {[
-                  { href: '/', label: t('frontend.menu.home') },
-                  { href: '/nursing-home', label: t('frontend.menu.nursingHome') },
-                  { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
-                ].map((item) => {
+                {primaryNavItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
                     <Link
@@ -96,7 +105,7 @@ export default function Navbar() {
               </div>
 
               {/* Center Logo */}
-              <div className="flex-shrink-0 flex justify-center">
+              <div className="shrink-0 flex justify-center">
                 <Link href="/" className="flex items-center">
                   <Image src="/logo.png" alt="Remes" width={219} height={172} style={{ width: "100%", height: "auto" }} />
                 </Link>
@@ -151,10 +160,7 @@ export default function Navbar() {
                     </form>
                   )}
                 </div>
-                {[
-                  { href: '/about', label: t('frontend.menu.about') },
-                  { href: '/magazine', label: t('frontend.menu.magazine') },
-                ].map((item) => {
+                {secondaryNavItems.map((item) => {
                   const isActive = pathname === item.href;
                   return (
                     <Link
@@ -176,7 +182,7 @@ export default function Navbar() {
 
       {/* Full Screen Mobile Menu */}
       {isMenuOpen && (
-        <div className="fixed inset-0 z-[60] xl:hidden">
+        <div className="fixed inset-0 z-60 xl:hidden">
           <div className="absolute inset-0 bg-dark-blue">
             {/* Close Button */}
             <div className="absolute top-12 left-8 z-20">
@@ -191,13 +197,7 @@ export default function Navbar() {
 
             {/* Menu Items */}
             <div className="mt-40 px-8 space-y-2">
-              {[
-                { href: '/', label: t('frontend.menu.home') },
-                { href: '/nursing-home', label: t('frontend.menu.nursingHome') },
-                { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
-                { href: '/about', label: t('frontend.menu.about') },
-                { href: '/magazine', label: t('frontend.menu.magazine') },
-              ].map((item) => {
+              {mobileNavItems.map((item) => {
                 const isActive = pathname === item.href;
                 return (
                   <div className="relative" key={item.href}>
@@ -331,7 +331,7 @@ export default function Navbar() {
       {/* Full Screen Search Modal - Mobile Only */}
       {isSearchOpen && (
         <div className="xl:hidden">
-          <div className="fixed inset-0 z-[70] flex items-center justify-center" style={{ backgroundColor: 'rgba(0,10,26,0.92)' }}>
+          <div className="fixed inset-0 z-70 flex items-center justify-center" style={{ backgroundColor: 'rgba(0,10,26,0.92)' }}>
             {/* Close Button */}
             <button
               onClick={() => setIsSearchOpen(false)}
