@@ -52,6 +52,8 @@ export const routing = defineRouting({
     '/adapted-stay/medical-equipment' : {
       fr: '/sejour-adapte/equipements-medicaux',
     },
+
+
     '/about' : {
       fr: '/a-propos',
     },
@@ -59,7 +61,7 @@ export const routing = defineRouting({
       fr: '/magazine',
     },
     '/magazine/[slug]' : {
-      fr: '/magazine/[slug]',
+      fr: '/magazine/[slug_fr]',
     },
     '/search' : {
       fr: '/recherche',
