@@ -3,7 +3,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useAuth } from '@/lib/auth-context';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 import { pb } from '@/lib/pocketbase';
 
 export default function ConfirmEmailPage() {

@@ -4,7 +4,7 @@ import { useAuth } from '@/lib/auth-context';
 import { pb } from '@/lib/pocketbase';
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 
 export default function AdminPage() {
   const { user } = useAuth();
@@ -80,11 +80,11 @@ export default function AdminPage() {
     <div className="space-y-6">
       {/* Welcome Message */}
       {showWelcome && (
-        <div className="relative bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
+        <div className="relative bg-linear-to-r from-indigo-500 via-purple-500 to-pink-500 rounded-lg shadow-lg">
           <div className="px-4 py-6 sm:px-6 lg:px-8">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <div className="flex-shrink-0">
+                <div className="shrink-0">
                   <svg className="h-8 w-8 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
                   </svg>
@@ -124,7 +124,7 @@ export default function AdminPage() {
         <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-4 sm:p-5">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-6 w-6 text-gray-400"
                   fill="none"
@@ -156,7 +156,7 @@ export default function AdminPage() {
         <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-4 sm:p-5">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-6 w-6 text-gray-400"
                   fill="none"
@@ -188,7 +188,7 @@ export default function AdminPage() {
         <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-4 sm:p-5">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-6 w-6 text-gray-400"
                   fill="none"
@@ -226,7 +226,7 @@ export default function AdminPage() {
         <div className="bg-white overflow-hidden shadow rounded-lg">
           <div className="p-4 sm:p-5">
             <div className="flex items-center">
-              <div className="flex-shrink-0">
+              <div className="shrink-0">
                 <svg
                   className="h-6 w-6 text-gray-400"
                   fill="none"

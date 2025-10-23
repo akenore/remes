@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useAuth } from '@/lib/auth-context';
 import { useTranslations } from 'next-intl';
-import { Link } from '@/i18n/routing';
+import { Link } from '@/i18n/navigation';
 
 export default function ForgetPasswordPage() {
   const [email, setEmail] = useState('');

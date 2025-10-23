@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { AuthProvider } from "@/lib/auth-context";
 import { ToastProvider } from "@/lib/toast-context";
-import { NextIntlClientProvider } from 'next-intl';
 import { getMessages } from 'next-intl/server';
+import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 
@@ -17,27 +17,21 @@ export const metadata: Metadata = {
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
 }
-
-export default async function LocaleLayout({
-  children,
-  params
-}: {
+type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
-}) {
-  // Await the params before destructuring
+};
+export default async function LocaleLayout({ children, params }: Props) {
   const { locale } = await params;
 
-  // Ensure that the incoming `locale` is valid
-  if (!routing.locales.includes(locale as any)) {
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
-  // Providing all messages to the client side
   const messages = await getMessages();
 
   return (
-    <NextIntlClientProvider messages={messages}>
+    <NextIntlClientProvider locale={locale} messages={messages}>
       <AuthProvider>
         <ToastProvider>
           {children}
