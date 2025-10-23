@@ -71,7 +71,15 @@ export default function Navbar() {
 
               {/* Center Logo */}
               <Link href="/" className="flex items-center">
-                <Image src="/logo.png" alt="Remes" width={150} height={120} className="h-14 w-auto" priority fetchPriority='high' style={{ width: 'auto', height: 'auto' }} />
+                <Image
+                  src="/logo.png"
+                  alt="Remes"
+                  width={150}
+                  height={120}
+                  className="h-14 w-auto"
+                  priority
+                  fetchPriority="high"
+                />
               </Link>
 
               {/* Search Icon */}
@@ -85,7 +93,7 @@ export default function Navbar() {
             </div>
 
             {/* Desktop Layout */}
-            <div className="hidden xl:flex items-center w-full">
+            <div className="hidden xl:flex items-center w-full min-h-[140px]">
               {/* Left Navigation */}
               <div className="flex items-center space-x-8 flex-1 justify-start pr-16">
                 {primaryNavItems.map((item) => {
@@ -107,7 +115,13 @@ export default function Navbar() {
               {/* Center Logo */}
               <div className="shrink-0 flex justify-center">
                 <Link href="/" className="flex items-center">
-                  <Image src="/logo.png" alt="Remes" width={219} height={172} style={{ width: "100%", height: "auto" }} />
+                  <Image
+                    src="/logo.png"
+                    alt="Remes"
+                    width={219}
+                    height={172}
+                    priority
+                  />
                 </Link>
               </div>
 
