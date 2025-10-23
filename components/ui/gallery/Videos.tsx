@@ -40,7 +40,7 @@ export default function VideosCarousel() {
                                    key={i}
                                    className="embla__slide shrink-0 snap-center px-4 flex-[0_0_100%] sm:flex-[0_0_80%] lg:flex-[0_0_60%]"
                               >
-                                   <div className="aspect-video w-full overflow-hidden [&>*]:!max-w-none [&>*]:!mx-0 [&>*]:!mt-0">
+                                   <div className="aspect-video w-full overflow-hidden *:max-w-none! *:mx-0! *:mt-0!">
                                         <Video poster={s.poster} videoSrc={s.videoSrc} />
                                    </div>
                               </div>

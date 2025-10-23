@@ -234,7 +234,10 @@ export default function MagazineView() {
                                                                  title={localizedContent.title}
                                                                  description={truncateContent(localizedContent.content)}
                                                                  buttonText={t('button')}
-                                                                 buttonHref={`/${locale}/magazine/${post.slug}`}
+                                                                 buttonHref={{
+                                                                     pathname: '/magazine/[slug]',
+                                                                     params: { slug: post.slug }
+                                                                 }}
                                                             />
                                                        );
                                                   })}

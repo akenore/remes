@@ -130,14 +130,14 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                         sizes="(max-width: 768px) 50vw"
                         quality={75}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   ))}
                 </div>
 
                 {/* Fifth image full width */}
                 <div
-                  className="group relative aspect-[16/10] w-full overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.99]"
+                  className="group relative aspect-16/10 w-full overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.99]"
                   onClick={() => openPopup(currentImages[4])}
                 >
                   <Image
@@ -148,7 +148,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                     sizes="(max-width: 768px) 100vw"
                     quality={75}
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                  <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
               </div>
 
@@ -170,7 +170,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                         sizes="(min-width: 768px) and (max-width: 1024px) 50vw"
                         quality={85}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     <div
                       className="group relative flex-1 overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
@@ -184,14 +184,14 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                         sizes="(min-width: 768px) and (max-width: 1024px) 50vw"
                         quality={85}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                   </div>
 
                   {/* Right Column */}
                   <div className="flex flex-col gap-4">
                     <div
-                      className="group relative flex-[2] overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
+                      className="group relative flex-2 overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
                       onClick={() => openPopup(currentImages[2])}
                     >
                       <Image
@@ -202,7 +202,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                         sizes="(min-width: 768px) and (max-width: 1024px) 50vw"
                         quality={85}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
                     <div className="flex-1 grid grid-cols-2 gap-4">
                       <div
@@ -217,7 +217,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                           sizes="(min-width: 768px) and (max-width: 1024px) 25vw"
                           quality={85}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div
                         className="group relative overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
@@ -231,7 +231,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                           sizes="(min-width: 768px) and (max-width: 1024px) 25vw"
                           quality={85}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
                   </div>
@@ -255,13 +255,13 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                       sizes="(min-width: 1024px) 33vw"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
 
                   {/* Center Column */}
                   <div className="flex flex-col gap-4">
                     <div
-                      className="group relative flex-[3] overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
+                      className="group relative flex-3 overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
                       onClick={() => openPopup(currentImages[1])}
                     >
                       <Image
@@ -272,9 +272,9 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                         sizes="(min-width: 1024px) 33vw"
                         quality={90}
                       />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                      <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                     </div>
-                    <div className="flex-[2] grid grid-cols-2 gap-4">
+                    <div className="flex-2 grid grid-cols-2 gap-4">
                       <div
                         className="group relative overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
                         onClick={() => openPopup(currentImages[2])}
@@ -287,7 +287,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                           sizes="(min-width: 1024px) 16vw"
                           quality={90}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                       <div
                         className="group relative overflow-hidden rounded-sm bg-gray-800 cursor-pointer transition-transform duration-300 hover:scale-[0.98]"
@@ -301,7 +301,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                           sizes="(min-width: 1024px) 16vw"
                           quality={90}
                         />
-                        <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                        <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                       </div>
                     </div>
                   </div>
@@ -319,7 +319,7 @@ export default function Masonary({ showIcons = true }: MasonaryProps) {
                       sizes="(min-width: 1024px) 33vw"
                       quality={90}
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    <div className="absolute inset-0 bg-linear-to-t from-black/40 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                   </div>
                 </div>
               </div>

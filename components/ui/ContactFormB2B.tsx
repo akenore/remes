@@ -1,5 +1,5 @@
 'use client';
-import Image from "next/image";
+// import Image from "next/image";
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
@@ -183,7 +183,7 @@ export default function ContactFormB2B() {
                <button 
                     type="submit" 
                     disabled={isSubmitting}
-                    className="border-1 border-dark-blue bg-dark-blue text-white px-12 py-2.5 hover:bg-white hover:text-dark-blue transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
+                    className="border border-dark-blue bg-dark-blue text-white px-12 py-2.5 hover:bg-white hover:text-dark-blue transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                >
                     {isSubmitting ? t('form.submitting') : t('form.submit')}
                </button>

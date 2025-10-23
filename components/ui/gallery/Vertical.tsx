@@ -106,7 +106,7 @@ export default function VerticalGallery() {
             </div>
             {/* Main image */}
             <div className="w-full flex flex-col items-center">
-              <div className="relative w-full aspect-[4/3] sm:aspect-[16/9] bg-gray-100 rounded-md overflow-hidden max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
+              <div className="relative w-full aspect-4/3 sm:aspect-video bg-gray-100 rounded-md overflow-hidden max-w-md sm:max-w-lg md:max-w-2xl lg:max-w-4xl mx-auto">
                 <Image
                   src={galleryImages[currentIndex]}
                   alt={`Gallery image ${currentIndex + 1}`}
@@ -125,7 +125,7 @@ export default function VerticalGallery() {
                     <button
                       key={img}
                       onClick={() => setCurrentIndex(idx)}
-                      className={`flex-shrink-0 w-14 h-10 sm:w-16 sm:h-12 md:w-20 md:h-16 rounded-md border-2 ${idx === currentIndex ? 'border-gold' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold`}
+                      className={`shrink-0 w-14 h-10 sm:w-16 sm:h-12 md:w-20 md:h-16 rounded-md border-2 ${idx === currentIndex ? 'border-gold' : 'border-transparent'} transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-gold`}
                       style={{ opacity: idx === currentIndex ? 1 : 0.5 }}
                       aria-label={`Show image ${idx + 1}`}
                     >

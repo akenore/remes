@@ -24,7 +24,7 @@ export default function FloatingWhatsAppButton() {
       style={{ whiteSpace: "nowrap" }}
       aria-label="Contact us on WhatsApp"
     >
-      <FaWhatsapp size={24} className="flex-shrink-0" />
+      <FaWhatsapp size={24} className="shrink-0" />
       <span className="hidden sm:inline">+216 23 050 038</span>
       <span className="inline sm:hidden text-sm">WhatsApp</span>
     </a>

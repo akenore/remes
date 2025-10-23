@@ -68,9 +68,9 @@ export default function EquipmentTable() {
         requestKey: null,
       });
 
-      console.log('Medical equipment API result:', result);
-      console.log('Items count:', result.items.length);
-      console.log('First item:', result.items[0]);
+      // console.log('Medical equipment API result:', result);
+      // console.log('Items count:', result.items.length);
+      // console.log('First item:', result.items[0]);
 
       // Simple mapping like admin component
       setEquipment(result.items as unknown as EquipmentItem[]);

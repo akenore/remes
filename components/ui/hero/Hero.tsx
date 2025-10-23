@@ -1,7 +1,7 @@
 'use client';
 import React, { useEffect, useState } from 'react';
 import { useTranslations, useLocale } from 'next-intl';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
 import Card from '../card/Card';
 import Navbar from '../Navbar';
 import { pb } from '@/lib/pocketbase';
@@ -94,7 +94,7 @@ export default function Hero() {
     <div className="w-full h-[1210px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpeg')] sm:bg-[url('/hero-1/bg-desktop.jpeg')] bg-no-repeat">
       <Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
-        <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-[28rem]'>
+        <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-112'>
           {loading ? (
             // Loading state
             <div className="absolute left-0 right-0 top-0 h-64 flex flex-col justify-center items-center">

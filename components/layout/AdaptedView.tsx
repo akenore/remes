@@ -3,7 +3,7 @@ import Footer from "../ui/Footer";
 import Image from "next/image";
 import { useTranslations } from 'next-intl';
 import Icon from "../ui/Icon";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 
 export default function AdaptedView() {
      const t = useTranslations('frontend.adaptedStay');
@@ -109,7 +109,7 @@ export default function AdaptedView() {
                          </blockquote>
                     </section>
                     <div className="flex justify-center my-10">
-                         <Link href="/adapted-stay/professional-services" className="border-1 border-dark-blue text-xl text-white px-8 py-2.5 bg-dark-blue hover:bg-white hover:text-dark-blue transition-all duration-500 cursor-pointer">
+                         <Link href="/adapted-stay/professional-services" className="border border-dark-blue text-xl text-white px-8 py-2.5 bg-dark-blue hover:bg-white hover:text-dark-blue transition-all duration-500 cursor-pointer">
                               {t('geographical.contactButton')}
                          </Link>
                     </div>

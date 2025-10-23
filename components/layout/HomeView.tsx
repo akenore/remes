@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 import Hero from "../ui/hero/Hero";
 import Footer from "../ui/Footer";
@@ -32,7 +32,7 @@ export default function HomeView() {
                                    </p>
 
                                    <div className="flex justify-center md:justify-start">
-                                        <Link href="/about" className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
+                                        <Link href="/about" className="border border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
                                              {t('mainContent.learnMore')}
                                         </Link>
                                    </div>
@@ -66,13 +66,13 @@ export default function HomeView() {
                          <div className="flex items-center space-x-10 animate-marquee whitespace-nowrap">
                               {Array.from({ length: 6 }).map((_, idx) => (
                                    <div key={"first-" + idx} className="flex items-center space-x-5 mx-5 min-h-[45px] md:min-h-[89px]">
-                                        <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] flex-shrink-0" priority />
+                                        <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] shrink-0" priority />
                                         <span className="text-dark-blue text-[2.25rem] lg:text-[4.3rem] font-vensfolk uppercase tracking-wide leading-none">{t('marquee.text')}</span>
                                    </div>
                               ))}
                               {Array.from({ length: 6 }).map((_, idx) => (
                                    <div key={"second-" + idx} className="flex items-center space-x-5 mx-5 min-h-[45px] md:min-h-[89px]">
-                                        <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] flex-shrink-0" priority />
+                                        <Image src="/icon-remes.png" alt="icon remes" width={89} height={89} className="w-[45px] h-[45px] md:w-[89px] md:h-[89px] shrink-0" priority />
                                         <span className="text-dark-blue text-[2.25rem] lg:text-[4.3rem] font-vensfolk uppercase tracking-wide leading-none">{t('marquee.text')}</span>
                                    </div>
                               ))}

@@ -1,5 +1,8 @@
+import type { ComponentProps } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+
+type LinkHref = ComponentProps<typeof Link>['href'];
 
 interface CardProps {
   image: string;
@@ -8,7 +11,7 @@ interface CardProps {
   title: string;
   description: string;
   buttonText: string;
-  buttonHref: string;
+  buttonHref: LinkHref;
 }
 
 export default function Card4({
@@ -28,7 +31,7 @@ export default function Card4({
     >
       <div className="flex flex-col">
         {/* Image */}
-        <div className="relative w-full aspect-[4/3]">
+        <div className="relative w-full aspect-4/3">
           <Image
             src={image}
             alt={title}

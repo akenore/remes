@@ -33,7 +33,7 @@ export default function CalendlyButton() {
                />
                <button
                     onClick={openCalendly}
-                    className="border-1 border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer"
+                    className="border border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer"
                >
                     {label}
                </button>

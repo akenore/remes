@@ -47,7 +47,7 @@ export default function NursingView() {
                               title: t('hero.cards.offer.title'),
                               description: t('hero.cards.offer.description'),
                               buttonText: t('button'),
-                              buttonHref: "/nursing-home/our-offer",
+                              buttonHref: "/nursing-home/our-offers",
                          },
                     ]}
                />

@@ -1,8 +1,9 @@
 import Image from "next/image";
 import LanguageSwitcher from "./LanguageSwitcher";
-import Link from "next/link";
+import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 import FloatingWhatsAppButton from "../WhatsApp";
+
 
 export default function Footer() {
      const t = useTranslations();

@@ -1,12 +1,15 @@
+import type { ComponentProps } from 'react';
 import Image from 'next/image';
-import Link from 'next/link';
+import { Link } from '@/i18n/navigation';
+
+type LinkHref = ComponentProps<typeof Link>['href'];
 
 interface CardProps {
   image: string;
   title: string;
   description: string;
   buttonText: string;
-  buttonHref: string;
+  buttonHref: LinkHref;
 }
 
 export default function Card({ image, title, description, buttonText, buttonHref }: CardProps) {
