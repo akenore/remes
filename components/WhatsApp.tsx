@@ -14,9 +14,11 @@ export default function FloatingWhatsAppButton() {
       className="
         fixed bottom-4 right-4
         flex items-center gap-2
-        bg-green-500 text-white font-medium
+        bg-[#0E7A45] text-white font-semibold
         px-4 py-2 rounded-full shadow-lg
-        hover:bg-green-600 active:scale-95
+        hover:bg-[#0C6B3B] focus-visible:bg-[#0C6B3B]
+        focus-visible:outline focus-visible:outline-offset-2 focus-visible:outline-white/70
+        active:scale-95
         transition-all duration-300 ease-in-out
         z-50
         sm:px-5 sm:py-3 sm:gap-3
