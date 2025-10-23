@@ -7,6 +7,18 @@ export const routing = defineRouting({
 
   pathnames: {
     '/': '/',
+    '/login': {
+      fr: '/connexion',
+    },
+    '/forget-password': {
+      fr: '/mot-de-passe-oublie',
+    },
+    '/confirm-email': {
+      fr: '/confirmer-email',
+    },
+    '/create-user': {
+      fr: '/creer-utilisateur',
+    },
 
     '/nursing-home' : {
       fr: '/ehpad',

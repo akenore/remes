@@ -22,7 +22,9 @@ export default function LanguageSwitcher() {
       document.cookie = `NEXT_LOCALE=${newLocale};path=${cookiePath};SameSite=Lax`;
     }
 
-    router.replace(currentPath, { locale: newLocale });
+    type ReplaceHref = Parameters<typeof router.replace>[0];
+    const targetPath = (pathname ?? '/') as ReplaceHref;
+    router.replace(targetPath, { locale: newLocale });
   };
 
   return (

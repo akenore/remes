@@ -319,12 +319,15 @@ export default function SearchView() {
                                                                  image={getImageUrl()}
                                                                  category={categoryNames || t('magazine.blog.uncategorized')}
                                                                  date={formatDate(post.created)}
-                                                                 title={localizedContent.title}
-                                                                 description={truncateContent(localizedContent.content)}
-                                                                 buttonText={t('button')}
-                                                                 buttonHref={`/${locale}/magazine/${post.slug}`}
-                                                            />
-                                                       );
+                                                              title={localizedContent.title}
+                                                              description={truncateContent(localizedContent.content)}
+                                                              buttonText={t('button')}
+                                                              buttonHref={{
+                                                                   pathname: '/magazine/[slug]',
+                                                                   params: { slug: post.slug },
+                                                              }}
+                                                         />
+                                                   );
                                                   })}
                                              </div>
 
