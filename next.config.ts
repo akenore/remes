@@ -18,8 +18,6 @@ const ContentSecurityPolicy = [
   "media-src 'self' https:;",
   "manifest-src 'self';",
   "upgrade-insecure-requests;",
-  "require-trusted-types-for 'script';",
-  "trusted-types nextjs nextjs#bundler;",
 ].join(' ');
 
 const securityHeaders: Array<{ key: string; value: string }> = [
