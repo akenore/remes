@@ -73,7 +73,7 @@ export const routing = defineRouting({
       fr: '/magazine',
     },
     '/magazine/[slug]' : {
-      fr: '/magazine/[slug_fr]',
+      fr: '/magazine/[slug]',
     },
     '/search' : {
       fr: '/recherche',

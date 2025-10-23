@@ -6,12 +6,14 @@ import Image from 'next/image';
 import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import { pb } from '@/lib/pocketbase';
+import type { ClientResponseError } from 'pocketbase';
 
 interface Post {
   id: string;
   title: string;
   title_fr: string;
   slug: string;
+  slug_fr?: string;
   content: string;
   content_fr: string;
   cover_image: string | null;
@@ -39,7 +41,7 @@ export default function PostDetailPage() {
   const [loading, setLoading] = useState(true);
   const [notFound, setNotFound] = useState(false);
 
-  const slug = params?.slug as string;
+  const slugParam = (params?.slug as string) ?? (params?.slug_fr as string);
 
   // Function to decode HTML entities
   const decodeHtmlEntities = (text: string): string => {
@@ -72,11 +74,36 @@ export default function PostDetailPage() {
       setLoading(true);
       setNotFound(false);
       
-      // Fetch single post by slug
-      const postResult = await pb.collection('posts').getFirstListItem(`slug="${slug}"`, {
-        expand: 'categories',
-        requestKey: null,
-      });
+      if (!slugParam) {
+        setNotFound(true);
+        return;
+      }
+
+      const filtersToTry = locale === 'fr'
+        ? [`slug_fr="${slugParam}"`, `slug="${slugParam}"`]
+        : [`slug="${slugParam}"`, `slug_fr="${slugParam}"`];
+
+      let postResult: any = null;
+
+      for (const filter of filtersToTry) {
+        try {
+          postResult = await pb.collection('posts').getFirstListItem(filter, {
+            expand: 'categories',
+            requestKey: null,
+          });
+          if (postResult) break;
+        } catch (error: unknown) {
+          const err = error as ClientResponseError;
+          if (!err?.status || err.status !== 404) {
+            throw error;
+          }
+        }
+      }
+
+      if (!postResult) {
+        setNotFound(true);
+        return;
+      }
 
       // Check if post is published (published is boolean)
       if (postResult.published !== true) {
@@ -89,6 +116,7 @@ export default function PostDetailPage() {
         title: postResult.title || '',
         title_fr: postResult.title_fr || '',
         slug: postResult.slug || '',
+        slug_fr: postResult.slug_fr || '',
         content: postResult.content || '',
         content_fr: postResult.content_fr || '',
         cover_image: postResult.cover_image || null,
@@ -124,10 +152,10 @@ export default function PostDetailPage() {
 
   // Fetch data on component mount
   useEffect(() => {
-    if (slug) {
+    if (slugParam) {
       fetchPostData();
     }
-  }, [slug]);
+  }, [slugParam]);
 
   // Format date
   const formatDate = (dateString: string) => {
@@ -214,6 +242,7 @@ export default function PostDetailPage() {
 
   const localizedContent = getLocalizedContent(post);
   const categoryNames = getPostCategoryNames(post.categories);
+  const canonicalSlug = locale === 'fr' ? (post.slug_fr || post.slug) : post.slug;
 
   // Get proper image URL with fallback
   const getImageUrl = () => {
@@ -223,8 +252,12 @@ export default function PostDetailPage() {
         typeof post.cover_image === 'string' && 
         post.cover_image.trim() !== '') {
       try {
-        // Use the correct PocketBase method (getURL, not getUrl)
-        const imageUrl = pb.files.getURL(post, post.cover_image);
+        const recordRef = {
+          id: post.id,
+          collectionId: post.collectionId,
+          collectionName: post.collectionName,
+        };
+        const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
         
         // Double check the URL is valid and not empty
         if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
@@ -234,7 +267,8 @@ export default function PostDetailPage() {
         console.warn('Error getting image URL for post:', post.id, 'image:', post.cover_image, 'error:', error);
         // Fallback to manual URL construction
         try {
-          return `${pb.baseURL}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
+          const collectionSegment = post.collectionId || post.collectionName || 'posts';
+          return `${pb.baseURL}/api/files/${collectionSegment}/${post.id}/${post.cover_image}`;
         } catch (e2) {
           console.warn('Manual URL construction failed:', e2);
         }
@@ -267,10 +301,10 @@ export default function PostDetailPage() {
     "description": categoryNames || t('magazine.blog.uncategorized'),
     "articleBody": localizedContent.content.replace(/<[^>]*>/g, ''),
     "keywords": categoryNames,
-    "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${post.slug}`,
+    "url": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${canonicalSlug}`,
     "mainEntityOfPage": {
       "@type": "WebPage",
-      "@id": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${post.slug}`
+      "@id": `${typeof window !== 'undefined' ? window.location.origin : ''}/${locale}/magazine/${canonicalSlug}`
     }
   };
 
@@ -337,6 +371,7 @@ export default function PostDetailPage() {
                       width={1200}
                       height={600}
                       className="w-full h-auto object-cover rounded-lg shadow-lg"
+                      unoptimized
                       priority
                       itemProp="image"
                     />

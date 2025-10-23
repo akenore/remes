@@ -12,10 +12,11 @@ interface Post {
   title: string;
   title_fr: string;
   slug: string;
+  slug_fr?: string;
   content: string;
   content_fr: string;
   cover_image: string | null;
-  categories: string[];
+  categories: any[];
   status: boolean;
   created: string;
   updated: string;
@@ -97,12 +98,13 @@ export default function SearchView() {
                     requestKey: null,
                });
 
-               const postsData: Post[] = postsResult.items.map((item: any) => ({
-                    id: item.id,
-                    title: item.title || '',
-                    title_fr: item.title_fr || '',
-                    slug: item.slug || '',
-                    content: item.content || '',
+    const postsData: Post[] = postsResult.items.map((item: any) => ({
+      id: item.id,
+      title: item.title || '',
+      title_fr: item.title_fr || '',
+      slug: item.slug || '',
+      slug_fr: item.slug_fr || '',
+      content: item.content || '',
                     content_fr: item.content_fr || '',
                     cover_image: item.cover_image || null,
                     categories: item.expand?.categories || [],
@@ -296,7 +298,12 @@ export default function SearchView() {
                                                                 typeof post.cover_image === 'string' && 
                                                                 post.cover_image.trim() !== '') {
                                                                  try {
-                                                                      const imageUrl = pb.files.getURL(post, post.cover_image);
+                                                                      const recordRef = {
+                                                                           id: post.id,
+                                                                           collectionId: post.collectionId,
+                                                                           collectionName: post.collectionName,
+                                                                      };
+                                                                      const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
                                                                       
                                                                       if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
                                                                            return imageUrl;
@@ -304,7 +311,8 @@ export default function SearchView() {
                                                                  } catch (error) {
                                                                       console.warn('Error getting image URL for post:', post.id, 'image:', post.cover_image, 'error:', error);
                                                                       try {
-                                                                           return `${pb.baseURL}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
+                                                                           const collectionSegment = post.collectionId || post.collectionName || 'posts';
+                                                                           return `${pb.baseURL}/api/files/${collectionSegment}/${post.id}/${post.cover_image}`;
                                                                       } catch (e2) {
                                                                            console.warn('Manual URL construction failed:', e2);
                                                                       }
@@ -312,6 +320,14 @@ export default function SearchView() {
                                                             }
                                                             return '/form.jpg';
                                                        };
+
+                                                       const slugParam = post.slug || '';
+                                                       const slugFrParam = post.slug_fr || post.slug || '';
+                                                       const slugForLocale = locale === 'fr' ? slugFrParam : slugParam;
+
+                                                       if (!slugForLocale) {
+                                                            return null;
+                                                       }
 
                                                        return (
                                                             <Card4
@@ -324,7 +340,9 @@ export default function SearchView() {
                                                               buttonText={t('button')}
                                                               buttonHref={{
                                                                    pathname: '/magazine/[slug]',
-                                                                   params: { slug: post.slug },
+                                                                   params: {
+                                                                        slug: slugForLocale,
+                                                                   },
                                                               }}
                                                          />
                                                    );

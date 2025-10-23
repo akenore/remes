@@ -126,6 +126,11 @@ const nextConfig: NextConfig = {
         hostname: 'remes-tunisie.com',
         pathname: '/api/pb/api/files/**',
       },
+      {
+        protocol: 'https',
+        hostname: 'www.remes-tunisie.com',
+        pathname: '/api/pb/api/files/**',
+      },
     ],
     formats: ['image/webp', 'image/avif'],
     deviceSizes: [640, 750, 828, 1080, 1200, 1920, 2048, 3840],

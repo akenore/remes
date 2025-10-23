@@ -14,14 +14,17 @@ interface Post {
   title: string;
   title_fr: string;
   slug: string;
+  slug_fr?: string;
   content: string;
   content_fr: string;
   author: string;
   published: boolean;
   categories: string[];
-  cover_image: string;
+  cover_image: string | null;
   created: string;
   updated: string;
+  collectionId?: string;
+  collectionName?: string;
   expand?: {
     author?: {
       name?: string;
@@ -34,6 +37,14 @@ interface Post {
     }>;
   };
 }
+
+const getCoverImageUrl = (post: Post) => {
+  if (!post.cover_image || typeof post.cover_image !== 'string') {
+    return '';
+  }
+  const collectionSegment = post.collectionId || post.collectionName || 'posts';
+  return `${pb.baseURL}/api/files/${collectionSegment}/${post.id}/${post.cover_image}`;
+};
 
 export default function PostsPage() {
   const locale = useLocale();
@@ -157,7 +168,26 @@ export default function PostsPage() {
         })
       );
 
-      setPosts(postsWithAuthors as unknown as Post[]);
+      const normalizedPosts = (postsWithAuthors as Array<Record<string, any>>).map((item) => ({
+        id: item.id as string,
+        title: item.title || '',
+        title_fr: item.title_fr || '',
+        slug: item.slug || '',
+        slug_fr: item.slug_fr || '',
+        content: item.content || '',
+        content_fr: item.content_fr || '',
+        author: item.author as string,
+        published: Boolean(item.published),
+        categories: Array.isArray(item.expand?.categories) ? item.expand?.categories : [],
+        cover_image: item.cover_image || null,
+        created: item.created as string,
+        updated: item.updated as string,
+        expand: item.expand,
+        collectionId: item.collectionId as string | undefined,
+        collectionName: item.collectionName as string | undefined,
+      }));
+
+      setPosts(normalizedPosts as Post[]);
       setTotalPages(result.totalPages);
     } catch (err) {
       setError(t('errors.fetchFailed'));
@@ -335,17 +365,24 @@ export default function PostsPage() {
                     <tr key={post.id} className="hover:bg-gray-50">
                       <td className="px-6 py-4 whitespace-nowrap">
                         <div className="flex items-center">
-                          {post.cover_image && (
-                            <div className="flex-shrink-0 h-10 w-10 relative">
-                              <Image
-                                src={pb.files.getURL(post, post.cover_image, { thumb: '40x40' })}
-                                alt={getLocalizedTitle(post)}
-                                fill
-                                sizes="40px"
-                                className="rounded-lg object-cover"
-                              />
-                            </div>
-                          )}
+                          {(() => {
+                            const coverImageUrl = getCoverImageUrl(post);
+                            if (!coverImageUrl) {
+                              return null;
+                            }
+                            return (
+                              <div className="flex-shrink-0 h-10 w-10 relative">
+                                <Image
+                                  src={coverImageUrl}
+                                  alt={getLocalizedTitle(post)}
+                                  fill
+                                  sizes="40px"
+                                  unoptimized
+                                  className="rounded-lg object-cover"
+                                />
+                              </div>
+                            );
+                          })()}
                           <div className={post.cover_image ? 'ml-4' : ''}>
                             <div className="text-sm font-medium text-gray-900">
                               {getLocalizedTitle(post)}

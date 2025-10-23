@@ -245,7 +245,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Add French versions of magazine posts
     const frenchMagazinePosts = posts.items.map((post: any) => ({
-      url: `${baseUrl}/fr/magazine/${post.slug}`,
+      url: `${baseUrl}/fr/magazine/${post.slug_fr || post.slug}`,
       lastModified: new Date(post.updated),
       changeFrequency: 'weekly' as const,
       priority: 0.8,

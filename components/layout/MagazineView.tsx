@@ -13,10 +13,11 @@ interface Post {
   title: string;
   title_fr: string;
   slug: string;
+  slug_fr?: string;
   content: string;
   content_fr: string;
   cover_image: string | null;
-  categories: string[];
+  categories: any[];
   status: boolean;
   created: string;
   updated: string;
@@ -80,7 +81,8 @@ export default function MagazineView() {
                          id: item.id,
                          title: item.title || '',
                          title_fr: item.title_fr || '',
-                         slug: item.slug || '',
+                        slug: item.slug || '',
+                        slug_fr: item.slug_fr || '',
                          content: item.content || '',
                          content_fr: item.content_fr || '',
                          cover_image: item.cover_image || null,
@@ -204,8 +206,12 @@ export default function MagazineView() {
                                                                 typeof post.cover_image === 'string' && 
                                                                 post.cover_image.trim() !== '') {
                                                                  try {
-                                                                      // Use the correct PocketBase method (getURL, not getUrl)
-                                                                      const imageUrl = pb.files.getURL(post, post.cover_image);
+                                                                      const recordRef = {
+                                                                           id: post.id,
+                                                                           collectionId: post.collectionId,
+                                                                           collectionName: post.collectionName,
+                                                                      };
+                                                                      const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
                                                                       
                                                                       // Double check the URL is valid and not empty
                                                                       if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
@@ -215,7 +221,8 @@ export default function MagazineView() {
                                                                       console.warn('Error getting image URL for post:', post.id, 'image:', post.cover_image, 'error:', error);
                                                                       // Fallback to manual URL construction
                                                                       try {
-                                                                           return `${pb.baseURL}/api/files/${post.collectionName}/${post.id}/${post.cover_image}`;
+                                                                           const collectionSegment = post.collectionId || post.collectionName || 'posts';
+                                                                           return `${pb.baseURL}/api/files/${collectionSegment}/${post.id}/${post.cover_image}`;
                                                                       } catch (e2) {
                                                                            console.warn('Manual URL construction failed:', e2);
                                                                       }
@@ -225,22 +232,32 @@ export default function MagazineView() {
                                                             return '/form.jpg';
                                                        };
 
+                                                       const slugParam = post.slug || '';
+                                                       const slugFrParam = post.slug_fr || post.slug || '';
+                                                       const slugForLocale = locale === 'fr' ? slugFrParam : slugParam;
+
+                                                       if (!slugForLocale) {
+                                                            return null;
+                                                       }
+
                                                        return (
                                                             <Card4
                                                                  key={post.id}
                                                                  image={getImageUrl()}
                                                                  category={categoryNames || t('magazine.blog.uncategorized')}
                                                                  date={formatDate(post.created)}
-                                                                 title={localizedContent.title}
-                                                                 description={truncateContent(localizedContent.content)}
-                                                                 buttonText={t('button')}
-                                                                 buttonHref={{
-                                                                     pathname: '/magazine/[slug]',
-                                                                     params: { slug: post.slug }
-                                                                 }}
-                                                            />
-                                                       );
-                                                  })}
+                                                                title={localizedContent.title}
+                                                                description={truncateContent(localizedContent.content)}
+                                                                buttonText={t('button')}
+                                                                buttonHref={{
+                                                                    pathname: '/magazine/[slug]',
+                                                                    params: {
+                                                                         slug: slugForLocale,
+                                                                    }
+                                                                }}
+                                                           />
+                                                      );
+                                                 })}
                                              </div>
 
                                              {/* Pagination */}
