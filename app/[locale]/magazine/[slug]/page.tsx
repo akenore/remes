@@ -157,6 +157,22 @@ export default function PostDetailPage() {
     }
   }, [slugParam]);
 
+  useEffect(() => {
+    if (typeof window === 'undefined' || !post) return;
+    (window as typeof window & {
+      __remesActiveSlugs?: { slug: string; slug_fr?: string };
+    }).__remesActiveSlugs = {
+      slug: post.slug,
+      slug_fr: post.slug_fr || post.slug,
+    };
+
+    return () => {
+      if (typeof window !== 'undefined') {
+        delete (window as typeof window & { __remesActiveSlugs?: unknown }).__remesActiveSlugs;
+      }
+    };
+  }, [post]);
+
   // Format date
   const formatDate = (dateString: string) => {
     const date = new Date(dateString);

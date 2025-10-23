@@ -2,7 +2,7 @@
 
 import { useLocale, useTranslations } from 'next-intl';
 import { useRouter, usePathname } from '@/i18n/navigation';
-import {routing} from '@/i18n/routing';
+import { routing } from '@/i18n/routing';
 
 export default function LanguageSwitcher() {
   const t = useTranslations('common');
@@ -13,18 +13,31 @@ export default function LanguageSwitcher() {
   const handleLocaleChange = (newLocale: string) => {
     if (newLocale === locale) return;
 
-    const currentPath = pathname ?? (typeof window !== 'undefined' ? window.location.pathname : '/');
-    const windowPath = typeof window !== 'undefined' ? window.location.pathname : currentPath;
+    const isBrowser = typeof window !== 'undefined';
 
-    if (typeof document !== 'undefined') {
-      const basePath = currentPath === '/' ? windowPath : windowPath.replace(currentPath, '');
-      const cookiePath = basePath !== '' ? basePath : '/';
-      document.cookie = `NEXT_LOCALE=${newLocale};path=${cookiePath};SameSite=Lax`;
+    if (isBrowser && pathname && pathname.includes('/magazine/')) {
+      const slugs = (window as typeof window & {
+        __remesActiveSlugs?: { slug: string; slug_fr?: string };
+      }).__remesActiveSlugs;
+
+      const currentSlug = slugs?.slug ?? pathname.split('/').filter(Boolean).pop() ?? '';
+      const currentSlugFr = slugs?.slug_fr ?? currentSlug;
+      const targetSlug = newLocale === 'fr' ? currentSlugFr : currentSlug;
+
+      if (targetSlug) {
+        router.replace(
+          {
+            pathname: '/magazine/[slug]',
+            params: { slug: targetSlug },
+          },
+          { locale: newLocale }
+        );
+        return;
+      }
     }
 
-    type ReplaceHref = Parameters<typeof router.replace>[0];
-    const targetPath = (pathname ?? '/') as ReplaceHref;
-    router.replace(targetPath, { locale: newLocale });
+    const target = pathname as Parameters<typeof router.replace>[0];
+    router.replace(target, { locale: newLocale });
   };
 
   return (
