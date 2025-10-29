@@ -5,14 +5,25 @@ import { useTranslations } from 'next-intl';
 import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import ContactForm from "@/components/ui/ContactForm";
+import { buildLocalizedMetadata, resolveLocaleParam } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.nursingHome.livingAtRemes.mealsAndDailyServices.meta');
+export async function generateMetadata({
+     params,
+}: {
+     params: { locale?: string } | Promise<{ locale?: string }>;
+}): Promise<Metadata> {
+     const locale = await resolveLocaleParam(params);
+     const t = await getTranslations({
+          locale,
+          namespace: 'frontend.nursingHome.livingAtRemes.mealsAndDailyServices.meta',
+     });
 
-     return {
+     return buildLocalizedMetadata({
+          locale,
+          path: '/nursing-home/living-at-remes/meals-and-daily-services',
           title: t('title'),
           description: t('description'),
-     };
+     });
 }
 
 export default function MealsAndDailyServices() {

@@ -5,14 +5,22 @@ import ContactFormB2B from "@/components/ui/ContactFormB2B";
 import { Metadata } from "next";
 import { getTranslations } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import { buildLocalizedMetadata, resolveLocaleParam } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.professionalServices.meta');
+export async function generateMetadata({
+     params,
+}: {
+     params: { locale?: string } | Promise<{ locale?: string }>;
+}): Promise<Metadata> {
+     const locale = await resolveLocaleParam(params);
+     const t = await getTranslations({ locale, namespace: 'frontend.professionalServices.meta' });
 
-     return {
+     return buildLocalizedMetadata({
+          locale,
+          path: '/adapted-stay/professional-services',
           title: t('title'),
           description: t('description'),
-     };
+     });
 }
 
 export default function ProfessionalServices() {

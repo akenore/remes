@@ -6,14 +6,22 @@ import PageSection from "@/components/ui/PageSection";
 import { Metadata } from "next";
 import { getTranslations } from 'next-intl/server';
 import { useTranslations } from 'next-intl';
+import { buildLocalizedMetadata, resolveLocaleParam } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.adaptedCare.meta');
+export async function generateMetadata({
+     params,
+}: {
+     params: { locale?: string } | Promise<{ locale?: string }>;
+}): Promise<Metadata> {
+     const locale = await resolveLocaleParam(params);
+     const t = await getTranslations({ locale, namespace: 'frontend.adaptedCare.meta' });
 
-     return {
+     return buildLocalizedMetadata({
+          locale,
+          path: '/adapted-stay/adapted-care',
           title: t('title'),
           description: t('description'),
-     };
+     });
 }
 
 export default function AdaptedCare() {

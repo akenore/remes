@@ -5,14 +5,22 @@ import Hero3 from "@/components/ui/hero/Hero3";
 import Footer from "@/components/ui/Footer";
 import ContactForm from "@/components/ui/ContactForm";
 import Image from "next/image";
+import { buildLocalizedMetadata, resolveLocaleParam } from '@/lib/seo';
 
-export async function generateMetadata(): Promise<Metadata> {
-     const t = await getTranslations('frontend.nursingHome.hostingSolutions.meta');
+export async function generateMetadata({
+     params,
+}: {
+     params: { locale?: string } | Promise<{ locale?: string }>;
+}): Promise<Metadata> {
+     const locale = await resolveLocaleParam(params);
+     const t = await getTranslations({ locale, namespace: 'frontend.nursingHome.hostingSolutions.meta' });
 
-     return {
+     return buildLocalizedMetadata({
+          locale,
+          path: '/nursing-home/hosting-solutions',
           title: t('title'),
           description: t('description'),
-     };
+     });
 }
 
 export default function HostingSolutions() {
