@@ -16,14 +16,9 @@ Disallow: /confirm-email
 Disallow: /*/confirm-email
 Disallow: /test-connection
 Disallow: /*/test-connection
-
-# Disallow terms of use and privacy policy
 Disallow: /terms-of-use
-Disallow: /*/terms-of-use
+Disallow: /fr/conditions-dutilisation
 Disallow: /privacy-policy
-Disallow: /*/privacy-policy
+Disallow: /fr/politique-de-confidentialite
 
-# Allow all other pages
-Allow: /
-
-Sitemap: http://remes-tunisie.com/sitemap.xml
+Sitemap: https://www.remes-tunisie.com/sitemap.xml
