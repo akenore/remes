@@ -5,7 +5,7 @@ import Hero2 from "../ui/hero/Hero2";
 import Footer from "../ui/Footer";
 import ContactForm from "../ui/ContactForm";
 import Card3 from "../ui/card/Card3";
-import CalendlyButton from '../CalendlyButton';
+import KoalendarButton from '../KoalendarButton';
 import { FaHome, FaBed, FaHandsHelping, FaTags, } from 'react-icons/fa';
 
 
@@ -73,7 +73,7 @@ export default function NursingView() {
                                    </p>
 
                                    <div className="flex justify-center md:justify-start">
-                                        <CalendlyButton />
+                                        <KoalendarButton />
                                    </div>
                               </div>
 
