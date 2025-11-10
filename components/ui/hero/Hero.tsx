@@ -5,6 +5,7 @@ import { Link } from '@/i18n/navigation';
 import Card from '../card/Card';
 import Navbar from '../Navbar';
 import { pb } from '@/lib/pocketbase';
+import KoalendarButton from '../../KoalendarButton';
 
 interface HomeSlide {
   id: string;
@@ -133,11 +134,12 @@ export default function Hero() {
                       {localizedContent.description}
                     </p>
                   </div>
-                  {/* <div className="my-10">
-                    <Link href="/" className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
+                  <div className="my-10">
+                    {/* <Link href="/" className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
                       {t('button')}
-                    </Link>
-                  </div> */}
+                    </Link> */}
+                    <KoalendarButton className='cursor-pointer bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8'/>
+                  </div>
                 </div>
               );
             })

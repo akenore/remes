@@ -3,7 +3,11 @@ import LanguageSwitcher from "./LanguageSwitcher";
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 import FloatingWhatsAppButton from "../WhatsApp";
+import { FaMapMarkerAlt } from 'react-icons/fa';
 
+
+const CONTACT_ADDRESS = 'Zone Touristique Skanes, Monastir';
+const CONTACT_MAP_URL = 'https://maps.google.com/?q=Remes+Medical+Residence+Monastir';
 
 export default function Footer() {
      const t = useTranslations();
@@ -19,8 +23,18 @@ export default function Footer() {
                               <div className="col-span-9 sm:col-span-4 md:col-span-3 mb-10 md:mb-0">
                                    <p className="pl-3 text-white mb-8 mx-2 md:mx-auto text-center sm:text-left">
                                         {t('frontend.menu.footer.description')}
+                                        <a
+                                             href={CONTACT_MAP_URL}
+                                             target="_blank"
+                                             rel="noopener noreferrer"
+                                             className="flex items-center justify-center lg:justify-start gap-2 hover:text-[#EEDAB8] transition-colors pt-5"
+                                             aria-label={`Open map for ${CONTACT_ADDRESS}`}
+                                        >
+                                             <FaMapMarkerAlt className="text-[#EEDAB8]" />
+                                             <span className="font-medium">{CONTACT_ADDRESS}</span>
+                                        </a>
                                    </p>
-                                   <div className="pl-3 pt-20 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
+                                   <div className="pl-3 pt-10 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
                                         <a href="https://www.facebook.com/remestunisie/" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook" target="_blanc" rel="noopener noreferrer">
                                              <svg
                                                   width={26}

@@ -16,8 +16,14 @@ declare global {
 }
 
 const KOALENDAR_URL = "https://koalendar.com/e/reunion-de-30-minutes";
+const DEFAULT_BUTTON_CLASS =
+     "border border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer";
 
-export default function KoalendarButton() {
+type KoalendarButtonProps = {
+     className?: string;
+};
+
+export default function KoalendarButton({ className }: KoalendarButtonProps = {}) {
      const locale = useLocale();
 
      useEffect(() => {
@@ -52,10 +58,7 @@ export default function KoalendarButton() {
                     src="https://koalendar.com/assets/widget.js"
                     strategy="afterInteractive"
                />
-               <button
-                    onClick={openKoalendar}
-                    className="border border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer"
-               >
+               <button onClick={openKoalendar} className={className ?? DEFAULT_BUTTON_CLASS}>
                     {label}
                </button>
           </>

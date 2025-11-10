@@ -5,6 +5,7 @@ import type { FocusEvent } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useTranslations } from 'next-intl';
 import Image from 'next/image';
+import { FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import { routing } from '@/i18n/routing';
 
 type AppPathname = keyof typeof routing.pathnames;
@@ -23,6 +24,9 @@ type NavItem = {
 };
 
 const KNOWN_LOCALES = routing.locales as readonly string[];
+const CONTACT_PHONE = '+216 23 050 038';
+const CONTACT_ADDRESS = 'Zone Touristique Skanes, Monastir';
+const CONTACT_MAP_URL = 'https://maps.google.com/?q=Remes+Medical+Residence+Monastir';
 
 const normalizePathValue = (target: string) => {
   if (!target) return '/';
@@ -40,6 +44,7 @@ export default function Navbar() {
   const [openMobileDropdown, setOpenMobileDropdown] = useState<StaticAppPathname | null>(null);
   const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<StaticAppPathname | null>(null);
   const pathname = usePathname();
+  const phoneHref = `tel:${CONTACT_PHONE.replace(/[^\d+]/g, '')}`;
 
   const nursingHomeSubmenu = useMemo<NavSubItem[]>(
     () => [
@@ -213,7 +218,29 @@ export default function Navbar() {
 
   return (
     <header>
-      <nav className="relative z-50 bg-transparent font-myanmar py-20 text-[1.18rem] md:mb-40">
+      <div className="bg-[#061a30]/80 text-white text-xs sm:text-sm border-b border-white/10 mb-6">
+        <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap items-center justify-start md:justify-end gap-4">
+          <a
+            href={phoneHref}
+            className="flex items-center gap-2 hover:text-[#EEDAB8] transition-colors"
+            aria-label={`Call us at ${CONTACT_PHONE}`}
+          >
+            <FaPhoneAlt className="text-[#EEDAB8]" />
+            <span className="font-medium">{CONTACT_PHONE}</span>
+          </a>
+          <a
+            href={CONTACT_MAP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex items-center gap-2 hover:text-[#EEDAB8] transition-colors"
+            aria-label={`Open map for ${CONTACT_ADDRESS}`}
+          >
+            <FaMapMarkerAlt className="text-[#EEDAB8]" />
+            <span className="font-medium">{CONTACT_ADDRESS}</span>
+          </a>
+        </div>
+      </div>
+      <nav className="relative z-50 bg-transparent font-myanmar py-10 md:py-20 text-[1.18rem] md:mb-40">
         <div className="max-w-[1540px] mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
 
@@ -237,7 +264,7 @@ export default function Navbar() {
                   alt="Remes"
                   width={150}
                   height={120}
-                  className="h-14 w-auto"
+                  className="h-auto w-auto"
                   priority
                   fetchPriority="high"
                 />
