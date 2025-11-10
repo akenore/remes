@@ -3,15 +3,26 @@
 import { useState, useMemo, useEffect, useCallback } from 'react';
 import type { FocusEvent } from 'react';
 import { Link, usePathname, useRouter } from '@/i18n/navigation';
-import { useTranslations, useLocale } from 'next-intl';
+import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { routing } from '@/i18n/routing';
 
-type NavItem = {
-  href: string;
+type AppPathname = keyof typeof routing.pathnames;
+type DynamicPathname = `${string}[${string}`;
+type StaticAppPathname = Exclude<AppPathname, DynamicPathname>;
+
+type NavSubItem = {
+  href: StaticAppPathname;
   label: string;
-  subItems?: { href: string; label: string }[];
 };
+
+type NavItem = {
+  href: StaticAppPathname;
+  label: string;
+  subItems?: NavSubItem[];
+};
+
+const KNOWN_LOCALES = routing.locales as readonly string[];
 
 const normalizePathValue = (target: string) => {
   if (!target) return '/';
@@ -22,16 +33,15 @@ const normalizePathValue = (target: string) => {
 
 export default function Navbar() {
   const t = useTranslations();
-  const locale = useLocale();
   const router = useRouter();
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
-  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
-  const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<string | null>(null);
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<StaticAppPathname | null>(null);
+  const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<StaticAppPathname | null>(null);
   const pathname = usePathname();
 
-  const nursingHomeSubmenu = useMemo(
+  const nursingHomeSubmenu = useMemo<NavSubItem[]>(
     () => [
       { href: '/nursing-home/the-residence', label: t('frontend.nursingHome.hero.cards.residence.title') },
       { href: '/nursing-home/hosting-solutions', label: t('frontend.nursingHome.hero.cards.solutions.title') },
@@ -41,7 +51,7 @@ export default function Navbar() {
     [t]
   );
 
-  const adaptedStaySubmenu = useMemo(
+  const adaptedStaySubmenu = useMemo<NavSubItem[]>(
     () => [
       { href: '/adapted-stay/adapted-accommodation', label: t('frontend.adaptedStay.hero.cards.accommodation.title') },
       { href: '/adapted-stay/adapted-transport', label: t('frontend.adaptedStay.hero.cards.transport.title') },
@@ -51,7 +61,7 @@ export default function Navbar() {
     [t]
   );
 
-  const primaryNavItems: NavItem[] = useMemo(
+  const primaryNavItems = useMemo<NavItem[]>(
     () => [
       { href: '/', label: t('frontend.menu.home') },
       { href: '/nursing-home', label: t('frontend.menu.nursingHome'), subItems: nursingHomeSubmenu },
@@ -60,7 +70,7 @@ export default function Navbar() {
     [adaptedStaySubmenu, nursingHomeSubmenu, t]
   );
 
-  const secondaryNavItems: NavItem[] = useMemo(
+  const secondaryNavItems = useMemo<NavItem[]>(
     () => [
       { href: '/about', label: t('frontend.menu.about') },
       { href: '/magazine', label: t('frontend.menu.magazine') },
@@ -68,7 +78,7 @@ export default function Navbar() {
     [t]
   );
 
-  const mobileNavItems: NavItem[] = useMemo(
+  const mobileNavItems = useMemo<NavItem[]>(
     () => [...primaryNavItems, ...secondaryNavItems],
     [primaryNavItems, secondaryNavItems]
   );
@@ -107,11 +117,16 @@ export default function Navbar() {
 
   // Handle search functionality
   const handleSearch = (query: string) => {
-    if (query.trim()) {
-      router.push(`/${locale}/search?q=${encodeURIComponent(query.trim())}`);
-      setIsSearchOpen(false);
-      setSearchQuery('');
-    }
+    const trimmed = query.trim();
+    if (!trimmed) return;
+
+    router.push({
+      pathname: '/search',
+      query: { q: trimmed },
+    });
+
+    setIsSearchOpen(false);
+    setSearchQuery('');
   };
 
   const closeMobileMenu = () => {
@@ -119,7 +134,7 @@ export default function Navbar() {
     setOpenMobileDropdown(null);
   };
 
-  const toggleMobileDropdown = (href: string) => {
+  const toggleMobileDropdown = (href: StaticAppPathname) => {
     setOpenMobileDropdown((current) => (current === href ? null : href));
   };
 
@@ -128,22 +143,15 @@ export default function Navbar() {
     const cleanPath = pathname.split('?')[0] || '/';
     const trimmed = cleanPath !== '/' ? cleanPath.replace(/\/+$/, '') || '/' : cleanPath;
     const segments = trimmed.split('/').filter(Boolean);
-    if (segments.length && routing.locales.includes(segments[0])) {
+    if (segments.length && KNOWN_LOCALES.includes(segments[0])) {
       const remainder = '/' + segments.slice(1).join('/');
       return remainder === '/' ? '/' : remainder.replace(/\/+$/, '') || '/';
     }
     return trimmed || '/';
   }, [pathname]);
 
-  const getLocalizedPaths = useCallback((href: string) => {
-    const entry = routing.pathnames?.[href as keyof typeof routing.pathnames] as
-      | string
-      | Record<string, string>
-      | undefined;
-
-    if (!entry) {
-      return [href];
-    }
+  const getLocalizedPaths = useCallback((href: StaticAppPathname) => {
+    const entry = routing.pathnames[href] as string | Record<string, string>;
 
     if (typeof entry === 'string') {
       return [entry];
@@ -153,7 +161,7 @@ export default function Navbar() {
   }, []);
 
   const matchesPath = useCallback(
-    (targetHref: string) => {
+    (targetHref: StaticAppPathname) => {
       const candidates = getLocalizedPaths(targetHref).map(normalizePathValue);
 
       return candidates.some((candidate) => {
@@ -175,7 +183,7 @@ export default function Navbar() {
     [matchesPath]
   );
 
-  const handleDesktopMouseEnter = (href: string) => {
+  const handleDesktopMouseEnter = (href: StaticAppPathname) => {
     setActiveDesktopDropdown(href);
   };
 
@@ -465,7 +473,7 @@ export default function Navbar() {
             <div className="absolute bottom-8 left-8">
               <p className="text-white text-sm mb-4 opacity-80">Social media</p>
               <div className="flex space-x-4">
-                <a href="https://www.facebook.com/remestunisie/" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook" target="_blanc">
+                <a href="https://www.facebook.com/remestunisie/" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook" target="_blanc" rel="noopener noreferrer">
                   <svg
                     width={26}
                     height={27}
@@ -541,7 +549,7 @@ export default function Navbar() {
                   </svg>
 
                 </a> */}
-                <a href="https://www.youtube.com/@remes.tunisie" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Youtube" target="_blanc">
+                <a href="https://www.youtube.com/@remes.tunisie" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Youtube" target="_blanc" rel="noopener noreferrer">
                   <svg width="26" height="27" viewBox="0 0 26 27" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                     <g clipPath="url(#clip0_207_2523)">
                       <path d="M25.3834 8.38939C25.3834 8.38939 25.1339 6.62772 24.3653 5.85418C23.3921 4.83611 22.3042 4.83112 21.8051 4.77123C18.2319 4.51172 12.867 4.51172 12.867 4.51172H12.857C12.857 4.51172 7.49219 4.51172 3.91894 4.77123C3.41988 4.83112 2.33194 4.83611 1.35878 5.85418C0.590229 6.62772 0.345691 8.38939 0.345691 8.38939C0.345691 8.38939 0.0861816 10.4605 0.0861816 12.5266V14.4629C0.0861816 16.529 0.340701 18.6001 0.340701 18.6001C0.340701 18.6001 0.590229 20.3618 1.35379 21.1353C2.32695 22.1534 3.60453 22.1184 4.17346 22.2282C6.21959 22.4229 12.862 22.4828 12.862 22.4828C12.862 22.4828 18.2319 22.4728 21.8051 22.2183C22.3042 22.1584 23.3921 22.1534 24.3653 21.1353C25.1339 20.3618 25.3834 18.6001 25.3834 18.6001C25.3834 18.6001 25.6379 16.534 25.6379 14.4629V12.5266C25.6379 10.4605 25.3834 8.38939 25.3834 8.38939ZM10.222 16.8135V9.63204L17.124 13.2352L10.222 16.8135Z" />
