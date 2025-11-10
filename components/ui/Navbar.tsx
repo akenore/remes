@@ -1,10 +1,24 @@
 'use client';
 
-import { useState } from 'react';
-import { Link } from '@/i18n/navigation';
+import { useState, useMemo, useEffect, useCallback } from 'react';
+import type { FocusEvent } from 'react';
+import { Link, usePathname, useRouter } from '@/i18n/navigation';
 import { useTranslations, useLocale } from 'next-intl';
 import Image from 'next/image';
-import { usePathname, useRouter } from 'next/navigation';
+import { routing } from '@/i18n/routing';
+
+type NavItem = {
+  href: string;
+  label: string;
+  subItems?: { href: string; label: string }[];
+};
+
+const normalizePathValue = (target: string) => {
+  if (!target) return '/';
+  const ensured = target.startsWith('/') ? target : `/${target}`;
+  if (ensured === '/') return ensured;
+  return ensured.replace(/\/+$/, '') || '/';
+};
 
 export default function Navbar() {
   const t = useTranslations();
@@ -13,20 +27,51 @@ export default function Navbar() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState('');
+  const [openMobileDropdown, setOpenMobileDropdown] = useState<string | null>(null);
+  const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<string | null>(null);
   const pathname = usePathname();
 
-  const primaryNavItems = [
-    { href: '/', label: t('frontend.menu.home') },
-    { href: '/nursing-home', label: t('frontend.menu.nursingHome') },
-    { href: '/adapted-stay', label: t('frontend.menu.adaptedStay') },
-  ] as const;
+  const nursingHomeSubmenu = useMemo(
+    () => [
+      { href: '/nursing-home/the-residence', label: t('frontend.nursingHome.hero.cards.residence.title') },
+      { href: '/nursing-home/hosting-solutions', label: t('frontend.nursingHome.hero.cards.solutions.title') },
+      { href: '/nursing-home/care-expertise', label: t('frontend.nursingHome.hero.cards.expertise.title') },
+      { href: '/nursing-home/our-offers', label: t('frontend.nursingHome.hero.cards.offer.title') },
+    ],
+    [t]
+  );
 
-  const secondaryNavItems = [
-    { href: '/about', label: t('frontend.menu.about') },
-    { href: '/magazine', label: t('frontend.menu.magazine') },
-  ] as const;
+  const adaptedStaySubmenu = useMemo(
+    () => [
+      { href: '/adapted-stay/adapted-accommodation', label: t('frontend.adaptedStay.hero.cards.accommodation.title') },
+      { href: '/adapted-stay/adapted-transport', label: t('frontend.adaptedStay.hero.cards.transport.title') },
+      { href: '/adapted-stay/adapted-care', label: t('frontend.adaptedStay.hero.cards.care.title') },
+      { href: '/adapted-stay/medical-equipment', label: t('frontend.adaptedStay.hero.cards.equipment.title') },
+    ],
+    [t]
+  );
 
-  const mobileNavItems = [...primaryNavItems, ...secondaryNavItems] as const;
+  const primaryNavItems: NavItem[] = useMemo(
+    () => [
+      { href: '/', label: t('frontend.menu.home') },
+      { href: '/nursing-home', label: t('frontend.menu.nursingHome'), subItems: nursingHomeSubmenu },
+      { href: '/adapted-stay', label: t('frontend.menu.adaptedStay'), subItems: adaptedStaySubmenu },
+    ],
+    [adaptedStaySubmenu, nursingHomeSubmenu, t]
+  );
+
+  const secondaryNavItems: NavItem[] = useMemo(
+    () => [
+      { href: '/about', label: t('frontend.menu.about') },
+      { href: '/magazine', label: t('frontend.menu.magazine') },
+    ],
+    [t]
+  );
+
+  const mobileNavItems: NavItem[] = useMemo(
+    () => [...primaryNavItems, ...secondaryNavItems],
+    [primaryNavItems, secondaryNavItems]
+  );
 
   const SearchIcon = () => (
     <svg width="21" height="22" viewBox="0 0 21 22" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -41,6 +86,25 @@ export default function Navbar() {
     </svg>
   );
 
+  const ChevronIcon = ({ className = '' }: { className?: string }) => (
+    <svg
+      className={className}
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      xmlns="http://www.w3.org/2000/svg"
+    >
+      <path
+        d="M6 9l6 6 6-6"
+        stroke="currentColor"
+        strokeWidth="2"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+      />
+    </svg>
+  );
+
   // Handle search functionality
   const handleSearch = (query: string) => {
     if (query.trim()) {
@@ -49,6 +113,95 @@ export default function Navbar() {
       setSearchQuery('');
     }
   };
+
+  const closeMobileMenu = () => {
+    setIsMenuOpen(false);
+    setOpenMobileDropdown(null);
+  };
+
+  const toggleMobileDropdown = (href: string) => {
+    setOpenMobileDropdown((current) => (current === href ? null : href));
+  };
+
+  const normalizedPathname = useMemo(() => {
+    if (!pathname) return '/';
+    const cleanPath = pathname.split('?')[0] || '/';
+    const trimmed = cleanPath !== '/' ? cleanPath.replace(/\/+$/, '') || '/' : cleanPath;
+    const segments = trimmed.split('/').filter(Boolean);
+    if (segments.length && routing.locales.includes(segments[0])) {
+      const remainder = '/' + segments.slice(1).join('/');
+      return remainder === '/' ? '/' : remainder.replace(/\/+$/, '') || '/';
+    }
+    return trimmed || '/';
+  }, [pathname]);
+
+  const getLocalizedPaths = useCallback((href: string) => {
+    const entry = routing.pathnames?.[href as keyof typeof routing.pathnames] as
+      | string
+      | Record<string, string>
+      | undefined;
+
+    if (!entry) {
+      return [href];
+    }
+
+    if (typeof entry === 'string') {
+      return [entry];
+    }
+
+    return [href, ...Object.values(entry)];
+  }, []);
+
+  const matchesPath = useCallback(
+    (targetHref: string) => {
+      const candidates = getLocalizedPaths(targetHref).map(normalizePathValue);
+
+      return candidates.some((candidate) => {
+        if (candidate === '/') {
+          return normalizedPathname === '/';
+        }
+        return normalizedPathname === candidate || normalizedPathname.startsWith(`${candidate}/`);
+      });
+    },
+    [getLocalizedPaths, normalizedPathname]
+  );
+
+  const isItemActive = useCallback(
+    (item: NavItem) => {
+      if (matchesPath(item.href)) return true;
+      if (item.subItems?.some((sub) => matchesPath(sub.href))) return true;
+      return false;
+    },
+    [matchesPath]
+  );
+
+  const handleDesktopMouseEnter = (href: string) => {
+    setActiveDesktopDropdown(href);
+  };
+
+  const handleDesktopMouseLeave = () => {
+    setActiveDesktopDropdown(null);
+  };
+
+  const handleDesktopBlur = (event: FocusEvent<HTMLDivElement>) => {
+    const nextTarget = event.relatedTarget as Node | null;
+    if (!event.currentTarget.contains(nextTarget)) {
+      setActiveDesktopDropdown(null);
+    }
+  };
+
+  useEffect(() => {
+    if (!isMenuOpen) {
+      setOpenMobileDropdown(null);
+      return;
+    }
+
+    setOpenMobileDropdown((current) => {
+      if (current) return current;
+      const activeParent = primaryNavItems.find((item) => item.subItems && isItemActive(item));
+      return activeParent?.href ?? null;
+    });
+  }, [isMenuOpen, isItemActive, primaryNavItems]);
 
   return (
     <header>
@@ -97,17 +250,59 @@ export default function Navbar() {
               {/* Left Navigation */}
               <div className="flex items-center space-x-8 flex-1 justify-start pr-16">
                 {primaryNavItems.map((item) => {
-                  const isActive = pathname === item.href;
+                  const hasSubmenu = item.subItems && item.subItems.length > 0;
+                  const isActive = isItemActive(item);
+                  const isDesktopDropdownOpen = hasSubmenu && activeDesktopDropdown === item.href;
                   return (
-                    <Link
+                    <div
                       key={item.href}
-                      href={item.href}
-                      className={`relative text-xl px-1 transition-colors duration-200 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'} group`}
+                      className="relative group"
+                      onMouseEnter={() => handleDesktopMouseEnter(item.href)}
+                      onMouseLeave={handleDesktopMouseLeave}
+                      onFocus={() => handleDesktopMouseEnter(item.href)}
+                      onBlur={handleDesktopBlur}
                     >
-                      <span className={`inline-block pb-1 transition-all duration-200 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
-                        {item.label}
-                      </span>
-                    </Link>
+                      <Link
+                        href={item.href}
+                        className={`flex items-center gap-2 relative text-xl px-1 transition-colors duration-200 font-myanmar ${isActive ? 'text-[#EEDAB8] font-bold' : 'text-white'}`}
+                        aria-haspopup={hasSubmenu ? 'menu' : undefined}
+                        aria-expanded={hasSubmenu ? isDesktopDropdownOpen : undefined}
+                      >
+                        <span className={`inline-block pb-1 transition-all duration-200 ${isActive ? 'border-b-2 border-[#EEDAB8]' : 'group-hover:border-b-2 group-hover:border-[#EEDAB8] border-b-2 border-transparent'}`}>
+                          {item.label}
+                        </span>
+                        {hasSubmenu && (
+                          <ChevronIcon
+                            className={`transition-transform duration-200 ${isDesktopDropdownOpen ? 'rotate-180 text-[#EEDAB8]' : isActive ? 'text-[#EEDAB8]' : 'text-white/80'}`}
+                          />
+                        )}
+                      </Link>
+                      {hasSubmenu && (
+                        <div
+                          className={`absolute left-0 top-full pt-5 min-w-[260px] rounded-xl border border-white/10 bg-[#071d33]/95 p-3 shadow-2xl transition-all duration-200 ${
+                            isDesktopDropdownOpen
+                              ? 'pointer-events-auto opacity-100 translate-y-0'
+                              : 'pointer-events-none opacity-0 -translate-y-2'
+                          }`}
+                        >
+                          <ul className="space-y-1">
+                            {item.subItems?.map((subItem) => {
+                              const isSubActive = matchesPath(subItem.href);
+                              return (
+                                <li key={subItem.href}>
+                                  <Link
+                                    href={subItem.href}
+                                    className={`block rounded-lg px-4 py-2 text-base transition-colors ${isSubActive ? 'text-[#EEDAB8] bg-white/10' : 'text-white/90 hover:text-[#EEDAB8] hover:bg-white/5'}`}
+                                  >
+                                    {subItem.label}
+                                  </Link>
+                                </li>
+                              );
+                            })}
+                          </ul>
+                        </div>
+                      )}
+                    </div>
                   );
                 })}
               </div>
@@ -175,7 +370,7 @@ export default function Navbar() {
                   )}
                 </div>
                 {secondaryNavItems.map((item) => {
-                  const isActive = pathname === item.href;
+                  const isActive = matchesPath(item.href);
                   return (
                     <Link
                       key={item.href}
@@ -201,7 +396,7 @@ export default function Navbar() {
             {/* Close Button */}
             <div className="absolute top-12 left-8 z-20">
               <button
-                onClick={() => setIsMenuOpen(false)}
+                onClick={closeMobileMenu}
                 className="text-white hover:text-gray-200 transition-colors duration-200 p-2"
                 aria-label="Close menu"
               >
@@ -212,18 +407,55 @@ export default function Navbar() {
             {/* Menu Items */}
             <div className="mt-40 px-8 space-y-2">
               {mobileNavItems.map((item) => {
-                const isActive = pathname === item.href;
+                const hasSubmenu = item.subItems && item.subItems.length > 0;
+                const isActive = isItemActive(item);
+                const isSubmenuOpen = hasSubmenu && openMobileDropdown === item.href;
                 return (
                   <div className="relative" key={item.href}>
-                    <Link
-                      href={item.href}
-                      className={`group block text-xl py-2 pl-4 transition-colors duration-200 relative ${isActive ? 'text-[#EEDAB8] font-bold mb-2' : 'text-white font-normal'}`}
-                      onClick={() => setIsMenuOpen(false)}
-                    >
-                      <span className={`relative z-10 ${isActive ? 'inline-block border-b-2 border-[#EEDAB8] pb-1' : ''}`}>
-                        {item.label}
-                      </span>
-                    </Link>
+                    <div className="flex items-center justify-between">
+                      <Link
+                        href={item.href}
+                        className={`group block text-xl py-2 pl-4 transition-colors duration-200 relative ${isActive ? 'text-[#EEDAB8] font-bold mb-2' : 'text-white font-normal'}`}
+                        onClick={closeMobileMenu}
+                      >
+                        <span className={`relative z-10 ${isActive ? 'inline-block border-b-2 border-[#EEDAB8] pb-1' : ''}`}>
+                          {item.label}
+                        </span>
+                      </Link>
+                      {hasSubmenu && (
+                        <button
+                          type="button"
+                          onClick={() => toggleMobileDropdown(item.href)}
+                          className="p-2 text-white transition-colors hover:text-[#EEDAB8]"
+                          aria-label="Toggle submenu"
+                          aria-expanded={isSubmenuOpen}
+                        >
+                          <ChevronIcon className={`h-4 w-4 transition-transform ${isSubmenuOpen ? 'rotate-180 text-[#EEDAB8]' : ''}`} />
+                        </button>
+                      )}
+                    </div>
+                    {hasSubmenu && (
+                      <div
+                        className={`ml-6 border-l border-white/10 pl-4 text-base text-white/90 transition-all duration-300 ${isSubmenuOpen ? 'max-h-96 opacity-100 mt-2' : 'max-h-0 opacity-0'} overflow-hidden`}
+                      >
+                        <ul className="space-y-1 pb-2">
+                          {item.subItems?.map((subItem) => {
+                            const isSubActive = matchesPath(subItem.href);
+                            return (
+                              <li key={subItem.href}>
+                                <Link
+                                  href={subItem.href}
+                                  className={`block py-1 text-lg ${isSubActive ? 'text-[#EEDAB8]' : 'text-white/80 hover:text-white'}`}
+                                  onClick={closeMobileMenu}
+                                >
+                                  {subItem.label}
+                                </Link>
+                              </li>
+                            );
+                          })}
+                        </ul>
+                      </div>
+                    )}
                   </div>
                 );
               })}
