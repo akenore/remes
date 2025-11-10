@@ -21,7 +21,7 @@ export default function Footer() {
                                         {t('frontend.menu.footer.description')}
                                    </p>
                                    <div className="pl-3 pt-20 flex items-center justify-center lg:justify-start lg:items-start space-x-4 mb-5">
-                                        <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook">
+                                        <a href="https://www.facebook.com/remestunisie/" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Facebook" target="_blanc">
                                              <svg
                                                   width={26}
                                                   height={27}
@@ -48,7 +48,7 @@ export default function Footer() {
                                              </svg>
 
                                         </a>
-                                        <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="X">
+                                        {/* <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="X">
                                              <svg
                                                   width={26}
                                                   height={27}
@@ -96,8 +96,8 @@ export default function Footer() {
                                                   </defs>
                                              </svg>
 
-                                        </a>
-                                        <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Youtube">
+                                        </a> */}
+                                        <a href="https://www.youtube.com/@remes.tunisie" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Youtube" target="_blanc">
                                              <svg width="26" height="27" viewBox="0 0 26 27" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                                                   <g clipPath="url(#clip0_207_2523)">
                                                        <path d="M25.3834 8.38939C25.3834 8.38939 25.1339 6.62772 24.3653 5.85418C23.3921 4.83611 22.3042 4.83112 21.8051 4.77123C18.2319 4.51172 12.867 4.51172 12.867 4.51172H12.857C12.857 4.51172 7.49219 4.51172 3.91894 4.77123C3.41988 4.83112 2.33194 4.83611 1.35878 5.85418C0.590229 6.62772 0.345691 8.38939 0.345691 8.38939C0.345691 8.38939 0.0861816 10.4605 0.0861816 12.5266V14.4629C0.0861816 16.529 0.340701 18.6001 0.340701 18.6001C0.340701 18.6001 0.590229 20.3618 1.35379 21.1353C2.32695 22.1534 3.60453 22.1184 4.17346 22.2282C6.21959 22.4229 12.862 22.4828 12.862 22.4828C12.862 22.4828 18.2319 22.4728 21.8051 22.2183C22.3042 22.1584 23.3921 22.1534 24.3653 21.1353C25.1339 20.3618 25.3834 18.6001 25.3834 18.6001C25.3834 18.6001 25.6379 16.534 25.6379 14.4629V12.5266C25.6379 10.4605 25.3834 8.38939 25.3834 8.38939ZM10.222 16.8135V9.63204L17.124 13.2352L10.222 16.8135Z" />
@@ -110,7 +110,7 @@ export default function Footer() {
                                              </svg>
 
                                         </a>
-                                        <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Whatsapp">
+                                        {/* <a href="#" className="text-white hover:text-[#EEDAB8] transition-colors" aria-label="Whatsapp">
                                              <svg
                                                   width={26}
                                                   height={27}
@@ -123,7 +123,7 @@ export default function Footer() {
                                                        fill="currentColor"
                                                   />
                                              </svg>
-                                        </a>
+                                        </a> */}
                                    </div>
                               </div>
                               <div className="mx-5 md:mx-auto col-span-4 sm:col-span-3 md:col-span-2">
