@@ -7,6 +7,7 @@ import { useTranslations } from 'next-intl';
 import Image from 'next/image';
 import { FaPhoneAlt, FaMapMarkerAlt } from 'react-icons/fa';
 import { routing } from '@/i18n/routing';
+import { REMES_CONTACT } from '@/lib/contact';
 
 type AppPathname = keyof typeof routing.pathnames;
 type DynamicPathname = `${string}[${string}`;
@@ -24,9 +25,6 @@ type NavItem = {
 };
 
 const KNOWN_LOCALES = routing.locales as readonly string[];
-const CONTACT_PHONE = '+216 23 050 038';
-const CONTACT_ADDRESS = 'Zone Touristique Skanes, Monastir';
-const CONTACT_MAP_URL = 'https://maps.google.com/?q=Remes+Medical+Residence+Monastir';
 
 const normalizePathValue = (target: string) => {
   if (!target) return '/';
@@ -44,7 +42,9 @@ export default function Navbar() {
   const [openMobileDropdown, setOpenMobileDropdown] = useState<StaticAppPathname | null>(null);
   const [activeDesktopDropdown, setActiveDesktopDropdown] = useState<StaticAppPathname | null>(null);
   const pathname = usePathname();
-  const phoneHref = `tel:${CONTACT_PHONE.replace(/[^\d+]/g, '')}`;
+  const phoneHref = `tel:${REMES_CONTACT.phone.replace(/[^\d+]/g, '')}`;
+  const contactAddressLabel = `${REMES_CONTACT.streetAddress}, ${REMES_CONTACT.addressLocality}`;
+  const contactMapUrl = REMES_CONTACT.mapUrl;
 
   const nursingHomeSubmenu = useMemo<NavSubItem[]>(
     () => [
@@ -223,20 +223,20 @@ export default function Navbar() {
           <a
             href={phoneHref}
             className="flex items-center gap-2 hover:text-[#EEDAB8] transition-colors"
-            aria-label={`Call us at ${CONTACT_PHONE}`}
+            aria-label={`Call us at ${REMES_CONTACT.phone}`}
           >
             <FaPhoneAlt className="text-[#EEDAB8]" />
-            <span className="font-medium">{CONTACT_PHONE}</span>
+            <span className="font-medium">{REMES_CONTACT.phone}</span>
           </a>
           <a
-            href={CONTACT_MAP_URL}
+            href={contactMapUrl}
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2 hover:text-[#EEDAB8] transition-colors"
-            aria-label={`Open map for ${CONTACT_ADDRESS}`}
+            aria-label={`Open map for ${contactAddressLabel}`}
           >
             <FaMapMarkerAlt className="text-[#EEDAB8]" />
-            <span className="font-medium">{CONTACT_ADDRESS}</span>
+            <span className="font-medium">{contactAddressLabel}</span>
           </a>
         </div>
       </div>
