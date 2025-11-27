@@ -14,7 +14,7 @@ const ContentSecurityPolicy = [
   "object-src 'none';",
   "script-src 'self' 'unsafe-inline' 'unsafe-eval' https://www.googletagmanager.com https://www.google-analytics.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;",
   "style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;",
-  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://pocket.remes-tunisie.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;",
+  "connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://pocket.remes-tunisie.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net https://api.web3forms.com;",
   "media-src 'self' https:;",
   "manifest-src 'self';",
   "upgrade-insecure-requests;",
