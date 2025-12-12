@@ -42,7 +42,7 @@ export default function KoalendarButton({ className }: KoalendarButtonProps = {}
      }, []);
 
      const label =
-          locale === "fr" ? "Planifier un appel dès maintenant" : "Schedule a call now";
+          locale === "fr" ? "Planifier un appel découverte" : "Schedule a discovery call";
 
      const openKoalendar = useCallback(() => {
           if (typeof window !== "undefined" && typeof window.Koalendar === "function") {

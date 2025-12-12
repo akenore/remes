@@ -691,10 +691,10 @@
       "countryPlaceholder": "Enter your country",
       "message": "Message",
       "messagePlaceholder": "Enter your message",
-      "submit": "Send",
+      "submit": "Send my request",
       "submitting": "Sending...",
-      "success": "Your message has been sent successfully! We will respond to you as soon as possible.",
-      "error": "An error occurred while sending the message. Please try again.",
+      "success": "Your request has been sent successfully! We will respond to you as soon as possible.",
+      "error": "An error occurred while sending your request. Please try again.",
       "phoneError": "Please enter a valid phone number."
     }
   },
@@ -756,6 +756,39 @@
     "common": {
       "loading": "Loading...",
       "retry": "Retry"
+    },
+    "faq": {
+      "header": {
+        "title": "Your questions about our",
+        "span": "nursing home in Tunisia"
+      },
+      "title": "Frequently Asked Questions",
+      "items": {
+        "price": {
+          "question": "What is the price of a nursing home at REMES?",
+          "answer": "Our all-inclusive monthly rates start at €2,300. This price includes accommodation in a single room, full board (four meals per day), medical and paramedical care, activities, and laundry service. A personalized quote is provided based on your loved one's level of dependency."
+        },
+        "location": {
+          "question": "Where exactly is the REMES residence located?",
+          "answer": "REMES is located in Skanes-Monastir, on the east coast of Tunisia. The residence is located within the Palm Beach Hotel, 200 meters from the Mediterranean Sea and a 5-minute drive from Monastir's Habib Bourguiba International Airport."
+        },
+        "alzheimer": {
+          "question": "Do you accept residents with Alzheimer's disease?",
+          "answer": "Yes. We welcome people with neurodegenerative diseases (Alzheimer's, Parkinson's, related dementias) and provide specifically tailored support. Our team is trained in the management of these conditions."
+        },
+        "admission": {
+          "question": "How does the admission process work?",
+          "answer": "It all starts with a phone call to understand your situation. We then review your loved one's medical records and propose a personalized care plan. A visit to the residence is possible before any decision is made."
+        },
+        "visit": {
+          "question": "Can I easily visit my loved one?",
+          "answer": "Absolutely. Monastir is a two-hour flight from Paris, with direct connections from several French and European cities. The airport is five minutes from our residence. Many families come every month—and take advantage of the visit to enjoy a few days of sunshine."
+        },
+        "language": {
+          "question": "Does the medical team speak French?",
+          "answer": "Yes. Our entire medical and nursing team is French-speaking. Tunisia has a long tradition of French-speaking culture, and our professionals communicate fluently in French with residents and their families."
+        }
+      }
     },
     "home": {
       "meta": {
@@ -896,30 +929,64 @@
     },
     "nursingHome": {
       "meta": {
-        "title": "Nursing Home | Medical Care Residence | REMES Tunisia",
-        "description": "Discover REMES nursing home in Tunisia. Professional medical care, comfortable accommodation, and personalized services for seniors. Book a consultation with our expert team."
+        "title": "Nursing homes in Tunisia | Monastir Medicalized Retirement Home - REMES",
+        "description": "Since 2009, REMES has been welcoming your loved ones to a high-end nursing home in Monastir. 24/7 medical team, 4-star hotel by the sea. All-inclusive rates starting at €2,500."
       },
       "hero": {
-        "title": "Nursing Home",
-        "description": "An exceptional place, a dedicated team, personalized support. Here, every day is an invitation to live better.",
+        "subtitle": "Since 2009 · Monastir, Tunisie",
+        "title": "REMES nursing homes in Tunisia:",
+        "titleSpan": "your loved one deserves excellence",
+        "description": "Located 200 meters from the Mediterranean Sea, REMES is much more than a nursing home. It is a place where every resident can enjoy dignity, comfort, and serenity. A multidisciplinary team is available 24 hours a day. Tailored support is provided in a 4-star hotel setting.",
+        "itemsCards": {
+          "i1": "years",
+          "i1Span": "of experience",
+          "i2": "",
+          "i2Span": "Present team",
+          "i3": "",
+          "i3Span": "Hotel standing",
+          "i4": "",
+          "i4Span": "Seafront"
+        },
         "cards": {
           "residence": {
             "title": "The Residence",
-            "description": "An exceptional setting, designed to combine comfort, security and serenity."
+            "description": "An exceptional setting within the Palm Beach Hotel. Spacious rooms with sea or garden views, welcoming common areas, access to hotel facilities. Everything is designed to combine comfort, security, and serenity."
           },
           "solutions": {
             "title": "Hosting Solutions",
-            "description": "Flexible and human formulas, designed to adapt to your needs."
+            "description": "Packages tailored to every situation: long-term stays for a new home, short stays for convalescence or respite for caregivers, adapted vacations to enjoy the Tunisian sun with medical support."
           },
           "expertise": {
             "title": "Care Expertise",
-            "description": "Attentive care, reassuring presence, personalized support."
+            "description": "A full medical team looks after your loved ones 24 hours a day: coordinating physician, registered nurses, trained nursing assistants, physical therapists, psychologist. Each resident benefits from a personalized care plan."
           },
           "offer": {
-            "title": "Our Offer",
-            "description": "A unique, simple and transparent rate"
+            "title": "Transparent pricing",
+            "description": "An all-inclusive monthly rate with no unpleasant surprises: accommodation, full board, medical and paramedical care, entertainment, laundry service. We provide a personalized quote based on the level of independence required."
           }
         }
+      },
+      "sectionEngagement": {
+        "span": "OUR COMMITMENTS",
+        "title": "Three promises for",
+        "titleSpan": "the well-being of your loved one.",
+        "item1": {
+          "title": "Personalized, human support",
+          "description": "At REMES, every resident is unique. Our multidisciplinary team—doctors, nurses, nursing assistants, physical therapists—provides attentive and caring support, day and night. Your loved one is not just a room number. They are known by their first name, listened to, and supported according to their own pace and desires. That is our approach to care: taking the time."
+        },
+        "item2": {
+          "title": "An exceptional living environment by the sea",
+          "description": "Imagine your parent waking up every morning facing the Mediterranean Sea. That's everyday life at REMES. Our nursing home is located in the heart of a 4-star hotel in Skanes-Monastir, with landscaped gardens, shaded terraces, and bright living spaces. With over 300 days of sunshine per year and a mild climate all year round, your loved ones will enjoy an environment conducive to well-being and serenity."
+        },
+        "item3": {
+          "title": "Complete transparency on pricing",
+          "description": "No hidden costs, no unpleasant surprises. Our all-inclusive rates start at €2,300 per month and include accommodation, meals, care, and activities. Before admission, we work with you to draw up a personalized quote based on your loved one's needs. You know exactly what you are paying for—and what your loved one is receiving."
+        }
+      },
+      "sectionSupport": {
+        "span": "OUR SUPPORT",
+        "title": "Three promises for",
+        "titleSpan": "the well-being of your loved one."
       },
       "button": "Learn more",
       "content": {
@@ -931,7 +998,7 @@
           "paragraph1": "We know that organizing the search for a medicalized residence can be a demanding step. To simplify your approach, we provide you with an online calendar.",
           "paragraph2": "Choose simply the day and time that suit you, and our team will call you directly at that time.",
           "paragraph3": "During this call, we will take the time to listen to your needs, answer your questions and present in detail the hosting solutions offered by REMES. You will thus have all the necessary information to move forward serenely in your project.",
-          "cta" : "Schedule a call now"
+          "cta": "Schedule a discovery call"
         },
         "living": {
           "title": "Living at REMES",
@@ -952,7 +1019,8 @@
           }
         },
         "reservation": {
-          "text": "Book your preferred time slot now: it's simple, fast and without commitment."
+          "title": "Remes Medical Residence in Tunisia",
+          "text": "A high-end medical residence dedicated to nursing homes and adapted stays in Tunisia, combining comfort, personalized care, and peace of mind every day."
         }
       },
       "careExpertise": {
@@ -1044,12 +1112,12 @@
       },
       "ourOffer": {
         "meta": {
-          "title": "Our Offer | Pricing & Services | REMES Tunisia",
+          "title": "Transparent pricing | Pricing & Services | REMES Tunisia",
           "description": "Discover REMES pricing and services in Tunisia. Transparent pricing, all-inclusive care, and comprehensive services for seniors. Competitive rates compared to France."
         },
         "hero": {
-          "title": "Our Offer",
-          "description": "Nursing Home / Our Offer"
+          "title": "Transparent pricing",
+          "description": "Nursing Home / Transparent pricing"
         },
         "content": {
           "title": "A unique, simple and transparent rate",

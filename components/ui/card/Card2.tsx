@@ -15,8 +15,8 @@ interface CardProps {
 
 export default function Card2({ icon, image, title, description, buttonText, buttonHref }: CardProps) {
   return (
-    <Link 
-      href={buttonHref} 
+    <Link
+      href={buttonHref}
       className="block bg-white shadow-2xl overflow-hidden w-full mx-auto transition-all duration-500 ease-in-out hover:shadow-2xl hover:scale-y-110 hover:scale-x-105 hover:-translate-y-2 hover:bg-blue group"
       aria-label={`${title} - ${description}`}
     >
@@ -37,9 +37,9 @@ export default function Card2({ icon, image, title, description, buttonText, but
           )
         )}
 
-        <h2 className="text-[1.375rem] md:text-[1.75rem] leading-tight text-dark-blue mb-6 font-myanmar group-hover:text-gold transition-colors duration-400">
+        <h3 className="text-[1.375rem] md:text-[1.75rem] leading-tight text-dark-blue mb-6 font-myanmar group-hover:text-gold transition-colors duration-400">
           {title}
-        </h2>
+        </h3>
         <p className="text-gray-600 text-sm md:text-base mb-10 group-hover:text-light-blue2 transition-colors duration-300">
           {description}
         </p>

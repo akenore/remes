@@ -691,10 +691,10 @@
       "countryPlaceholder": "Tapez votre pays",
       "message": "Message",
       "messagePlaceholder": "Tapez votre message",
-      "submit": "Envoyer",
+      "submit": "Envoyer ma demande",
       "submitting": "Envoi en cours...",
-      "success": "Votre message a été envoyé avec succès ! Nous vous répondrons dans les plus brefs délais.",
-      "error": "Une erreur est survenue lors de l'envoi du message. Veuillez réessayer.",
+      "success": "Votre demande a été envoyée avec succès ! Nous vous répondrons dans les plus brefs délais.",
+      "error": "Une erreur est survenue lors de l'envoi de votre demande. Veuillez réessayer.",
       "phoneError": "Veuillez entrer un numéro de téléphone valide."
     }
   },
@@ -756,6 +756,38 @@
     "common": {
       "loading": "Chargement...",
       "retry": "Réessayer"
+    },
+    "faq": {
+      "header": {
+        "title": "Vos questions sur notre",
+        "span": "EHPAD en Tunisie"
+      },
+      "items": {
+        "price": {
+          "question": "Quel est le prix d'un EHPAD chez REMES ?",
+          "answer": "Nos tarifs mensuels tout compris débutent à 2 300€. Ce prix inclut l'hébergement en chambre individuelle, la pension complète (4 repas/jour), les soins médicaux et paramédicaux, les animations et l'entretien du linge. Un devis personnalisé est établi selon le niveau de dépendance de votre proche."
+        },
+        "location": {
+          "question": "Où se situe exactement la résidence REMES ?",
+          "answer": "REMES est situé à Skanes-Monastir, sur la côte est de la Tunisie. La résidence se trouve au sein de l'Hôtel Palm Beach, à 200 mètres de la mer Méditerranée et à 5 minutes en voiture de l'aéroport international Habib Bourguiba de Monastir."
+        },
+        "alzheimer": {
+          "question": "Acceptez-vous les résidents atteints de la maladie d'Alzheimer ? ",
+          "answer": "Oui. Nous accueillons les personnes atteintes de maladies neurodégénératives (Alzheimer, Parkinson, démences apparentées) avec un accompagnement spécifiquement adapté. Notre équipe est formée à la prise en charge de ces pathologies."
+        },
+        "admission": {
+          "question": "Comment se déroule la procédure d'admission ?",
+          "answer": "Tout commence par un échange téléphonique pour comprendre votre situation. Nous étudions ensuite le dossier médical de votre proche et vous proposons un projet d'accueil personnalisé. Une visite de la résidence est possible avant toute décision."
+        },
+        "visit": {
+          "question": "Puis-je rendre visite facilement à mon proche ?",
+          "answer": "Absolument. Monastir est à 2 heures de vol de Paris, avec des liaisons directes depuis plusieurs villes françaises et européennes. L'aéroport est à 5 minutes de notre résidence. De nombreuses familles viennent chaque mois — et profitent de la visite pour quelques jours de soleil."
+        },
+        "language": {
+          "question": "L'équipe soignante parle-t-elle français ?",
+          "answer": "Oui. L'ensemble de notre équipe médicale et soignante est francophone. La Tunisie a une longue tradition francophone et nos professionnels communiquent couramment en français avec les résidents et leurs familles."
+        }
+      }
     },
     "home": {
       "meta": {
@@ -896,30 +928,64 @@
     },
     "nursingHome": {
       "meta": {
-        "title": "EHPAD & Maison de Retraite | Résidence Médicalisée | REMES Tunisie",
-        "description": "Découvrez l'EHPAD REMES en Tunisie. Soins médicaux professionnels, hébergement confortable et services personnalisés pour seniors. Réservez une consultation avec notre équipe d'experts."
+        "title": "EHPAD en Tunisie | Maison de Retraite Médicalisée Monastir - REMES",
+        "description": "Depuis 2009, REMES accueille vos proches dans un EHPAD haut de gamme à Monastir. Équipe médicale 24/7, hôtel 4★ en bord de mer. Tarifs tout compris dès 2 500€."
       },
       "hero": {
-        "title": "EHPAD",
-        "description": "Un lieu d'exception, une équipe dévouée, un accompagnement sur mesure. Ici, chaque jour est une invitation à vivre mieux.",
+        "subtitle": "Depuis 2009 · Monastir, Tunisie",
+        "title": "REMES EHPAD en Tunisie:",
+        "titleSpan": "votre proche mérite l'excellence",
+        "description": "À 200 mètres de la Méditerranée, REMES est bien plus qu'une maison de retraite médicalisée. C'est un lieu de vie où chaque résident retrouve dignité, confort et sérénité. Une équipe pluridisciplinaire disponible 24h/24. Un accompagnement sur mesure dans un cadre hôtelier 4 étoiles.",
+        "itemsCards": {
+          "i1": "ans",
+          "i1Span": "années d'expérience",
+          "i2": "",
+          "i2Span": "Équipe présente",
+          "i3": "",
+          "i3Span": "Standing hôtelier",
+          "i4": "",
+          "i4Span": "De la mer"
+        },
         "cards": {
           "residence": {
-            "title": "Notre résidence",
-            "description": "Un cadre d'exception, pensé pour conjuguer confort, sécurité et sérénité."
+            "title": "La Résidence",
+            "description": "Un cadre d'exception au sein de l'Hôtel Palm Beach. Chambres spacieuses avec vue mer ou jardin, espaces communs chaleureux, accès aux installations de l'hôtel. Tout est conçu pour conjuguer confort, sécurité et sérénité."
           },
           "solutions": {
             "title": "Solutions d'accueil",
-            "description": "Des formules flexibles et humaines, pensées pour s'adapter à vos besoins."
+            "description": "Des formules adaptées à chaque situation : séjour longue durée pour un nouveau chez-soi, court séjour pour une convalescence ou un répit pour les aidants, vacances adaptées pour profiter du soleil tunisien avec un accompagnement médical."
           },
           "expertise": {
             "title": "Expertise Soins",
-            "description": "Des soins attentifs, une présence rassurante, un accompagnement sur mesure."
+            "description": "Une équipe médicale complète veille sur vos proches 24h/24 : médecin coordinateur, infirmières diplômées, aides-soignantes formées, kinésithérapeutes, psychologue. Chaque résident bénéficie d'un projet de soins personnalisé."
           },
           "offer": {
-            "title": "Notre offre",
-            "description": "Un tarif unique, simple et transparent"
+            "title": "Tarifs transparents",
+            "description": "Un tarif mensuel tout compris, sans mauvaise surprise : hébergement, pension complète, soins médicaux et paramédicaux, animations, entretien du linge. Nous établissons un devis personnalisé selon le niveau d'autonomie."
           }
         }
+      },
+      "sectionEngagement": {
+        "span": "NOS ENGAGEMENTS",
+        "title": "Trois promess pour",
+        "titleSpan": "votre bien-être de votre proche.",
+        "item1": {
+          "title": "Un accompagnement humain et personnalisé",
+          "description": "Chez REMES, chaque résident est unique. Notre équipe pluridisciplinaire — médecins, infirmières, aides-soignantes, kinésithérapeutes — assure une présence attentive et bienveillante, de jour comme de nuit. Votre proche n'est pas un numéro de chambre. Il est connu par son prénom, écouté, accompagné selon son rythme et ses envies. C'est notre conception du soin : prendre le temps."
+        },
+        "item2": {
+          "title": "Un cadre de vie exceptionnel en bord de mer",
+          "description": "Imaginez votre parent se réveillant chaque matin face à la Méditerranée. C'est le quotidien à REMES. Notre résidence médicalisée est installée au cœur d'un hôtel 4 étoiles à Skanes-Monastir : jardins paysagers, terrasses ombragées, espaces de vie lumineux. Avec plus de 300 jours de soleil par an et un climat doux toute l'année, vos proches profitent d'un environnement propice au bien-être et à la sérénité."
+        },
+        "item3": {
+          "title": "Une transparence totale sur les tarifs",
+          "description": "Pas de frais cachés, pas de mauvaise surprise. Nos tarifs tout compris débutent à 2 300€ par mois et incluent l'hébergement, la restauration, les soins et les activités. Avant toute admission, nous établissons ensemble un devis personnalisé selon les besoins de votre proche. Vous savez exactement ce que vous payez — et ce que votre proche reçoit."
+        }
+      },
+      "sectionSupport": {
+        "span": "Notre accompagnement",
+        "title": "Trois promess pour",
+        "titleSpan": "votre bien-être de votre proche."
       },
       "button": "En savoir plus",
       "content": {
@@ -931,7 +997,7 @@
           "paragraph1": "Nous savons qu'organiser la recherche d'une résidence médicalisée peut être une étape exigeante. Pour vous simplifier la démarche, nous mettons à votre disposition un calendrier en ligne.",
           "paragraph2": "Choisissez en toute simplicité le jour et l'heure qui vous conviennent, et notre équipe vous appellera directement à ce moment-là.",
           "paragraph3": "Lors de cet appel, nous prendrons le temps d'écouter vos besoins, de répondre à vos questions et de vous présenter en détail les solutions d'accueil proposées par REMES. Vous disposerez ainsi de toutes les informations nécessaires pour avancer sereinement dans votre projet.",
-          "cta" : "Planifier un appel dès maintenant"
+          "cta": "Planifier un appel découverte"
         },
         "living": {
           "title": "Vivre à REMES",
@@ -952,7 +1018,8 @@
           }
         },
         "reservation": {
-          "text": "Réservez dès maintenant le créneau de votre choix : c'est simple, rapide et sans engagement."
+          "title": "Résidence Médicalisée Remes en Tunisie",
+          "text": "Une résidence médicalisée haut de gamme dédiée à l’EHPAD et aux séjours adaptés en Tunisie, alliant confort, soins personnalisés et sérénité au quotidien."
         }
       },
       "careExpertise": {
@@ -1044,12 +1111,12 @@
       },
       "ourOffer": {
         "meta": {
-          "title": "Notre Offre | Tarifs & Services | REMES Tunisie",
+          "title": "Tarifs transparents | Tarifs & Services | REMES Tunisie",
           "description": "Découvrez les tarifs et services REMES en Tunisie. Tarification transparente, soins tout inclus et services complets pour seniors. Tarifs compétitifs par rapport à la France."
         },
         "hero": {
-          "title": "Notre Offre",
-          "description": "EHPAD / Notre Offre"
+          "title": "Tarifs transparents",
+          "description": "EHPAD / Tarifs transparents"
         },
         "content": {
           "title": "Un tarif unique, simple et transparent",

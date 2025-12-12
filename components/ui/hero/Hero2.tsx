@@ -11,7 +11,7 @@ function HeroHeader({ title, description }: { title: string; description: string
   return (
     <div className='mb-14 max-h-80 sm:max-h-96 md:max-h-112 md:-mt-20 lg:-mt-32 xl:-ml-80'>
       <div className="h-64 flex flex-col justify-center md:justify-start">
-        
+
         <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar max-w-sm sm:max-w-xl">
           {title}
         </h1>

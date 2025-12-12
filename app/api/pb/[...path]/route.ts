@@ -1,10 +1,11 @@
 import type { NextRequest } from 'next/server';
 
-const PB_ORIGIN = process.env.NEXT_PUBLIC_POCKETBASE_URL || 'http://127.0.0.1:8090';
+const PB_ORIGIN = process.env.NEXT_PUBLIC_POCKETBASE_URL;
 
 async function proxy(request: NextRequest, path: string[]) {
   const url = new URL(request.url);
   const targetUrl = `${PB_ORIGIN}/${path.join('/')}${url.search}`;
+  console.log('Proxying to:', targetUrl, 'using origin:', PB_ORIGIN);
 
   const headers = new Headers(request.headers);
   headers.delete('host');
@@ -15,9 +16,7 @@ async function proxy(request: NextRequest, path: string[]) {
   const init: RequestInit = {
     method: request.method,
     headers,
-    // Only pass body for methods that can have one
     body: request.method !== 'GET' && request.method !== 'HEAD' ? await request.arrayBuffer() : undefined,
-    // Do not leak credentials to another origin
     credentials: 'omit',
     redirect: 'manual',
   };
@@ -25,12 +24,10 @@ async function proxy(request: NextRequest, path: string[]) {
   const response = await fetch(targetUrl, init);
 
   const responseHeaders = new Headers(response.headers);
-  // Ensure CORS is fine for same-origin proxy
   responseHeaders.set('Access-Control-Allow-Origin', '*');
   responseHeaders.set('Access-Control-Allow-Methods', 'GET, POST, PUT, PATCH, DELETE, HEAD, OPTIONS');
   responseHeaders.set('Access-Control-Allow-Headers', 'Content-Type, Authorization');
-  
-  // Add cache headers for images
+
   if (path.includes('files')) {
     responseHeaders.set('Cache-Control', 'public, max-age=31536000, immutable');
   }

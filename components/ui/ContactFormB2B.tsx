@@ -15,7 +15,7 @@ export default function ContactFormB2B() {
           setSubmitStatus('idle');
 
           const formData = new FormData(e.currentTarget);
-          
+
           // Validate phone number
           const phone = formData.get('phone') as string;
           const phoneRegex = /^[0-9+\-\s\(\)]+$/;
@@ -49,7 +49,7 @@ export default function ContactFormB2B() {
                });
 
                const result = await response.json();
-               
+
                if (result.success) {
                     setSubmitStatus('success');
                     setMessage(t('form.success'));
@@ -74,36 +74,36 @@ export default function ContactFormB2B() {
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="organization">
                               {t('form.organization')}
                          </label>
-                         <input 
-                              type="text" 
-                              id="organization" 
-                              name="organization" 
+                         <input
+                              type="text"
+                              id="organization"
+                              name="organization"
                               required
-                              className="border border-gray-200 bg-gray-100 p-2" 
-                              placeholder={t('form.organizationPlaceholder')} 
+                              className="border border-gray-200 bg-gray-100 p-2"
+                              placeholder={t('form.organizationPlaceholder')}
                          />
                     </div>
                     <div className="flex flex-col gap-2 mb-5">
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="contact_person">
                               {t('form.contactPerson')}
                          </label>
-                         <input 
-                              type="text" 
-                              id="contact_person" 
-                              name="contact_person" 
+                         <input
+                              type="text"
+                              id="contact_person"
+                              name="contact_person"
                               required
-                              className="border border-gray-200 bg-gray-100 p-2" 
-                              placeholder={t('form.contactPersonPlaceholder')} 
+                              className="border border-gray-200 bg-gray-100 p-2"
+                              placeholder={t('form.contactPersonPlaceholder')}
                          />
                     </div>
                     <div className="flex flex-col gap-2 mb-5">
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="phone">
                               {t('form.phone')}
                          </label>
-                         <input 
-                              type="tel" 
-                              id="phone" 
-                              name="phone" 
+                         <input
+                              type="tel"
+                              id="phone"
+                              name="phone"
                               pattern="[0-9+\-\s\(\)]+"
                               title={t('form.phoneError')}
                               className="border border-gray-200 bg-gray-100 p-2"
@@ -121,37 +121,37 @@ export default function ContactFormB2B() {
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="email">
                               {t('form.email')}
                          </label>
-                         <input 
-                              type="email" 
-                              id="email" 
-                              name="email" 
+                         <input
+                              type="email"
+                              id="email"
+                              name="email"
                               required
                               className="border border-gray-200 bg-gray-100 p-2"
-                              placeholder={t('form.emailPlaceholder')} 
+                              placeholder={t('form.emailPlaceholder')}
                          />
                     </div>
                     <div className="flex flex-col gap-2 mb-5">
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="address">
                               {t('form.address')}
                          </label>
-                         <input 
-                              type="text" 
-                              id="address" 
-                              name="address" 
+                         <input
+                              type="text"
+                              id="address"
+                              name="address"
                               className="border border-gray-200 bg-gray-100 p-2"
-                              placeholder={t('form.addressPlaceholder')} 
+                              placeholder={t('form.addressPlaceholder')}
                          />
                     </div>
                     <div className="flex flex-col gap-2 mb-5">
                          <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="country">
                               {t('form.country')}
                          </label>
-                         <input 
-                              type="text" 
-                              id="country" 
-                              name="country" 
+                         <input
+                              type="text"
+                              id="country"
+                              name="country"
                               className="border border-gray-200 bg-gray-100 p-2"
-                              placeholder={t('form.countryPlaceholder')} 
+                              placeholder={t('form.countryPlaceholder')}
                          />
                     </div>
                </div>
@@ -159,29 +159,27 @@ export default function ContactFormB2B() {
                     <label className="text-dark-blue text-xl font-semibold mb-4" htmlFor="message">
                          {t('form.message')}
                     </label>
-                    <textarea 
-                         id="message" 
-                         name="message" 
-                         rows={6} 
+                    <textarea
+                         id="message"
+                         name="message"
+                         rows={6}
                          required
                          className="border border-gray-200 bg-gray-100 p-2"
-                         placeholder={t('form.messagePlaceholder')} 
+                         placeholder={t('form.messagePlaceholder')}
                     />
                </div>
-               
-               {/* Status Message */}
+
                {submitStatus !== 'idle' && (
-                    <div className={`mb-4 p-4 border-l-4 ${
-                         submitStatus === 'success' 
-                              ? 'bg-gold/20 border-gold text-dark-blue' 
+                    <div className={`mb-4 p-4 border-l-4 ${submitStatus === 'success'
+                              ? 'bg-gold/20 border-gold text-dark-blue'
                               : 'bg-red-50 border-red-400 text-red-700'
-                    }`}>
+                         }`}>
                          <p className="text-sm font-medium">{message}</p>
                     </div>
                )}
-               
-               <button 
-                    type="submit" 
+
+               <button
+                    type="submit"
                     disabled={isSubmitting}
                     className="border border-dark-blue bg-dark-blue text-white px-12 py-2.5 hover:bg-white hover:text-dark-blue transition-all duration-500 cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
                >
