@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { authHelpers } from '@/lib/pocketbase';
+import { authHelper } from '@/lib/pocketbase';
 import Link from 'next/link';
 
 export default function CreateUserPage() {
@@ -30,8 +30,8 @@ export default function CreateUserPage() {
     }
 
     try {
-      const result = await authHelpers.createUser(email, password, name);
-      
+      const result = await authHelper.createUser(email, password, name);
+
       if (result.success) {
         setSuccess(true);
       } else {
@@ -85,7 +85,7 @@ export default function CreateUserPage() {
             Create a regular user account for admin panel access
           </p>
         </div>
-        
+
         <form className="mt-8 space-y-6" onSubmit={handleSubmit}>
           <div className="space-y-4">
             <div>
@@ -103,7 +103,7 @@ export default function CreateUserPage() {
                 disabled={isLoading}
               />
             </div>
-            
+
             <div>
               <label htmlFor="email" className="block text-sm font-medium text-gray-700">
                 Email Address *
@@ -121,7 +121,7 @@ export default function CreateUserPage() {
                 disabled={isLoading}
               />
             </div>
-            
+
             <div>
               <label htmlFor="password" className="block text-sm font-medium text-gray-700">
                 Password *
@@ -149,7 +149,7 @@ export default function CreateUserPage() {
 
           <div className="bg-yellow-50 border border-yellow-200 rounded-md p-4">
             <div className="text-sm text-yellow-800">
-              <strong>Note:</strong> This creates a regular user account in the &apos;users&apos; collection, 
+              <strong>Note:</strong> This creates a regular user account in the &apos;users&apos; collection,
               which is the recommended approach for admin panel authentication.
             </div>
           </div>
