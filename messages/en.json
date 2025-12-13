@@ -988,6 +988,34 @@
         "title": "Three promises for",
         "titleSpan": "the well-being of your loved one."
       },
+      "sectionTeam": {
+        "span": "OUR TEAM",
+        "title": "Healthcare professionals dedicated",
+        "titleSpan": "to your loved ones",
+        "p1": "REMES was founded in 2009 by <bold>Dr. Ahlem Bourourou</bold>, a physician who firmly believes that a nursing home can be a truly vibrant place to live.",
+        "p2": "Even today, she personally supervises each intake project and ensures that every resident is supported with respect for their dignity, history, and habits.",
+        "p3": "Our multidisciplinary team brings together experienced, French-speaking professionals:",
+        "li1": "<bold>Coordinating physician</bold>: medical follow-up, coordination with specialists",
+        "li2": "<bold>Registered nurses</bold>: available 24 hours a day, 7 days a week",
+        "li3": "<bold>Care assistants</bold>: assistance with daily tasks",
+        "li4": "<bold>Physical therapists</bold>: maintaining mobility, rehabilitation",
+        "li5": "<bold>Psychologist</bold>: emotional support for residents and families",
+        "li6": "<bold>Activity leaders</bold>: therapeutic activities, outings, social gatherings"
+      },
+      "sectionTestimonials": {
+        "span": "Testimonials",
+        "title": "Families",
+        "titleSpan": "trust us"
+      },
+      "sectionContact": {
+        "span": "Contact",
+        "title": "We are here to",
+        "titleSpan": "support you.",
+        "p1": "Placing a loved one in a retirement home is a difficult and emotional decision. There are many questions and doubts—and that's normal. Our team is here to listen to you, reassure you, and answer all your questions with kindness and without any obligation.",
+        "p2": "Schedule a phone call or fill out the form. We will get back to you within 24 hours.",
+        "li1": "Palm Beach Hotel, Skanes Tourist Area, Monastir, Tunisia",
+        "li2": "5 minutes from Monastir Airport · 2-hour flight from Paris"
+      },
       "button": "Learn more",
       "content": {
         "images": {

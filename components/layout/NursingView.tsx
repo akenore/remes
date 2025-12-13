@@ -9,6 +9,8 @@ import Navbar from '../ui/Navbar';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import Card2 from '../ui/card/Card2';
 import { FaHome, FaBed, FaHandsHelping, FaTags, FaQuoteRight } from 'react-icons/fa';
+import { FaLocationPin, FaPhone } from "react-icons/fa6";
+import { IoAirplane } from "react-icons/io5";
 import TestimonialSingle from '../ui/TestimonialSingle';
 
 
@@ -158,27 +160,45 @@ export default function NursingView() {
                               <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-10">
                                    <div>
                                         <span className="text-[#c9a324] text-[1.2rem] text-left font-myanmar flex items-center justify-center md:justify-start mb-5">
-                                             <hr className="w-16 h-0.5 bg-[#c9a324] border-0 mr-4" />Notre équipe
+                                             <hr className="w-16 h-0.5 bg-[#c9a324] border-0 mr-4" />{t('sectionTeam.span')}
                                         </span>
                                         <h2 className="text-[1.5rem] md:text-[2.9rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
-                                             Des professionnels de santé dévoués <span className="text-[#c9a324]">à vos proches</span>
+                                             {t('sectionTeam.title')} <span className="text-[#c9a324]">{t('sectionTeam.titleSpan')}</span>
                                         </h2>
                                         <p className="text-[1.2rem] text-center md:text-left text-gray mb-8">
-                                             REMES a été fondée en 2009 par le <b>Dr. Ahlem Bourourou</b>, médecin convaincue qu'une résidence médicalisée peut être un véritable lieu de vie.
+                                             {t.rich('sectionTeam.p1', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}
                                         </p>
                                         <p className="text-[1.2rem] text-center md:text-left text-gray mb-10">
-                                             Aujourd'hui encore, elle supervise personnellement chaque projet d'accueil et veille à ce que chaque résident soit accompagné dans le respect de sa dignité, de son histoire et de ses habitudes.
+                                             {t.rich('sectionTeam.p2', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}
                                         </p>
                                         <p className="text-[1.2rem] text-center md:text-left text-gray mb-10">
-                                             Notre équipe pluridisciplinaire rassemble des professionnels expérimentés et francophones :
+                                             {t.rich('sectionTeam.p3', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}
                                         </p>
                                         <ul className="list-disc space-y-2 text-[1.2rem]">
-                                             <li><b>Médecin coordinateur</b> : suivi médical, coordination avec les spécialistes</li>
-                                             <li><b>Infirmières diplômées</b> : présentes 24h/24, 7j/7</li>
-                                             <li><b>Aides-soignantes</b> : accompagnement dans les gestes du quotidien</li>
-                                             <li><b>Kinésithérapeutes</b> : maintien de la mobilité, rééducation</li>
-                                             <li><b>Psychologue</b> : soutien émotionnel pour résidents et familles</li>
-                                             <li><b>Animateurs</b> : activités thérapeutiques, sorties, moments de convivialité</li>
+                                             <li>{t.rich('sectionTeam.li1', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
+                                             <li>{t.rich('sectionTeam.li2', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
+                                             <li>{t.rich('sectionTeam.li3', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
+                                             <li>{t.rich('sectionTeam.li4', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
+                                             <li>{t.rich('sectionTeam.li5', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
+                                             <li>{t.rich('sectionTeam.li6', {
+                                                  bold: (chunks) => <strong>{chunks}</strong>,
+                                             })}</li>
                                         </ul>
 
 
@@ -194,11 +214,11 @@ export default function NursingView() {
                          <div className="mx-5 md:mx-auto max-w-7xl">
                               <div className="flex items-center gap-4 max-w-md mx-auto text-dark-blue mb-5 text-dark-blue">
                                    <div className="flex-1 border-t border-dark-blue"></div>
-                                   <span className="text-sm tracking-wide text-[1.4rem] uppercase">Témoignages</span>
+                                   <span className="text-sm tracking-wide text-[1.4rem] uppercase">{t('sectionTestimonials.span')}</span>
                                    <div className="flex-1 border-t border-dark-blue"></div>
                               </div>
                               <h2 className="text-[1.5rem] md:text-[3.25rem] text-center text-dark-blue font-myanmar mb-8 w-4xl mx-auto">
-                                   Les familles nous font <span className="text-[#c9a324]">confiance</span>
+                                   {t('sectionTestimonials.title')} <span className="text-[#c9a324]">{t('sectionTestimonials.titleSpan')}</span>
                               </h2>
                               <FaQuoteRight className="text-[#c9a324] text-[4rem] mx-auto" />
                               <TestimonialSingle />
@@ -211,21 +231,19 @@ export default function NursingView() {
                          <div className="mx-5 md:mx-auto max-w-7xl py-20">
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
                                    <div className="flex flex-col justify-center md:justify-start">
-                                        <span className="text-[#c9a324] text-[1.9rem] text-left font-myanmar">Contact</span>
+                                        <span className="text-[#c9a324] text-[1.9rem] text-left font-myanmar">{t('sectionContact.span')}</span>
                                         <h2 className="text-[2.5rem] md:text-[3rem] text-left text-dark-blue font-myanmar mb-8 ">
-                                             {/* {t('content.reservation.title')} */}
-                                             Nous sommes là pour <br className='md:block hidden' /><span className="text-[#c9a324]">vous accompagner.</span>
+                                             {t('sectionContact.title')} <br className='md:block hidden' /><span className="text-[#c9a324]">{t('sectionContact.titleSpan')}</span>
                                         </h2>
                                         <p className=" text-left text-gray">
-                                             {/* {t('content.reservation.text')} */}
-                                             Confier un proche à une maison de retraite est une décision difficile, chargée d'émotion. Les questions sont nombreuses, les doutes aussi — c'est normal. Notre équipe est là pour vous écouter, vous rassurer et répondre à toutes vos interrogations, avec bienveillance et sans aucun engagement.
+                                             {t('sectionContact.p1')}
                                         </p>
                                         <hr className="my-8 border-gray-300" />
-                                        <p className=" text-left text-gray mb-5">Planifiez un appel téléphonique ou remplissez le formulaire. Nous vous recontactons sous 24 heures.</p>
+                                        <p className=" text-left text-gray mb-5">{t('sectionContact.p2')}</p>
                                         <ul className="text-left space-y-4 text-gray">
-                                             <li>📍 Hôtel Palm Beach, Zone Touristique Skanes, Monastir, Tunisie</li>
-                                             <li>📞 +216 23 050 038</li>
-                                             <li>✈️ À 5 min de l'aéroport de Monastir · 2h de vol depuis Paris</li>
+                                             <li><FaLocationPin className="inline mr-2 text-[#c9a324]" /> {t('sectionContact.li1')}</li>
+                                             <li><FaPhone className="inline mr-2 text-[#c9a324]" /> +216 23 050 038</li>
+                                             <li><IoAirplane className="inline mr-2 text-[#c9a324]" /> {t('sectionContact.li2')}</li>
                                         </ul>
                                    </div>
                                    <div>
@@ -240,12 +258,6 @@ export default function NursingView() {
                                    <header className="text-center lg:text-left mb-12 lg:mb-16 pt-20">
                                         <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
                                              <div className="flex-1">
-                                                  {/* <h2 className="text-gold text-3xl sm:text-4xl lg:text-5xl xl:text-6xl font-myanmar mb-4">
-                                                       {t('content.living.title')}
-                                                  </h2>
-                                                  <p className="text-white text-sm sm:text-base lg:text-lg xl:text-xl max-w-4xl mx-auto lg:mx-0 leading-relaxed">
-                                                       {t('content.living.description')}
-                                                  </p> */}
                                                   <h2 className="text-dark-gold text-3xl sm:text-4xl font-myanmar mb-4 text-center">
                                                        FAQ
                                                   </h2>

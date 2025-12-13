@@ -10,7 +10,8 @@ interface Testimonial {
      description_fr: string;
      created: string;
      updated: string;
-     role?: string; // Assuming role might be added later or mapped from somewhere, but relying on fetch map for now
+     role?: string;
+     role_fr?: string;
      location?: string;
 }
 
@@ -20,12 +21,16 @@ export default function TestimonialSingle() {
      const [current, setCurrent] = useState(0);
      const [testimonials, setTestimonials] = useState<Testimonial[]>([]);
      const [loading, setLoading] = useState(true);
+
      const getLocalizedContent = (testimonial: Testimonial) => {
           const isFrench = locale === 'fr';
           return {
                description: isFrench && testimonial.description_fr
                     ? testimonial.description_fr
-                    : testimonial.description
+                    : testimonial.description,
+               role: isFrench && testimonial.role_fr
+                    ? testimonial.role_fr
+                    : testimonial.role
           };
      };
 
@@ -45,6 +50,7 @@ export default function TestimonialSingle() {
                     created: item.created,
                     updated: item.updated,
                     role: item.role || "Fille de résidente",
+                    role_fr: item.role_fr || "",
                     location: item.location || "Paris"
                }));
 
@@ -60,6 +66,7 @@ export default function TestimonialSingle() {
      useEffect(() => {
           fetchTestimonials();
      }, []);
+
      useEffect(() => {
           if (testimonials.length > 1) {
                const id = setInterval(() => setCurrent((prev) => (prev + 1) % testimonials.length), 8000);
@@ -76,9 +83,6 @@ export default function TestimonialSingle() {
      }
 
      if (testimonials.length === 0) return null;
-
-     const testimonial = testimonials[current];
-     const localizedContent = getLocalizedContent(testimonial);
 
      return (
           <div className="max-w-4xl mx-auto px-4 py-8 text-center relative min-h-[300px] flex items-center justify-center">
@@ -101,7 +105,7 @@ export default function TestimonialSingle() {
                                         {item.full_name}
                                    </span>
                                    <span className="text-gray-500 text-sm mt-1">
-                                        {item.role}, {item.location}
+                                        {content.role}, {item.location}
                                    </span>
                               </div>
                          </div>
