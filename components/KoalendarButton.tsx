@@ -21,9 +21,10 @@ const DEFAULT_BUTTON_CLASS =
 
 type KoalendarButtonProps = {
      className?: string;
+     children?: React.ReactNode;
 };
 
-export default function KoalendarButton({ className }: KoalendarButtonProps = {}) {
+export default function KoalendarButton({ className, children }: KoalendarButtonProps = {}) {
      const locale = useLocale();
 
      useEffect(() => {
@@ -59,7 +60,7 @@ export default function KoalendarButton({ className }: KoalendarButtonProps = {}
                     strategy="afterInteractive"
                />
                <button onClick={openKoalendar} className={className ?? DEFAULT_BUTTON_CLASS}>
-                    {label}
+                    {children || label}
                </button>
           </>
      );
