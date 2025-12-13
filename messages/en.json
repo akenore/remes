@@ -749,7 +749,8 @@
         "privacy": "Privacy Policy",
         "terms": "Terms of Use",
         "professionalsServices": "Professionals Services",
-        "description": "A high-end medical residence by the sea, dedicated to comfort, care, and serenity."
+        "span": "Remes Medical Residence in Tunisia",
+        "description": "A high-end medical residence dedicated to nursing homes and adapted stays in Tunisia, combining comfort, personalized care, and peace of mind every day."
       }
     },
     "button": "Read more",
@@ -975,12 +976,12 @@
           "description": "At REMES, every resident is unique. Our multidisciplinary team—doctors, nurses, nursing assistants, physical therapists—provides attentive and caring support, day and night. Your loved one is not just a room number. They are known by their first name, listened to, and supported according to their own pace and desires. That is our approach to care: taking the time."
         },
         "item2": {
-          "title": "An exceptional living environment by the sea",
-          "description": "Imagine your parent waking up every morning facing the Mediterranean Sea. That's everyday life at REMES. Our nursing home is located in the heart of a 4-star hotel in Skanes-Monastir, with landscaped gardens, shaded terraces, and bright living spaces. With over 300 days of sunshine per year and a mild climate all year round, your loved ones will enjoy an environment conducive to well-being and serenity."
+          "title": "A living environment conducive to serenity",
+          "description": "Imagine your parent waking up every morning facing the Mediterranean Sea. With over 300 days of sunshine per year and a mild climate all year round, your loved ones can enjoy a peaceful daily life, far from stress and gloom."
         },
         "item3": {
-          "title": "Complete transparency on pricing",
-          "description": "No hidden costs, no unpleasant surprises. Our all-inclusive rates start at €2,300 per month and include accommodation, meals, care, and activities. Before admission, we work with you to draw up a personalized quote based on your loved one's needs. You know exactly what you are paying for—and what your loved one is receiving."
+          "title": "Complete transparency",
+          "description": "No hidden fees, no unpleasant surprises. Before any admission, we work with you to draw up a personalized quote. You know exactly what you are paying for—and what your loved one is receiving."
         }
       },
       "sectionSupport": {
@@ -992,11 +993,10 @@
         "span": "OUR TEAM",
         "title": "Healthcare professionals dedicated",
         "titleSpan": "to your loved ones",
-        "p1": "REMES was founded in 2009 by <bold>Dr. Ahlem Bourourou</bold>, a physician who firmly believes that a nursing home can be a truly vibrant place to live.",
-        "p2": "Even today, she personally supervises each intake project and ensures that every resident is supported with respect for their dignity, history, and habits.",
-        "p3": "Our multidisciplinary team brings together experienced, French-speaking professionals:",
+        "p1": "Before becoming director, <bold>Dr. Ahlem Bourourou</bold> was a daughter, a granddaughter, a caregiver. She knows what it's like to lie awake at night worrying, to face impossible decisions, to be consumed by guilt. That's why, in 2009, she created REMES: a place where families can finally breathe easy. Fifteen years later, she still answers the first call from loved ones herself. Because she doesn't delegate that moment.",
+        "p2": "To honor this commitment, she has surrounded herself with professionals who share her vision:",
         "li1": "<bold>Coordinating physician</bold>: medical follow-up, coordination with specialists",
-        "li2": "<bold>Registered nurses</bold>: available 24 hours a day, 7 days a week",
+        "li2": "<bold>Registered nurses</bold>: available day and night for daily care",
         "li3": "<bold>Care assistants</bold>: assistance with daily tasks",
         "li4": "<bold>Physical therapists</bold>: maintaining mobility, rehabilitation",
         "li5": "<bold>Psychologist</bold>: emotional support for residents and families",

@@ -175,11 +175,6 @@ export default function NursingView() {
                                                   bold: (chunks) => <strong>{chunks}</strong>,
                                              })}
                                         </p>
-                                        <p className="text-[1.2rem] text-center md:text-left text-gray mb-10">
-                                             {t.rich('sectionTeam.p3', {
-                                                  bold: (chunks) => <strong>{chunks}</strong>,
-                                             })}
-                                        </p>
                                         <ul className="list-disc space-y-2 text-[1.2rem]">
                                              <li>{t.rich('sectionTeam.li1', {
                                                   bold: (chunks) => <strong>{chunks}</strong>,
@@ -275,15 +270,7 @@ export default function NursingView() {
                          </div>
                     </section>
 
-                    <section className="max-w-5xl mx-5 md:mx-auto text-center pb-24">
 
-                         <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
-                              {t('content.reservation.title')}
-                         </h2>
-                         <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
-                              {t('content.reservation.text')}
-                         </p>
-                    </section>
                </main>
 
                <div className="bg-dark-blue pb-10">

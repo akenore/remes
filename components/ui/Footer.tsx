@@ -21,7 +21,10 @@ export default function Footer() {
                     <div className="container mx-auto mb-10 md:mb-50">
                          <div className="grid grid-cols-9 gap-4 mt-10">
                               <div className="col-span-9 sm:col-span-4 md:col-span-3 mb-10 md:mb-0">
-                                   <p className="pl-3 text-white mb-8 mx-2 md:mx-auto text-center sm:text-left">
+                                   <h2 className="pl-3 font-bold text-white mx-2 md:mx-auto text-center sm:text-left">
+                                        {t('frontend.menu.footer.span')}
+                                   </h2>
+                                   <p className="pl-3 text-white mb-8 pt-5 mx-2 md:mx-auto text-center sm:text-left">
                                         {t('frontend.menu.footer.description')}
                                         <a
                                              href={CONTACT_MAP_URL}

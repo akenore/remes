@@ -749,7 +749,8 @@
         "privacy": "Politique de confidentialité",
         "terms": "Conditions d'utilisation",
         "professionalsServices": "Professionnels services",
-        "description": "Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité."
+        "span": "Résidence Médicalisée Remes en Tunisie",
+        "description": "Une résidence médicalisée haut de gamme dédiée à l’EHPAD et aux séjours adaptés en Tunisie, alliant confort, soins personnalisés et sérénité au quotidien."
       }
     },
     "button": "En savoir plus",
@@ -974,12 +975,12 @@
           "description": "Chez REMES, chaque résident est unique. Notre équipe pluridisciplinaire — médecins, infirmières, aides-soignantes, kinésithérapeutes — assure une présence attentive et bienveillante, de jour comme de nuit. Votre proche n'est pas un numéro de chambre. Il est connu par son prénom, écouté, accompagné selon son rythme et ses envies. C'est notre conception du soin : prendre le temps."
         },
         "item2": {
-          "title": "Un cadre de vie exceptionnel en bord de mer",
-          "description": "Imaginez votre parent se réveillant chaque matin face à la Méditerranée. C'est le quotidien à REMES. Notre résidence médicalisée est installée au cœur d'un hôtel 4 étoiles à Skanes-Monastir : jardins paysagers, terrasses ombragées, espaces de vie lumineux. Avec plus de 300 jours de soleil par an et un climat doux toute l'année, vos proches profitent d'un environnement propice au bien-être et à la sérénité."
+          "title": "Un cadre de vie propice à la sérénité",
+          "description": "Imaginez votre parent se réveillant chaque matin face à la Méditerranée. Avec plus de 300 jours de soleil par an et un climat doux toute l'année, vos proches retrouvent un quotidien apaisé, loin du stress et de la grisaille."
         },
         "item3": {
-          "title": "Une transparence totale sur les tarifs",
-          "description": "Pas de frais cachés, pas de mauvaise surprise. Nos tarifs tout compris débutent à 2 300€ par mois et incluent l'hébergement, la restauration, les soins et les activités. Avant toute admission, nous établissons ensemble un devis personnalisé selon les besoins de votre proche. Vous savez exactement ce que vous payez — et ce que votre proche reçoit."
+          "title": "Une transparence totale",
+          "description": "Pas de frais cachés, pas de mauvaise surprise. Avant toute admission, nous établissons ensemble un devis personnalisé. Vous savez exactement ce que vous payez — et ce que votre proche reçoit."
         }
       },
       "sectionSupport": {
@@ -991,11 +992,10 @@
         "span": "Notre équipe",
         "title": "Des professionnels de santé dévoués",
         "titleSpan": "à vos proches",
-        "p1": "REMES a été fondée en 2009 par le <bold>Dr. Ahlem Bourourou</bold>, médecin convaincue qu'une résidence médicalisée peut être un véritable lieu de vie.",
-        "p2": "Aujourd'hui encore, elle supervise personnellement chaque projet d'accueil et veille à ce que chaque résident soit accompagné dans le respect de sa dignité, de son histoire et de ses habitudes.",
-        "p3": "Notre équipe pluridisciplinaire rassemble des professionnels expérimentés et francophones :",
+        "p1": "Avant d'être directrice, le <bold>Dr. Ahlem Bourourou</bold> a été fille, petite-fille, accompagnante. Elle connaît les nuits d'inquiétude, les décisions impossibles, la culpabilité qui ronge. C'est pour ça qu'en 2009, elle a créé REMES : un lieu où les familles peuvent enfin souffler. Quinze ans plus tard, elle répond encore elle-même au premier appel des proches. Parce que ce moment-là, elle ne le délègue pas.",
+        "p2": "Pour honorer cet engagement, elle s'est entourée de professionnels qui partagent sa vision :",
         "li1": "<bold>Médecin coordinateur</bold> : suivi médical, coordination avec les spécialistes",
-        "li2": "<bold>Infirmières diplômées</bold> : présentes 24h/24, 7j/7",
+        "li2": "<bold>Infirmières diplômées</bold> : présentes jour et nuit pour les soins quotidiens",
         "li3": "<bold>Aides-soignantes</bold> : accompagnement dans les gestes du quotidien",
         "li4": "<bold>Kinésithérapeutes</bold> : maintien de la mobilité, rééducation",
         "li5": "<bold>Psychologue</bold> : soutien émotionnel pour résidents et familles",
