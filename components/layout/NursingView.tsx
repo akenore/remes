@@ -80,7 +80,7 @@ export default function NursingView() {
                                    <span className="text-dark-blue text-sm tracking-wide text-[1.4rem]">{t('sectionEngagement.span')}</span>
                                    <div className="flex-1 border-t border-gray-600"></div>
                               </div>
-                              <h2 className="text-[1.5rem] md:text-[3.25rem] text-center text-dark-blue font-myanmar mb-8 w-4xl mx-auto">
+                              <h2 className="text-[1.5rem] md:text-[3.25rem] leading-tight text-center text-dark-blue font-myanmar mb-8 max-w-4xl mx-auto">
                                    {t('sectionEngagement.title')} <span className="text-[#c9a324]">{t('sectionEngagement.titleSpan')}</span>
                               </h2>
                               <div className="flex flex-col lg:flex-row lg:divide-x lg:divide-slate-200">
@@ -126,7 +126,7 @@ export default function NursingView() {
                                    <span className="text-sm tracking-wide text-[1.4rem] uppercase">{t('sectionSupport.span')}</span>
                                    <div className="flex-1 border-t border-dark-gold"></div>
                               </div>
-                              <h2 className="text-[1.5rem] md:text-[3.25rem] text-center text-white font-myanmar mb-8 w-4xl mx-auto">
+                              <h2 className="text-[1.5rem] md:text-[3.25rem] leading-tight text-center text-white font-myanmar mb-8 max-w-4xl mx-auto">
                                    {t('sectionSupport.title')} <span className="text-[#c9a324]">{t('sectionSupport.titleSpan')}</span>
                               </h2>
                          </div>
@@ -217,7 +217,7 @@ export default function NursingView() {
                                    <span className="text-sm tracking-wide text-[1.4rem] uppercase">{t('sectionTestimonials.span')}</span>
                                    <div className="flex-1 border-t border-dark-blue"></div>
                               </div>
-                              <h2 className="text-[1.5rem] md:text-[3.25rem] text-center text-dark-blue font-myanmar mb-8 w-4xl mx-auto">
+                              <h2 className="text-[1.5rem] md:text-[3.25rem] leading-tight text-center text-dark-blue font-myanmar mb-8 max-w-4xl mx-auto">
                                    {t('sectionTestimonials.title')} <span className="text-[#c9a324]">{t('sectionTestimonials.titleSpan')}</span>
                               </h2>
                               <FaQuoteRight className="text-[#c9a324] text-[4rem] mx-auto" />
