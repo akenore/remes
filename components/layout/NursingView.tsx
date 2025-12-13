@@ -8,8 +8,8 @@ import ContactForm2 from '../ui/ContactForm2';
 import Navbar from '../ui/Navbar';
 import Breadcrumbs from '../ui/Breadcrumbs';
 import Card2 from '../ui/card/Card2';
-import Icon from '../ui/Icon';
-import { FaHome, FaBed, FaHandsHelping, FaTags, } from 'react-icons/fa';
+import { FaHome, FaBed, FaHandsHelping, FaTags, FaQuoteRight } from 'react-icons/fa';
+import TestimonialSingle from '../ui/TestimonialSingle';
 
 
 
@@ -190,6 +190,22 @@ export default function NursingView() {
                               </div>
                          </div>
                     </section>
+                    <section className="py-20">
+                         <div className="mx-5 md:mx-auto max-w-7xl">
+                              <div className="flex items-center gap-4 max-w-md mx-auto text-dark-blue mb-5 text-dark-blue">
+                                   <div className="flex-1 border-t border-dark-blue"></div>
+                                   <span className="text-sm tracking-wide text-[1.4rem] uppercase">Témoignages</span>
+                                   <div className="flex-1 border-t border-dark-blue"></div>
+                              </div>
+                              <h2 className="text-[1.5rem] md:text-[3.25rem] text-center text-dark-blue font-myanmar mb-8 w-4xl mx-auto">
+                                   Les familles nous font <span className="text-[#c9a324]">confiance</span>
+                              </h2>
+                              <FaQuoteRight className="text-[#c9a324] text-[4rem] mx-auto" />
+                              <TestimonialSingle />
+
+                         </div>
+
+                    </section>
                     <section className="w-full text-center pb-24 bg-[#f6f1eb]">
 
                          <div className="mx-5 md:mx-auto max-w-7xl py-20">
@@ -246,6 +262,7 @@ export default function NursingView() {
                               </div>
                          </div>
                     </section>
+
                     <section className="max-w-5xl mx-5 md:mx-auto text-center pb-24">
 
                          <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
@@ -254,13 +271,7 @@ export default function NursingView() {
                          <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                               {t('content.reservation.text')}
                          </p>
-
-
-                         {/* <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-6 gap-6 items-center justify-items-center">
-                              MAP
-                         </div> */}
                     </section>
-                    {/* <ContactForm /> */}
                </main>
 
                <div className="bg-dark-blue pb-10">

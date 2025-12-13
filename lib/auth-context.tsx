@@ -1,7 +1,7 @@
 'use client';
 
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { authHelpers, pb } from './pocketbase';
+import { authHelper, pb } from './pocketbase';
 
 interface User {
   id: string;
@@ -26,12 +26,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    // Check if PocketBase already has a valid auth state
-    const isAuthenticated = authHelpers.isAuthenticated();
-    
+    const isAuthenticated = authHelper.isAuthenticated();
+
     if (isAuthenticated) {
-      const currentUser = authHelpers.getCurrentUser();
-      
+      const currentUser = authHelper.getCurrentUser();
+
       if (currentUser) {
         const userObj = {
           id: currentUser.id,
@@ -42,10 +41,9 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(userObj);
       }
     }
-    
+
     setIsLoading(false);
 
-    // Set up auth store listener for changes
     const unsubscribe = pb.authStore.onChange((token, record) => {
       if (token && record) {
         const userObj = {
@@ -57,14 +55,12 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         setUser(userObj);
       } else {
         setUser(null);
-        // Clear welcome message flag when user logs out
         if (typeof window !== 'undefined') {
           sessionStorage.removeItem('welcome_shown');
         }
       }
     });
 
-    // Cleanup function
     return () => {
       if (unsubscribe) unsubscribe();
     };
@@ -72,41 +68,35 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
 
   const login = async (email: string, password: string) => {
     setIsLoading(true);
-    
-    const result = await authHelpers.login(email, password);
-    
-    // Note: User state will be updated via the authStore.onChange listener
-    // No need to manually set user here
-    
+
+    const result = await authHelper.login(email, password);
+
     setIsLoading(false);
     return result;
   };
 
   const logout = () => {
-    authHelpers.logout();
+    authHelper.logout();
     // User state will be cleared via the authStore.onChange listener
     // Welcome message flag will also be cleared in the onChange handler
   };
 
   const requestPasswordReset = async (email: string) => {
-    return await authHelpers.requestPasswordReset(email);
+    return await authHelper.requestPasswordReset(email);
   };
 
   const refreshUser = async () => {
     try {
       if (pb.authStore.model?.id) {
-        // Check if this is an admin or regular user
         const currentUser = pb.authStore.record;
         let updatedUser;
-        
+
         if (currentUser && currentUser.collectionName === '_superusers') {
-          // This is an admin user - refresh from admins
           updatedUser = await pb.admins.getOne(pb.authStore.model.id);
         } else {
-          // This is a regular user - refresh from users collection
           updatedUser = await pb.collection('users').getOne(pb.authStore.model.id);
         }
-        
+
         const userObj = {
           id: updatedUser.id,
           email: updatedUser.email,
