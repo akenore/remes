@@ -9,7 +9,7 @@ import { routing } from '@/i18n/routing';
 export const metadata: Metadata = {
   title: {
     default: "Résidence médicalisée Remes",
-    template: "Résidence médicalisée Remes - %s",
+    template: "%s",
   },
   description: "Un lieu de vie, de soin et de serenite Une résidence médicalisée haut de gamme en bord de mer, dédiée au confort, aux soins et à la sérénité.",
 };

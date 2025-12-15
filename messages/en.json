@@ -765,29 +765,61 @@
       },
       "title": "Frequently Asked Questions",
       "items": {
-        "price": {
+        "q1": {
           "question": "What is the price of a nursing home at REMES?",
           "answer": "Our all-inclusive monthly rates start at €2,300. This price includes accommodation in a single room, full board (four meals per day), medical and paramedical care, activities, and laundry service. A personalized quote is provided based on your loved one's level of dependency."
         },
-        "location": {
+        "q2": {
           "question": "Where exactly is the REMES residence located?",
           "answer": "REMES is located in Skanes-Monastir, on the east coast of Tunisia. The residence is located within the Palm Beach Hotel, 200 meters from the Mediterranean Sea and a 5-minute drive from Monastir's Habib Bourguiba International Airport."
         },
-        "alzheimer": {
+        "q3": {
           "question": "Do you accept residents with Alzheimer's disease?",
           "answer": "Yes. We welcome people with neurodegenerative diseases (Alzheimer's, Parkinson's, related dementias) and provide specifically tailored support. Our team is trained in the management of these conditions."
         },
-        "admission": {
+        "q4": {
           "question": "How does the admission process work?",
           "answer": "It all starts with a phone call to understand your situation. We then review your loved one's medical records and propose a personalized care plan. A visit to the residence is possible before any decision is made."
         },
-        "visit": {
+        "q5": {
           "question": "Can I easily visit my loved one?",
           "answer": "Absolutely. Monastir is a two-hour flight from Paris, with direct connections from several French and European cities. The airport is five minutes from our residence. Many families come every month—and take advantage of the visit to enjoy a few days of sunshine."
         },
-        "language": {
+        "q6": {
           "question": "Does the medical team speak French?",
           "answer": "Yes. Our entire medical and nursing team is French-speaking. Tunisia has a long tradition of French-speaking culture, and our professionals communicate fluently in French with residents and their families."
+        }
+      }
+    },
+    "faq2": {
+      "header": {
+        "title": "Frequently asked questions about",
+        "span": "accessible vacations in Tunisia"
+      },
+      "items": {
+        "q1": {
+          "question": "How much does a customized stay at REMES cost?",
+          "answer": "Our rates vary depending on the length of stay, the level of support required, and the time of year. On average, you can expect to pay between €80 and €150 per day for an all-inclusive package (accommodation, meals, basic care). Request a free personalized quote."
+        },
+        "q2": {
+          "question": "Can we bring our own wheelchair?",
+          "answer": "Yes, you can bring your own equipment. We also have wheelchairs and medical equipment available on site."
+        },
+        "q3": {
+          "question": "Does the team speak English?",
+          "answer": "Yes, all our staff are English-speaking. Tunisia is a country where English is widely spoken, which facilitates communication."
+        },
+        "q4": {
+          "question": "How is the transfer from the airport?",
+          "answer": "We organize your transfer in a suitable vehicle from Monastir Airport (5 min) or Enfidha Airport (40 min). A member of our team will welcome you upon your arrival."
+        },
+        "q5": {
+          "question": "Can families accompany their loved ones?",
+          "answer": "Absolutely! Companions can stay in the same room or in an adjacent room. We offer special rates for caregivers."
+        },
+        "q6": {
+          "question": "What conditions do you treat?",
+          "answer": "We welcome people with reduced mobility, seniors who have lost their independence, people with neurodegenerative diseases (Alzheimer's, Parkinson's), and people with motor or sensory disabilities."
         }
       }
     },
@@ -847,8 +879,18 @@
         "description": "Organize your accessible vacation in Tunisia with REMES. Accessible accommodation, care team, wheelchair accessible transportation, and accessible excursions throughout Tunisia. Free quote."
       },
       "hero": {
-        "title": "Discover Tunisia differently",
-        "description": "Immerse yourself in the heart of a country of a thousand and one colors, where history, traditions and the beauty of landscapes blend to offer a unique experience.",
+        "button": "4-star nursing home",
+        "title": "Adapted Stay in Tunisia:",
+        "titleSpan": "Vacations Accessible to All",
+        "description": "Treat yourself or a loved one to a tailored vacation in Tunisia, on the shores of the Mediterranean. The REMES residence in Monastir welcomes people with reduced mobility, seniors, and people with disabilities in a fully accessible 4-star hotel setting.",
+        "badges": {
+          "b1": "4★ Hotel",
+          "b2": "24/7 Care",
+          "b3": "5 min Airport",
+          "b4": "100% PMR"
+        },
+        "buttonCTA": "Schedule an appointment",
+        "info": "DISCOVER",
         "cards": {
           "accommodation": {
             "title": "Adapted accommodation",
@@ -867,6 +909,117 @@
             "description": "Travel light, we take care of the rest"
           }
         }
+      },
+      "sectionServices": {
+        "subtitle": "Our services",
+        "title": "Why choose <bold>REMES</bold> for your customized trip to Tunisia?",
+        "description": "REMES is a unique medical residence: we combine the comfort of a 4-star hotel with the support of a trained care team. Whether you are traveling alone, with family, or with a group, we tailor each stay to your specific needs.",
+        "cards": {
+          "card1": {
+            "title": "100% accessible accommodation",
+            "description": "Our rooms are designed to accommodate all types of disabilities:",
+            "li1": "Spacious rooms with wheelchair access",
+            "li2": "Adapted bathrooms (walk-in shower, grab bars)",
+            "li3": "Medical beds available upon request",
+            "li4": "Level access to common areas",
+            "li5": "Elevators adapted for people with reduced mobility"
+          },
+          "card2": {
+            "title": "A healthcare team at your side",
+            "description": "Our qualified staff provides attentive care around the clock:",
+            "li1": "Registered nurses and certified nursing assistants",
+            "li2": "Assistance with activities of daily living",
+            "li3": "Administration of medical treatments",
+            "li4": "Personalized support tailored to your level of independence"
+          },
+          "card3": {
+            "title": "Medical equipment on site",
+            "description": "Travel light, we'll take care of the rest:",
+            "li1": "Wheelchairs available for loan",
+            "li2": "Medical beds",
+            "li3": "Patient lifts",
+            "li4": "Oxygen therapy equipment (upon request)",
+            "li5": "Anti-bedsore mattress"
+          }
+        }
+      },
+      "sectionForms": {
+        "subtitle": "Our packages",
+        "title": "Our Tailored",
+        "titleSpan": "Vacation Packages",
+        "individuals": {
+          "subtitle": "POPULAR",
+          "button": "Individuals",
+          "title": "Adapted vacations for individuals",
+          "description": "Are you a person with reduced mobility, a senior citizen, or a caregiver? We welcome you for:",
+          "cards": {
+            "card1": {
+              "title": "Short stays",
+              "description": "From 3 nights for a rejuvenating getaway",
+              "price": "From €80/day"
+            },
+            "card2": {
+              "title": "Long-term stays",
+              "description": "Several weeks in the Tunisian sun",
+              "price": "Sliding scale"
+            },
+            "card3": {
+              "title": "Respite stays for caregivers",
+              "description": "Entrust your loved one to us while you take a break",
+              "price": "Based on estimate"
+            }
+          },
+          "buttonCTA": "Book my stay"
+        },
+        "professionals": {
+          "button": "Professionals (B2B)",
+          "title": "Receptive offer for professionals (B2B)",
+          "description": "Are you a travel agency, association, or tour operator specializing in accessible vacations? REMES is your receptive partner in Tunisia:",
+          "list": {
+            "l1": "Turnkey solution (accommodation + treatments + excursions)",
+            "l2": "Compliance with your protocols",
+            "l3": "Group rates available upon request",
+            "l4": "Comprehensive logistical support"
+          },
+          "buttonCTA": "Request a B2B partnership"
+        }
+      },
+      "sectionActivities": {
+        "title": "Activities",
+        "subtitle": "Adapted activities and excursions from Monastir",
+        "description": "Make the most of your accessible vacation in Tunisia with our accessible activities:",
+        "cards": {
+          "card1": {
+            "title": "Relaxation by the sea",
+            "li1": "Direct access to a private beach",
+            "li2": "Sunbathing on adapted deckchairs",
+            "li3": "Supervised swimming (upon request)"
+          },
+          "card2": {
+            "title": "Cultural discovery",
+            "li1": "Tour of the medina of Monastir (accompaniment for people with reduced mobility)",
+            "li2": "The Ribat of Monastir (partially accessible)",
+            "li3": "The Bourguiba Mausoleum",
+            "li4": "Excursion to Sousse (UNESCO sites)"
+          },
+          "card3": {
+            "title": "Wellness and care",
+            "li1": "Access to the hotel spa and pool",
+            "li2": "Massages and relaxation treatments",
+            "li3": "Physical therapy sessions (upon request)"
+          },
+          "card4": {
+            "title": "Paratransit",
+            "description": "Our equipped vehicles take care of all your transportation needs:",
+            "li1": "Airport transfers ↔ residence",
+            "li2": "Excursions by minibus for people with reduced mobility",
+            "li3": "Shopping and leisure outings"
+          }
+        }
+      },
+      "sectionCTA": {
+        "title": "Book your accessible vacation in Tunisia",
+        "description": "Ready to plan your accessible vacation? Our team is here to help you create a tailor-made trip."
       },
       "mainContent": {
         "title": "Professional services",

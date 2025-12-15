@@ -4,11 +4,17 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { GoPlus } from 'react-icons/go';
 
-export default function FaqAccordion() {
-     const t = useTranslations('frontend.faq');
-     const [openItem, setOpenItem] = useState<string | null>(null);
+interface FaqAccordionProps {
+     translationScope?: string;
+     keys?: string[];
+}
 
-     const keys = ['price', 'location', 'alzheimer', 'admission', 'visit', 'language'] as const;
+export default function FaqAccordion({
+     translationScope = 'frontend.faq',
+     keys = ['price', 'location', 'alzheimer', 'admission', 'visit', 'language']
+}: FaqAccordionProps) {
+     const t = useTranslations(translationScope);
+     const [openItem, setOpenItem] = useState<string | null>(null);
 
      const toggleItem = (key: string) => {
           setOpenItem(openItem === key ? null : key);

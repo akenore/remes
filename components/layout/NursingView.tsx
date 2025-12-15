@@ -25,10 +25,10 @@ export default function NursingView() {
      return (
           <>
                <div
-                    className="relative w-full bg-cover bg-top bg-no-repeat dynamic-hero-bg min-h-[900px]"
-                    style={{ backgroundImage: `url('/bg-ehpad.jpg')` }}>
+                    className="relative w-full bg-cover bg-top bg-no-repeat dynamic-hero-bg min-h-[980px]"
+                    style={{ backgroundImage: `url('/bg-hero-2.jpg')` }}>
                     <Navbar />
-                    <div className='relative z-10 w-full max-w-7xl mx-auto px-4'>
+                    <div className="relative z-10 w-full max-w-7xl mx-auto px-4 pb-20">
                          <div className="flex flex-col lg:flex-row gap-8 lg:gap-16">
                               <div className='flex-1 flex flex-col items-center md:items-start text-center md:text-left'>
                                    <div className='mb-14 md:-mt-20 lg:-mt-32'>
@@ -264,7 +264,10 @@ export default function NursingView() {
                                         </div>
                                    </header>
                                    <div className="w-full">
-                                        <FaqAccordion />
+                                        <FaqAccordion
+                                             translationScope="frontend.faq"
+                                             keys={['q1', 'q2', 'q3', 'q4', 'q5', 'q6']}
+                                        />
                                    </div>
                               </div>
                          </div>

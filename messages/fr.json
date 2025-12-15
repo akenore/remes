@@ -764,29 +764,61 @@
         "span": "EHPAD en Tunisie"
       },
       "items": {
-        "price": {
+        "q1": {
           "question": "Quel est le prix d'un EHPAD chez REMES ?",
           "answer": "Nos tarifs mensuels tout compris débutent à 2 300€. Ce prix inclut l'hébergement en chambre individuelle, la pension complète (4 repas/jour), les soins médicaux et paramédicaux, les animations et l'entretien du linge. Un devis personnalisé est établi selon le niveau de dépendance de votre proche."
         },
-        "location": {
+        "q2": {
           "question": "Où se situe exactement la résidence REMES ?",
           "answer": "REMES est situé à Skanes-Monastir, sur la côte est de la Tunisie. La résidence se trouve au sein de l'Hôtel Palm Beach, à 200 mètres de la mer Méditerranée et à 5 minutes en voiture de l'aéroport international Habib Bourguiba de Monastir."
         },
-        "alzheimer": {
+        "q3": {
           "question": "Acceptez-vous les résidents atteints de la maladie d'Alzheimer ? ",
           "answer": "Oui. Nous accueillons les personnes atteintes de maladies neurodégénératives (Alzheimer, Parkinson, démences apparentées) avec un accompagnement spécifiquement adapté. Notre équipe est formée à la prise en charge de ces pathologies."
         },
-        "admission": {
+        "q4": {
           "question": "Comment se déroule la procédure d'admission ?",
           "answer": "Tout commence par un échange téléphonique pour comprendre votre situation. Nous étudions ensuite le dossier médical de votre proche et vous proposons un projet d'accueil personnalisé. Une visite de la résidence est possible avant toute décision."
         },
-        "visit": {
+        "q5": {
           "question": "Puis-je rendre visite facilement à mon proche ?",
           "answer": "Absolument. Monastir est à 2 heures de vol de Paris, avec des liaisons directes depuis plusieurs villes françaises et européennes. L'aéroport est à 5 minutes de notre résidence. De nombreuses familles viennent chaque mois — et profitent de la visite pour quelques jours de soleil."
         },
-        "language": {
+        "q6": {
           "question": "L'équipe soignante parle-t-elle français ?",
           "answer": "Oui. L'ensemble de notre équipe médicale et soignante est francophone. La Tunisie a une longue tradition francophone et nos professionnels communiquent couramment en français avec les résidents et leurs familles."
+        }
+      }
+    },
+    "faq2": {
+      "header": {
+        "title": "Questions fréquentes sur les",
+        "span": "séjours adaptés en Tunisie"
+      },
+      "items": {
+        "q1": {
+          "question": "Quel est le prix d'un séjour adapté chez REMES ?",
+          "answer": "Nos tarifs varient selon la durée du séjour, le niveau d'accompagnement souhaité et la période. Comptez en moyenne entre 80€ et 150€ par jour en formule tout compris (hébergement, repas, soins de base). Demandez un devis personnalisé gratuit."
+        },
+        "q2": {
+          "question": "Peut-on venir avec son propre fauteuil roulant ?",
+          "answer": "Oui, vous pouvez apporter votre propre équipement. Nous disposons également de fauteuils de prêt et de matériel médical sur place."
+        },
+        "q3": {
+          "question": "L'équipe parle-t-elle français ?",
+          "answer": "Oui, tout notre personnel est francophone. La Tunisie est un pays où le français est largement parlé, ce qui facilite la communication."
+        },
+        "q4": {
+          "question": "Comment se passe le transfert depuis l'aéroport ?",
+          "answer": "Nous organisons votre transfert en véhicule adapté depuis l'aéroport de Monastir (5 min) ou Enfidha (40 min). Un membre de l'équipe vous accueille dès votre arrivée."
+        },
+        "q5": {
+          "question": "Les familles peuvent-elles accompagner leur proche ?",
+          "answer": "Absolument ! Les accompagnants peuvent séjourner dans la même chambre ou dans une chambre adjacente. Nous proposons des tarifs spéciaux pour les aidants."
+        },
+        "q6": {
+          "question": "Quelles pathologies prenez-vous en charge ?",
+          "answer": "Nous accueillons les personnes à mobilité réduite, les seniors en perte d'autonomie, les personnes atteintes de maladies neurodégénératives (Alzheimer, Parkinson) et les personnes en situation de handicap moteur ou sensoriel."
         }
       }
     },
@@ -846,8 +878,19 @@
         "description": "Organisez votre séjour adapté en Tunisie avec REMES. Hébergement accessible, équipe soignante, transport PMR et excursions adaptées dans toute la Tunisie. Devis gratuit."
       },
       "hero": {
-        "title": "Découvrez la Tunisie autrement",
-        "description": "Plongez au cœur d'un pays aux mille et une couleurs, où l'histoire, les traditions et la beauté des paysages se mêlent pour offrir une expérience unique.",
+        "button": "Résidence médicalisée 4 étoiles",
+        "subtitle": "Résidence médicalisée 4 étoiles",
+        "title": "Séjour Adapté en Tunisie:",
+        "titleSpan": "Des Vacances Accessibles à Tous",
+        "description": "Offrez-vous ou offrez à un proche des vacances adaptées en Tunisie, au bord de la Méditerranée. La résidence REMES à Monastir accueille les personnes à mobilité réduite, les seniors et les personnes en situation de handicap dans un cadre hôtelier 4 étoiles entièrement accessible.",
+        "badges": {
+          "b1": "4★ Hôtel",
+          "b2": "24/7 Soins",
+          "b3": "5 min Aéroport",
+          "b4": "100% PMR"
+        },
+        "buttonCTA": "Planifier un rendez-vous",
+        "info": "DÉCOUVRIR",
         "cards": {
           "accommodation": {
             "title": "Hébergement adapté",
@@ -866,6 +909,117 @@
             "description": "Voyagez léger, nous nous occupons du reste"
           }
         }
+      },
+      "sectionServices": {
+        "subtitle": "Nos services",
+        "title": "Pourquoi choisir <bold>REMES</bold> pour votre séjour adapté en Tunisie ?",
+        "description": "REMES est une résidence médicalisée unique en son genre : nous combinons le confort d'un hôtel 4 étoiles avec l'accompagnement d'une équipe soignante formée. Que vous voyagiez seul, en famille ou avec un groupe, nous adaptons chaque séjour à vos besoins spécifiques.",
+        "cards": {
+          "card1": {
+            "title": "Un hébergement 100% accessible",
+            "description": "Nos chambres sont conçues pour accueillir tous les types de handicap :",
+            "li1": "Chambres spacieuses avec accès fauteuil roulant",
+            "li2": "Salles de bain adaptées (douche à l'italienne, barres d'appui)",
+            "li3": "Lits médicalisés disponibles sur demande",
+            "li4": "Accès de plain-pied aux espaces communs",
+            "li5": "Ascenseurs adaptés PMR"
+          },
+          "card2": {
+            "title": "Une équipe soignante à vos côtés",
+            "description": "Notre personnel qualifié assure une présence bienveillante 24h/24 :",
+            "li1": "Infirmiers et aides-soignants diplômés",
+            "li2": "Assistance aux gestes de la vie quotidienne",
+            "li3": "Administration des traitements médicaux",
+            "li4": "Accompagnement personnalisé selon votre niveau d'autonomie"
+          },
+          "card3": {
+            "title": "Du matériel médical sur place",
+            "description": "Voyagez léger, nous nous occupons du reste :",
+            "li1": "Fauteuils roulants de prêt",
+            "li2": "Lits médicalisés",
+            "li3": "Lève-personnes",
+            "li4": "Matériel d'oxygénothérapie (sur demande)",
+            "li5": "Matelas anti-escarres"
+          }
+        }
+      },
+      "sectionForms": {
+        "subtitle": "Nos formules",
+        "title": "Nos formules de",
+        "titleSpan": "Séjours Adaptés",
+        "individuals": {
+          "subtitle": "POPULAIRE",
+          "button": "Particuliers",
+          "title": "Vacances adaptées pour particuliers",
+          "description": "Vous êtes une personne à mobilité réduite, un senior ou un proche aidant ? Nous vous accueillons pour :",
+          "cards": {
+            "card1": {
+              "title": "Courts séjours",
+              "description": "À partir de 3 nuits pour une escapade ressourçante",
+              "price": "Dès 80€/jour"
+            },
+            "card2": {
+              "title": "Séjours longue durée",
+              "description": "Plusieurs semaines au soleil tunisien",
+              "price": "Tarif dégressif"
+            },
+            "card3": {
+              "title": "Séjours de répit pour aidants",
+              "description": "Confiez-nous votre proche le temps de souffler",
+              "price": "Sur devis"
+            }
+          },
+          "buttonCTA": "Réserver mon séjour"
+        },
+        "professionals": {
+          "button": "Professionnels (B2B)",
+          "title": "Offre réceptive pour professionnels (B2B)",
+          "description": "Vous êtes une agence de voyages, une association ou un tour-opérateur spécialisé dans les vacances adaptées ? REMES est votre partenaire réceptif en Tunisie :",
+          "list": {
+            "l1": "Solution clé en main (hébergement + soins + excursions)",
+            "l2": "Respect de vos protocoles",
+            "l3": "Tarifs groupe sur demande",
+            "l4": "Accompagnement logistique complet"
+          },
+          "buttonCTA": "Demander un partenariat B2B"
+        }
+      },
+      "sectionActivities": {
+        "title": "Activités",
+        "subtitle": "Activités et excursions adaptées depuis Monastir",
+        "description": "Profitez pleinement de votre séjour adapté en Tunisie grâce à nos activités accessibles :",
+        "cards": {
+          "card1": {
+            "title": "Détente en bord de mer",
+            "li1": "Accès direct à une plage privée",
+            "li2": "Bains de soleil sur transats adaptés",
+            "li3": "Baignade accompagnée (sur demande)"
+          },
+          "card2": {
+            "title": "Découverte culturelle",
+            "li1": "Visite de la médina de Monastir (accompagnement PMR)",
+            "li2": "Le Ribat de Monastir (partiellement accessible)",
+            "li3": "Le mausolée Bourguiba",
+            "li4": "Excursion à Sousse (sites UNESCO)"
+          },
+          "card3": {
+            "title": "Bien-être et soins",
+            "li1": "Accès au spa et à la piscine de l'hôtel",
+            "li2": "Massages et soins de détente",
+            "li3": "Séances de kinésithérapie (sur demande)"
+          },
+          "card4": {
+            "title": "Transport adapté",
+            "description": "Nos véhicules équipés assurent tous vos déplacements :",
+            "li1": "Transferts aéroport ↔ résidence",
+            "li2": "Excursions en minibus PMR",
+            "li3": "Sorties shopping et loisirs"
+          }
+        }
+      },
+      "sectionCTA": {
+        "title": "Réservez votre séjour adapté en Tunisie",
+        "description": "Prêt à organiser vos vacances accessibles ? Notre équipe est à votre écoute pour construire un séjour sur-mesure."
       },
       "mainContent": {
         "title": "Services aux professionnels",
