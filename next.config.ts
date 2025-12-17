@@ -140,6 +140,15 @@ const nextConfig: NextConfig = {
     contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
     qualities: [75, 85, 90, 95, 100],
   },
+  async redirects() {
+    return [
+      {
+        source: '/fr/nursing-home/our-offer',
+        destination: '/fr/nursing-home/our-offers',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default withNextIntl(nextConfig);
