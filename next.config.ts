@@ -143,8 +143,8 @@ const nextConfig: NextConfig = {
   async redirects() {
     return [
       {
-        source: '/fr/nursing-home/our-offer',
-        destination: '/fr/nursing-home/our-offers',
+        source: '/:locale/nursing-home/our-offer',
+        destination: '/:locale/nursing-home/our-offers',
         permanent: true,
       },
     ]
