@@ -57,7 +57,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
         fill
         priority
         fetchPriority="high"
-        sizes="100vw"
+        sizes="(min-width: 640px) 100vw, 1px"
         className="object-cover object-top -z-10 hidden sm:block"
       />
       <Image
@@ -66,7 +66,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
         fill
         priority
         fetchPriority="high"
-        sizes="100vw"
+        sizes="(max-width: 639px) 100vw, 1px"
         className="object-cover object-top -z-10 sm:hidden"
       />
       <Navbar />

@@ -13,11 +13,12 @@ export default function middleware(request: NextRequest) {
   const response = intlMiddleware(request);
 
   // Define CSP directives
-  // We use 'strict-dynamic' and nonces for script-src to eliminate the need for allowlists where possible
+  // We use 'unsafe-inline' for styles as many libraries inject styles dynamically.
+  // 'strict-dynamic' is used for script-src to allow trusted scripts to load their dependencies.
   const cspHeader = `
     default-src 'self';
     script-src 'self' 'nonce-${nonce}' 'strict-dynamic' 'unsafe-eval' https: http:;
-    style-src 'self' 'nonce-${nonce}' https://fonts.googleapis.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;
+    style-src 'self' 'unsafe-inline' https://fonts.googleapis.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net;
     img-src 'self' data: blob: https:;
     font-src 'self' https://fonts.gstatic.com data:;
     object-src 'none';
@@ -27,7 +28,6 @@ export default function middleware(request: NextRequest) {
     frame-ancestors 'self';
     connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://pocket.remes-tunisie.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net https://api.web3forms.com https://sst.remes-tunisie.com;
     upgrade-insecure-requests;
-    require-trusted-types-for 'script';
   `;
 
   // Filter out extra whitespace

@@ -61,7 +61,7 @@ export default async function RootLayout({ children }: Props) {
     <html lang="en">
       <GoogleTagManager
         gtmId="GTM-NKG2GQHF"
-        gtmScriptUrl="https://sst.remes-tunisie.com/gtm.js"
+        // gtmScriptUrl="https://sst.remes-tunisie.com/gtm.js"
         nonce={nonce}
       />
       <body
