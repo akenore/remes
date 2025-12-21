@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { Geist, Geist_Mono, Poppins } from "next/font/google";
 import localFont from "next/font/local";
+import { headers } from 'next/headers';
 import './globals.css';
 import { GoogleTagManager } from '@next/third-parties/google';
 
@@ -52,12 +53,16 @@ type Props = {
   children: ReactNode;
 };
 
-export default function RootLayout({ children }: Props) {
+export default async function RootLayout({ children }: Props) {
+  const headersList = await headers();
+  const nonce = headersList.get('x-nonce') || undefined;
+
   return (
     <html lang="en">
       <GoogleTagManager
         gtmId="GTM-NKG2GQHF"
-      // gtmScriptUrl="https://sst.remes-tunisie.com/gtm.js"
+        gtmScriptUrl="https://sst.remes-tunisie.com/gtm.js"
+        nonce={nonce}
       />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${myanmarMN.variable} ${vensfolk.variable} antialiased`}
