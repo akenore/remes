@@ -63,6 +63,9 @@ const isProd = process.env.NODE_ENV === 'production';
 
 const nextConfig: NextConfig = {
   outputFileTracingRoot: __dirname,
+  experimental: {
+    turbopackFileSystemCacheForBuild: true,
+  },
   async headers() {
     if (!isProd) {
       return [];
