@@ -55,7 +55,10 @@ type Props = {
 export default function RootLayout({ children }: Props) {
   return (
     <html lang="en">
-      <GoogleTagManager gtmId="GTM-NKG2GQHF" />
+      <GoogleTagManager
+        gtmId="GTM-NKG2GQHF"
+      // gtmScriptUrl="https://sst.remes-tunisie.com/gtm.js"
+      />
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} ${myanmarMN.variable} ${vensfolk.variable} antialiased`}
       >

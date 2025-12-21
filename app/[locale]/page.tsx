@@ -2,6 +2,7 @@ import HomeView from "@/components/layout/HomeView";
 import { Metadata } from "next";
 import { getTranslations } from 'next-intl/server';
 import { buildLocalizedMetadata } from '@/lib/seo';
+import { getHomeSlides } from '@/lib/home-data';
 // import MaintenanceMode from "@/components/layout/MaintenanceMode";
 
 type PageParams = {
@@ -25,10 +26,12 @@ export async function generateMetadata({
   });
 }
 
-export default function Home() {
+export default async function Home() {
+  const slides = await getHomeSlides();
+
   return (
     <>
-      <HomeView />
+      <HomeView initialSlides={slides} />
       {/* <MaintenanceMode /> */}
     </>
   );

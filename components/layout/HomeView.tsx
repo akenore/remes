@@ -4,6 +4,7 @@ import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 import Hero from "../ui/hero/Hero";
 import Footer from "../ui/Footer";
+import type { HomeSlide } from '@/lib/home-data';
 // import MaintenanceMode from "@/components/layout/MaintenanceMode";
 
 const Masonary = dynamic(() => import("../ui/gallery/Masonry"));
@@ -11,12 +12,16 @@ const Testimonials = dynamic(() => import("../ui/Testimonials"));
 const Partners = dynamic(() => import("../ui/Partners"));
 const ContactForm = dynamic(() => import("../ui/ContactForm"));
 
-export default function HomeView() {
+interface HomeViewProps {
+     initialSlides?: HomeSlide[];
+}
+
+export default function HomeView({ initialSlides = [] }: HomeViewProps) {
      const t = useTranslations('frontend.home');
 
      return (
           <>
-               <Hero />
+               <Hero initialSlides={initialSlides} />
                <main className="pt-96">
                     <div className="mx-5 md:mx-auto max-w-7xl">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
