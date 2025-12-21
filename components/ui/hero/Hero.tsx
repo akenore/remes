@@ -1,5 +1,6 @@
 'use client';
 import React, { useEffect, useState } from 'react';
+import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
 import { Link } from '@/i18n/navigation';
 import Card from '../card/Card';
@@ -38,7 +39,6 @@ export default function Hero() {
   const total = slides.length;
   const goTo = (idx: number) => setCurrent((idx + total) % total);
 
-  // Function to get localized content with fallback
   const getLocalizedContent = (slide: HomeSlide) => {
     const isFrench = locale === 'fr';
     return {
@@ -47,13 +47,12 @@ export default function Hero() {
     };
   };
 
-  // Fetch home slider data from PocketBase
   const fetchSlides = async () => {
     try {
       setLoading(true);
       const result = await pb.collection('home_slider').getList(1, 50, {
-        sort: '-created', // Get newest first
-        requestKey: null, // Prevent caching issues
+        sort: '-created',
+        requestKey: null,
       });
 
       const slidesData: HomeSlide[] = result.items.map((item: any) => ({
@@ -69,41 +68,53 @@ export default function Hero() {
       setSlides(slidesData);
     } catch (error) {
       console.error('Failed to fetch home slider data:', error);
-      // Fallback to empty array to prevent errors
       setSlides([]);
     } finally {
       setLoading(false);
     }
   };
 
-  // Fetch slides on component mount
   useEffect(() => {
     fetchSlides();
   }, []);
-
-  // Auto-advance carousel
   useEffect(() => {
     if (total > 1) {
       const interval = setInterval(() => {
         setCurrent((prev) => (prev + 1) % total);
-      }, 5000); // Slightly longer interval for better UX
+      }, 5000);
       return () => clearInterval(interval);
     }
   }, [total]);
 
   return (
-    <div className="w-full h-[1210px] lg:h-[1330px] bg-cover bg-top bg-[url('/hero-1/bg-mobile.jpeg')] sm:bg-[url('/hero-1/bg-desktop.jpeg')] bg-no-repeat">
+    <div className="relative w-full h-[1210px] lg:h-[1330px]">
+      <Image
+        src="/hero-1/bg-desktop.jpeg"
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className="object-cover object-top -z-10 hidden sm:block"
+      />
+      <Image
+        src="/hero-1/bg-mobile.jpeg"
+        alt=""
+        fill
+        priority
+        fetchPriority="high"
+        sizes="100vw"
+        className="object-cover object-top -z-10 sm:hidden"
+      />
       <Navbar />
       <div className='relative z-10 flex flex-col items-center justify-center w-full max-w-3xl mx-auto text-center gap-6 px-4 pt-20 '>
         <div className='mb-20 max-h-80 sm:max-h-96 md:max-h-112'>
           {loading ? (
-            // Loading state
             <div className="absolute left-0 right-0 top-0 h-64 flex flex-col justify-center items-center">
               <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-gold"></div>
               <p className="text-white text-sm mt-4">Loading...</p>
             </div>
           ) : slides.length === 0 ? (
-            // Fallback when no slides available
             <div className="absolute left-0 right-0 top-0 h-64 flex flex-col justify-center">
               <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">
                 {t('home.hero.fallback.title')}
@@ -138,7 +149,7 @@ export default function Hero() {
                     {/* <Link href="/" className="bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8">
                       {t('button')}
                     </Link> */}
-                    <KoalendarButton className='cursor-pointer bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8'/>
+                    <KoalendarButton className='cursor-pointer bg-gold text-dark-blue font-semibold px-8 py-3 shadow hover:bg-transparent hover:text-gold hover:border-gold border border-gold transition-colors mt-8 mb-8' />
                   </div>
                 </div>
               );

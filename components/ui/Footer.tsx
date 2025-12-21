@@ -14,7 +14,23 @@ export default function Footer() {
      return (
           <>
                <FloatingWhatsAppButton />
-               <footer className="w-full min-h-[1220px] lg:min-h-[930px] bg-cover bg-top bg-[url('/footer/bg-mobile.jpg')] sm:bg-[url('/footer/bg-desktop.jpg')] bg-no-repeat flex flex-col justify-between">
+               <footer className="relative w-full min-h-[1220px] lg:min-h-[930px] flex flex-col justify-between">
+                    <Image
+                         src="/footer/bg-desktop.jpg"
+                         alt=""
+                         fill
+                         sizes="100vw"
+                         className="object-cover object-top -z-10 hidden sm:block"
+                         loading="lazy"
+                    />
+                    <Image
+                         src="/footer/bg-mobile.jpg"
+                         alt=""
+                         fill
+                         sizes="100vw"
+                         className="object-cover object-top -z-10 sm:hidden"
+                         loading="lazy"
+                    />
                     <div className="flex flex-col items-center justify-center pt-40 mb-20">
                          <Image src="/logo-footer.png" alt="Remes" width={335} height={263} className="w-1/2 lg:w-1/6" />
                     </div>

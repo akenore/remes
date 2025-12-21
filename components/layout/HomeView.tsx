@@ -1,16 +1,19 @@
 import Image from "next/image";
+import dynamic from 'next/dynamic';
 import { Link } from '@/i18n/navigation';
 import { useTranslations } from "next-intl";
 import Hero from "../ui/hero/Hero";
 import Footer from "../ui/Footer";
-import Masonary from "../ui/gallery/Masonry";
-import Testimonials from "../ui/Testimonials";
-import Partners from "../ui/Partners";
-import ContactForm from "../ui/ContactForm";
+// import MaintenanceMode from "@/components/layout/MaintenanceMode";
+
+const Masonary = dynamic(() => import("../ui/gallery/Masonry"));
+const Testimonials = dynamic(() => import("../ui/Testimonials"));
+const Partners = dynamic(() => import("../ui/Partners"));
+const ContactForm = dynamic(() => import("../ui/ContactForm"));
 
 export default function HomeView() {
      const t = useTranslations('frontend.home');
-     
+
      return (
           <>
                <Hero />
@@ -50,14 +53,14 @@ export default function HomeView() {
                                    <path d="M6 0H2a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3H2a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Zm10 0h-4a2 2 0 0 0-2 2v4a2 2 0 0 0 2 2h4v1a3 3 0 0 1-3 3h-1a1 1 0 0 0 0 2h1a5.006 5.006 0 0 0 5-5V2a2 2 0 0 0-2-2Z" />
                               </svg>
                               <p className='mb-5'>
-                              &ldquo;{t('quote.text')}&rdquo;
+                                   &ldquo;{t('quote.text')}&rdquo;
                               </p>
                               <div className='mb-20 font-semibold flex flex-col justify-end items-end'>
                                    <h3>Dr. Ahlem Bourourou</h3>
                                    <p className="text-sm">{t('quote.role')}</p>
                               </div>
                          </blockquote>
-                         
+
                     </div>
                     <Masonary />
                     <Testimonials />
