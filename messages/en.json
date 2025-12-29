@@ -819,7 +819,7 @@
         },
         "q6": {
           "question": "What conditions do you treat?",
-          "answer": "We welcome people with reduced mobility, seniors who have lost their independence, people with neurodegenerative diseases (Alzheimer's, Parkinson's), and people with motor or sensory disabilities."
+          "answer": "Our adapted stays are designed for adults with mental and/or physical disabilities. Guests must be in stable health, enabling them to integrate into an open establishment and share common areas with other hotel guests, while respecting their safety and that of everyone else."
         }
       }
     },
@@ -875,14 +875,14 @@
     },
     "adaptedStay": {
       "meta": {
-        "title": "Remes Medical Residence in TunisiaAdapted Stay in Tunisia | Holidays for People with Reduced Mobility & Seniors in Monastir - REMES",
+        "title": "Adapted Holidays Tunisia | Holidays for adults with mental and/or physical disabilities in Monastir - REMES",
         "description": "Organize your accessible vacation in Tunisia with REMES. Accessible accommodation, care team, wheelchair accessible transportation, and accessible excursions throughout Tunisia. Free quote."
       },
       "hero": {
         "button": "4-star nursing home",
         "title": "Adapted Stay in Tunisia:",
         "titleSpan": "Vacations Accessible to All",
-        "description": "Treat yourself or a loved one to a tailored vacation in Tunisia, on the shores of the Mediterranean. The REMES residence in Monastir welcomes people with reduced mobility, seniors, and people with disabilities in a fully accessible 4-star hotel setting.",
+        "description": "Treat yourself or a loved one to a tailored vacation in Tunisia, on the shores of the Mediterranean. REMES tailored vacations are designed for adults with mental and/or physical disabilities, regardless of their level of independence, in a fully accessible 4-star hotel setting.",
         "badges": {
           "b1": "4★ Hotel",
           "b2": "24/7 Care",
@@ -952,6 +952,7 @@
           "button": "Individuals",
           "title": "Adapted vacations for individuals",
           "description": "Are you a person with reduced mobility, a senior citizen, or a caregiver? We welcome you for:",
+          "description2": "REMES organizes and coordinates the entire stay on site—accommodation, medical and paramedical support, local transportation, and excursions—from arrival at the airport to departure.",
           "cards": {
             "card1": {
               "title": "Short stays",

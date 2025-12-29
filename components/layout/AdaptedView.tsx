@@ -141,10 +141,10 @@ export default function AdaptedView() {
                                                   <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li4')}</span>
                                              </li>
-                                             <li className="flex items-start gap-3">
+                                             {/* <li className="flex items-start gap-3">
                                                   <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li5')}</span>
-                                             </li>
+                                             </li> */}
                                         </ul>
                                    </div>
 
@@ -254,7 +254,7 @@ export default function AdaptedView() {
                                    </div>
                               </div>
 
-                              <div className="max-w-6xl mx-auto px-4">
+                              <div className="max-w-6xl mx-auto">
                                    {activeTab === 'individual' ? (
                                         <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-8 md:p-12">
                                              <div className="flex items-center gap-4 mb-6">
@@ -263,8 +263,11 @@ export default function AdaptedView() {
                                                        {t('sectionForms.individuals.title')}
                                                   </h3>
                                              </div>
-                                             <p className="text-slate-400 text-lg mb-12 max-w-3xl">
+                                             <p className="text-slate-400 text-lg mb-12 max-w-5xl">
                                                   {t('sectionForms.individuals.description')}
+                                             </p>
+                                             <p className="text-slate-400 text-lg mb-12 max-w-5xl">
+                                                  {t('sectionForms.individuals.description2')}
                                              </p>
 
                                              <div className="bg-[#0f172a] rounded-2xl p-6 border border-white/5 hover:border-dark-gold/30 transition-colors mb-6">
@@ -303,7 +306,7 @@ export default function AdaptedView() {
                                    ) : (
                                         <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-8 md:p-12">
                                              <div className="flex items-center gap-4 mb-6">
-                                                  <LuBuilding2 className="text-[#ECA824] text-2xl" />
+                                                  <LuBuilding2 className="text-dark-gold text-2xl" />
                                                   <h3 className="text-white text-2xl md:text-3xl font-myanmar">
                                                        {t('sectionForms.professionals.title')}
                                                   </h3>
@@ -320,15 +323,15 @@ export default function AdaptedView() {
                                                        t('sectionForms.professionals.list.l4')
                                                   ].map((item, index) => (
                                                        <div key={index} className="bg-[#0f172a] p-4 rounded-xl border border-white/5 flex items-center gap-4">
-                                                            <FaCheck className="text-[#ECA824] shrink-0" />
+                                                            <FaCheck className="text-dark-gold shrink-0" />
                                                             <span className="text-slate-300">{item}</span>
                                                        </div>
                                                   ))}
                                              </div>
 
                                              <div className="text-center">
-                                                  <Link href="/adapted-stay/professional-services" className="border border-[#ECA824] text-[#ECA824] cursor-pointer px-8 py-3 rounded-full font-bold hover:bg-[#ECA824] hover:text-[#0f172a] transition-all duration-300">
-                                                       Demander un partenariat B2B
+                                                  <Link href="/adapted-stay/professional-services" className="inline-flex items-center border border-dark-gold text-dark-gold cursor-pointer px-8 py-3 rounded-full font-bold hover:bg-dark-gold hover:text-[#0f172a] transition-all duration-300">
+                                                       {t('sectionForms.professionals.buttonCTA')}
                                                   </Link>
                                              </div>
                                         </div>

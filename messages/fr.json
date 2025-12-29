@@ -818,7 +818,7 @@
         },
         "q6": {
           "question": "Quelles pathologies prenez-vous en charge ?",
-          "answer": "Nous accueillons les personnes à mobilité réduite, les seniors en perte d'autonomie, les personnes atteintes de maladies neurodégénératives (Alzheimer, Parkinson) et les personnes en situation de handicap moteur ou sensoriel."
+          "answer": "Nos séjours adaptés s’adressent à des personnes adultes en situation de handicap mental et/ou physique. Les personnes accueillies doivent présenter un état de santé stabilisé, leur permettant de s’intégrer dans un établissement ouvert et de partager les espaces communs avec les autres clients de l’hôtel, dans le respect de leur sécurité et de celle de tous."
         }
       }
     },
@@ -874,15 +874,15 @@
     },
     "adaptedStay": {
       "meta": {
-        "title": "Séjour Adapté Tunisie | Vacances PMR & Seniors à Monastir - REMES",
+        "title": "Séjours Adaptés Tunisie | Vacances pour adultes en situation de handicap mental et/ou physique à Monastir - REMES",
         "description": "Organisez votre séjour adapté en Tunisie avec REMES. Hébergement accessible, équipe soignante, transport PMR et excursions adaptées dans toute la Tunisie. Devis gratuit."
       },
       "hero": {
         "button": "Résidence médicalisée 4 étoiles",
         "subtitle": "Résidence médicalisée 4 étoiles",
-        "title": "Séjour Adapté en Tunisie:",
+        "title": "Séjours Adaptés en Tunisie:",
         "titleSpan": "Des Vacances Accessibles à Tous",
-        "description": "Offrez-vous ou offrez à un proche des vacances adaptées en Tunisie, au bord de la Méditerranée. La résidence REMES à Monastir accueille les personnes à mobilité réduite, les seniors et les personnes en situation de handicap dans un cadre hôtelier 4 étoiles entièrement accessible.",
+        "description": "Offrez-vous ou offrez à un proche des vacances adaptées en Tunisie, au bord de la Méditerranée. Les séjours adaptés REMES s’adressent à des personnes adultes en situation de handicap mental et/ou physique, quel que soit leur degré d’autonomie, dans un cadre hôtelier 4 étoiles entièrement accessible.",
         "badges": {
           "b1": "4★ Hôtel",
           "b2": "24/7 Soins",
@@ -951,7 +951,8 @@
           "subtitle": "POPULAIRE",
           "button": "Particuliers",
           "title": "Vacances adaptées pour particuliers",
-          "description": "Vous êtes une personne à mobilité réduite, un senior ou un proche aidant ? Nous vous accueillons pour :",
+          "description": "Les séjours adaptés REMES (séjours de vacances adaptés clés en main) sont conçus pour des personnes adultes en situation de handicap mental et/ou physique nécessitant un accompagnement structuré et préparé en amont. Chaque accueil fait l’objet d’une étude préalable du dossier, afin de garantir une prise en charge adaptée et sécurisée, compatible avec un établissement hôtelier ouvert.",
+          "description2": "REMES assure l’organisation et la coordination de l’ensemble du séjour sur place — hébergement, accompagnement médico-paramédical, transports locaux et excursions — depuis l’arrivée à l’aéroport jusqu’au départ.",
           "cards": {
             "card1": {
               "title": "Courts séjours",
