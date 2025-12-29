@@ -750,7 +750,7 @@
         "terms": "Terms of Use",
         "professionalsServices": "Professionals Services",
         "span": "Remes Medical Residence in Tunisia",
-        "description": "A high-end medical residence dedicated to nursing homes and adapted stays in Tunisia, combining comfort, personalized care, and peace of mind every day."
+        "description": "A high-end medical residence in Tunisia, offering both nursing home stays and adapted vacation stays, combining comfort, personalized care, and peace of mind every day."
       }
     },
     "button": "Read more",
@@ -767,7 +767,7 @@
       "items": {
         "q1": {
           "question": "What is the price of a nursing home at REMES?",
-          "answer": "Our all-inclusive monthly rates start at €2,300. This price includes accommodation in a single room, full board (four meals per day), medical and paramedical care, activities, and laundry service. A personalized quote is provided based on your loved one's level of dependency."
+          "answer": "Our all-inclusive monthly rates start at €2,300. This amount includes accommodation in a single room, full board (three meals a day and two snacks), medical and paramedical care, entertainment, and laundry service. We provide a personalized quote based on your loved one's level of dependency."
         },
         "q2": {
           "question": "Where exactly is the REMES residence located?",
@@ -1084,10 +1084,10 @@
     "nursingHome": {
       "meta": {
         "title": "Nursing homes in Tunisia | Monastir Medicalized Retirement Home - REMES",
-        "description": "Since 2009, REMES has been welcoming your loved ones to a high-end nursing home in Monastir. 24/7 medical team, 4-star hotel by the sea. All-inclusive rates starting at €2,500."
+        "description": "Since 2021, REMES has been welcoming your loved ones to a high-end nursing home in Monastir. 24/7 medical team, 4-star hotel by the sea. All-inclusive rates starting at €2,500."
       },
       "hero": {
-        "subtitle": "Since 2009 · Monastir, Tunisie",
+        "subtitle": "Since 2021 · Monastir, Tunisie",
         "title": "REMES nursing homes in Tunisia:",
         "titleSpan": "your loved one deserves excellence",
         "description": "Located 200 meters from the Mediterranean Sea, REMES is much more than a nursing home. It is a place where every resident can enjoy dignity, comfort, and serenity. A multidisciplinary team is available 24 hours a day. Tailored support is provided in a 4-star hotel setting.",
@@ -1104,7 +1104,7 @@
         "cards": {
           "residence": {
             "title": "The Residence",
-            "description": "An exceptional setting within the Palm Beach Hotel. Spacious rooms with sea or garden views, welcoming common areas, access to hotel facilities. Everything is designed to combine comfort, security, and serenity."
+            "description": "An exceptional setting within the Palm Beach Skanes Hotel. Spacious rooms with views of the pool or garden, welcoming common areas, access to hotel facilities. Everything is designed to combine comfort, security, and serenity."
           },
           "solutions": {
             "title": "Hosting Solutions",
@@ -1112,7 +1112,7 @@
           },
           "expertise": {
             "title": "Care Expertise",
-            "description": "A full medical team looks after your loved ones 24 hours a day: coordinating physician, registered nurses, trained nursing assistants, physical therapists, psychologist. Each resident benefits from a personalized care plan."
+            "description": "A full medical team looks after your loved ones 24 hours a day: coordinating physician, registered nurses, trained nursing assistants, physical therapists, psychologist... Each resident benefits from a personalized care plan."
           },
           "offer": {
             "title": "Transparent pricing",
@@ -1123,14 +1123,14 @@
       "sectionEngagement": {
         "span": "OUR COMMITMENTS",
         "title": "Three promises for",
-        "titleSpan": "the well-being of your loved one.",
+        "titleSpan": "the well-being of your loved one",
         "item1": {
           "title": "Personalized, human support",
           "description": "At REMES, every resident is unique. Our multidisciplinary team—doctors, nurses, nursing assistants, physical therapists—provides attentive and caring support, day and night. Your loved one is not just a room number. They are known by their first name, listened to, and supported according to their own pace and desires. That is our approach to care: taking the time."
         },
         "item2": {
-          "title": "A living environment conducive to serenity",
-          "description": "Imagine your parent waking up every morning facing the Mediterranean Sea. With over 300 days of sunshine per year and a mild climate all year round, your loved ones can enjoy a peaceful daily life, far from stress and gloom."
+          "title": "An exceptional living environment by the sea",
+          "description": "Imagine your parent starting each morning in a bright Mediterranean setting. That's everyday life at REMES. Our nursing home is nestled in the heart of a 4-star hotel in Skanes-Monastir, surrounded by landscaped gardens, shaded terraces, and light-filled living spaces. With over 300 days of sunshine per year and a mild climate all year round, your loved ones will enjoy an environment conducive to well-being and serenity."
         },
         "item3": {
           "title": "Complete transparency",
@@ -1660,7 +1660,7 @@
     "about": {
       "meta": {
         "title": "About REMES - Medical Residence in Tunisia | Excellence in Care",
-        "description": "Discover REMES, Tunisia's premier medical residence since 2009. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
+        "description": "Discover REMES, Tunisia's premier medical residence since 2021. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
       },
       "hero": {
         "title": "About Us",
@@ -1806,7 +1806,7 @@
   "about": {
     "meta": {
       "title": "About REMES - Medical Residence in Tunisia | Excellence in Care",
-      "description": "Discover REMES, Tunisia's premier medical residence since 2009. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
+      "description": "Discover REMES, Tunisia's premier medical residence since 2021. Located in Skanes by the Mediterranean, we offer exceptional care, comfort, and serenity in a 4-star hotel setting. Learn about our mission, philosophy, and expert team."
     },
     "hero": {
       "title": "About Us",

@@ -45,26 +45,26 @@ export default function NursingView() {
                                              <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg max-w-sm sm:max-w-xl">
                                                   {t('hero.description')}
                                              </p>
-                                             <KoalendarButton className='bg-[#c9a324] text-[1.2rem] text-dark-blue py-5 px-5 cursor-pointer hover:bg-[#c9a324]/80 hover:text-white transition-colors duration-300' />
+                                             <KoalendarButton className='bg-dark-gold text-[1.2rem] text-dark-blue py-5 px-5 cursor-pointer hover:bg-dark-blue hover:text-white transition-colors duration-300' />
                                         </div>
                                    </div>
                               </div>
                               <div className="flex-1 flex justify-center lg:justify-end items-center mb-16">
                                    <div className="grid grid-cols-2 gap-4 max-w-lg">
                                         <div className="bg-[#1a2b4b]/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center aspect-square md:aspect-auto md:h-48 min-w-[160px]">
-                                             <div className="text-[#c9a324] text-4xl md:text-5xl font-myanmar mb-2">16<span className="text-xl md:text-2xl ml-1">{t('hero.itemsCards.i1')}</span></div>
+                                             <div className="text-gold text-4xl md:text-5xl font-myanmar mb-2">5<span className="text-xl md:text-2xl ml-1">{t('hero.itemsCards.i1')}</span></div>
                                              <div className="text-gray-300 text-xs md:text-sm tracking-widest uppercase font-medium">{t('hero.itemsCards.i1Span')}</div>
                                         </div>
                                         <div className="bg-[#1a2b4b]/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center aspect-square md:aspect-auto md:h-48 min-w-[160px]">
-                                             <div className="text-[#c9a324] text-4xl md:text-5xl font-myanmar mb-2">24<span className="text-2xl md:text-3xl">/7</span></div>
+                                             <div className="text-gold text-4xl md:text-5xl font-myanmar mb-2">24<span className="text-2xl md:text-3xl">/7</span></div>
                                              <div className="text-gray-300 text-xs md:text-sm tracking-widest uppercase font-medium">{t('hero.itemsCards.i2Span')}</div>
                                         </div>
                                         <div className="bg-[#1a2b4b]/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center aspect-square md:aspect-auto md:h-48 min-w-[160px]">
-                                             <div className="text-[#c9a324] text-4xl md:text-5xl font-myanmar mb-2">4<span className="text-3xl md:text-4xl">★</span></div>
+                                             <div className="text-gold text-4xl md:text-5xl font-myanmar mb-2">4<span className="text-3xl md:text-4xl">★</span></div>
                                              <div className="text-gray-300 text-xs md:text-sm tracking-widest uppercase font-medium">{t('hero.itemsCards.i3Span')}</div>
                                         </div>
                                         <div className="bg-[#1a2b4b]/80 backdrop-blur-sm border border-white/10 p-6 flex flex-col items-center justify-center text-center aspect-square md:aspect-auto md:h-48 min-w-[160px]">
-                                             <div className="text-[#c9a324] text-4xl md:text-5xl font-myanmar mb-2">200<span className="text-xl md:text-2xl ml-1">m</span></div>
+                                             <div className="text-gold text-4xl md:text-5xl font-myanmar mb-2">200<span className="text-xl md:text-2xl ml-1">m</span></div>
                                              <div className="text-gray-300 text-xs md:text-sm tracking-widest uppercase font-medium">{t('hero.itemsCards.i4Span')}</div>
                                         </div>
                                    </div>
@@ -127,7 +127,7 @@ export default function NursingView() {
                                    <div className="flex-1 border-t border-dark-gold"></div>
                               </div>
                               <h2 className="text-[1.5rem] md:text-[3.25rem] leading-tight text-center text-white font-myanmar mb-8 max-w-4xl mx-auto">
-                                   {t('sectionSupport.title')} <span className="text-[#c9a324]">{t('sectionSupport.titleSpan')}</span>
+                                   {t('sectionSupport.title')} <span className="text-dark-gold">{t('sectionSupport.titleSpan')}</span>
                               </h2>
                          </div>
                          <div className="w-full max-w-8xl mx-auto flex flex-col lg:flex-row gap-4 lg:gap-0 justify-center items-stretch px-4 mb-20">
