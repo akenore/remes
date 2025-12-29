@@ -29,10 +29,10 @@ export default function FaqAccordion({
                     >
                          <button
                               onClick={() => toggleItem(key)}
-                              className="flex w-full items-center justify-between py-2 text-left text-lg font-medium text-white hover:text-amber-200 transition-colors duration-200"
+                              className="flex w-full items-center justify-between py-2 text-left text-lg font-medium text-white hover:text-dark-gold transition-colors duration-200"
                          >
                               <span>{t(`items.${key}.question`)}</span>
-                              <span className={`transform transition-transform duration-300 ${openItem === key ? 'rotate-45 text-amber-200' : 'text-amber-400'}`}>
+                              <span className={`transform transition-transform duration-300 ${openItem === key ? 'rotate-45 text-dark-gold' : 'text-dark-gold'}`}>
                                    <GoPlus size={24} />
                               </span>
                          </button>

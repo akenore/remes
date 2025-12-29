@@ -46,7 +46,7 @@ export default function AdaptedView() {
                                    <div className="flex flex-col justify-center md:justify-start items-center md:items-start text-center md:text-left">
                                         <Breadcrumbs className='mb-10 text-white mt-10 md:mt-0' />
                                         <span
-                                             className="max-w-[300px] inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-amber-400 bg-gradient-to-b from-amber-500/15 to-amber-500/5 border border-amber-400/30 shadow-[0_0_0_1px_rgba(251,191,36,0.15),0_0_20px_rgba(251,191,36,0.15)] backdrop-blur-sm mb-5"
+                                             className="max-w-[300px] inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-medium text-dark-gold bg-gradient-to-b from-dark-gold/15 to-dark-gold/5 border border-dark-gold/30 shadow-[0_0_0_1px_rgba(251,191,36,0.15),0_0_20px_rgba(251,191,36,0.15)] backdrop-blur-sm mb-5"
                                         >
                                              <HiOutlineSparkles className="w-4 h-4" />
                                              {t('hero.button')}
@@ -63,25 +63,25 @@ export default function AdaptedView() {
 
                                         <div className="flex flex-wrap gap-4 mb-10">
                                              <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-[#0f172a]/50 backdrop-blur-sm">
-                                                  <FaStar className="text-[#c9a324]" />
+                                                  <FaStar className="text-dark-gold" />
                                                   <span className="text-white text-sm font-medium">{t('hero.badges.b1')}</span>
                                              </div>
                                              <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-[#0f172a]/50 backdrop-blur-sm">
-                                                  <FaShieldAlt className="text-[#c9a324]" />
+                                                  <FaShieldAlt className="text-dark-gold" />
                                                   <span className="text-white text-sm font-medium">{t('hero.badges.b2')}</span>
                                              </div>
                                              <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-[#0f172a]/50 backdrop-blur-sm">
-                                                  <IoAirplane className="text-[#c9a324]" />
+                                                  <IoAirplane className="text-dark-gold" />
                                                   <span className="text-white text-sm font-medium">{t('hero.badges.b3')}</span>
                                              </div>
                                              <div className="flex items-center gap-2 px-4 py-2 rounded-full border border-white/10 bg-[#0f172a]/50 backdrop-blur-sm">
-                                                  <FaHeart className="text-[#c9a324]" />
+                                                  <FaHeart className="text-dark-gold" />
                                                   <span className="text-white text-sm font-medium">{t('hero.badges.b4')}</span>
                                              </div>
                                         </div>
 
-                                        <KoalendarButton className='bg-[#ECA824] hover:bg-[#d6961f] cursor-pointer text-black font-medium text-[1.1rem] py-4 px-8 rounded-full flex items-center gap-3 transition-colors duration-300 shadow-lg shadow-amber-500/20'>
-                                             <FaCalendar className="text-black/80" /> {t('hero.buttonCTA')} <FaArrowRight className="text-black/80" />
+                                        <KoalendarButton className='bg-dark-gold hover:bg-dark-blue hover:text-white cursor-pointer text-black font-medium text-[1.1rem] py-4 px-8 rounded-full flex items-center gap-3 transition-colors duration-300 shadow-lg shadow-amber-500/20'>
+                                             <FaCalendar /> {t('hero.buttonCTA')} <FaArrowRight />
                                         </KoalendarButton>
                                    </div>
                               </div>
@@ -113,7 +113,7 @@ export default function AdaptedView() {
                               <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <FaBed className="text-[#FFB800] text-2xl" />
+                                             <FaBed className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -126,23 +126,23 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li3')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li4')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card1.li5')}</span>
                                              </li>
                                         </ul>
@@ -150,7 +150,7 @@ export default function AdaptedView() {
 
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <FaHeart className="text-[#FFB800] text-2xl" />
+                                             <FaHeart className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -163,19 +163,19 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card2.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card2.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card2.li3')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card2.li4')}</span>
                                              </li>
                                         </ul>
@@ -183,7 +183,7 @@ export default function AdaptedView() {
 
                                    <div className="md:col-span-2 bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <FaStethoscope className="text-[#FFB800] text-2xl" />
+                                             <FaStethoscope className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -196,23 +196,23 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card3.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card3.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card3.li3')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card3.li4')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionServices.cards.card3.li5')}</span>
                                              </li>
                                         </ul>
@@ -236,7 +236,7 @@ export default function AdaptedView() {
                                         <button
                                              onClick={() => setActiveTab('individual')}
                                              className={`px-8 py-3 rounded-full text-sm cursor-pointer font-medium transition-all duration-300 ${activeTab === 'individual'
-                                                  ? 'bg-[#ECA824] text-[#0f172a]'
+                                                  ? 'bg-dark-gold text-[#0f172a]'
                                                   : 'text-slate-400 hover:text-white'
                                                   }`}
                                         >
@@ -245,7 +245,7 @@ export default function AdaptedView() {
                                         <button
                                              onClick={() => setActiveTab('b2b')}
                                              className={`px-8 py-3 rounded-full text-sm cursor-pointer font-medium transition-all duration-300 ${activeTab === 'b2b'
-                                                  ? 'bg-[#ECA824] text-[#0f172a]'
+                                                  ? 'bg-dark-gold text-[#0f172a]'
                                                   : 'text-slate-400 hover:text-white'
                                                   }`}
                                         >
@@ -258,7 +258,7 @@ export default function AdaptedView() {
                                    {activeTab === 'individual' ? (
                                         <div className="bg-[#1e293b]/50 border border-white/5 rounded-3xl p-8 md:p-12">
                                              <div className="flex items-center gap-4 mb-6">
-                                                  <FaUserGroup className="text-[#ECA824] text-2xl" />
+                                                  <FaUserGroup className="text-dark-gold text-2xl" />
                                                   <h3 className="text-white text-2xl md:text-3xl font-myanmar">
                                                        {t('sectionForms.individuals.title')}
                                                   </h3>
@@ -267,35 +267,35 @@ export default function AdaptedView() {
                                                   {t('sectionForms.individuals.description')}
                                              </p>
 
-                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-white/5 hover:border-[#ECA824]/30 transition-colors mb-6">
+                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-white/5 hover:border-dark-gold/30 transition-colors mb-6">
                                                   <h4 className="text-white text-xl font-bold mb-3">{t('sectionForms.individuals.cards.card1.title')}</h4>
                                                   <p className="text-slate-400 mb-6">
                                                        {t('sectionForms.individuals.cards.card1.description')}
                                                   </p>
-                                                  <span className="text-[#ECA824] text-lg font-medium">{t('sectionForms.individuals.cards.card1.price')}</span>
+                                                  <span className="text-dark-gold text-lg font-medium">{t('sectionForms.individuals.cards.card1.price')}</span>
                                              </div>
 
-                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-[#ECA824] relative mb-6">
-                                                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-[#ECA824] text-[#0f172a] text-xs font-bold px-3 py-1 rounded-full">
+                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-dark-gold relative mb-6">
+                                                  <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-dark-gold text-[#0f172a] text-xs font-bold px-3 py-1 rounded-full">
                                                        {t('sectionForms.individuals.subtitle')}
                                                   </div>
                                                   <h4 className="text-white text-xl font-bold mb-3">{t('sectionForms.individuals.cards.card2.title')}</h4>
                                                   <p className="text-slate-400 mb-6">
                                                        {t('sectionForms.individuals.cards.card2.description')}
                                                   </p>
-                                                  <span className="text-[#ECA824] text-lg font-medium">{t('sectionForms.individuals.cards.card2.price')}</span>
+                                                  <span className="text-dark-gold text-lg font-medium">{t('sectionForms.individuals.cards.card2.price')}</span>
                                              </div>
 
-                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-white/5 hover:border-[#ECA824]/30 transition-colors">
+                                             <div className="bg-[#0f172a] rounded-2xl p-6 border border-white/5 hover:border-dark-gold/30 transition-colors">
                                                   <h4 className="text-white text-xl font-bold mb-3">{t('sectionForms.individuals.cards.card3.title')}</h4>
                                                   <p className="text-slate-400 mb-6">
                                                        {t('sectionForms.individuals.cards.card3.description')}
                                                   </p>
-                                                  <span className="text-[#ECA824] text-lg font-medium">{t('sectionForms.individuals.cards.card3.price')}</span>
+                                                  <span className="text-dark-gold text-lg font-medium">{t('sectionForms.individuals.cards.card3.price')}</span>
                                              </div>
 
                                              <div className="mt-12 text-center">
-                                                  <KoalendarButton className="bg-[#ECA824] text-[#0f172a] cursor-pointer px-8 py-3 rounded-full font-bold hover:bg-white transition-colors duration-300">
+                                                  <KoalendarButton className="bg-dark-gold text-[#0f172a] cursor-pointer px-8 py-3 rounded-full font-bold hover:bg-gold transition-colors duration-300">
                                                        {t('sectionForms.individuals.buttonCTA')}
                                                   </KoalendarButton>
                                              </div>
@@ -355,7 +355,7 @@ export default function AdaptedView() {
 
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <FaWater className="text-[#FFB800] text-2xl" />
+                                             <FaWater className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -365,15 +365,15 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card1.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card1.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card1.li3')}</span>
                                              </li>
                                         </ul>
@@ -381,7 +381,7 @@ export default function AdaptedView() {
 
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <FaCamera className="text-[#FFB800] text-2xl" />
+                                             <FaCamera className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -390,19 +390,19 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card2.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card2.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card2.li3')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card2.li4')}</span>
                                              </li>
                                         </ul>
@@ -410,7 +410,7 @@ export default function AdaptedView() {
 
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <LuDumbbell className="text-[#FFB800] text-2xl" />
+                                             <LuDumbbell className="text-dark-gold text-2xl" />
                                         </div>
 
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
@@ -419,15 +419,15 @@ export default function AdaptedView() {
 
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card3.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card3.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card3.li3')}</span>
                                              </li>
                                         </ul>
@@ -435,7 +435,7 @@ export default function AdaptedView() {
 
                                    <div className="bg-blue rounded-3xl p-8 md:p-12 border border-white/5">
                                         <div className="w-14 h-14 rounded-2xl bg-white/5 flex items-center justify-center mb-8 border border-white/10">
-                                             <TbBus className="text-[#FFB800] text-2xl" />
+                                             <TbBus className="text-dark-gold text-2xl" />
                                         </div>
                                         <h3 className="text-white text-2xl md:text-3xl font-bold mb-4 font-myanmar">
                                              {t('sectionActivities.cards.card4.title')}
@@ -445,15 +445,15 @@ export default function AdaptedView() {
                                         </p>
                                         <ul className="space-y-4">
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card4.li1')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card4.li2')}</span>
                                              </li>
                                              <li className="flex items-start gap-3">
-                                                  <FaCheck className="text-[#FFB800] mt-1 shrink-0" />
+                                                  <FaCheck className="text-dark-gold mt-1 shrink-0" />
                                                   <span className="text-slate-300">{t('sectionActivities.cards.card4.li3')}</span>
                                              </li>
                                         </ul>
