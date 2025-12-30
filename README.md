@@ -1,38 +1,80 @@
 # Remes Web
 
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+Remes Web is a premium medical residence platform based in Tunisia, offering high-end EHPAD (Nursing Home) services and tailored medical vacation stays. The platform combines luxury comfort, personalized medical care, and a serene Mediterranean environment.
 
-## Getting Started
+## 🚀 Tech Stack
 
-First, run the development server:
+- **Framework**: [Next.js 16](https://nextjs.org/) (App Router)
+- **Backend/DB**: [PocketBase](https://pocketbase.io/)
+- **Styling**: [Tailwind CSS 4](https://tailwindcss.com/)
+- **Internationalization**: [next-intl](https://next-intl-docs.vercel.app/) (FR/EN)
+- **CMS Features**: [TinyMCE React](https://github.com/tinymce/tinymce-react) for rich text editing
+- **UI Components**: Embla Carousel, React Icons
+- **Language**: TypeScript
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+## ✨ Key Features
+
+- **Multilingual Support**: Fully localized in French and English with SEO-friendly routing.
+- **Admin Dashboard**: Comprehensive management of:
+  - Magazine articles and categories.
+  - Home page slider content.
+  - Medical equipment catalog.
+  - Customer testimonials.
+- **Medical Equipment Catalog**: Responsive display of available medical equipment with daily/monthly pricing.
+- **SEO Optimized**: Custom `sitemap.ts`, metadata handling, and optimized fonts/images.
+- **Secure**: Implemented Content Security Policy (CSP) and secure authentication via PocketBase.
+
+## 📁 Project Structure
+
+- `app/`: Next.js App Router folders, includes `[locale]` for i18n routing.
+- `components/`: Modular UI components separated by features (admin, layout, UI).
+- `messages/`: Localization JSON files used by `next-intl`.
+- `lib/`: Core logic, including PocketBase client, Auth context, and SEO utilities.
+- `public/`: Static assets and icons.
+- `proxy.ts`: Middleware for CSP and localization handling.
+
+## 🛠️ Getting Started
+
+### Prerequisites
+
+- Node.js >= 22.17.0
+- pnpm (recommended)
+
+### Installation
+
+1. Clone the repository and navigate to the web directory.
+2. Install dependencies:
+   ```bash
+   pnpm install
+   ```
+
+### Configuration
+
+Create a `.env.local` file in the root directory:
+```env
+NEXT_PUBLIC_POCKETBASE_URL=https://your-pocketbase-instance.com
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### Development
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Run the development server with Turbopack:
+```bash
+pnpm dev
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+Open [http://localhost:3000](http://localhost:3000) to view the application.
 
-## Learn More
+### Build & Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+pnpm build
+pnpm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## 🔒 Security
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The project uses a custom middleware (`proxy.ts`) to inject a strict Content Security Policy (CSP) with nonces for script-src and style-src, ensuring protection against XSS and other injection attacks.
 
-## Deploy on Vercel
+## 📄 License
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Private - All rights reserved to Remes.
