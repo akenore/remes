@@ -314,11 +314,10 @@ export default function Navbar() {
                       </Link>
                       {hasSubmenu && (
                         <div
-                          className={`absolute left-0 top-full pt-5 min-w-[260px] rounded-xl border border-white/10 bg-[#071d33]/95 p-3 shadow-2xl transition-all duration-200 ${
-                            isDesktopDropdownOpen
-                              ? 'pointer-events-auto opacity-100 translate-y-0'
-                              : 'pointer-events-none opacity-0 -translate-y-2'
-                          }`}
+                          className={`absolute left-0 top-full pt-5 min-w-[260px] rounded-xl border border-white/10 bg-[#071d33]/95 p-3 shadow-2xl transition-all duration-200 ${isDesktopDropdownOpen
+                            ? 'pointer-events-auto opacity-100 translate-y-0'
+                            : 'pointer-events-none opacity-0 -translate-y-2'
+                            }`}
                         >
                           <ul className="space-y-1">
                             {item.subItems?.map((subItem) => {
@@ -368,7 +367,7 @@ export default function Navbar() {
                       <SearchIcon />
                     </button>
                   ) : (
-                    <form 
+                    <form
                       onSubmit={(e) => {
                         e.preventDefault();
                         handleSearch(searchQuery);
@@ -623,7 +622,7 @@ export default function Navbar() {
             </button>
 
             {/* Centered Search Input */}
-            <form 
+            <form
               onSubmit={(e) => {
                 e.preventDefault();
                 const formData = new FormData(e.currentTarget);
