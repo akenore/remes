@@ -8,26 +8,26 @@ import Card4 from '../ui/card/Card4';
 import { pb } from '@/lib/pocketbase';
 
 interface Post {
-  id: string;
-  title: string;
-  title_fr: string;
-  slug: string;
-  slug_fr?: string;
-  content: string;
-  content_fr: string;
-  cover_image: string | null;
-  categories: any[];
-  status: boolean;
-  created: string;
-  updated: string;
-  collectionName?: string;
-  collectionId?: string;
+     id: string;
+     title: string;
+     title_fr: string;
+     slug: string;
+     slug_fr?: string;
+     content: string;
+     content_fr: string;
+     cover_image: string | null;
+     categories: any[];
+     status: boolean;
+     created: string;
+     updated: string;
+     collectionName?: string;
+     collectionId?: string;
 }
 
 interface Category {
-  id: string;
-  title: string;
-  title_fr: string;
+     id: string;
+     title: string;
+     title_fr: string;
 }
 
 export default function SearchView() {
@@ -54,7 +54,7 @@ export default function SearchView() {
      // Function to decode HTML entities
      const decodeHtmlEntities = (text: string): string => {
           if (typeof window === 'undefined') return text; // Server-side fallback
-          
+
           const textarea = document.createElement('textarea');
           textarea.innerHTML = text;
           return textarea.value;
@@ -78,7 +78,7 @@ export default function SearchView() {
      const searchData = async () => {
           try {
                setLoading(true);
-               
+
                if (!searchQuery.trim()) {
                     setPosts([]);
                     setTotalPages(1);
@@ -89,7 +89,7 @@ export default function SearchView() {
 
                // Create search filter for both English and French content
                const searchFilter = `(title ~ "${searchQuery}" || title_fr ~ "${searchQuery}" || content ~ "${searchQuery}" || content_fr ~ "${searchQuery}") && published = true`;
-               
+
                // Fetch search results
                const postsResult = await pb.collection('posts').getList(currentPage, postsPerPage, {
                     filter: searchFilter,
@@ -98,13 +98,13 @@ export default function SearchView() {
                     requestKey: null,
                });
 
-    const postsData: Post[] = postsResult.items.map((item: any) => ({
-      id: item.id,
-      title: item.title || '',
-      title_fr: item.title_fr || '',
-      slug: item.slug || '',
-      slug_fr: item.slug_fr || '',
-      content: item.content || '',
+               const postsData: Post[] = postsResult.items.map((item: any) => ({
+                    id: item.id,
+                    title: item.title || '',
+                    title_fr: item.title_fr || '',
+                    slug: item.slug || '',
+                    slug_fr: item.slug_fr || '',
+                    content: item.content || '',
                     content_fr: item.content_fr || '',
                     cover_image: item.cover_image || null,
                     categories: item.expand?.categories || [],
@@ -171,7 +171,7 @@ export default function SearchView() {
           // Strip HTML tags and decode HTML entities
           const strippedContent = content.replace(/<[^>]*>/g, '');
           const decodedContent = decodeHtmlEntities(strippedContent);
-          
+
           if (decodedContent.length <= maxLength) return decodedContent;
           return decodedContent.substring(0, maxLength).trim() + '...';
      };
@@ -198,12 +198,12 @@ export default function SearchView() {
                     bgMobile="/hero-4/bg-mobile.jpeg"
                     bgDesktop="/hero-4/bg-desktop.jpeg"
                />
-               
+
                <main>
                     <section className="relative w-full overflow-hidden bg-white">
                          <div className="w-full pb-12 md:pb-16 lg:pb-24">
                               <div className="max-w-3xl md:max-w-3xl lg:max-w-7xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
-                                   
+
                                    {/* Navigation breadcrumb */}
                                    <nav className="mb-8" aria-label="Breadcrumb">
                                         <button
@@ -219,7 +219,7 @@ export default function SearchView() {
 
                                    {/* Search Input */}
                                    <div className="mb-12">
-                                        <form 
+                                        <form
                                              onSubmit={(e) => {
                                                   e.preventDefault();
                                                   const formData = new FormData(e.currentTarget);
@@ -290,13 +290,13 @@ export default function SearchView() {
                                                   {posts.map((post) => {
                                                        const localizedContent = getLocalizedContent(post);
                                                        const categoryNames = getPostCategoryNames(post.categories);
-                                                       
+
                                                        // Get proper image URL with fallback
                                                        const getImageUrl = () => {
-                                                            if (post.cover_image !== null && 
-                                                                post.cover_image !== undefined && 
-                                                                typeof post.cover_image === 'string' && 
-                                                                post.cover_image.trim() !== '') {
+                                                            if (post.cover_image !== null &&
+                                                                 post.cover_image !== undefined &&
+                                                                 typeof post.cover_image === 'string' &&
+                                                                 post.cover_image.trim() !== '') {
                                                                  try {
                                                                       const recordRef = {
                                                                            id: post.id,
@@ -304,7 +304,7 @@ export default function SearchView() {
                                                                            collectionName: post.collectionName,
                                                                       };
                                                                       const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
-                                                                      
+
                                                                       if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
                                                                            return imageUrl;
                                                                       }
@@ -335,17 +335,17 @@ export default function SearchView() {
                                                                  image={getImageUrl()}
                                                                  category={categoryNames || t('magazine.blog.uncategorized')}
                                                                  date={formatDate(post.created)}
-                                                              title={localizedContent.title}
-                                                              description={truncateContent(localizedContent.content)}
-                                                              buttonText={t('button')}
-                                                              buttonHref={{
-                                                                   pathname: '/magazine/[slug]',
-                                                                   params: {
-                                                                        slug: slugForLocale,
-                                                                   },
-                                                              }}
-                                                         />
-                                                   );
+                                                                 title={localizedContent.title}
+                                                                 description={truncateContent(localizedContent.content)}
+                                                                 buttonText={t('button')}
+                                                                 buttonHref={{
+                                                                      pathname: '/magazine/[slug]',
+                                                                      params: {
+                                                                           slug: slugForLocale,
+                                                                      },
+                                                                 }}
+                                                            />
+                                                       );
                                                   })}
                                              </div>
 
@@ -364,11 +364,10 @@ export default function SearchView() {
                                                             <button
                                                                  key={page}
                                                                  onClick={() => handlePageChange(page)}
-                                                                 className={`px-4 py-2 text-sm font-medium rounded-lg ${
-                                                                      currentPage === page
+                                                                 className={`px-4 py-2 text-sm font-medium rounded-lg ${currentPage === page
                                                                            ? 'text-white bg-dark-gold'
                                                                            : 'text-dark-blue bg-white border border-gray-300 hover:bg-gray-50'
-                                                                 }`}
+                                                                      }`}
                                                             >
                                                                  {page}
                                                             </button>
@@ -390,9 +389,7 @@ export default function SearchView() {
                     </section>
                </main>
 
-               <div className="bg-dark-blue pb-10">
-                    <Footer />
-               </div>
+               <Footer />
           </>
      );
 } 

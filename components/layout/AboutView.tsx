@@ -93,9 +93,7 @@ export default function AboutView() {
                     <ContactForm />
                </main>
 
-               <div className="bg-dark-blue pb-10">
-                    <Footer />
-               </div>
+               <Footer />
           </>
      );
 }

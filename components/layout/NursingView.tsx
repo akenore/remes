@@ -276,9 +276,7 @@ export default function NursingView() {
 
                </main>
 
-               <div className="bg-dark-blue pb-10">
-                    <Footer />
-               </div>
+               <Footer />
           </>
      );
 }

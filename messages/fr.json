@@ -828,6 +828,14 @@
         "description": "Maison de retraite médicalisée en Tunisie. EHPAD 4★ à Monastir, 200m de la plage. Ratio 1 soignant / résident. À partir de 2 300€/mois. Devis gratuit 24h."
       },
       "hero": {
+        "badge": "Résidence 4★ · Depuis 2021 · Monastir, Tunisie",
+        "subtitle": "EHPAD et séjours adaptés à 200m de la Méditerranée",
+        "points": {
+          "p1": "Équipe médicale 24h/24",
+          "p2": "Ratio 1 soignant /résident",
+          "p3": "À partir de 2 300€/mois"
+        },
+        "buttonCTA": "Prendre rendez-vous",
         "previous": "Diapositive précédente",
         "next": "Diapositive suivante",
         "fallback": {
@@ -859,8 +867,8 @@
       },
       "mainContent": {
         "title": "Un cadre unique, un accompagnement sur mesure",
-        "description1": "À REMES, nous avons fait le choix d'un modèle unique : une résidence hôtelière médicalisée située au bord de la Méditerranée, qui conjugue soins, accompagnement et qualité de vie.",
-        "description2": "Nous accueillons des personnes âgées, en perte d'autonomie ou en situation de handicap, ainsi que toute personne ayant besoin d'un accompagnement adapté. Ici, chacun bénéficie d'un suivi personnalisé, respectueux de son rythme, de ses envies et de son histoire.",
+        "description1": "Chez REMES, nous avons choisi un modèle unique : une maison de retraite hôtelière médicalisée située sur la côte méditerranéenne à Monastir, qui conjugue soins, accompagnement et qualité de vie.",
+        "description2": "Nous accueillons les personnes âgées, celles en perte d'autonomie ou en situation de handicap, pour un séjour permanent ou temporaire.",
         "description3": "Plus qu'un lieu de soins, REMES est avant tout un lieu de vie : un cadre lumineux, verdoyant et sécurisé, où chaque résident est reconnu comme une personne unique, entourée d'attention et de bienveillance.",
         "learnMore": "En savoir plus"
       },

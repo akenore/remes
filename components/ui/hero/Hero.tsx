@@ -36,12 +36,12 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
   const goTo = (idx: number) => setCurrent((idx + total) % total);
 
   const staticContent = {
-    badge: "Résidence 4★ · Depuis 2021 · Monastir, Tunisie",
-    subtitle: "EHPAD et séjours adaptés à 200m de la Méditerranée",
+    badge: t('home.hero.badge'),
+    subtitle: t('home.hero.subtitle'),
     points: [
-      { icon: <FaStar className="text-gold" />, text: "Équipe médicale 24h/24" },
-      { icon: <FaShieldAlt className="text-gold" />, text: "Ratio 1 soignant /résident" },
-      { icon: <FaHeart className="text-gold" />, text: "À partir de 2 300€/mois" }
+      { icon: <FaStar className="text-gold" />, text: t('home.hero.points.p1') },
+      { icon: <FaShieldAlt className="text-gold" />, text: t('home.hero.points.p2') },
+      { icon: <FaHeart className="text-gold" />, text: t('home.hero.points.p3') }
     ]
   };
 
@@ -92,14 +92,14 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
 
       <div className="mb-8 px-6 md:px-0">
         <KoalendarButton className='bg-gold hover:bg-dark-blue hover:text-white cursor-pointer text-dark-blue font-bold text-[1.1rem] py-4 px-10 rounded-full flex items-center gap-3 transition-all duration-300 shadow-lg shadow-amber-500/20 transform hover:scale-105'>
-          <FaCalendar /> Prendre rendez-vous <FaArrowRight />
+          <FaCalendar /> {t('home.hero.buttonCTA')} <FaArrowRight />
         </KoalendarButton>
       </div>
     </div>
   );
 
   return (
-    <div className="relative w-full flex flex-col overflow-visible pb-12 md:pb-32">
+    <div className="relative w-full flex flex-col overflow-visible pb-12 ">
       <div className="absolute inset-0 -z-10">
         <Image
           src="/hero-1/bg-desktop.jpeg"
@@ -165,7 +165,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
         )}
       </div>
 
-      <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4">
+      {/* <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4">
         <Card
           image="/card/card-1.jpeg"
           title={t('home.cards.retirement.title')}
@@ -180,7 +180,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
           buttonText={t('button')}
           buttonHref="/adapted-stay"
         />
-      </div>
+      </div> */}
     </div>
   );
 }

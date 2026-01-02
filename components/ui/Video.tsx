@@ -8,7 +8,7 @@ interface VideoProps {
   videoSrc?: string;
 }
 
-export default function Video({ poster = "/videos/video-1.jpg", videoSrc = "https://cdn.strakon.fr/videos/strakon-presentation.mp4" }: VideoProps) {
+export default function Video({ poster = "/videos/video-1.jpg", videoSrc = "https://www.youtube.com/watch?v=ZOoCrTORmaw" }: VideoProps) {
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 

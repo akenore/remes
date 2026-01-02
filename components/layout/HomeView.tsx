@@ -5,10 +5,12 @@ import { useTranslations } from "next-intl";
 import Hero from "../ui/hero/Hero";
 import Footer from "../ui/Footer";
 import type { HomeSlide } from '@/lib/home-data';
+import { FaQuoteRight } from "react-icons/fa";
+import FaqAccordion from "../ui/FaqAccordion";
 // import MaintenanceMode from "@/components/layout/MaintenanceMode";
 
 const Masonary = dynamic(() => import("../ui/gallery/Masonry"));
-const Testimonials = dynamic(() => import("../ui/Testimonials"));
+const TestimonialSingle = dynamic(() => import("../ui/TestimonialSingle"));
 const Partners = dynamic(() => import("../ui/Partners"));
 const ContactForm = dynamic(() => import("../ui/ContactForm"));
 
@@ -18,35 +20,37 @@ interface HomeViewProps {
 
 export default function HomeView({ initialSlides = [] }: HomeViewProps) {
      const t = useTranslations('frontend.home');
+     const t2 = useTranslations('frontend.nursingHome');
+     const tFaq = useTranslations('frontend.faq');
 
      return (
           <>
                <Hero initialSlides={initialSlides} />
-               <main className="pt-96">
+               <main className="pt-40">
                     <div className="mx-5 md:mx-auto max-w-7xl">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
                               <div className="md:px-14">
-                                   <h2 className="text-[1.5rem] md:text-[2rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
+                                   <h2 className="text-[1.5rem] md:text-[2rem] text-center md:text-left text-dark-blue font-myanmar mb-8 md:pt-20">
                                         {t('mainContent.title')}
                                    </h2>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-8">
                                         {t('mainContent.description1')}
                                    </p>
-                                   <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
+                                   {/* <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         {t('mainContent.description2')}
                                    </p>
                                    <p className="text-[1.313rem] text-center md:text-left text-gray mb-10">
                                         {t('mainContent.description3')}
-                                   </p>
+                                   </p> */}
 
-                                   <div className="flex justify-center md:justify-start">
+                                   {/* <div className="flex justify-center md:justify-start">
                                         <Link href="/about" className="border border-dark-blue text-dark-blue px-8 py-2.5 hover:bg-dark-blue hover:text-white transition-all duration-500 cursor-pointer">
                                              {t('mainContent.learnMore')}
                                         </Link>
-                                   </div>
+                                   </div> */}
                               </div>
                               <div>
-                                   <Image src="/home/h-r-1.jpeg" alt="Maison de Repos" width={610} height={648} style={{ width: "100%", height: "auto" }} />
+                                   <Image src="/home/h-r.jpeg" alt="Maison de Repos" width={610} height={603} style={{ width: "100%", height: "auto" }} />
                                    <div className="flex justify-center lg:hidden">
                                         <Image src="/rounded-logo.png" alt="remes logo" width={183} height={183} className="-mt-16 md:-mt-20 h-auto max-w-full" style={{ width: "auto", height: "25%" }} />
                                    </div>
@@ -68,7 +72,22 @@ export default function HomeView({ initialSlides = [] }: HomeViewProps) {
 
                     </div>
                     <Masonary />
-                    <Testimonials />
+                    <section className="py-20">
+                         <div className="mx-5 md:mx-auto max-w-7xl">
+                              <div className="flex items-center gap-4 max-w-md mx-auto text-dark-blue mb-5 text-dark-blue">
+                                   <div className="flex-1 border-t border-dark-blue"></div>
+                                   <span className="text-sm tracking-wide text-[1.4rem] uppercase">{t2('sectionTestimonials.span')}</span>
+                                   <div className="flex-1 border-t border-dark-blue"></div>
+                              </div>
+                              <h2 className="text-[1.5rem] md:text-[3.25rem] leading-tight text-center text-dark-blue font-myanmar mb-8 max-w-4xl mx-auto">
+                                   {t2('sectionTestimonials.title')} <span className="text-[#c9a324]">{t2('sectionTestimonials.titleSpan')}</span>
+                              </h2>
+                              <FaQuoteRight className="text-[#c9a324] text-[4rem] mx-auto" />
+                              <TestimonialSingle />
+
+                         </div>
+
+                    </section>
                     {/* Marquee strip */}
                     <div className="overflow-hidden py-20">
                          <div className="flex items-center space-x-10 animate-marquee whitespace-nowrap">
@@ -86,12 +105,35 @@ export default function HomeView({ initialSlides = [] }: HomeViewProps) {
                               ))}
                          </div>
                     </div>
+                    <section className="relative w-full min-h-screen overflow-hidden bg-cover bg-center bg-no-repeat bg-[url('/home/bg-m-2.jpg')] sm:bg-[url('/home/bg-d-2.jpg')]">
+                         <div className="w-full min-h-screen">
+                              <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 lg:py-24">
+                                   <header className="text-center lg:text-left mb-12 lg:mb-16 pt-20">
+                                        <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-8">
+                                             <div className="flex-1">
+                                                  <h2 className="text-dark-gold text-3xl sm:text-4xl font-myanmar mb-4 text-center">
+                                                       FAQ
+                                                  </h2>
+                                                  <h3 className="text-white text-3xl sm:text-4xl lg:text-5xl font-myanmar mb-4 text-center leading-relaxed">
+                                                       {tFaq('header.title')} <span className="text-dark-gold">{tFaq('header.span')}</span>
+                                                  </h3>
+                                             </div>
+
+                                        </div>
+                                   </header>
+                                   <div className="w-full">
+                                        <FaqAccordion
+                                             translationScope="frontend.faq"
+                                             keys={['q1', 'q2', 'q3', 'q4', 'q5', 'q6']}
+                                        />
+                                   </div>
+                              </div>
+                         </div>
+                    </section>
                     <Partners />
                     <ContactForm />
                </main>
-               <div className="bg-dark-blue pb-10">
-                    <Footer />
-               </div>
+               <Footer />
           </>
      );
 }

@@ -9,26 +9,26 @@ import Card4 from '../ui/card/Card4';
 import { pb } from '@/lib/pocketbase';
 
 interface Post {
-  id: string;
-  title: string;
-  title_fr: string;
-  slug: string;
-  slug_fr?: string;
-  content: string;
-  content_fr: string;
-  cover_image: string | null;
-  categories: any[];
-  status: boolean;
-  created: string;
-  updated: string;
-  collectionName?: string;
-  collectionId?: string;
+     id: string;
+     title: string;
+     title_fr: string;
+     slug: string;
+     slug_fr?: string;
+     content: string;
+     content_fr: string;
+     cover_image: string | null;
+     categories: any[];
+     status: boolean;
+     created: string;
+     updated: string;
+     collectionName?: string;
+     collectionId?: string;
 }
 
 interface Category {
-  id: string;
-  title: string;
-  title_fr: string;
+     id: string;
+     title: string;
+     title_fr: string;
 }
 
 export default function MagazineView() {
@@ -44,7 +44,7 @@ export default function MagazineView() {
      // Function to decode HTML entities
      const decodeHtmlEntities = (text: string): string => {
           if (typeof window === 'undefined') return text; // Server-side fallback
-          
+
           const textarea = document.createElement('textarea');
           textarea.innerHTML = text;
           return textarea.value;
@@ -68,7 +68,7 @@ export default function MagazineView() {
      const fetchData = async () => {
           try {
                setLoading(true);
-               
+
                // Fetch published posts (published is boolean field)
                const postsResult = await pb.collection('posts').getList(currentPage, postsPerPage, {
                     filter: 'published = true',
@@ -78,21 +78,21 @@ export default function MagazineView() {
                });
 
                const postsData: Post[] = postsResult.items.map((item: any) => ({
-                         id: item.id,
-                         title: item.title || '',
-                         title_fr: item.title_fr || '',
-                        slug: item.slug || '',
-                        slug_fr: item.slug_fr || '',
-                         content: item.content || '',
-                         content_fr: item.content_fr || '',
-                         cover_image: item.cover_image || null,
-                         categories: item.expand?.categories || [],
-                         status: item.published || false, // Use the published boolean field
-                         created: item.created,
-                         updated: item.updated,
-                         collectionName: item.collectionName,
-                         collectionId: item.collectionId,
-                    }));
+                    id: item.id,
+                    title: item.title || '',
+                    title_fr: item.title_fr || '',
+                    slug: item.slug || '',
+                    slug_fr: item.slug_fr || '',
+                    content: item.content || '',
+                    content_fr: item.content_fr || '',
+                    cover_image: item.cover_image || null,
+                    categories: item.expand?.categories || [],
+                    status: item.published || false, // Use the published boolean field
+                    created: item.created,
+                    updated: item.updated,
+                    collectionName: item.collectionName,
+                    collectionId: item.collectionId,
+               }));
 
                // Fetch categories
                const categoriesResult = await pb.collection('categories').getList(1, 50, {
@@ -147,7 +147,7 @@ export default function MagazineView() {
           // Strip HTML tags and decode HTML entities
           const strippedContent = content.replace(/<[^>]*>/g, '');
           const decodedContent = decodeHtmlEntities(strippedContent);
-          
+
           if (decodedContent.length <= maxLength) return decodedContent;
           return decodedContent.substring(0, maxLength).trim() + '...';
      };
@@ -197,14 +197,14 @@ export default function MagazineView() {
                                                   {posts.map((post) => {
                                                        const localizedContent = getLocalizedContent(post);
                                                        const categoryNames = getPostCategoryNames(post.categories);
-                                                       
+
                                                        // Get proper image URL with fallback
                                                        const getImageUrl = () => {
                                                             // Check if cover_image exists and is a valid string
-                                                            if (post.cover_image !== null && 
-                                                                post.cover_image !== undefined && 
-                                                                typeof post.cover_image === 'string' && 
-                                                                post.cover_image.trim() !== '') {
+                                                            if (post.cover_image !== null &&
+                                                                 post.cover_image !== undefined &&
+                                                                 typeof post.cover_image === 'string' &&
+                                                                 post.cover_image.trim() !== '') {
                                                                  try {
                                                                       const recordRef = {
                                                                            id: post.id,
@@ -212,7 +212,7 @@ export default function MagazineView() {
                                                                            collectionName: post.collectionName,
                                                                       };
                                                                       const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
-                                                                      
+
                                                                       // Double check the URL is valid and not empty
                                                                       if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
                                                                            return imageUrl;
@@ -246,18 +246,18 @@ export default function MagazineView() {
                                                                  image={getImageUrl()}
                                                                  category={categoryNames || t('magazine.blog.uncategorized')}
                                                                  date={formatDate(post.created)}
-                                                                title={localizedContent.title}
-                                                                description={truncateContent(localizedContent.content)}
-                                                                buttonText={t('button')}
-                                                                buttonHref={{
-                                                                    pathname: '/magazine/[slug]',
-                                                                    params: {
-                                                                         slug: slugForLocale,
-                                                                    }
-                                                                }}
-                                                           />
-                                                      );
-                                                 })}
+                                                                 title={localizedContent.title}
+                                                                 description={truncateContent(localizedContent.content)}
+                                                                 buttonText={t('button')}
+                                                                 buttonHref={{
+                                                                      pathname: '/magazine/[slug]',
+                                                                      params: {
+                                                                           slug: slugForLocale,
+                                                                      }
+                                                                 }}
+                                                            />
+                                                       );
+                                                  })}
                                              </div>
 
                                              {/* Pagination */}
@@ -266,11 +266,10 @@ export default function MagazineView() {
                                                        <button
                                                             onClick={() => setCurrentPage(prev => Math.max(prev - 1, 1))}
                                                             disabled={currentPage === 1}
-                                                            className={`px-4 py-2 rounded-lg border ${
-                                                                 currentPage === 1
+                                                            className={`px-4 py-2 rounded-lg border ${currentPage === 1
                                                                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                                                       : 'bg-white text-dark-blue border-dark-blue hover:bg-dark-blue hover:text-white'
-                                                            } transition-colors`}
+                                                                 } transition-colors`}
                                                        >
                                                             {t('magazine.pagination.previous')}
                                                        </button>
@@ -282,11 +281,10 @@ export default function MagazineView() {
                                                        <button
                                                             onClick={() => setCurrentPage(prev => Math.min(prev + 1, totalPages))}
                                                             disabled={currentPage === totalPages}
-                                                            className={`px-4 py-2 rounded-lg border ${
-                                                                 currentPage === totalPages
+                                                            className={`px-4 py-2 rounded-lg border ${currentPage === totalPages
                                                                       ? 'bg-gray-100 text-gray-400 cursor-not-allowed'
                                                                       : 'bg-white text-dark-blue border-dark-blue hover:bg-dark-blue hover:text-white'
-                                                            } transition-colors`}
+                                                                 } transition-colors`}
                                                        >
                                                             {t('magazine.pagination.next')}
                                                        </button>
@@ -299,9 +297,7 @@ export default function MagazineView() {
                     </section>
                </main>
 
-               <div className="bg-dark-blue pb-10">
-                    <Footer />
-               </div>
+               <Footer />
           </>
      );
 }

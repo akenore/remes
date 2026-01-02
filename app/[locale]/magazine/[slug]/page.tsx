@@ -47,7 +47,7 @@ export default function PostDetailPage() {
   // Function to decode HTML entities
   const decodeHtmlEntities = (text: string): string => {
     if (typeof window === 'undefined') return text; // Server-side fallback
-    
+
     const textarea = document.createElement('textarea');
     textarea.innerHTML = text;
     return textarea.value;
@@ -57,7 +57,7 @@ export default function PostDetailPage() {
   const getLocalizedContent = (post: Post) => {
     const isFrench = locale === 'fr';
     const content = isFrench && post.content_fr ? post.content_fr : post.content;
-    
+
     return {
       title: isFrench && post.title_fr ? post.title_fr : post.title,
       content: content // Keep as HTML - dangerouslySetInnerHTML should handle entities
@@ -74,7 +74,7 @@ export default function PostDetailPage() {
     try {
       setLoading(true);
       setNotFound(false);
-      
+
       if (!slugParam) {
         setNotFound(true);
         return;
@@ -215,9 +215,7 @@ export default function PostDetailPage() {
             </div>
           </section>
         </main>
-        <div className="bg-dark-blue pb-10">
-          <Footer />
-        </div>
+        <Footer />
       </>
     );
   }
@@ -250,9 +248,7 @@ export default function PostDetailPage() {
             </div>
           </section>
         </main>
-        <div className="bg-dark-blue pb-10">
-          <Footer />
-        </div>
+        <Footer />
       </>
     );
   }
@@ -264,10 +260,10 @@ export default function PostDetailPage() {
   // Get proper image URL with fallback
   const getImageUrl = () => {
     // Check if cover_image exists and is a valid string
-    if (post.cover_image !== null && 
-        post.cover_image !== undefined && 
-        typeof post.cover_image === 'string' && 
-        post.cover_image.trim() !== '') {
+    if (post.cover_image !== null &&
+      post.cover_image !== undefined &&
+      typeof post.cover_image === 'string' &&
+      post.cover_image.trim() !== '') {
       try {
         const recordRef = {
           id: post.id,
@@ -275,7 +271,7 @@ export default function PostDetailPage() {
           collectionName: post.collectionName,
         };
         const imageUrl = pb.files.getURL(recordRef as any, post.cover_image);
-        
+
         // Double check the URL is valid and not empty
         if (imageUrl && typeof imageUrl === 'string' && imageUrl.trim() !== '') {
           return imageUrl;
@@ -306,7 +302,7 @@ export default function PostDetailPage() {
       "name": "Resort Medical"
     },
     "publisher": {
-      "@type": "Organization", 
+      "@type": "Organization",
       "name": "Resort Medical",
       "logo": {
         "@type": "ImageObject",
@@ -332,7 +328,7 @@ export default function PostDetailPage() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
-      
+
       <Hero3
         title={localizedContent.title}
         description={categoryNames || t('magazine.blog.uncategorized')}
@@ -343,7 +339,7 @@ export default function PostDetailPage() {
         <section className="relative w-full overflow-hidden bg-white">
           <div className="w-full pb-12 md:pb-16 lg:pb-24">
             <div className="max-w-3xl md:max-w-4xl lg:max-w-5xl mx-auto px-2 sm:px-4 md:px-6 lg:px-8 py-8 md:py-12 lg:py-24">
-              
+
               {/* Navigation breadcrumb */}
               <nav className="mb-8" aria-label="Breadcrumb">
                 <button
@@ -378,26 +374,26 @@ export default function PostDetailPage() {
                 </header>
 
                 {/* Featured image */}
-                {post.cover_image && 
-                 typeof post.cover_image === 'string' && 
-                 post.cover_image.trim() !== '' && (
-                  <figure className="mb-12">
-                    <Image
-                      src={getImageUrl()}
-                      alt={localizedContent.title}
-                      width={1200}
-                      height={600}
-                      className="w-full h-auto object-cover rounded-lg shadow-lg"
-                      unoptimized
-                      priority
-                      itemProp="image"
-                    />
-                  </figure>
-                )}
+                {post.cover_image &&
+                  typeof post.cover_image === 'string' &&
+                  post.cover_image.trim() !== '' && (
+                    <figure className="mb-12">
+                      <Image
+                        src={getImageUrl()}
+                        alt={localizedContent.title}
+                        width={1200}
+                        height={600}
+                        className="w-full h-auto object-cover rounded-lg shadow-lg"
+                        unoptimized
+                        priority
+                        itemProp="image"
+                      />
+                    </figure>
+                  )}
 
                 {/* Article content */}
                 <div className="prose prose-lg max-w-none" itemProp="articleBody">
-                  <div 
+                  <div
                     className="text-gray leading-relaxed text-lg prose-headings:text-dark-blue prose-a:text-dark-gold hover:prose-a:text-gold"
                     dangerouslySetInnerHTML={{ __html: localizedContent.content }}
                   />
@@ -418,9 +414,7 @@ export default function PostDetailPage() {
         </section>
       </main>
 
-      <div className="bg-dark-blue pb-10">
-        <Footer />
-      </div>
+      <Footer />
     </>
   );
 } 

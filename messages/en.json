@@ -829,6 +829,14 @@
         "description": "Nursing home in Tunisia. 4★ nursing home in Monastir, 200m from the beach. Ratio of 1 caregiver per resident. From €2,300/month. Free quote within 24 hours."
       },
       "hero": {
+        "badge": "4★ Residence · Since 2021 · Monastir, Tunisia",
+        "subtitle": "Nursing homes and adapted stays 200 meters from the Mediterranean Sea",
+        "points": {
+          "p1": "24-hour medical team",
+          "p2": "Ratio of 1 caregiver per resident",
+          "p3": "Starting at $2,300/month"
+        },
+        "buttonCTA": "Make an appointment",
         "previous": "Previous slide",
         "next": "Next slide",
         "fallback": {
@@ -860,8 +868,8 @@
       },
       "mainContent": {
         "title": "A unique setting, personalized support",
-        "description1": "At REMES, we have chosen a unique model: a medicalized hotel residence located on the Mediterranean coast, which combines care, support and quality of life.",
-        "description2": "We welcome elderly people, those with loss of autonomy or in a situation of disability, as well as anyone who needs adapted support. Here, everyone benefits from personalized follow-up, respectful of their pace, their desires and their history.",
+        "description1": "At REMES, we have chosen a unique model: a medicalized retirement home located on the Mediterranean coast in Monastir, which combines care, support, and quality of life.",
+        "description2": "We welcome elderly people, those who have lost their independence, or those with disabilities, for permanent or temporary stays.",
         "description3": "More than a place of care, REMES is above all a place of life: a bright, green and secure setting, where each resident is recognized as a unique person, surrounded by attention and kindness.",
         "learnMore": "Learn more"
       },
