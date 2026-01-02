@@ -96,7 +96,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
                   style={{ minWidth: '100%' }}
                 >
                   <div className="h-64 flex flex-col justify-center">
-                    <h1 className="px-6 md:px-0 text-[2rem] md:text-[3.875rem] mb-6 text-gold leading-tight font-myanmar">
+                    <h1 className="px-6 md:px-0 text-[2rem] md:text-[3rem] mb-6 text-gold leading-tight font-myanmar">
                       {localizedContent.title}
                     </h1>
                     <p className="px-6 md:px-0 text-white text-[1rem] md:text-[1.2rem] mb-8 drop-shadow-lg">
