@@ -21,14 +21,14 @@ interface HomeViewProps {
 export default function HomeView({ initialSlides = [] }: HomeViewProps) {
      const t = useTranslations('frontend.home');
      const t2 = useTranslations('frontend.nursingHome');
-     const tFaq = useTranslations('frontend.faq');
+     const tFaq = useTranslations('frontend.faq3');
 
      return (
           <>
                <Hero initialSlides={initialSlides} />
                <main className="pt-40">
-                    <div className="mx-5 md:mx-auto max-w-7xl">
-                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20">
+                    <section className="mx-5 md:mx-auto max-w-7xl">
+                         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-5">
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[2rem] text-center md:text-left text-dark-blue font-myanmar mb-8 md:pt-20">
                                         {t('mainContent.title')}
@@ -70,7 +70,7 @@ export default function HomeView({ initialSlides = [] }: HomeViewProps) {
                               </div>
                          </blockquote>
 
-                    </div>
+                    </section>
                     <Masonary />
                     <section className="py-20">
                          <div className="mx-5 md:mx-auto max-w-7xl">
@@ -115,7 +115,8 @@ export default function HomeView({ initialSlides = [] }: HomeViewProps) {
                                                        FAQ
                                                   </h2>
                                                   <h3 className="text-white text-3xl sm:text-4xl lg:text-5xl font-myanmar mb-4 text-center leading-relaxed">
-                                                       {tFaq('header.title')} <span className="text-dark-gold">{tFaq('header.span')}</span>
+                                                       {tFaq('header.title')}
+                                                       {/* <span className="text-dark-gold">{tFaq('header.span')}</span> */}
                                                   </h3>
                                              </div>
 
@@ -123,7 +124,7 @@ export default function HomeView({ initialSlides = [] }: HomeViewProps) {
                                    </header>
                                    <div className="w-full">
                                         <FaqAccordion
-                                             translationScope="frontend.faq"
+                                             translationScope="frontend.faq3"
                                              keys={['q1', 'q2', 'q3', 'q4', 'q5', 'q6']}
                                         />
                                    </div>

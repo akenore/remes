@@ -6,7 +6,7 @@ export default function Icons() {
      return (
           <div className="w-full px-4 sm:px-6 lg:px-8 pb-8">
                <div className="max-w-7xl mx-auto">
-                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-8 pt-20 pb-40">
+                    <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8 pt-20 pb-40">
                          <div className="flex flex-col items-center text-white h-full space-y-4 text-center">
                               <FaHandsHelping size={72} className="text-[#EEDAB8]" />
                               <span className="text-4xl md:text-5xl font-semibold">+300</span>
@@ -29,13 +29,13 @@ export default function Icons() {
                               <span className="text-4xl md:text-5xl font-semibold">+5</span>
                               <p className="text-sm md:text-base">{t('remesnumbers.4')}</p>
                          </div>
-                         <div className="flex flex-col items-center text-white h-full space-y-4 text-center">
+                         {/* <div className="flex flex-col items-center text-white h-full space-y-4 text-center">
                               <FaUserCheck size={72} className="text-[#EEDAB8]" />
                               <span className="text-4xl md:text-5xl font-semibold">50%</span>
                               <p className="text-sm md:text-base">
                                    {t('remesnumbers.5')}
                               </p>
-                         </div>
+                         </div> */}
                     </div>
                </div>
           </div>

@@ -678,8 +678,8 @@
     "logout": "Logout"
   },
   "contact": {
-    "title": "Contact Us",
-    "description": "A question, a specific need or a stay request? Contact us, our team will respond to you as soon as possible.",
+    "title": "Up to 40% cheaper than in France",
+    "description": "All-inclusive rates, with no unpleasant surprises. Enjoy premium support at an affordable price.",
     "form": {
       "name": "Full Name",
       "namePlaceholder": "Enter your full name",
@@ -820,6 +820,49 @@
         "q6": {
           "question": "What conditions do you treat?",
           "answer": "Our adapted stays are designed for adults with mental and/or physical disabilities. Guests must be in stable health, enabling them to integrate into an open establishment and share common areas with other hotel guests, while respecting their safety and that of everyone else."
+        }
+      }
+    },
+    "faq3": {
+      "header": {
+        "title": "Everything you need to know about REMES"
+      },
+      "items": {
+        "q1": {
+          "question": "How much does a stay at REMES cost compared to France?",
+          "answer": "The rates at REMES are generally more affordable than those charged by nursing homes in France, while including accommodation, full board, and medical and nursing care.",
+          "answer2": "Permanent stays are offered at a fixed rate, regardless of the level of dependency, while short stays may vary depending on the time of year.",
+          "answer3": "Details of rates are available in the dedicated section, and a personalized quote is provided after reviewing the file."
+        },
+        "q2": {
+          "question": "What is the difference between a nursing home and a retirement home?",
+          "answer": "In France, the term EHPAD refers to a medical facility that is subject to specific administrative and regulatory requirements.",
+          "answer2": "A nursing home, such as REMES, also offers daily medical and nursing care, without falling under the French administrative status of EHPAD.",
+          "answer3": "REMES welcomes both independent individuals and those who have lost their independence or are dependent, providing care tailored to each situation in an open, hotel-like setting."
+        },
+        "q3": {
+          "question": "What is the caregiver-to-resident ratio at REMES?",
+          "answer": "REMES stands out for its particularly strong care presence, with an organization that allows for support of up to one caregiver per resident, depending on needs.",
+          "answer2": "The teams are on duty 24 hours a day, day and night, to ensure continuous, safe, and individualized care.",
+          "answer3": "This level of human support is one of the cornerstones of the REMES model."
+        },
+        "q4": {
+          "question": "Do you offer Alzheimer's care?",
+          "answer": "Yes. REMES provides specialized care for Alzheimer's disease and related disorders in an open setting.",
+          "answer2": "It is based on enhanced human support, trained staff, and tailored cognitive stimulation activities."
+        },
+        "q5": {
+          "question": "How to get there from France?",
+          "answer": "REMES is located 5 minutes from Monastir International Airport, easily accessible from France.",
+          "answer2": "The journey is quick and the airport-hotel transfer is provided by the REMES team."
+        },
+        "q6": {
+          "question": "How does admission work?",
+          "answer": "Admission to REMES is simple and supported.",
+          "answer2": "It begins with an initial telephone conversation to understand the situation and needs of the person concerned.",
+          "answer3": "The medical file is then reviewed by the team.",
+          "answer4": "A tour of the facility, either in person or remotely (via video), can be arranged for families.",
+          "answer5": "When admission is possible, it can be arranged quickly, sometimes within 48 hours, without a waiting list, depending on availability."
         }
       }
     },
@@ -1964,7 +2007,7 @@
     }
   },
   "remesnumbers": {
-    "1": "people with limited independence welcomed",
+    "1": "People receiving support",
     "2": "employees per resident",
     "3": "customer satisfaction",
     "4": "years of experience",

@@ -678,8 +678,8 @@
     "logout": "Déconnexion"
   },
   "contact": {
-    "title": "Contactez-Nous",
-    "description": "Une question, un besoin spécifique ou une demande de séjour ? Contactez-nous, notre équipe vous répondra dans les plus brefs délais.",
+    "title": "Jusqu'à 40% moins cher qu'en France",
+    "description": "Des tarifs tout compris, sans mauvaises surprises. Profitez d'un accompagnement premium à un prix accessible.",
     "form": {
       "name": "Nom et Prénom",
       "namePlaceholder": "Tapez votre nom complet",
@@ -819,6 +819,49 @@
         "q6": {
           "question": "Quelles pathologies prenez-vous en charge ?",
           "answer": "Nos séjours adaptés s’adressent à des personnes adultes en situation de handicap mental et/ou physique. Les personnes accueillies doivent présenter un état de santé stabilisé, leur permettant de s’intégrer dans un établissement ouvert et de partager les espaces communs avec les autres clients de l’hôtel, dans le respect de leur sécurité et de celle de tous."
+        }
+      }
+    },
+    "faq3": {
+      "header": {
+        "title": "Tout savoir sur REMES"
+      },
+      "items": {
+        "q1": {
+          "question": "Combien coûte un séjour à REMES comparé à la France ?",
+          "answer": "Les tarifs à REMES sont globalement plus accessibles que ceux pratiqués en EHPAD en France, tout en incluant l’hébergement, la pension complète et l’accompagnement médical et soignant.",
+          "answer2": "Les séjours permanents sont proposés à tarif fixe, indépendamment du niveau de dépendance, tandis que les courts séjours peuvent varier selon la période de l’année.",
+          "answer3": "Le détail des tarifs est disponible dans la rubrique dédiée, et un devis personnalisé est proposé après étude du dossier."
+        },
+        "q2": {
+          "question": "Quelle est la différence entre EHPAD et maison de retraite ?",
+          "answer": "Le terme EHPAD désigne, en France, un établissement médicalisé relevant d’un cadre administratif et réglementaire spécifique.",
+          "answer2": "Une maison de retraite médicalisée, comme REMES, propose également un accompagnement médical et soignant au quotidien, sans relever du statut administratif français d’EHPAD.",
+          "answer3": "REMES accueille aussi bien des personnes autonomes que des personnes en perte d’autonomie ou dépendantes, avec une prise en charge adaptée à chaque situation, dans un cadre ouvert et hôtelier."
+        },
+        "q3": {
+          "question": "Quel est le ratio soignant/résident à REMES ?",
+          "answer": "REMES se distingue par une présence soignante particulièrement renforcée, avec une organisation permettant un accompagnement pouvant aller jusqu’à un soignant par résident, selon les besoins.",
+          "answer2": "Les équipes sont présentes 24h/24, de jour comme de nuit, afin d’assurer une prise en charge continue, sécurisante et individualisée.",
+          "answer3": "Ce niveau d’accompagnement humain constitue l’un des fondements du modèle de REMES."
+        },
+        "q4": {
+          "question": "Proposez-vous une prise en charge Alzheimer ?",
+          "answer": "Oui. REMES assure une prise en charge spécialisée Alzheimer et troubles apparentés, dans un cadre ouvert.",
+          "answer2": "Elle repose sur un accompagnement humain renforcé, un personnel formé et des actions de stimulation cognitive adaptées."
+        },
+        "q5": {
+          "question": "Comment venir depuis la France ?",
+          "answer": "REMES se situe à 5 minutes de l’aéroport international de Monastir, facilement accessible depuis la France.",
+          "answer2": "Le trajet est rapide et le transfert aéroport–établissement est assuré par l’équipe de REMES."
+        },
+        "q6": {
+          "question": "Comment se déroule l'admission ?",
+          "answer": "L’admission à REMES se fait de manière simple et accompagnée.",
+          "answer2": "Elle débute par un premier échange téléphonique afin de comprendre la situation et les besoins de la personne concernée.",
+          "answer3": "Le dossier médical est ensuite étudié par l’équipe.",
+          "answer4": "Une visite de l’établissement, sur place ou à distance (visio), peut être organisée pour les familles.",
+          "answer5": "Lorsque l’accueil est possible, l’admission peut être réalisée dans des délais rapides, parfois sous 48 heures, sans liste d’attente, selon les disponibilités."
         }
       }
     },
@@ -1964,7 +2007,7 @@
     }
   },
   "remesnumbers": {
-    "1": "personnes en situation de faible autonomie accueillies",
+    "1": "Personnes accompagnées",
     "2": "employés par résident",
     "3": "de satisfaction client",
     "4": "ans d'expérience",

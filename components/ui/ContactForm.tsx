@@ -15,7 +15,7 @@ export default function ContactForm() {
           setSubmitStatus('idle');
 
           const formData = new FormData(e.currentTarget);
-          
+
           // Validate phone number
           const phone = formData.get('telephone') as string;
           const phoneRegex = /^[0-9+\-\s\(\)]+$/;
@@ -46,7 +46,7 @@ export default function ContactForm() {
                });
 
                const result = await response.json();
-               
+
                if (result.success) {
                     setSubmitStatus('success');
                     setMessage(t('form.success'));
@@ -70,13 +70,26 @@ export default function ContactForm() {
                          <div className="flex flex-col lg:flex-row">
                               <div className="w-full lg:w-2/3 bg-gold p-8 sm:p-12 lg:p-16">
                                    <div className="max-w-xl mx-auto lg:mx-0">
-                                        <h1 className="text-2xl sm:text-3xl lg:text-[3.25rem] font-myanmar text-dark-blue mb-4">
+                                        <h1 className="text-2xl sm:text-3xl lg:text-[2rem] font-myanmar text-dark-blue mb-4">
                                              {t('title')}
                                         </h1>
-                                        <p className="text-dark-blue text-md sm:text-[1.375rem] mb-8 leading-relaxed">
+                                        <p className="text-dark-blue text-md mb-8 leading-relaxed">
                                              {t('description')}
                                         </p>
-
+                                        <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
+                                             <div className="p-4 border border-dark-gold rounded shadow-sm">
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">Séjour permanent</h3>
+                                                  <p>À partir de 2 300€/mois</p>
+                                             </div>
+                                             <div className="p-4 border border-dark-gold rounded shadow-sm">
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">Séjour temporaire / répit</h3>
+                                                  <p>Sur devis</p>
+                                             </div>
+                                             <div className="md:col-span-2 p-4 border border-dark-gold rounded shadow-sm">
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">Inclus :</h3>
+                                                  <p>Hébergement chambre individuelle, pension complète 4 repas/jour, soins médicaux et paramédicaux, animations, entretien du linge.</p>
+                                             </div>
+                                        </div>
                                         <form onSubmit={handleSubmit} className="space-y-6">
                                              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                                                   <div>
@@ -164,14 +177,13 @@ export default function ContactForm() {
                                                        {isSubmitting ? t('form.submitting') : t('form.submit')}
                                                   </button>
                                              </div>
-                                             
+
                                              {/* Status Message */}
                                              {submitStatus !== 'idle' && (
-                                                  <div className={`mt-4 p-4 border-l-4 ${
-                                                       submitStatus === 'success' 
-                                                            ? 'bg-gold/20 border-gold text-dark-blue' 
-                                                            : 'bg-red-50 border-red-400 text-red-700'
-                                                  }`}>
+                                                  <div className={`mt-4 p-4 border-l-4 ${submitStatus === 'success'
+                                                       ? 'bg-gold/20 border-gold text-dark-blue'
+                                                       : 'bg-red-50 border-red-400 text-red-700'
+                                                       }`}>
                                                        <p className="text-sm font-medium">{message}</p>
                                                   </div>
                                              )}
@@ -187,7 +199,7 @@ export default function ContactForm() {
                                         sizes="50vw"
                                    />
                               </div>
-                    </div>
+                         </div>
                     </div>
                </div>
           </div>

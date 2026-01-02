@@ -165,7 +165,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
         )}
       </div>
 
-      {/* <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4">
+      <div className="relative z-20 w-full max-w-7xl mx-auto flex flex-col md:flex-row gap-8 justify-center items-stretch px-4">
         <Card
           image="/card/card-1.jpeg"
           title={t('home.cards.retirement.title')}
@@ -180,7 +180,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
           buttonText={t('button')}
           buttonHref="/adapted-stay"
         />
-      </div> */}
+      </div>
     </div>
   );
 }
