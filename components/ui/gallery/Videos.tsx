@@ -11,15 +11,15 @@ interface Slide {
 const slides: Slide[] = [
      {
           poster: '/videos/video-1.jpg',
-          videoSrc: 'https://cdn.strakon.fr/videos/strakon-presentation.mp4',
+          videoSrc: 'https://www.youtube.com/watch?v=ZOoCrTORmaw',
      },
      {
           poster: '/videos/video-1.jpg',
-          videoSrc: 'https://cdn.strakon.fr/videos/strakon-presentation.mp4',
+          videoSrc: 'https://www.youtube.com/watch?v=ZOoCrTORmaw',
      },
      {
           poster: '/videos/video-1.jpg',
-          videoSrc: 'https://cdn.strakon.fr/videos/strakon-presentation.mp4',
+          videoSrc: 'https://www.youtube.com/watch?v=ZOoCrTORmaw',
      },
 ];
 

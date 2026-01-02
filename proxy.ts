@@ -26,6 +26,7 @@ export default function middleware(request: NextRequest) {
     form-action 'self';
     frame-src 'self' https://www.youtube.com https://player.vimeo.com https://koalendar.com https://cdn.strakon.fr;
     frame-ancestors 'self';
+    media-src 'self' https: blob:;
     connect-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://analytics.google.com https://stats.g.doubleclick.net https://pocket.remes-tunisie.com https://koalendar.com https://cdn.tiny.cloud https://cdn.jsdelivr.net https://api.web3forms.com https://sst.remes-tunisie.com;
     upgrade-insecure-requests;
   `;

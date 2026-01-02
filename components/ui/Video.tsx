@@ -12,12 +12,23 @@ export default function Video({ poster = "/videos/video-1.jpg", videoSrc = "http
   const [isPlaying, setIsPlaying] = useState(false);
   const videoRef = useRef<HTMLVideoElement>(null);
 
+  const getYouTubeId = (url: string) => {
+    const regExp = /^.*(youtu.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    const match = url.match(regExp);
+    return (match && match[2].length === 11) ? match[2] : null;
+  };
+
+  const youtubeId = getYouTubeId(videoSrc);
+
   const handlePlayClick = () => {
-    if (videoRef.current) {
+    if (youtubeId) {
+      setIsPlaying(true);
+    } else if (videoRef.current) {
       setIsPlaying(true);
       videoRef.current.play();
     }
   };
+
   return (
     <div className="max-w-6xl mx-2 sm:mx-4 md:mx-5 xl:mx-auto rounded-sm overflow-hidden -mt-10 sm:-mt-28 md:-mt-56 lg:-mt-72 2xl:-mt-96">
       <div className="relative group cursor-pointer" onClick={handlePlayClick}>
@@ -40,16 +51,32 @@ export default function Video({ poster = "/videos/video-1.jpg", videoSrc = "http
             </div>
           </>
         )}
-        <video
-          preload="metadata"
-          ref={videoRef}
-          className={`w-full rounded-sm ${!isPlaying ? 'hidden' : ''}`}
-          controls={isPlaying}
-          onPause={() => setIsPlaying(false)}
-        >
-          <source src={videoSrc} type="video/mp4" />
-          Your browser does not support the video tag.
-        </video>
+
+        {isPlaying && youtubeId ? (
+          <div className="aspect-video w-full">
+            <iframe
+              width="100%"
+              height="100%"
+              src={`https://www.youtube.com/embed/${youtubeId}?autoplay=1`}
+              title="YouTube video player"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              allowFullScreen
+              className="rounded-sm"
+            ></iframe>
+          </div>
+        ) : (
+          <video
+            preload="metadata"
+            ref={videoRef}
+            className={`w-full rounded-sm ${!isPlaying ? 'hidden' : ''}`}
+            controls={isPlaying}
+            onPause={() => setIsPlaying(false)}
+          >
+            <source src={videoSrc} type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        )}
       </div>
     </div>
   );
