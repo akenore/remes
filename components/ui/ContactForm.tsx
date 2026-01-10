@@ -70,24 +70,24 @@ export default function ContactForm() {
                          <div className="flex flex-col lg:flex-row">
                               <div className="w-full lg:w-2/3 bg-gold p-8 sm:p-12 lg:p-16">
                                    <div className="max-w-xl mx-auto lg:mx-0">
-                                        <h1 className="text-2xl sm:text-3xl lg:text-[2rem] font-myanmar text-dark-blue mb-4">
+                                        <h2 className="text-2xl sm:text-3xl lg:text-[2rem] font-myanmar text-dark-blue mb-4">
                                              {t('title')}
-                                        </h1>
+                                        </h2>
                                         <p className="text-dark-blue text-md mb-8 leading-relaxed">
                                              {t('description')}
                                         </p>
                                         <div className="mb-10 grid grid-cols-1 md:grid-cols-2 gap-4">
                                              <div className="p-4 border border-dark-gold rounded shadow-sm">
-                                                  <h3 className="text-dark-blue font-myanmar text-lg">Séjour permanent</h3>
-                                                  <p>À partir de 2 300€/mois</p>
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">{t('badges.b1.title')}</h3>
+                                                  <p>{t('badges.b1.description')}</p>
                                              </div>
                                              <div className="p-4 border border-dark-gold rounded shadow-sm">
-                                                  <h3 className="text-dark-blue font-myanmar text-lg">Séjour temporaire / répit</h3>
-                                                  <p>Sur devis</p>
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">{t('badges.b2.title')}</h3>
+                                                  <p>{t('badges.b2.description')}</p>
                                              </div>
                                              <div className="md:col-span-2 p-4 border border-dark-gold rounded shadow-sm">
-                                                  <h3 className="text-dark-blue font-myanmar text-lg">Inclus :</h3>
-                                                  <p>Hébergement chambre individuelle, pension complète 4 repas/jour, soins médicaux et paramédicaux, animations, entretien du linge.</p>
+                                                  <h3 className="text-dark-blue font-myanmar text-lg">{t('badges.b3.title')}</h3>
+                                                  <p>{t('badges.b3.description')}</p>
                                              </div>
                                         </div>
                                         <form onSubmit={handleSubmit} className="space-y-6">

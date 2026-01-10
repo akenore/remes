@@ -680,6 +680,20 @@
   "contact": {
     "title": "Jusqu'à 40% moins cher qu'en France",
     "description": "Des tarifs tout compris, sans mauvaises surprises. Profitez d'un accompagnement premium à un prix accessible.",
+    "badges": {
+      "b1": {
+        "title": "Séjour permanent",
+        "description": "À partir de 2 300€/mois"
+      },
+      "b2": {
+        "title": "Séjour temporaire / répit",
+        "description": "Sur devis"
+      },
+      "b3": {
+        "title": "Inclus",
+        "description": "Hébergement chambre individuelle, pension complète 4 repas/jour, soins médicaux et paramédicaux, animations, entretien du linge."
+      }
+    },
     "form": {
       "name": "Nom et Prénom",
       "namePlaceholder": "Tapez votre nom complet",

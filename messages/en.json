@@ -680,6 +680,20 @@
   "contact": {
     "title": "Up to 40% cheaper than in France",
     "description": "All-inclusive rates, with no unpleasant surprises. Enjoy premium support at an affordable price.",
+    "badges": {
+      "b1": {
+        "title": "Permanent stay",
+        "description": "From $2,300/month"
+      },
+      "b2": {
+        "title": "Temporary stay / respite",
+        "description": "On estimate"
+      },
+      "b3": {
+        "title": "Included",
+        "description": "Single room accommodation, full board with 4 meals/day, medical and paramedical care, activities, laundry service."
+      }
+    },
     "form": {
       "name": "Full Name",
       "namePlaceholder": "Enter your full name",
