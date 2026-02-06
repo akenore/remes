@@ -38,11 +38,11 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
           name: currentUser.name,
           avatar: currentUser.avatar,
         };
-        setUser(userObj);
+        queueMicrotask(() => setUser(userObj));
       }
     }
 
-    setIsLoading(false);
+    queueMicrotask(() => setIsLoading(false));
 
     const unsubscribe = pb.authStore.onChange((token, record) => {
       if (token && record) {

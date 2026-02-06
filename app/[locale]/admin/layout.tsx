@@ -7,12 +7,12 @@ import { useRouter, usePathname } from 'next/navigation';
 import Link from 'next/link';
 import { useTranslations, useLocale } from 'next-intl';
 import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
-   
-   export default function AdminLayout({
-     children,
-   }: {
-     children: React.ReactNode;
-   }) {
+
+export default function AdminLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const { user, logout } = useAuth();
   const router = useRouter();
@@ -21,12 +21,6 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
   const tLayout = useTranslations('admin.layout');
   const tNav = useTranslations('admin.navigation');
   const tPageHeaders = useTranslations('admin.pageHeaders');
-
-  // Force re-render when locale changes
-  const [localeKey, setLocaleKey] = useState(0);
-  useEffect(() => {
-    setLocaleKey(prev => prev + 1);
-  }, [locale]);
 
   const handleLogout = () => {
     logout();
@@ -120,22 +114,20 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
   };
 
   return (
-    <AdminGuard key={localeKey}>
+    <AdminGuard key={locale}>
       <div className="min-h-screen bg-gray-50">
         {/* Mobile sidebar overlay */}
-        <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ease-in-out ${
-          sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
-        }`}>
+        <div className={`fixed inset-0 z-40 lg:hidden transition-opacity duration-300 ease-in-out ${sidebarOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'
+          }`}>
           {/* Backdrop with reduced opacity */}
           <div
             className="fixed inset-0 bg-gray-600 bg-opacity-40 transition-opacity duration-300 ease-in-out"
             onClick={() => setSidebarOpen(false)}
           />
-          
+
           {/* Sidebar panel */}
-          <div className={`fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${
-            sidebarOpen ? 'translate-x-0' : '-translate-x-full'
-          }`}>
+          <div className={`fixed inset-y-0 left-0 flex w-64 flex-col bg-white shadow-xl transform transition-transform duration-300 ease-in-out ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'
+            }`}>
             <div className="flex h-16 shrink-0 items-center justify-between px-4 border-b border-gray-200 bg-gray-50">
               <div className="flex items-center space-x-3">
                 <div className="h-8 w-8 rounded-lg bg-indigo-600 flex items-center justify-center">
@@ -162,16 +154,14 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
                     <Link
                       key={`${item.href}-${locale}`}
                       href={item.href}
-                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                        isActive
-                          ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      }`}
+                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${isActive
+                        ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        }`}
                       onClick={() => setSidebarOpen(false)}
                     >
-                      <div className={`mr-3 h-5 w-5 transition-colors ${
-                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
-                      }`}>
+                      <div className={`mr-3 h-5 w-5 transition-colors ${isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
+                        }`}>
                         {item.icon}
                       </div>
                       {item.name}
@@ -198,19 +188,17 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
               <div className="space-y-1">
                 {navigation.map((item) => {
                   const isActive = pathname === item.href;
-     return (
+                  return (
                     <Link
                       key={`${item.href}-${locale}`}
                       href={item.href}
-                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${
-                        isActive
-                          ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
-                          : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
-                      }`}
+                      className={`group flex items-center rounded-md px-3 py-2 text-sm font-medium transition-colors ${isActive
+                        ? 'bg-indigo-50 text-indigo-700 border-r-2 border-indigo-700'
+                        : 'text-gray-600 hover:bg-gray-50 hover:text-gray-900'
+                        }`}
                     >
-                      <div className={`mr-3 h-5 w-5 transition-colors ${
-                        isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
-                      }`}>
+                      <div className={`mr-3 h-5 w-5 transition-colors ${isActive ? 'text-indigo-500' : 'text-gray-400 group-hover:text-gray-500'
+                        }`}>
                         {item.icon}
                       </div>
                       {item.name}
@@ -249,12 +237,12 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
                     {getCurrentPageTitle()}
                   </h2>
                 </div>
-                
+
                 {/* User info and actions */}
                 <div className="flex items-center space-x-4">
                   {/* Language Switcher */}
                   <LanguageSwitcher />
-                  
+
                   {/* User welcome message */}
                   <div className="hidden sm:flex items-center space-x-3">
                     <div className="flex items-center space-x-2">
@@ -289,7 +277,7 @@ import LanguageSwitcher from '@/components/ui/LanguageSwitcher';
             {children}
           </main>
         </div>
-       </div>
+      </div>
     </AdminGuard>
-     );
-   }
+  );
+}
