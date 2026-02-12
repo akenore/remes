@@ -1729,34 +1729,34 @@
         "description": "Découvrez REMES, la première résidence médicalisée de Tunisie depuis 2021. Située à Skanes en bord de mer Méditerranée, nous offrons des soins d'exception, confort et sérénité dans un cadre hôtelier 4 étoiles. Découvrez notre mission, philosophie et équipe d'experts."
       },
       "hero": {
-        "title": "A propos de nous",
-        "description": "Bienvenue chez REMES Où l'excellence des soins rencontre l'art de vivre méditerranéen"
+        "title": "À propos de nous",
+        "description": "Bienvenue chez REMES, votre résidence médicalisée d'excellence en Tunisie, où l'excellence des soins rencontre l'art de vivre méditerranéen."
       },
       "content": {
         "mission": {
           "title": "Notre mission",
-          "description": "Chez REMES, nous réinventons l'accompagnement médicalisé en offrant à chaque personne accueillie un environnement sûr, humain et chaleureux, où la qualité des soins s'allie naturellement à la qualité de vie. Notre priorité absolue est de préserver la dignité, le confort et la sérénité de chacun, dans le respect de son histoire personnelle."
+          "description": "Chez REMES, nous réinventons l'accompagnement médicalisé en offrant à chaque personne accueillie un environnement sûr, humain et chaleureux, où la qualité des soins s'allie naturellement à la qualité de vie. Notre résidence médicalisée à Monastir préserve la dignité, le confort et la sérénité de chacun, dans le respect de son histoire personnelle."
         },
         "philosophy": {
           "title": "Notre philosophie",
           "description": "Nous croyons fermement qu'un établissement médicalisé ne doit pas seulement être un lieu de soins, mais avant tout un véritable lieu de vie. C'est pourquoi nous privilégions une approche à taille humaine, où chaque résident est connu par son prénom, reconnu dans sa singularité et accompagné selon son parcours unique et ses besoins propres."
         },
         "exceptionalSetting": {
-          "title": "Un cadre d'exception",
-          "description": "Nichée au cœur d'un hôtel 4 étoiles dans la zone touristique de Skanes, à seulement 200 mètres de la Méditerranée, notre résidence bénéficie d'un environnement véritablement exceptionnel. Entre jardins paysagers et terrasses ensoleillées, ce cadre lumineux et verdoyant est naturellement propice au bien-être et à la sérénité."
+          "title": "Un cadre d'exception au bord de la Méditerranée",
+          "description": "Nichée au cœur d'un hôtel 4 étoiles dans la zone touristique de Skanes à Monastir, à seulement 200 mètres de la Méditerranée, notre résidence bénéficie d'un environnement véritablement exceptionnel. Entre jardins paysagers et terrasses ensoleillées, ce cadre lumineux et verdoyant est naturellement propice au bien-être et à la sérénité."
         },
         "expertTeam": {
-          "title": "Une équipe d'experts dévoués",
-          "description": "Notre force repose sur une équipe pluridisciplinaire d'exception : médecins, infirmiers spécialisés, kinésithérapeutes, psychologues et personnel de vie sociale. Attentive, investie et disponible 24h/24, cette équipe offre un accompagnement personnalisé qui répond aussi bien aux besoins médicaux spécifiques qu'aux attentes du quotidien, dans un esprit constant de chaleur humaine et de bienveillance."
+          "title": "Une équipe d'experts dévoués à votre service",
+          "description": "Notre force repose sur une équipe pluridisciplinaire d'exception : médecins spécialistes, infirmiers diplômés d'État, kinésithérapeutes, ergothérapeutes, psychologues et personnel de vie sociale. Attentive, investie et disponible 24h/24 et 7j/7, cette équipe offre un accompagnement personnalisé qui répond aussi bien aux besoins médicaux spécifiques qu'aux attentes du quotidien, dans un esprit constant de chaleur humaine et de bienveillance."
         },
         "customOffer": {
-          "title": "Une offre sur mesure",
-          "description": "Qu'il s'agisse d'un séjour permanent, d'un court séjour de répit ou de convalescence, ou encore de vacances thérapeutiques adaptées, REMES propose des solutions flexibles et personnalisées, pensées pour s'adapter à chaque parcours de vie. Nous accompagnons également les familles dans cette étape importante, en les impliquant dans le projet de soins de leur proche. Découvrez notre univers unique où soins d'excellence et douceur de vivre se conjuguent au quotidien. Contactez-nous pour une visite personnalisée et rencontrez notre équipe dévouée."
+          "title": "Une offre sur mesure adaptée à vos besoins",
+          "description": "Qu'il s'agisse d'un séjour permanent en EHPAD, d'un court séjour de répit ou de convalescence, ou encore de vacances thérapeutiques adaptées, REMES propose des solutions flexibles et personnalisées, pensées pour s'adapter à chaque parcours de vie. Nous accompagnons également les familles dans cette étape importante, en les impliquant pleinement dans le projet de soins de leur proche. "
         },
         "whatIsRemes": {
           "title": "C'est Quoi REMES ?",
-          "description1": "Resort Medical est la première maison de retraite médicalisée hôtelière en Tunisie, accueillant des francophones depuis 2009. Située à Skanes, à deux pas de la Méditerranée, elle offre un cadre arboré, lumineux et sécurisé.",
-          "description2": "Un lieu de vie paisible et haut de gamme, alliant confort, soins personnalisés et climat agréable. L'objectif : préserver l'autonomie et offrir une retraite sereine dans un environnement exceptionnel."
+          "description1": "Depuis 2021, REMES s'est positionnée comme une résidence médicalisée hôtelière de référence en Tunisie, accueillant principalement des résidents francophones. Située à Skanes (Monastir), à 200m de la Méditerranée, notre établissement offre un cadre arboré, lumineux et parfaitement sécurisé.",
+          "description2": "Un lieu de vie paisible et haut de gamme, alliant confort hôtelier, soins médicaux personnalisés et climat méditerranéen agréable toute l'année. Notre objectif : préserver l'autonomie de nos résidents et leur offrir une retraite sereine dans un environnement véritablement exceptionnel."
         },
         "images": {
           "alt": "Maison de Repos"
