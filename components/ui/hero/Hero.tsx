@@ -2,13 +2,11 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations, useLocale } from 'next-intl';
-import { Link } from '@/i18n/navigation';
 import Card from '../card/Card';
 import Navbar from '../Navbar';
 import KoalendarButton from '../../KoalendarButton';
 import { HiOutlineSparkles } from 'react-icons/hi';
 import { FaStar, FaShieldAlt, FaHeart, FaCalendar, FaArrowRight } from 'react-icons/fa';
-import { IoAirplane } from 'react-icons/io5';
 import type { HomeSlide } from '@/lib/home-data';
 
 interface HeroProps {
@@ -63,7 +61,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
   }, [total]);
 
   const renderSlideContent = (title: string, description: string) => (
-    <div className="flex flex-col items-center md:items-start text-center md:text-left transition-all duration-700">
+    <div className="flex flex-col items-center text-center transition-all duration-700">
       <span className="max-w-fit inline-flex items-center gap-2 px-4 py-2 rounded-full text-xs md:text-sm font-medium text-gold bg-dark-gold/10 border border-gold/30 shadow-[0_0_0_1px_rgba(251,191,36,0.15),0_0_20px_rgba(251,191,36,0.15)] backdrop-blur-sm mb-6 animate-fade-in">
         <HiOutlineSparkles className="w-4 h-4" />
         {staticContent.badge}
@@ -117,15 +115,15 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
           fetchPriority="high"
           className="object-cover object-top sm:hidden"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent" />
+        {/* <div className="absolute inset-0 bg-gradient-to-b from-black/60 via-black/20 to-transparent" /> */}
       </div>
 
       <Navbar />
 
-      <div className='relative z-10 w-full max-w-7xl mx-auto px-4 md:-mt-32'>
+      <div className='relative z-10 w-full max-w-7xl mx-auto px-4 md:-mt-40'>
         <div className='min-h-[850px] md:min-h-[800px] lg:min-h-[750px] relative flex items-center pb-32 md:pb-0'>
           {slides.length === 0 ? (
-            <div className="relative w-full flex flex-col items-center md:items-start justify-center">
+            <div className="relative w-full flex flex-col items-center justify-center">
               {renderSlideContent(t('home.hero.fallback.title'), t('home.hero.fallback.description'))}
             </div>
           ) : (
@@ -134,7 +132,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
               return (
                 <div
                   key={slide.id}
-                  className={`absolute inset-0 transition-all duration-1000 ease-in-out flex flex-col items-center md:items-start justify-center ${current === idx ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
+                  className={`absolute inset-0 transition-all duration-1000 ease-in-out flex flex-col items-center justify-center ${current === idx ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-10 pointer-events-none'}`}
                 >
                   <div className="pb-12 md:pb-0">
                     {renderSlideContent(localizedContent.title, localizedContent.description)}
@@ -146,7 +144,7 @@ export default function Hero({ initialSlides = [] }: HeroProps) {
         </div>
 
         {slides.length > 1 && (
-          <div className="flex justify-center md:justify-start gap-8 mt-12 mb-20 px-6 md:px-0">
+          <div className="flex justify-center gap-8 mt-12 mb-20 px-6 md:px-0">
             <button
               aria-label={t('home.hero.previous')}
               onClick={() => goTo(current - 1)}

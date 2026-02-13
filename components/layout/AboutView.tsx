@@ -68,9 +68,14 @@ export default function AboutView() {
                     </div>
                     <div className="mx-5 md:mx-auto max-w-7xl pt-40">
                          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-20 md:mb-40">
-                              <div>
-                                   <Image src="/about2.jpg" alt={t('content.images.alt')} width={512} height={600} style={{ width: "100%", height: "auto" }} />
-
+                              <div className="relative h-full min-h-[320px]">
+                                   <Image
+                                        src="/about@2x.jpg"
+                                        alt={t('content.images.alt')}
+                                        fill
+                                        sizes="(min-width: 1024px) 50vw, 100vw"
+                                        className="object-cover"
+                                   />
                               </div>
                               <div className="md:px-14">
                                    <h2 className="text-[1.5rem] md:text-[3.25rem] text-center md:text-left text-dark-blue font-myanmar mb-8">
